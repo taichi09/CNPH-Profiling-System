@@ -1,0 +1,28 @@
+/* Navbar Styles */
+:root {
+    --navbar-green: #1a3a2e;
+    --navbar-hover: #234438;
+    --navbar-border: #0f2419;
+    --navbar-foreground: #e8f5e9;
+}
+
+.navbar-green {
+    background-color: var(--navbar-green);
+    border-bottom: 1px solid var(--navbar-border);
+}
+
+.text-navbar-foreground {
+    color: var(--navbar-foreground);
+}
+
+.hover\:bg-navbar-hover:hover {
+    background-color: var(--navbar-hover);
+}
+
+.bg-navbar-hover {
+    background-color: var(--navbar-hover);
+}
+
+.ring-navbar-green {
+    --tw-ring-color: var(--navbar-green);
+}

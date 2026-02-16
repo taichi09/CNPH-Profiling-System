@@ -1,0 +1,37 @@
+/* Dark Green Color Scheme */
+:root {
+    --sidebar-bg: #1a3a2e;
+    --sidebar-hover: #234438;
+    --sidebar-active: #2d5447;
+    --sidebar-border: #0f2419;
+    --navbar-bg: #1a3a2e;
+    --text-light: #e8f5e9;
+}
+
+.bg-sidebar {
+    background-color: var(--sidebar-bg) !important;
+}
+
+.border-sidebar-line {
+    border-color: var(--sidebar-border) !important;
+}
+
+.bg-sidebar-nav-hover:hover {
+    background-color: var(--sidebar-hover) !important;
+}
+
+.bg-sidebar-nav-active {
+    background-color: var(--sidebar-active) !important;
+}
+
+.bg-sidebar-nav-focus:focus {
+    background-color: var(--sidebar-hover) !important;
+}
+
+.text-sidebar-nav-foreground {
+    color: var(--text-light) !important;
+}
+
+.text-layer-foreground {
+    color: var(--text-light) !important;
+}
