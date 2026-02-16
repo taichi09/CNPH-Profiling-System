@@ -1,108 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-
-    <!-- Tailwind CSS -->
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
-
-<!-- Preline CSS -->
-<link href="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.css" rel="stylesheet">
-
-<!-- Sidebar CSS -->
-<link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
-<body>
-    
-</body>
-</html>
-
-
-<!-- Navigation Toggle -->
-<div class="sm:hidden py-16 text-center">
-    <button type="button" class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-start bg-secondary border border-secondary-line text-secondary-foreground text-sm font-medium rounded-lg shadow-2xs hover:bg-secondary-hover focus:outline-hidden focus:bg-secondary-focus" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-sidebar-layout-splitter" aria-label="Toggle navigation" data-hs-overlay="#hs-sidebar-layout-splitter">
-        Open
-    </button>
-</div>
-<!-- End Navigation Toggle -->
-
-<!-- Sidebar -->
-<!-- Sidebar -->
+<!-- The main container below makes the sidebar appear fixed on the left -->
 <div id="hs-sidebar-layout-splitter"
   class="hs-overlay [--auto-close:sm] sm:block sm:translate-x-0
-  w-64
-  hs-overlay-open:translate-x-0
-  -translate-x-full transition-all duration-300 transform
-  h-full
-  hidden
-  fixed top-0 start-0 bottom-0 z-60
-  bg-sidebar border-e border-sidebar-line"
-  role="dialog"
-  tabindex="-1"
-  aria-label="Sidebar">
+  w-64 fixed top-0 start-0 bottom-0 z-60
+  bg-sidebar border-e border-sidebar-line transition-all duration-300 transform"
+  role="dialog" tabindex="-1">
 
-  <!-- Header -->
-  <header class="p-4 flex justify-between items-center gap-x-2">
-    <a class="font-semibold text-xl text-layer-foreground" href="#">Brand</a>
-
-    <div class="sm:hidden -me-2">
-      <button type="button"
-        class="flex justify-center items-center size-6 bg-layer border border-layer-line rounded-full"
-        data-hs-overlay="#hs-sidebar-layout-splitter">
-        ✕
-      </button>
-    </div>
+  <!-- Sidebar Header -->
+  <header class="p-4 flex justify-between items-center">
+    <a class="font-semibold text-xl text-layer-foreground" href="#">CNPH HR</a>
   </header>
 
-  <!-- Body -->
-<nav class="h-full overflow-y-auto px-2">
-  <ul class="space-y-1">
+  <!-- Sidebar Items -->
+  <div class="h-full overflow-y-auto px-2 mt-4">
+    <ul class="space-y-2">
 
-    <!-- Dashboard -->
-    <li>
-      <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-sidebar-nav-active text-sm text-sidebar-nav-foreground rounded-lg">
-        <!-- Icon -->
-        <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 13h8V3H3v10zm10 8h8V11h-8v10zM3 21h8v-6H3v6zm10-18v6h8V3h-8z"/>
-        </svg>
-        Dashboard
-      </a>
-    </li>
+      <!-- Dashboard (Active) -->
+      <li>
+        <a class="flex items-center gap-x-3.5 py-3 px-4 bg-sidebar-nav-active text-sidebar-nav-foreground text-sm font-medium rounded-lg transition-all duration-300 cursor-pointer hover:bg-sidebar-nav-hover">
+          <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 13h8V3H3v10zm10 8h8V11h-8v10zM3 21h8v-6H3v6zm10-18v6h8V3h-8z"/>
+          </svg>
+          Dashboard
+        </a>
+      </li>
 
-    <!-- Employee -->
-    <li>
-      <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover">
-        <!-- Icon -->
-        <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"/>
-        </svg>
-        Employee
-      </a>
-    </li>
+      <!-- Employee (Hover Effect Added) -->
+      <li>
+        <a class="flex items-center gap-x-3.5 py-3 px-4 text-sidebar-nav-foreground text-sm font-medium rounded-lg transition-all duration-300 cursor-pointer hover:bg-sidebar-nav-hover hover:text-white">
+          <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          Employee
+        </a>
+      </li>
 
-    <!-- Departments -->
-    <li>
-      <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-sidebar-nav-foreground rounded-lg hover:bg-sidebar-nav-hover">
-        <!-- Icon -->
-        <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
-        </svg>
-        Departments
-      </a>
-    </li>
+      <!-- Departments (Hover Effect Added) -->
+      <li>
+        <a class="flex items-center gap-x-3.5 py-3 px-4 text-sidebar-nav-foreground text-sm font-medium rounded-lg transition-all duration-300 cursor-pointer hover:bg-sidebar-nav-hover hover:text-white">
+          <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+          </svg>
+          Departments
+        </a>
+      </li>
 
-  </ul>
-</nav>
-
+    </ul>
+  </div>
 </div>
-<!-- End Sidebar -->
-
-</div>
-<!-- End Sidebar -->
