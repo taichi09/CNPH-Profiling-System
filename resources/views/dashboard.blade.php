@@ -13,7 +13,7 @@
     @include('partials.navbar')
     @include('partials.sidebar')
     
-    <main class="sm:ml-64 p-6">
+    <main class="sm:ml-72 p-8">
         <div class="max-w-7xl mx-auto">
             <!-- Header -->
             <div class="mb-8">
