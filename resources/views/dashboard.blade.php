@@ -50,17 +50,17 @@
             <!-- Content Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Chart Card - Increased Height -->
-                <div class="lg:col-span-2 bg-white rounded-lg shadow p-6 min-h-[600px]">
+                <div class="lg:col-span-2 bg-white rounded-lg shadow p-6 min-h-[450px]">
                     <h2 class="text-lg font-semibold text-gray-800 mb-6">Employees by Department</h2>
                     
                     <!-- Chart.js Canvas -->
-                    <div class="relative" style="height: 500px;">
+                    <div class="relative" style="height: 350px;">
                         <canvas id="departmentChart"></canvas>
                     </div>
                 </div>
 
                 <!-- Recently Added Employees Card - Increased Height -->
-                <div class="bg-white rounded-lg shadow p-6 min-h-[600px] flex flex-col">
+                <div class="bg-white rounded-lg shadow p-6 min-h-[450px] flex flex-col">
                     <h2 class="text-lg font-semibold text-gray-800 mb-4">Recently Added Employees</h2>
                     <div class="space-y-3 flex-1">
                         <div class="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg transition">
