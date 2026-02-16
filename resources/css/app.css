@@ -3,3 +3,7 @@
 @tailwind utilities;
 @import "./node_modules/preline/variants.css";
 
+
+@import "flyonui/dist/flyonui.css";
+
+
