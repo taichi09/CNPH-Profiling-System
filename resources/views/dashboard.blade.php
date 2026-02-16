@@ -6,6 +6,8 @@
     <title>@yield('title')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body class="bg-gray-50">
     @include('partials.navbar')
@@ -22,7 +24,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <!-- Investments Card -->
                 <div class="bg-white rounded-lg shadow p-6 border-l-4 border-teal-500">
-                    <div class="text-sm text-gray-600 mb-2">Investments</div>
+                    <div class="text-sm text-gray-600 mb-2">Departments</div>
                     <div class="text-4xl font-bold text-gray-800">15</div>
                 </div>
 
@@ -34,13 +36,13 @@
 
                 <!-- Promotions Card -->
                 <div class="bg-white rounded-lg shadow p-6">
-                    <div class="text-sm text-gray-600 mb-2">Promotions</div>
+                    <div class="text-sm text-gray-600 mb-2">Job Orders</div>
                     <div class="text-4xl font-bold text-gray-800">400</div>
                 </div>
 
                 <!-- Net Hires Card -->
                 <div class="bg-white rounded-lg shadow p-6">
-                    <div class="text-sm text-gray-600 mb-2">Net Hires</div>
+                    <div class="text-sm text-gray-600 mb-2">Permanent</div>
                     <div class="text-4xl font-bold text-gray-800">100</div>
                 </div>
             </div>
@@ -51,46 +53,9 @@
                 <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
                     <h2 class="text-lg font-semibold text-gray-800 mb-6">Employees by Department</h2>
                     
-                    <!-- Simple Bar Chart -->
-                    <div class="relative">
-                        <div class="flex items-end justify-around h-64 border-l border-b border-gray-300 pl-12 pb-4">
-                            <!-- Y-axis labels -->
-                            <div class="absolute left-0 flex flex-col justify-between h-64 text-xs text-gray-500 pb-4">
-                                <span>40</span>
-                                <span>30</span>
-                                <span>20</span>
-                                <span>10</span>
-                                <span>0</span>
-                            </div>
-                            
-                            <!-- Bars -->
-                            <div class="flex items-end justify-around w-full h-full gap-4">
-                                <div class="flex flex-col items-center flex-1 max-w-20">
-                                    <div class="w-full bg-teal-600 rounded-t" style="height: 25%"></div>
-                                    <span class="text-xs text-gray-600 mt-2">IT</span>
-                                </div>
-                                <div class="flex flex-col items-center flex-1 max-w-20">
-                                    <div class="w-full bg-teal-600 rounded-t" style="height: 15%"></div>
-                                    <span class="text-xs text-gray-600 mt-2">HR</span>
-                                </div>
-                                <div class="flex flex-col items-center flex-1 max-w-20">
-                                    <div class="w-full bg-teal-600 rounded-t" style="height: 85%"></div>
-                                    <span class="text-xs text-gray-600 mt-2">Finance</span>
-                                </div>
-                                <div class="flex flex-col items-center flex-1 max-w-20">
-                                    <div class="w-full bg-teal-600 rounded-t" style="height: 75%"></div>
-                                    <span class="text-xs text-gray-600 mt-2">Sales</span>
-                                </div>
-                                <div class="flex flex-col items-center flex-1 max-w-20">
-                                    <div class="w-full bg-teal-600 rounded-t" style="height: 45%"></div>
-                                    <span class="text-xs text-gray-600 mt-2">Marketing</span>
-                                </div>
-                                <div class="flex flex-col items-center flex-1 max-w-20">
-                                    <div class="w-full bg-teal-600 rounded-t" style="height: 55%"></div>
-                                    <span class="text-xs text-gray-600 mt-2">Operations</span>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Chart.js Canvas -->
+                    <div class="relative" style="height: 300px;">
+                        <canvas id="departmentChart"></canvas>
                     </div>
                 </div>
 
@@ -132,5 +97,60 @@
     </main>
     
     <script src="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.js"></script>
+    
+    <!-- Chart.js Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('departmentChart').getContext('2d');
+            
+            const departmentChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['IT', 'HR', 'Finance', 'Sales', 'Marketing', 'Operations'],
+                    datasets: [{
+                        label: 'Employees',
+                        data: [45, 28, 85, 92, 62, 78],
+                        backgroundColor: '#0d9488', // teal-600
+                        borderRadius: 4,
+                        barThickness: 50
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Employees: ' + context.parsed.y;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 25
+                            },
+                            grid: {
+                                display: true,
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
