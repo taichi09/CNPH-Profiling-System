@@ -13,7 +13,7 @@
     @include('partials.navbar')
     @include('partials.sidebar')
     
-    <main class="sm:ml-64 p-6 mt-16">
+    <main class="sm:ml-72 p-6 mt-16">
         <!-- All Employees Section -->
         <div class="bg-white rounded-lg shadow">
             <!-- Header -->
