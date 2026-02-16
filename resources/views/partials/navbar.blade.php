@@ -10,9 +10,13 @@
     
 </body>
 </html>
+<main class="sm:ml-72 p-8">
+    
+</main>
 
 <!-- Navbar -->
-<nav class="navbar-green fixed top-0 left-0 right-0 z-50 sm:left-64">
+<!-- Navbar -->
+<nav class="navbar-green fixed top-0 left-0 right-0 z-50 sm:left-72">
     <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <!-- Left side - Page Title -->
@@ -22,7 +26,6 @@
             
             <!-- Right side - User Menu & Notifications -->
             <div class="flex items-center gap-4">
-
 
                 <!-- User Dropdown -->
                 <div class="hs-dropdown relative inline-flex">
@@ -64,4 +67,5 @@
         </div>
     </div>
 </nav>
+<!-- End Navbar -->
 <!-- End Navbar -->
