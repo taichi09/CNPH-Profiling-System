@@ -8,6 +8,7 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         "./node_modules/preline/dist/*.js",
+         "./node_modules/flyonui/dist/**/*.js"
     ],
 
     theme: {

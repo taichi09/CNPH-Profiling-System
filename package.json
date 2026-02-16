@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "chart.js": "^4.5.1",
+        "flyonui": "^2.4.1",
         "preline": "^4.0.1"
     }
 }
