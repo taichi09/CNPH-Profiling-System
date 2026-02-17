@@ -8,22 +8,39 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mr+Dafoe&display=swap" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
+    <body class="text-gray-900 antialiased" style="font-family: 'Montserrat', sans-serif;">
+        <div class="min-h-screen flex bg-gradient-to-r from-[#02522D] to-[#53886E]">
+            
+            {{-- LEFT SIDE --}}
+            <div class="w-1/2 min-h-screen relative flex items-center justify-center overflow-hidden">
+                <img src="{{ asset('images/camarines-norte-provincial-hospital-logo.png') }}"
+                    class="w-full opacity-25">
+
+                {{-- CONTENT (top layer) --}}
+                <div class="absolute flex flex-col items-center text-white text-center px-10">
+                    <div class="flex gap-3 mb-4">
+                        <img src="{{ asset('images/camarines-norte-official-seal.png') }}" class="w-20 h-20 object-contain">
+                        <img src="{{ asset('images/camarines-norte-provincial-hospital-logo.png') }}" class="w-20 h-20 object-contain">
+                    </div>
+                    <p class="text-medium uppercase tracking-widest font-regular">Camarines Norte</p>
+                    <h1 class="text-5xl font-extrabold uppercase leading-tight">Provincial Hospital</h1>
+                    <p class="text-3xl font-regular mb-20">Employee Profiling System</p>
+                    <p class="text-white mt-20" style="font-family: 'Mr Dafoe', cursive; font-size: 2.2rem;">"Alay sa Diyos, Alay sa Bayan"</p>
+                </div>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+            {{-- RIGHT SIDE --}}
+            <div class="w-1/2 min-h-screen flex items-center justify-center">
+                <div class="w-full max-w-sm">
+                    {{ $slot }}
+                </div>
             </div>
         </div>
     </body>
