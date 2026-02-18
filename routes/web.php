@@ -11,15 +11,12 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-<<<<<<< HEAD
 Route::get('/form', function () {
     return view('add_forms.Form3');
 });
 
 
 // 2. Wrap all protected routes inside the 'auth' middleware group
-=======
->>>>>>> a290d280c8e445d9b353d67146e6512ebf11c61a
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
