@@ -25,8 +25,8 @@
   <div class="p-8 text-center border-b border-white/10">
     <div class="flex justify-center gap-3 mb-4">
         <!-- Logo Placeholders (Replace with your <img> tags later) -->
-        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-[8px]">SEAL</div>
-        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-[8px]">LOGO</div>
+        <img src="{{ asset('images/camarines-norte-official-seal.png') }}" class="w-12 h-12 object-contain">
+        <img src="{{ asset('images/camarines-norte-provincial-hospital-logo.png') }}" class="w-12 h-12 object-contain">
     </div>
     
     <h1 class="text-3xl font-bold tracking-tight leading-none uppercase">Profiling System</h1>
