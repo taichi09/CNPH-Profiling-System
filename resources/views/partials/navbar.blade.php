@@ -32,13 +32,13 @@
 
                             <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center border border-white/30">
                                 <span class="text-xs font-bold uppercase tracking-tighter">
-                                    {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
+                                    {{ Auth::user() ? strtoupper(substr(Auth::user()->name, 0, 2)) : '??' }}
                                 </span>
                             </div>
 
                             <div class="hidden md:block text-left leading-tight">
                                 <span class="block text-sm font-bold uppercase tracking-wide">
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->name ?? 'Guest' }}
                                 </span>
                                 <span class="block text-[10px] opacity-70 uppercase tracking-widest">
                                     {{ Auth::user()->role ?? 'User' }}
