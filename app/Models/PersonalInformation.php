@@ -12,8 +12,8 @@ class PersonalInformation extends Model
 
     protected $primaryKey = 'employee_id';
 
-    public $timestamps = false;
-    
+    public $timestamps = true;
+
     protected $fillable = [
         'surname', 'first_name', 'middle_name', 'extension', 
         'date_of_birth', 'place_of_birth',
