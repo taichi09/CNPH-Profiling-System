@@ -29,7 +29,7 @@
                         <img src="{{ asset('images/camarines-norte-official-seal.png') }}" class="w-20 h-20 object-contain">
                         <img src="{{ asset('images/camarines-norte-provincial-hospital-logo.png') }}" class="w-20 h-20 object-contain">
                     </div>
-                    <p class="text-medium uppercase tracking-widest font-regular">Camarines Norte</p>
+                    <p class="text-medium uppercase tracking-[0.4em] font-regular">Camarines Norte</p>
                     <h1 class="text-5xl font-extrabold uppercase leading-tight">Provincial Hospital</h1>
                     <p class="text-3xl font-regular mb-20">Employee Profiling System</p>
                     <p class="text-white mt-20" style="font-family: 'Mr Dafoe', cursive; font-size: 2.2rem;">"Alay sa Diyos, Alay sa Bayan"</p>
