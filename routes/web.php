@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('departments');
 });
 
+Route::get('/departments', function () {
+    return view('departments');
+});
+
 Route::get('/employee', function () {
     return view('employee');
 });
@@ -25,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
-    Route::get('/departments', [DepartmentController::class, 'index'])->name('departments.index');
+    Route::get('/department', [DepartmentController::class, 'index'])->name('departments.index');
 });
 
 require __DIR__.'/auth.php';
