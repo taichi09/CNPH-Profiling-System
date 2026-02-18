@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     
@@ -52,13 +53,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-
+                        
                         <x-dropdown-link :href="route('profile.edit')">
                             <span class="flex items-center gap-x-3">
-                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                My Profile
+                                <span class="material-icons text-[18px]">settings</span>
+                                Settings
                             </span>
                         </x-dropdown-link>
 
