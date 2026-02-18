@@ -4,7 +4,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    return view('departments');
+});
+
+Route::get('/employee', function () {
     return view('employee');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
 });
 
 Route::get('/dashboard', function () {
