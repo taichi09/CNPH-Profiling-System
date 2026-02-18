@@ -7,7 +7,7 @@ use App\Http\Controllers\DepartmentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('add_forms.Form1');
+    return view('add_forms.Form2');
 });
 
 Route::get('/dashboard', function () {
