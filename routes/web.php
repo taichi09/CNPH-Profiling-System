@@ -6,6 +6,10 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DepartmentController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('add_forms.Form1');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
