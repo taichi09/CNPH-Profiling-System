@@ -15,7 +15,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="text-gray-900 antialiased" style="font-family: 'Montserrat', sans-serif;">
+    <body class="text-gray-900 antialiased overflow-hidden" style="font-family: 'Montserrat', sans-serif;">
         <div class="min-h-screen flex flex-col lg:flex-row bg-gradient-to-r from-[#02522D] to-[#53886E]">
 
             {{-- Left Side - Hidden on mobile, visible on large screens --}}
