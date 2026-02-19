@@ -101,7 +101,7 @@
     <div id="modal-backdrop" style="display:none;position:fixed;inset:0;background:rgba(17,24,39,0.6);z-index:9998;"></div>
 
     <div id="add-department-modal"
-        class="hidden flex items-start justify-center" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;padding-top:5rem;padding-left:clamp(1rem, 20vw, 22rem);pointer-events:none;"
+        class="flex items-start justify-center" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;padding-top:5rem;padding-left:clamp(1rem, 20vw, 22rem);pointer-events:none;"
         role="dialog"
         tabindex="-1"
         aria-labelledby="add-department-modal-label"
