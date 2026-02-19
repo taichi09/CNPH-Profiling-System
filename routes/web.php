@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 Route::get('/form', function () {
-    return view('add_forms.Form2');
+    return view('add_forms.Form6');
 });
 
 
