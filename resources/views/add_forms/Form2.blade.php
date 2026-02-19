@@ -14,7 +14,6 @@
     @include('partials.sidebar')
     
 
-
 <main class="sm:ml-72 p-8">
   <div class="max-w-4xl mx-auto bg-white rounded-lg shadow p-8">
     <!-- Header -->
@@ -139,15 +138,23 @@
           <!-- NAME OF CHILDREN -->
           <div>
             <p class="text-sm font-bold text-gray-800 uppercase mb-3">Name of Children/s:</p>
+            <!-- Column headers -->
+            <div class="flex gap-2 mb-1">
+              <span class="flex-1 text-xs font-semibold text-gray-500 uppercase tracking-wide">Full Name</span>
+              <span class="w-36 text-xs font-semibold text-gray-500 uppercase tracking-wide">Date of Birth</span>
+            </div>
             <div class="space-y-3" id="children-list">
-              <div class="flex items-center">
+              <div class="flex gap-2 items-center">
                 <input type="text" placeholder="Full Name" class="flex-1 border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
+                <input type="date" class="w-36 border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
               </div>
-              <div class="flex items-center">
+              <div class="flex gap-2 items-center">
                 <input type="text" placeholder="Full Name" class="flex-1 border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
+                <input type="date" class="w-36 border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
               </div>
-              <div class="flex items-center">
+              <div class="flex gap-2 items-center">
                 <input type="text" placeholder="Full Name" class="flex-1 border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
+                <input type="date" class="w-36 border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
               </div>
             </div>
             <button type="button" onclick="addChild()" class="mt-2 text-xs text-green-700 hover:underline">+ Add Child</button>
@@ -168,9 +175,9 @@
     </form>
   </div>
 </main>
-    
-    <script src="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.js"></script>
-    
+
+<script src="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.js"></script>
+
 <script>
 function addChild() {
   const list = document.getElementById('children-list');
@@ -178,6 +185,7 @@ function addChild() {
   row.className = 'flex gap-2 items-center';
   row.innerHTML = `
     <input type="text" placeholder="Full Name" class="flex-1 border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
+    <input type="date" class="w-36 border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
   `;
   list.appendChild(row);
 }
