@@ -15,11 +15,11 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="text-gray-900 antialiased overflow-hidden" style="font-family: 'Montserrat', sans-serif;">
-        <div class="min-h-screen flex bg-gradient-to-r from-[#02522D] to-[#53886E]">
-            
-            {{-- Left Side --}}
-            <div class="w-1/2 min-h-screen relative flex items-center justify-center ">
+    <body class="text-gray-900 antialiased" style="font-family: 'Montserrat', sans-serif;">
+        <div class="min-h-screen flex flex-col lg:flex-row bg-gradient-to-r from-[#02522D] to-[#53886E]">
+
+            {{-- Left Side - Hidden on mobile, visible on large screens --}}
+            <div class="hidden lg:flex lg:w-1/2 min-h-screen relative items-center justify-center">
                 <img src="{{ asset('images/camarines-norte-provincial-hospital-logo.png') }}"
                     class="scale-[1.2] opacity-25 -translate-x-0">
 
@@ -37,7 +37,20 @@
             </div>
 
             {{-- Right Side --}}
-            <div class="w-1/2 min-h-screen flex items-center justify-center">
+            <div class="w-full lg:w-1/2 min-h-screen flex flex-col items-center justify-center px-6 py-10">
+
+                {{-- Mobile-only branding --}}
+                <div class="flex flex-col items-center text-white text-center mb-8 lg:hidden">
+                    <div class="flex gap-3 mb-3">
+                        <img src="{{ asset('images/camarines-norte-official-seal.png') }}" class="w-14 h-14 object-contain">
+                        <img src="{{ asset('images/camarines-norte-provincial-hospital-logo.png') }}" class="w-14 h-14 object-contain">
+                    </div>
+                    <p class="text-xs uppercase tracking-[0.4em]">Camarines Norte</p>
+                    <h1 class="text-2xl font-extrabold uppercase leading-tight">Provincial Hospital</h1>
+                    <p class="text-base">Employee Profiling System</p>
+                </div>
+
+                {{-- Form Card --}}
                 <div class="w-full max-w-sm">
                     {{ $slot }}
                 </div>
