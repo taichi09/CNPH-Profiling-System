@@ -23,8 +23,24 @@ class PersonalInformation extends Model
         'permanent_zip_code', 'permanent_address', 'permanent_zip_code', 
         'telephone_no', 'email_address', 'mobile_no'
     ];
+     public function familyBackground()
+    {
+        return $this->hasOne(FamilyBackground::class, 'employee_id', 'employee_id');
+    }
     public function educations()
     {
         return $this->hasMany(EducationalBackground::class, 'employee_id', 'employee_id');
+    }
+    public function workExperiences()
+    {
+        return $this->hasMany(WorkExperience::class, 'employee_id', 'employee_id');
+    }
+    public function eligibilities()
+    {
+        return $this->hasMany(CivilServiceEligibility::class, 'employee_id', 'employee_id');
+    }
+    public function voluntaryWorks()
+    {
+        return $this->hasMany(VoluntaryWork::class, 'employee_id', 'employee_id');
     }
 }
