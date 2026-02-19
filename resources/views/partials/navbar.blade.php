@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,12 +10,11 @@
 <body>
     
 </body>
-</html>
+</html> --}}
 <main class="sm:ml-72 p-8">
     
 </main>
 
-<!-- Navbar -->
 <!-- Navbar -->
 <nav class="bg-gradient-to-r from-[#1b5e3a] to-[#53886E] fixed top-0 left-0 right-0 z-50 sm:left-72">
     <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,5 +66,4 @@
         </div>
     </div>
 </nav>
-<!-- End Navbar -->
 <!-- End Navbar -->

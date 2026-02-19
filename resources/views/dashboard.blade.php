@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,8 +11,9 @@
 </head>
 <body class="bg-gray-50">
     @include('partials.navbar')
-    @include('partials.sidebar')
-    
+    @include('partials.sidebar') --}}
+
+<x-app-layout>    
     <main class="sm:ml-72 p-8">
         <div class="max-w-7xl mx-auto">
             <!-- Header -->
@@ -179,5 +180,6 @@
             });
         });
     </script>
-</body>
-</html>
+</x-app-layout>
+{{-- </body>
+</html> --}}

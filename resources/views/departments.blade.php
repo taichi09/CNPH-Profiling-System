@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,8 +11,9 @@
 </head>
 <body class="bg-gray-50">
     @include('partials.navbar')
-    @include('partials.sidebar')
-    
+    @include('partials.sidebar') --}}
+
+<x-app-layout>    
     <!-- Responsive main container -->
     <main class="lg:ml-72 p-4 sm:p-6 mt-16 transition-all duration-300">
         <!-- All Departments Section -->
@@ -215,5 +216,6 @@
             }
         });
     </script>
-</body>
-</html>
+</x-app-layout>
+{{-- </body>
+</html> --}}
