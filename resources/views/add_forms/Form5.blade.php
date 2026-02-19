@@ -24,7 +24,7 @@
       <!-- Header -->
       <div class="mb-6 pb-3">
         <h2 class="text-xl font-bold text-green-800 uppercase tracking-wide">Work Experience</h2>
-        <p class="text-sm text-gray-500 mt-1">Provide details regarding educational background.</p>
+        <p class="text-sm text-gray-500 mt-1">Provide details regarding past work experience.</p>
       </div>
 
       <form>

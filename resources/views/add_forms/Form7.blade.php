@@ -23,7 +23,7 @@
       <!-- Header -->
       <div class="mb-6 pb-3">
         <h2 class="text-xl font-bold text-green-800 uppercase tracking-wide">Learning and Development (L&amp;D) Interventions/<br>Training Programs Attended</h2>
-        <p class="text-sm text-gray-500 mt-1">Provide details regarding educational background.</p>
+        <p class="text-sm text-gray-500 mt-1">Provide details regarding training programs attended.</p>
       </div>
 
       <form>
