@@ -20,7 +20,7 @@ class FamilyBackground extends Model
         'period_of_attendance_to',
         'highest_level',
         'year_graduated',
-        'scholarship_academic_honirs_recieved',
+        'scholarship_academic_honors_recieved',
     ];
 
     public function personalInformation()
