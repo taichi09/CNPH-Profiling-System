@@ -47,7 +47,7 @@ input, select, textarea, button, label, option {
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
                     <div class="flex items-center">
-                        <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Last Name</label>
+                        <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Middle Name</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
                     <div class="flex items-center">
