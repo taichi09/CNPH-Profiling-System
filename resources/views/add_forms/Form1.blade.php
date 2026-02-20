@@ -9,17 +9,17 @@
      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
       <style>
-        *, *::before, *::after {
-            font-family: 'Poppins', sans-serif;
-        }
-        /* Browsers don't inherit font into form elements by default — force it */
-        input, select, textarea, button, label, option {
-            font-family: 'Poppins', sans-serif !important;
-        }
+       *, *::before, *::after {
+    font-family: 'Montserrat', sans-serif;
+}
+input, select, textarea, button, label, option {
+    font-family: 'Montserrat', sans-serif !important;
+}
     </style>
 </head>
 <body class="bg-gray-50">
@@ -30,8 +30,8 @@
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow p-8">
         <!-- Header -->
         <div class="mb-6 border-b pb-4">
-            <h2 style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Personal Information</h2>
-            <p style="font-family: 'Poppins', sans-serif; font-size: 0.8rem; color: #6b7280;">Provide the needed personal information.</p>
+            <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Personal Information</h2>
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #6b7280;">Provide the needed personal information.</p>
         </div>
 
         <form>
