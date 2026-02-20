@@ -8,9 +8,18 @@
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+      *, *::before, *::after {
+    font-family: 'Montserrat', sans-serif;
+}
+input, select, textarea, button, label, option {
+    font-family: 'Montserrat', sans-serif !important;
+}
+    </style>
 </head>
 <body class="bg-gray-50">
     @include('partials.navbar')
@@ -20,8 +29,8 @@
  <main class="sm:ml-72 p-8">
     <div class="max-w-6xl mx-auto bg-white rounded-lg shadow p-8">
       <div class="mb-6 pb-3 border-b border-gray-200">
-        <h2 class="text-xl font-bold text-gray-900 uppercase tracking-wide">Department &amp; Job Status</h2>
-        <p class="text-sm text-gray-500 mt-1">Assign employee to Department and select job status.</p>
+        <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Department &amp; Job Status</h2>
+         <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #6b7280;">Assign employee to Department and select job status.</p>
       </div>
       <form>
         <div class="flex flex-col items-center gap-6 py-10">
