@@ -6,11 +6,21 @@
     <title>@yield('title')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+      <style>
+        *, *::before, *::after {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Browsers don't inherit font into form elements by default — force it */
+        input, select, textarea, button, label, option {
+            font-family: 'Poppins', sans-serif !important;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     @include('partials.navbar')
@@ -19,36 +29,31 @@
 <main class="sm:ml-72 p-8">
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow p-8">
         <!-- Header -->
-        <div class="mb-6 border-b pb-3">
-            <h2 class="text-xl font-bold text-green-800 uppercase tracking-wide">Personal Information</h2>
-            <p class="text-sm text-gray-500 mt-1">Provide the needed personal information.</p>
+        <div class="mb-6 border-b pb-4">
+            <h2 style="font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Personal Information</h2>
+            <p style="font-family: 'Poppins', sans-serif; font-size: 0.8rem; color: #6b7280;">Provide the needed personal information.</p>
         </div>
 
         <form>
             <div class="flex gap-8">
                 <!-- Left Column -->
                 <div class="flex-1 space-y-3">
-                    <!-- Surname -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Surname</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- First Name -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">First Name</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- Last Name -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Last Name</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- Place of Birth -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Place of Birth</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- Civil Status -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Civil Status</label>
                         <select class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
@@ -59,53 +64,43 @@
                             <option>Separated</option>
                         </select>
                     </div>
-                    <!-- Height -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Height</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- Weight -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Weight</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- Blood Type -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Blood Type</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- UMID ID No. -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">UMID ID No.</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- Pag-IBIG ID No. -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Pag-IBIG ID No.</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- PhilHealth No. -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">PhilHealth No.</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- PhilSys No. -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">PhilSys No.</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- TIN No. -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">TIN No.</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
-                    <!-- Agency Employee No. -->
                     <div class="flex items-center">
                         <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Agency Employee No.</label>
                         <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                     </div>
 
-                    <!-- Contact Info (moved here) -->
                     <div class="space-y-3 pt-2">
                         <div class="flex items-center">
                             <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Telephone No.</label>
@@ -124,7 +119,6 @@
 
                 <!-- Right Column -->
                 <div class="flex-1 space-y-5">
-                    <!-- Citizenship -->
                     <div>
                         <select class="w-full border border-gray-400 rounded focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent">
                             <option value="">CITIZENSHIP</option>
@@ -210,7 +204,7 @@
             <div class="flex justify-center mt-8">
                 <button 
                     type="submit"
-                    class="bg-green-800 text-white hover:bg-green-700 font-semibold px-10 py-2 rounded-full text-sm tracking-widest uppercase transition-colors duration-200"
+                    class="text-white font-semibold px-10 py-2 rounded-full text-sm tracking-widest uppercase transition-colors duration-200"
                     style="background-color: #166534; color: #ffffff;">
                     Next &rsaquo;
                 </button>
