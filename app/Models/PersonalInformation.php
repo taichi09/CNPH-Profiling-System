@@ -23,7 +23,7 @@ class PersonalInformation extends Model
         'permanent_zip_code', 'permanent_address', 'permanent_zip_code', 
         'telephone_no', 'email_address', 'mobile_no'
     ];
-     public function familyBackground()
+    public function familyBackground()
     {
         return $this->hasOne(FamilyBackground::class, 'employee_id', 'employee_id');
     }
@@ -43,4 +43,13 @@ class PersonalInformation extends Model
     {
         return $this->hasMany(VoluntaryWork::class, 'employee_id', 'employee_id');
     }
+    public function learningAndDevelopments()
+    {
+        return $this->hasMany(LearningAndDevelopment::class, 'employee_id', 'employee_id');
+    }
+    public function otherInformations()
+    {
+        return $this->hasMany(OtherInformation::class, 'employee_id', 'employee_id');
+    }
+
 }
