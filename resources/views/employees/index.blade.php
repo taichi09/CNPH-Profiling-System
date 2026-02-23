@@ -1,6 +1,6 @@
 <x-app-layout>    
     <!-- Responsive main container - similar to Bootstrap's behavior -->
-    <main class="lg:ml-72 p-4 sm:p-6 mt-16 transition-all duration-300">
+    <main class="lg:ml-72 p-4 sm:p-6 transition-all duration-300">
         <!-- All Employees Section -->
         <div class="bg-white rounded-lg shadow">
             <!-- Header -->
