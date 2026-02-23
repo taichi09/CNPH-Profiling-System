@@ -1,18 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-</head>
-<body class="bg-gray-50">
-    @include('partials.navbar')
-    @include('partials.sidebar') --}}
-
 <x-app-layout>    
     <main class="sm:ml-72 p-8">
         <div class="max-w-7xl mx-auto">
@@ -181,5 +166,3 @@
         });
     </script>
 </x-app-layout>
-{{-- </body>
-</html> --}}
