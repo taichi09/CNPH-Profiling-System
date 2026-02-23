@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,12 +23,11 @@ input, select, textarea, button, label, option {
 </head>
 <body class="bg-gray-50">
     @include('partials.navbar')
-    @include('partials.sidebar')
-    
+    @include('partials.sidebar') --}}
 
-
- <main class="sm:ml-72 p-8">
-    <div class="max-w-6xl mx-auto bg-white rounded-lg shadow p-8">
+<x-app-layout>
+  <main class="sm:ml-72 p-8">
+    <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
 
       <!-- Header -->
       <div class="mb-6 pb-3">
@@ -182,7 +181,8 @@ input, select, textarea, button, label, option {
       }
     }
   </script>
+</x-app-layout>
  
-</body>
+{{-- </body>
 
-</html>
+</html> --}}

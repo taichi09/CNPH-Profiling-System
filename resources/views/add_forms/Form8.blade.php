@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,11 +23,11 @@ input, select, textarea, button, label, option {
 </head>
 <body class="bg-gray-50">
     @include('partials.navbar')
-    @include('partials.sidebar')
+    @include('partials.sidebar') --}}
     
-
- <main class="sm:ml-72 p-8">
-    <div class="max-w-6xl mx-auto bg-white rounded-lg shadow p-8">
+<x-app-layout>
+  <main class="sm:ml-72 p-8">
+    <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
       <div class="mb-6 pb-3 border-b border-gray-200">
         <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Department &amp; Job Status</h2>
          <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #6b7280;">Assign employee to Department and select job status.</p>
@@ -116,7 +116,8 @@ input, select, textarea, button, label, option {
       }
     }
   </script>
+</x-app-layout>
  
-</body>
+{{-- </body>
 
-</html>
+</html> --}}
