@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\PdsOcrController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,6 +16,8 @@ Route::get('/', function () {
 Route::get('/form', function () {
     return view('add_forms.Form8');
 });
+Route::get('/pds',          [PdsOcrController::class, 'index'])->name('pds.index');
+    Route::post('/pds/extract', [PdsOcrController::class, 'extract'])->name('pds.extract');
 
 
 // 2. Wrap all protected routes inside the 'auth' middleware group
