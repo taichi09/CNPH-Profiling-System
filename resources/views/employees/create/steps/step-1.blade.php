@@ -176,7 +176,9 @@
         
         <!-- Navigation -->
         <div class="flex justify-between mt-8">
-            <div></div>
+            <a href="{{ route('employees.index') }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
+                &lsaquo; Cancel
+            </a>
             <button type="submit" class="px-10 py-2 rounded-full bg-green-700 text-white text-sm font-semibold uppercase tracking-widest hover:bg-green-800">
                 Next &rsaquo;
             </button>
