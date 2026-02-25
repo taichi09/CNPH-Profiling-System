@@ -14,12 +14,12 @@
                             </svg>
                             Filter
                         </button>
-                        <button type="button" id="open-add-employee-modal" class="py-2 px-4 inline-flex items-center justify-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
+                        <a href="{{ route('employees.create.step', 1) }}" class="py-2 px-4 inline-flex items-center justify-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700">
                             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
                             Add Employee
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <!-- Search Bar -->
@@ -30,8 +30,6 @@
             @include('employees.partials.table')
         </div>
     </main>
-
-    @include('employees.forms.add-employee-modal')
     
     <script src="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.js"></script>
 </x-app-layout>

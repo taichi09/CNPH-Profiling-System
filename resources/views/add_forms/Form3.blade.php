@@ -1,33 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
-
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-       *, *::before, *::after {
-    font-family: 'Montserrat', sans-serif;
-}
-input, select, textarea, button, label, option {
-    font-family: 'Montserrat', sans-serif !important;
-}
-    </style>
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    
-</head>
-<body class="bg-gray-50">
-    @include('partials.navbar')
-    @include('partials.sidebar') --}}
-    
-
-
 <x-app-layout>
   <main class="sm:ml-72 p-8">
     <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
@@ -115,30 +85,25 @@ input, select, textarea, button, label, option {
   </script>
       
   <style>
-  input[type="text"], input[type="date"] {
-    border: 1px solid #d1d5db;       /* all 4 sides */
-    border-radius: 3px;               /* slight rounding */
-    outline: none;
-    background: transparent;
-    width: 100%;
-    font-size: 0.75rem;
-    padding: 4px 6px;                 /* inner spacing */
-  }
-  input[type="text"]:focus, input[type="date"]:focus {
-    border-color: #166534;            /* green on focus */
-  }
-  label {
-    font-size: 0.65rem;
-    color: #6b7280;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    display: block;
-    margin-bottom: 2px;
-  }
-    </style>
+    input[type="text"], input[type="date"] {
+      border: 1px solid #d1d5db;       /* all 4 sides */
+      border-radius: 3px;               /* slight rounding */
+      outline: none;
+      background: transparent;
+      width: 100%;
+      font-size: 0.75rem;
+      padding: 4px 6px;                 /* inner spacing */
+    }
+    input[type="text"]:focus, input[type="date"]:focus {
+      border-color: #166534;            /* green on focus */
+    }
+    label {
+      font-size: 0.65rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: block;
+      margin-bottom: 2px;
+    }
+  </style>
 </x-app-layout> 
-{{-- <!-- Chart.js Initialization -->
- 
-</body>
-
-</html> --}}

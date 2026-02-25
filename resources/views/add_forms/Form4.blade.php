@@ -1,31 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
-
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-      <style>
-       *, *::before, *::after {
-    font-family: 'Montserrat', sans-serif;
-}
-input, select, textarea, button, label, option {
-    font-family: 'Montserrat', sans-serif !important;
-}
-    </style>
-</head>
-<body class="bg-gray-50">
-    @include('partials.navbar')
-    @include('partials.sidebar') --}}
-
 <x-app-layout>
   <main main class="sm:ml-72 p-8">
     <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
@@ -151,9 +123,3 @@ input, select, textarea, button, label, option {
     }
   </script>
 </x-app-layout>
-    
-{{-- <!-- Chart.js Initialization -->
- 
-</body>
-
-</html> --}}

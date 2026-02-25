@@ -1,0 +1,103 @@
+<form method="POST" action="{{ route('employees.create.step.post', 3) }}">
+    @csrf
+
+    <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
+        <!-- Header -->
+        <div class="mb-6 border-b pb-3">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Educational Background</h2>
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #6b7280;">Provide details regarding educational background.</p>
+        </div>
+
+        <!-- Reusable section template via JS -->
+        <div id="edu-sections" class="space-y-6"></div>
+            
+        <script>
+            const sections = [
+            "Elementary",
+            "Secondary",
+            "Vocational / Trade Course",
+            "College",
+            "Graduate Studies"
+            ];
+
+            const container = document.getElementById('edu-sections');
+
+            sections.forEach(title => {
+            const section = document.createElement('div');
+            section.innerHTML = `
+                <div class="mb-1">
+                <p class="text-sm font-bold text-gray-800 uppercase tracking-wide">${title}:</p>
+                </div>
+                <div class="grid grid-cols-3 gap-x-4 gap-y-3">
+                <!-- Row 1 -->
+                <div>
+                    <label>Name of School</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label>Basic Education Degree/Course</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label>Period of Attendance</label>
+                    <div class="flex gap-2 items-center mt-1">
+                    <span class="text-xs text-gray-500">From</span>
+                    <input type="text" class="w-16" placeholder="yyyy">
+                    <span class="text-xs text-gray-500">To</span>
+                    <input type="text" class="w-16" placeholder="yyyy">
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div>
+                    <label>Highest Level/Units Earned</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label>Year Graduated</label>
+                    <input type="text">
+                </div>
+                <div>
+                    <label>Scholarship / Academic Honors Received</label>
+                    <input type="text">
+                </div>
+                </div>
+                <div class="border-b border-gray-200 mt-4"></div>
+            `;
+            container.appendChild(section);
+            });
+        </script>
+            
+        <style>
+            input[type="text"], input[type="date"] {
+            border: 1px solid #d1d5db;       /* all 4 sides */
+            border-radius: 3px;               /* slight rounding */
+            outline: none;
+            background: transparent;
+            width: 100%;
+            font-size: 0.75rem;
+            padding: 4px 6px;                 /* inner spacing */
+            }
+            input[type="text"]:focus, input[type="date"]:focus {
+            border-color: #166534;            /* green on focus */
+            }
+            label {
+            font-size: 0.65rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            display: block;
+            margin-bottom: 2px;
+            }
+        </style>
+
+        <div class="flex justify-between mt-8">
+            <a href="{{ route('employees.create.step', 2) }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
+                &lsaquo; Back
+            </a>
+            <button type="submit" class="px-10 py-2 rounded-full bg-green-700 text-white text-sm font-semibold uppercase tracking-widest hover:bg-green-800">
+                Next &rsaquo;
+            </button>
+        </div>
+    </div>
+</form>
