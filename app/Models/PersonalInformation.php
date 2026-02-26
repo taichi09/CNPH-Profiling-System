@@ -20,7 +20,7 @@ class PersonalInformation extends Model
         'sex_at_birth', 'civil_status', 'height', 'weight', 'blood_type', 
         'umid_id_no', 'pagibig_id_no', 'philhealth_id_no', 'philsys_no',
         'tin_no', 'agency_employee_no', 'citizenship', 'residential_address',
-        'permanent_zip_code', 'permanent_address', 'permanent_zip_code', 
+        'residential_zip_code', 'permanent_address', 'permanent_zip_code', 
         'telephone_no', 'email_address', 'mobile_no'
     ];
     public function familyBackground()
