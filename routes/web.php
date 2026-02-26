@@ -33,6 +33,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/employees/create/{step}', [EmployeeController::class, 'storeStep'])
         ->name('employees.create.step.post');
 
+    Route::post('/employees/import', [EmployeeController::class, 'import'])
+    ->name('employees.import');
+
     Route::get('/departments', [DepartmentController::class, 'index'])->name('departments.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
