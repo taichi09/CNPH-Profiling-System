@@ -9,7 +9,7 @@ class EducationalBackground extends Model
     //
         protected $table = 'educational_background';
 
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $fillable =   [
         'employee_id',
