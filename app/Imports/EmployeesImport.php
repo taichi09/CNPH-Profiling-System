@@ -6,6 +6,7 @@ use App\Models\PersonalInformation;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
+use Carbon\Carbon;
 
 class EmployeesImport implements ToModel, WithHeadingRow
 {
@@ -16,8 +17,8 @@ class EmployeesImport implements ToModel, WithHeadingRow
             'first_name' => $row['first_name'] ?? null,
             'middle_name' => $row['middle_name'] ?? null,
             'extension' => $row['extension'] ?? null,
-            'date_of_birth' => isset($row['date_of_birth']) ? ExcelDate::excelToDateTimeObject($row['date_of_birth'])
-            ->format('Y-m-d') : null,
+            'date_of_birth' => isset($row['date_of_birth']) ? (is_numeric($row['date_of_birth']) ? ExcelDate::excelToDateTimeObject($row['date_of_birth'])->format('Y-m-d')
+        : Carbon::parse($row['date_of_birth'])->format('Y-m-d')) : null,
             'place_of_birth' => $row['place_of_birth'] ?? null,
             'sex_at_birth' => $row['sex_at_birth'] ?? null,
             'civil_status' => $row['civil_status'] ?? null,
