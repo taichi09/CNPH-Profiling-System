@@ -16,7 +16,7 @@ Route::get('/', function () {
 Route::get('/form', function () {
     return view('add_forms.Form8');
 });
-Route::get('/pds',          [PdsOcrController::class, 'index'])->name('pds.index');
+Route::get('/pds', [PdsOcrController::class, 'index'])->name('pds.index');
     Route::post('/pds/extract', [PdsOcrController::class, 'extract'])->name('pds.extract');
 
 
