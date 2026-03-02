@@ -23,6 +23,7 @@
         
         <!-- Chart.js CDN -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
