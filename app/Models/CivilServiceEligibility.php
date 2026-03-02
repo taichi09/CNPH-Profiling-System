@@ -23,9 +23,9 @@ class CivilServiceEligibility extends Model
         'license_validity',
     ];
 
-    protected $casts = [
-        'license_validity' => 'date',
-    ];
+    // protected $casts = [
+    //     'license_validity' => 'date',
+    // ];
 
     public function personalInformation()
     {

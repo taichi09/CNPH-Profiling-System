@@ -18,6 +18,9 @@ class OtherInformation extends Model
         'special_skills_and_hobbies',
         'non_academic_distinction',
         'membership_in_association',
+        'landbank_no',
+        'dbp_no',
+        'sss_id'
     ];
 
     public function personalInformation()

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Imports\EmployeePdsImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -28,5 +30,16 @@ class EmployeeController extends Controller
         }
 
         return redirect()->route('employees.create.step', (int)$step + 1);
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xlsm,xls|max:10240',
+        ]);
+
+        Excel::import(new EmployeePdsImport, $request->file('file'));
+
+        return back()->with('success', 'All employee data imported successfully.');
     }
 }

@@ -22,10 +22,10 @@ class VoluntaryWork extends Model
         'position_nature_of_work',
     ];
 
-    protected $casts = [
-        'inclusive_date_from' => 'date',
-        'inclusive_date_to' => 'date',
-    ];
+    // protected $casts = [
+    //     'inclusive_date_from' => 'date',
+    //     'inclusive_date_to' => 'date',
+    // ];
 
     public function personalInformation()
     {
