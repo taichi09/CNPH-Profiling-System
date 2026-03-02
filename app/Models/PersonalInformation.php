@@ -15,7 +15,7 @@ class PersonalInformation extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'surname', 'first_name', 'middle_name', 'extension', 
+        'employee_id', 'surname', 'first_name', 'middle_name', 'extension', 
         'date_of_birth', 'place_of_birth',
         'sex_at_birth', 'civil_status', 'height', 'weight', 'blood_type', 
         'umid_id_no', 'pagibig_id_no', 'philhealth_id_no', 'philsys_no',

@@ -23,11 +23,11 @@ class LearningAndDevelopment extends Model
         'conducted_sponsored_by',
     ];
 
-    protected $casts = [
-        'inclusive_date_from' => 'date',
-        'inclusive_date_to' => 'date',
-        'number_of_hours' => 'float',
-    ];
+    // protected $casts = [
+    //     'inclusive_date_from' => 'date',
+    //     'inclusive_date_to' => 'date',
+    //     'number_of_hours' => 'float',
+    // ];
 
     public function personalInformation()
     {
