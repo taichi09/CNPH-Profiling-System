@@ -43,7 +43,7 @@
     </main>
 
     {{-- Import Modal --}}
-    @include('employees.partials.import-modal')
+    {{-- @include('employees.partials.import-modal') --}}
     
     <script src="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.js"></script>
 </x-app-layout>
