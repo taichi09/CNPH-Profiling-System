@@ -25,8 +25,34 @@
                     <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
                 </div>
                 <div class="flex items-center">
+                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Name Extension</label>
+                    <select class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
+                        <option value=""></option>
+                        <option>Jr.</option>
+                        <option>Sr.</option>
+                        <option>II</option>
+                        <option>III</option>
+                        <option>IV</option>
+                    </select>
+                </div>
+                <div class="flex items-center">
+                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Date of Birth</label>
+                    <input type="date" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
+                </div>
+                <div class="flex items-center">
                     <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Place of Birth</label>
                     <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
+                </div>
+                <div class="flex items-center">
+                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Sex at Birth</label>
+                    <div class="flex gap-6 text-sm text-gray-700">
+                        <label class="flex items-center gap-1.5">
+                            <input type="radio" name="sex_at_birth" value="Male" class="accent-green-700"> Male
+                        </label>
+                        <label class="flex items-center gap-1.5">
+                            <input type="radio" name="sex_at_birth" value="Female" class="accent-green-700"> Female
+                        </label>
+                    </div>
                 </div>
                 <div class="flex items-center">
                     <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Civil Status</label>
