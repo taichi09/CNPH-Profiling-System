@@ -9,10 +9,22 @@ use Illuminate\Http\Request;
 class DepartmentController extends Controller
 {
     //
-    public function index(){
-        return view('departments.index');
-    }
+ public function index()
+{
+    $departments = Department::orderBy('dept_name', 'asc')->get();
+    return view('departments.index', compact('departments'));
+}
+public function update(Request $request, Department $department)
+{
+  $validated = $request->validate([
+    'department_name' => 'required|string|max:255|unique:department,dept_name,' 
+        . $department->dept_id . ',dept_id',
+]);
 
+    $department->update(['dept_name' => $validated['department_name']]);
+
+    return response()->json(['success' => true, 'message' => 'Department updated successfully.']);
+}
     public function store(Request $request)
 
 
