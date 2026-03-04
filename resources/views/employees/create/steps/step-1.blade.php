@@ -9,193 +9,374 @@
         </div>
 
         <!-- Body -->
-        <div class="flex gap-8">
-            <!-- Left Column -->
-            <div class="flex-1 space-y-3">
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Surname</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">First Name</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Middle Name</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Name Extension</label>
-                    <select class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                        <option value=""></option>
-                        <option>Jr.</option>
-                        <option>Sr.</option>
-                        <option>II</option>
-                        <option>III</option>
-                        <option>IV</option>
-                    </select>
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Date of Birth</label>
-                    <input type="date" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Place of Birth</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Sex at Birth</label>
-                    <div class="flex gap-6 text-sm text-gray-700">
-                        <label class="flex items-center gap-1.5">
-                            <input type="radio" name="sex_at_birth" value="Male" class="accent-green-700"> Male
-                        </label>
-                        <label class="flex items-center gap-1.5">
-                            <input type="radio" name="sex_at_birth" value="Female" class="accent-green-700"> Female
-                        </label>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Civil Status</label>
-                    <select class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                        <option value=""></option>
-                        <option>Single</option>
-                        <option>Married</option>
-                        <option>Widowed</option>
-                        <option>Separated</option>
-                    </select>
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Height</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Weight</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Blood Type</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">UMID ID No.</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Pag-IBIG ID No.</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">PhilHealth No.</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">PhilSys No.</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">TIN No.</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
-                <div class="flex items-center">
-                    <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Agency Employee No.</label>
-                    <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                </div>
+        <div class="border border-gray-300 text-xs w-full">
 
-                <div class="space-y-3 pt-2">
-                    <div class="flex items-center">
-                        <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Telephone No.</label>
-                        <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                    </div>
-                    <div class="flex items-center">
-                        <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Mobile No.</label>
-                        <input type="text" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                    </div>
-                    <div class="flex items-center">
-                        <label class="w-48 text-sm font-semibold text-gray-700 uppercase tracking-wide shrink-0">Email</label>
-                        <input type="email" class="w-72 border border-gray-400 focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent rounded-sm">
-                    </div>
-                </div>
+            <!-- Surname  -->
+            <div class="flex items-stretch border-b border-gray-300">
+                <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                    1. Surname
+                </span>
+                <input type="text" name="surname"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent uppercase text-sm">
             </div>
 
-            <!-- Right Column -->
-            <div class="flex-1 space-y-5">
-                <div>
-                    <select class="w-full border border-gray-400 rounded focus:border-green-700 outline-none py-1.5 px-2 text-sm bg-transparent">
-                        <option value="">CITIZENSHIP</option>
-                        <option>Filipino</option>
-                        <option>Dual Citizen</option>
-                        <option>Other</option>
-                    </select>
+            <!-- First Name -->
+            <div class="flex items-stretch border-b border-gray-300">
+                <!-- Left: First Name label + input -->
+                <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                    2. First Name
+                </span>
+                <input type="text" name="first_name"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent uppercase text-sm">
+
+                <!-- Name Extension -->
+                <span class="w-44 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                    Name Extension <br>(Jr., Sr., II, III)
+                </span>
+                <select name="name_extension"
+                    class="w-60 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    <option value=""></option>
+                    <option>Jr.</option>
+                    <option>Sr.</option>
+                    <option>II</option>
+                    <option>III</option>
+                    <option>IV</option>
+                </select>
+            </div>
+
+            <!-- Middle Name -->
+            <div class="flex items-stretch border-b border-gray-300">
+                <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                    Middle Name
+                </span>
+                <input type="text" name="middle_name"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent uppercase text-sm">
+            </div>
+
+            <div class="flex border-b border-gray-300">
+
+                <!-- Left Side -->
+                <div class="flex-1 border-r border-gray-300">
+
+                    <!-- Date of Birth -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 leading-tight">
+                            3. Date of Birth <br><span class="normal-case font-normal text-[10px]">(mm/dd/yyyy)</span>
+                        </span>
+                        <input type="date" name="date_of_birth"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                    <!-- Place of Birth -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            4. Place of Birth
+                        </span>
+                        <input type="text" name="place_of_birth"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
+                    <!-- Sex at Birth -->
+                    <div class="flex items-stretch">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            5. Sex at Birth
+                        </span>
+                        <div class="flex items-center gap-6 px-3 py-2 text-sm text-gray-700">
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="sex_at_birth" value="Male" class="accent-green-700"> Male
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="sex_at_birth" value="Female" class="accent-green-700"> Female
+                            </label>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Residential Address -->
-                <div>
-                    <p class="text-sm font-bold text-gray-800 uppercase mb-2">Residential Address:</p>
-                    <div class="grid grid-cols-2 gap-x-4 gap-y-3">
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">House/Block/Lot No.</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">Street</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">Subdivision/Village</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">Barangay</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">City/Municipality</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">Province</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">Zip Code</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
+                <!-- Right Side -->
+                <div class="w-[50%] shrink-0 px-3 py-2 flex flex-col gap-2">
+                    <span class="text-gray-600 uppercase font-semibold tracking-wide">16. Citizenship</span>
+
+                    <!-- Filipino / Dual Citizenship -->
+                    <div class="flex flex-row gap-1 text-sm text-gray-700">
+                        <label class="flex items-center gap-1.5 cursor-pointer">
+                            <input type="radio" name="citizenship" value="Filipino" class="accent-green-700"> Filipino
+                        </label>
+                        <label class="flex items-center gap-1.5 cursor-pointer">
+                            <input type="radio" name="citizenship" value="Dual Citizenship" class="accent-green-700"> Dual Citizenship
+                        </label>
+                    </div>
+
+                    <!-- By birth / By naturalization -->
+                    <div class="flex gap-4 ml-28 text-[11px] text-gray-600">
+                        <label class="flex items-center gap-1 cursor-pointer">
+                            <input type="radio" name="citizenship_type" value="by birth" class="accent-green-700"> by birth
+                        </label>
+                        <label class="flex items-center gap-1 cursor-pointer">
+                            <input type="radio" name="citizenship_type" value="by naturalization" class="accent-green-700"> by naturalization
+                        </label>
+                    </div>
+
+                    <!-- Indicate country -->
+                    <div class="mt-1">
+                        <p class="text-[10px] text-gray-400 mb-0.5">If holder of dual citizenship, please indicate country:</p>
+                        <input type="text" name="citizenship_country"
+                            class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent uppercase text-sm">
                     </div>
                 </div>
 
-                <!-- Permanent Address -->
-                <div>
-                    <p class="text-sm font-bold text-gray-800 uppercase mb-2">Permanent Address:</p>
-                    <div class="grid grid-cols-2 gap-x-4 gap-y-3">
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">House/Block/Lot No.</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">Street</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">Subdivision/Village</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">Barangay</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">City/Municipality</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">Province</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-0.5">Zip Code</label>
-                            <input type="text" class="w-full border-b border-gray-400 focus:border-green-700 outline-none py-1 text-sm bg-transparent">
+            </div>
+
+            <div class="flex border-b border-gray-300">
+
+                <!-- Left Side -->
+                <div class="flex-1 border-r border-gray-300">
+
+                    <!-- Civil Status -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            6. Civil Status
+                        </span>
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 px-3 py-2 text-sm text-gray-700">
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="civil_status" value="Single" class="accent-green-700"> Single
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="civil_status" value="Married" class="accent-green-700"> Married
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="civil_status" value="Widowed" class="accent-green-700"> Widowed
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="civil_status" value="Separated" class="accent-green-700"> Separated
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" name="civil_status" value="Others" class="accent-green-700"> Others
+                            </label>
                         </div>
                     </div>
+
+                    <!-- Height -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            7. Height <span class="lowercase">(m)</span>
+                        </span>
+                        <input type="text" name="height"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                    <!-- Weight -->
+                    <div class="flex items-stretch">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            8. Weight <span class="lowercase">(kg)</span>
+                        </span>
+                        <input type="text" name="weight"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                </div>
+
+                <!-- Right Side: Residential Address spanning all 3 rows -->
+                <div class="w-[50%] shrink-0 px-3 py-2 flex flex-col gap-2">
+                    <span class="text-gray-600 uppercase font-semibold tracking-wide">17. Residential Address</span>
+
+                    <div class="grid grid-cols-2 gap-x-3 gap-y-2">
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">House/Block/Lot No.</label>
+                            <input type="text" name="res_house"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">Street</label>
+                            <input type="text" name="res_street"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">Subdivision/Village</label>
+                            <input type="text" name="res_subdivision"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">Barangay</label>
+                            <input type="text" name="res_barangay"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">City/Municipality</label>
+                            <input type="text" name="res_city"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">Province</label>
+                            <input type="text" name="res_province"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Zip Code -->
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[10px] text-gray-600 uppercase font-semibold tracking-wide shrink-0">Zip Code</span>
+                        <input type="text" name="res_zip"
+                            class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex border-b border-gray-300">
+
+                <!-- Left Side -->
+                <div class="flex-1 border-r border-gray-300">
+
+                    <!-- Blood Type -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            9. Blood Type
+                        </span>
+                        <input type="text" name="blood_type"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                    <!-- UMID -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            10. UMID ID No.
+                        </span>
+                        <input type="text" name="umid"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                    <!-- Pag-IBIG -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            11. Pag-IBIG ID No.
+                        </span>
+                        <input type="text" name="pagibig"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                    <!-- PhilHealth -->
+                    <div class="flex items-stretch">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            12. PhilHealth No.
+                        </span>
+                        <input type="text" name="philhealth"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                </div>
+
+                <!-- Right Side: Permanent Address spanning all 4 rows -->
+                <div class="w-[50%] shrink-0 px-3 py-2 flex flex-col gap-2">
+                    <span class="text-gray-600 uppercase font-semibold tracking-wide">18. Permanent Address</span>
+
+                    <div class="grid grid-cols-2 gap-x-3 gap-y-2">
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">House/Block/Lot No.</label>
+                            <input type="text" name="perm_house"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">Street</label>
+                            <input type="text" name="perm_street"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">Subdivision/Village</label>
+                            <input type="text" name="perm_subdivision"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">Barangay</label>
+                            <input type="text" name="perm_barangay"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">City/Municipality</label>
+                            <input type="text" name="perm_city"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">Province</label>
+                            <input type="text" name="perm_province"
+                                class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Zip Code -->
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[10px] text-gray-600 uppercase font-semibold tracking-wide shrink-0">Zip Code</span>
+                        <input type="text" name="perm_zip"
+                            class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex border-b border-gray-300">
+
+                <!-- Left Side -->
+                <div class="flex-1 border-r border-gray-300">
+
+                    <!-- PhilSys -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            13. PhilSys No.
+                        </span>
+                        <input type="text" name="philsys"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                    <!-- TIN -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            14. TIN No.
+                        </span>
+                        <input type="text" name="tin"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                    <!-- Agency Employee No -->
+                    <div class="flex items-stretch">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            15. Agency Employee No.
+                        </span>
+                        <input type="text" name="agency_employee_no"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                </div>
+
+                <!-- Right Side: Telephone, Mobile, Email -->
+                <div class="w-[50%] shrink-0">
+
+                    <!-- Telephone -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                            19. Telephone No.
+                        </span>
+                        <input type="text" name="telephone"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                    <!-- Mobile -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                            20. Mobile No.
+                        </span>
+                        <input type="text" name="mobile"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="flex items-stretch">
+                        <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                            21. Email Address
+                        </span>
+                        <input type="email" name="email"
+                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    </div>
+
                 </div>
             </div>
         </div>
