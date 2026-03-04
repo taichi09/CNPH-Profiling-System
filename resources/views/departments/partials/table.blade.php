@@ -4,16 +4,18 @@
             <tr>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Department Name</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No. of Employees</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center">No. of Employees</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
             @forelse ($departments as $index => $department)
                 <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-6 py-4 text-sm text-gray-500">{{ $index + 1 }}</td>
+                   <td class="px-6 py-4 text-sm text-gray-500">
+    {{ ($departments->currentPage() - 1) * $departments->perPage() + $index + 1 }}
+</td>
                     <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ $department->dept_name }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-500">{{ $department->emp_no }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500 text-center">{{ $department->emp_no }}</td>
                     <td class="px-6 py-4 text-sm">
                         <div class="flex items-center gap-x-2">
                             <!-- Edit Button -->
@@ -37,4 +39,36 @@
             @endforelse
         </tbody>
     </table>
+
+    @if ($departments->hasPages())
+    <div class="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
+        <p class="text-sm text-gray-500">
+            Showing {{ $departments->firstItem() }} to {{ $departments->lastItem() }} of {{ $departments->total() }} results
+        </p>
+        <div class="flex items-center gap-x-1">
+            {{-- Previous --}}
+            @if ($departments->onFirstPage())
+                <span class="px-3 py-1 text-sm text-gray-400 border border-gray-200 rounded cursor-not-allowed">Previous</span>
+            @else
+                <a href="{{ $departments->previousPageUrl() }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Previous</a>
+            @endif
+
+            {{-- Page Numbers --}}
+            @foreach ($departments->getUrlRange(1, $departments->lastPage()) as $page => $url)
+                @if ($page == $departments->currentPage())
+                    <span class="px-3 py-1 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded">{{ $page }}</span>
+                @else
+                    <a href="{{ $url }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">{{ $page }}</a>
+                @endif
+            @endforeach
+
+            {{-- Next --}}
+            @if ($departments->hasMorePages())
+                <a href="{{ $departments->nextPageUrl() }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Next</a>
+            @else
+                <span class="px-3 py-1 text-sm text-gray-400 border border-gray-200 rounded cursor-not-allowed">Next</span>
+            @endif
+        </div>
+    </div>
+@endif
 </div>
