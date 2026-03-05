@@ -61,7 +61,7 @@
                     <!-- Date of Birth -->
                     <div class="flex items-stretch border-b border-gray-300">
                         <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 leading-tight">
-                            3. Date of Birth <br><span class="normal-case font-normal text-[10px]">(mm/dd/yyyy)</span>
+                            3. Date of Birth <br><span class="normal-case font-normal text-[10px]">(dd/mm/yyyy)</span>
                         </span>
                         <input type="date" name="date_of_birth"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
