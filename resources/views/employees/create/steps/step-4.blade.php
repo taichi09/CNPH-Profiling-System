@@ -9,105 +9,100 @@
         </div>
 
         <!-- Body -->
-        <div class="w-full">
-            <!-- Table Header -->
-            <div class="grid grid-cols-12 gap-x-6 mb-2 text-xs font-bold text-gray-700 uppercase tracking-wide">
-                <div class="col-span-4">Career Service/RA 1080 (Board/Bar) Under Special Laws/Category II/IV Eligibility and Eligibilities for Uniformed Personnel</div>
-                <div class="col-span-1 text-center">Rating</div>
-                <div class="col-span-2 text-center">Date of Examination</div>
-                <div class="col-span-2 text-center">Place of Examination</div>
-                <div class="col-span-2 text-center">License</div>
-                <div class="col-span-1"></div>
+        <div class="border border-gray-300 text-xs w-full">
+
+            <!-- Header Row -->
+            <div class="flex items-stretch border-b border-gray-300">
+
+                <!-- Eligibility -->
+                <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col justify-center text-center">
+                    <span>27. CES/CSEE/Career Service/RA 1080 (Board/Bar)/Under Special Laws/Category II/IV Eligibility</span>
+                    <span>and Eligibilities for Uniformed Personnel</span>
+                </div>
+
+                <!-- Rating -->
+                <div class="w-24 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Rating</span>
+                    <span class="normal-case font-normal">(if Applicable)</span>
+                </div>
+
+                <!-- Date of Examination -->
+                <div class="w-28 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Date of</span>
+                    <span>Examination /</span>
+                    <span>Conferment</span>
+                </div>
+
+                <!-- Place of Examination -->
+                <div class="w-36 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Place of Examination /</span>
+                    <span>Conferment</span>
+                </div>
+
+                <!-- License -->
+                <div class="w-48 shrink-0 border-gray-300 flex flex-col">
+                    <div class="px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-b border-gray-300 text-center">
+                        License <span class="normal-case font-normal">(if applicable)</span>
+                    </div>
+                    <div class="flex flex-1">
+                        <div class="flex-1 px-2 py-1 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-center">Number</div>
+                        <div class="flex-1 px-2 py-1 text-[10px] text-gray-600 uppercase font-semibold tracking-wide text-center">Valid Until</div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Sub-header for License columns -->
-            <div class="grid grid-cols-12 gap-x-6 mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                <div class="col-span-4"></div>
-                <div class="col-span-1"></div>
-                <div class="col-span-2"></div>
-                <div class="col-span-2"></div>
-                <div class="col-span-1 text-center">License No.</div>
-                <div class="col-span-1 text-center">Valid Until</div>
-                <div class="col-span-1"></div>
-            </div>
-
-            <!-- Rows -->
-            <div id="eligibility-list" class="space-y-3">
-                <div class="grid grid-cols-12 gap-x-6 items-center eligibility-row">
-                <div class="col-span-4">
-                    <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </div>
-                <div class="col-span-1">
-                    <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm text-center" />
-                </div>
-                <div class="col-span-2">
-                    <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </div>
-                <div class="col-span-2">
-                    <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </div>
-                <div class="col-span-1">
-                    <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </div>
-                <div class="col-span-1">
-                    <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </div>
-                <div class="col-span-1 flex justify-center">
-                    <button type="button" onclick="removeRow(this)" class="text-red-400 hover:text-red-600 text-lg font-bold leading-none">&times;</button>
-                </div>
+            <!-- Input Rows -->
+            <div id="eligibility-list" class="flex flex-col">
+                <div class="flex items-stretch border-b border-gray-300">
+                    <input type="text" name="eligibility[0][name]"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                    <input type="text" name="eligibility[0][rating]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="eligibility[0][date]"
+                        class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="eligibility[0][place]"
+                        class="w-36 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                    <input type="text" name="eligibility[0][license_no]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="eligibility[0][license_valid]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
                 </div>
             </div>
 
-            <!-- Add Another Button -->
-            <div class="flex justify-center mt-6">
-                <button
-                type="button"
-                onclick="addRow()"
-                class="border border-gray-400 text-gray-600 hover:border-green-700 hover:text-green-700 px-6 py-2 rounded-full text-sm font-semibold tracking-wide transition-colors duration-200">
-                + Add another
-                </button>
+            <!-- Add Row Button -->
+            <div class="px-2 py-1.5 border-t border-gray-300">
+                <button type="button" onclick="addEligibility()"
+                    class="text-xs text-green-700 hover:underline">+ Add Row</button>
             </div>
         </div>
 
         <script>
-            function addRow() {
-            const list = document.getElementById('eligibility-list');
-            const row = document.createElement('div');
-            row.className = 'grid grid-cols-12 gap-x-6 items-center eligibility-row';
-            row.innerHTML = `
-                <div class="col-span-4">
-                <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </div>
-                <div class="col-span-1">
-                <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm text-center" />
-                </div>
-                <div class="col-span-2">
-                <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </div>
-                <div class="col-span-2">
-                <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </div>
-                <div class="col-span-1">
-                <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </div>
-                <div class="col-span-1">
-                <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </div>
-                <div class="col-span-1 flex justify-center">
-                <button type="button" onclick="removeRow(this)" class="text-red-400 hover:text-red-600 text-lg font-bold leading-none">&times;</button>
-                </div>
-            `;
-            list.appendChild(row);
-            }
-
-            function removeRow(btn) {
-            const rows = document.querySelectorAll('.eligibility-row');
-            if (rows.length > 1) {
-                btn.closest('.eligibility-row').remove();
-            }
+            let eligibilityIndex = 1;
+            function addEligibility() {
+                const list = document.getElementById('eligibility-list');
+                const row = document.createElement('div');
+                row.className = 'flex items-stretch border-b border-gray-300';
+                row.innerHTML = `
+                    <input type="text" name="eligibility[${eligibilityIndex}][name]"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                    <input type="text" name="eligibility[${eligibilityIndex}][rating]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="eligibility[${eligibilityIndex}][date]"
+                        class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="eligibility[${eligibilityIndex}][place]"
+                        class="w-36 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                    <input type="text" name="eligibility[${eligibilityIndex}][license_no]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="eligibility[${eligibilityIndex}][license_valid]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                `;
+                list.appendChild(row);
+                eligibilityIndex++;
             }
         </script>
 
+        <!-- Navigation -->
         <div class="flex justify-between mt-8">
             <a href="{{ route('employees.create.step', 3) }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
                 &lsaquo; Back
