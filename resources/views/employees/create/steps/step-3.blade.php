@@ -3,94 +3,141 @@
 
     <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
         <!-- Header -->
-        <div class="mb-6 border-b pb-3">
+        <div class="mb-6 border-b pb-4">
             <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Educational Background</h2>
             <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #6b7280;">Provide details regarding educational background.</p>
         </div>
 
-        <!-- Reusable section template via JS -->
-        <div id="edu-sections" class="space-y-6"></div>
-            
-        <script>
-            const sections = [
-            "Elementary",
-            "Secondary",
-            "Vocational / Trade Course",
-            "College",
-            "Graduate Studies"
-            ];
+        <!-- Body -->
+        <div class="border border-gray-300 text-xs w-full">
 
-            const container = document.getElementById('edu-sections');
+            <!-- Header Row -->
+            <div class="flex items-stretch border-b border-gray-300">
 
-            sections.forEach(title => {
-            const section = document.createElement('div');
-            section.innerHTML = `
-                <div class="mb-1">
-                <p class="text-sm font-bold text-gray-800 uppercase tracking-wide">${title}:</p>
+                <!-- Level -->
+                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center justify-center text-center">
+                    26. Level
                 </div>
-                <div class="grid grid-cols-3 gap-x-4 gap-y-3">
-                <!-- Row 1 -->
-                <div>
-                    <label>Name of School</label>
-                    <input type="text">
+
+                <!-- Name of School -->
+                <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Name of School</span>
+                    <span class="normal-case font-normal">(Write in full)</span>
                 </div>
-                <div>
-                    <label>Basic Education Degree/Course</label>
-                    <input type="text">
+
+                <!-- Basic Education/Degree/Course -->
+                <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Basic Education/Degree/Course</span>
+                    <span class="normal-case font-normal">(Write in full)</span>
                 </div>
-                <div>
-                    <label>Period of Attendance</label>
-                    <div class="flex gap-2 items-center mt-1">
-                    <span class="text-xs text-gray-500">From</span>
-                    <input type="text" class="w-16" placeholder="yyyy">
-                    <span class="text-xs text-gray-500">To</span>
-                    <input type="text" class="w-16" placeholder="yyyy">
+
+                <!-- Period of Attendance -->
+                <div class="w-28 shrink-0 border-r border-gray-300 flex flex-col">
+                    <div class="px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-b border-gray-300 text-center">
+                        Period of Attendance
+                    </div>
+                    <div class="flex flex-1">
+                        <div class="flex-1 px-2 py-1 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-center">From</div>
+                        <div class="flex-1 px-2 py-1 text-[10px] text-gray-600 uppercase font-semibold tracking-wide text-center">To</div>
                     </div>
                 </div>
 
-                <!-- Row 2 -->
-                <div>
-                    <label>Highest Level/Units Earned</label>
-                    <input type="text">
+                <!-- Highest Level/Units Earned -->
+                <div class="w-28 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Highest Level/</span>
+                    <span>Units Earned</span>
+                    <span class="normal-case font-normal">(if not graduated)</span>
                 </div>
-                <div>
-                    <label>Year Graduated</label>
-                    <input type="text">
-                </div>
-                <div>
-                    <label>Scholarship / Academic Honors Received</label>
-                    <input type="text">
-                </div>
-                </div>
-                <div class="border-b border-gray-200 mt-4"></div>
-            `;
-            container.appendChild(section);
-            });
-        </script>
-            
-        <style>
-            input[type="text"], input[type="date"] {
-            border: 1px solid #d1d5db;       /* all 4 sides */
-            border-radius: 3px;               /* slight rounding */
-            outline: none;
-            background: transparent;
-            width: 100%;
-            font-size: 0.75rem;
-            padding: 4px 6px;                 /* inner spacing */
-            }
-            input[type="text"]:focus, input[type="date"]:focus {
-            border-color: #166534;            /* green on focus */
-            }
-            label {
-            font-size: 0.65rem;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            display: block;
-            margin-bottom: 2px;
-            }
-        </style>
 
+                <!-- Year Graduated -->
+                <div class="w-20 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Year</span>
+                    <span>Graduated</span>
+                </div>
+
+                <!-- Scholarship/Academic Honors Received -->
+                <div class="w-28 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide flex flex-col items-center justify-center text-center">
+                    <span>Scholarship/</span>
+                    <span>Academic</span>
+                    <span>Honors Received</span>
+                </div>
+
+            </div>
+
+            <!-- Elementary Row -->
+            <div class="flex items-stretch border-b border-gray-300">
+                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
+                    Elementary
+                </div>
+                <input type="text" name="elem_school" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="elem_course" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="elem_from" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="elem_to" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="elem_units" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="elem_year_grad" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="elem_honors" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+            </div>
+
+            <!-- Secondary Row -->
+            <div class="flex items-stretch border-b border-gray-300">
+                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
+                    Secondary
+                </div>
+                <input type="text" name="sec_school" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="sec_course" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="sec_from" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="sec_to" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="sec_units" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="sec_year_grad" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="sec_honors" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+            </div>
+
+            <!-- Vocational/Trade Course Row -->
+            <div class="flex items-stretch border-b border-gray-300">
+                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center leading-tight">
+                    Vocational/<br>Trade Course
+                </div>
+                <input type="text" name="voc_school" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="voc_course" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="voc_from" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="voc_to" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="voc_units" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="voc_year_grad" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="voc_honors" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+            </div>
+
+            <!-- College Row -->
+            <div class="flex items-stretch border-b border-gray-300">
+                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
+                    College
+                </div>
+                <input type="text" name="col_school" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="col_course" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="col_from" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="col_to" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="col_units" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="col_year_grad" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="col_honors" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+            </div>
+
+            <!-- Graduate Studies Row -->
+            <div class="flex items-stretch">
+                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
+                    Graduate Studies
+                </div>
+                <input type="text" name="grad_school" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="grad_course" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="grad_from" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="grad_to" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="grad_units" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="text" name="grad_year_grad" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="grad_honors" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+            </div>
+        
+        </div>
+
+
+        <!-- Navigation -->
         <div class="flex justify-between mt-8">
             <a href="{{ route('employees.create.step', 2) }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
                 &lsaquo; Back
