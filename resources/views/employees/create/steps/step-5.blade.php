@@ -9,138 +9,122 @@
         </div>
 
         <!-- Body -->
-        <div class="w-full overflow-x-auto">
-            <table class="w-full table-fixed text-sm">
-                <colgroup>
-                    <col style="width: 9%">   <!-- From -->
-                    <col style="width: 2%">   <!-- Dash -->
-                    <col style="width: 9%">   <!-- To -->
-                    <col style="width: 18%">  <!-- Position Title -->
-                    <col style="width: 24%">  <!-- Department -->
-                    <col style="width: 18%">  <!-- Status of Appointment -->
-                    <col style="width: 12%">  <!-- Govt Service -->
-                    <col style="width: 8%">   <!-- Remove -->
-                </colgroup>
-                <thead>
-                    <tr class="text-xs font-bold text-gray-700 uppercase tracking-wide align-top">
-                        <td colspan="3" class="pb-1 pr-6">
-                            Inclusive Dates
-                            <div class="font-normal normal-case text-gray-500">(DD/MM/YYYY)</div>
-                        </td>
-                        <td class="pb-1 pr-6">
-                            Position Title
-                            <div class="font-normal normal-case text-gray-500">(Write in full/Do not abbreviate)</div>
-                        </td>
-                        <td class="pb-1 pr-6">
-                            Department/Agency/Office/
-                            Company
-                            <div class="font-normal normal-case text-gray-500">(Write in full/Do not abbreviate)</div>
-                        </td>
-                        <td class="pb-1 pr-6">
-                            Status of Appointment
-                        </td>
-                        <td class="pb-1 pr-6">
-                            Govt Service (Y/N)
-                        </td>
-                    </tr>
-                    <tr class="text-xs text-gray-500">
-                        <td class="pb-2">From</td>
-                        <td></td>
-                        <td class="pb-2">To</td>
-                        <td colspan="5"></td>
-                    </tr>
-                </thead>
-                <tbody id="work-list">
-                    <tr class="work-row">
-                        <td class="pb-3 pr-1">
-                            <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                        </td>
-                        <td class="pb-3 text-center text-gray-400 font-bold">—</td>
-                        <td class="pb-3 pr-6 pl-1">
-                            <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                        </td>
-                        <td class="pr-6 pb-3">
-                            <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                        </td>
-                        <td class="pr-6 pb-3">
-                            <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                        </td>
-                        <td class="pr-6 pb-3">
-                            <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                        </td>
-                        <td class="pr-6 pb-3">
-                            <select class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm bg-transparent">
-                                <option value=""></option>
-                                <option value="y">Y</option>
-                                <option value="n">N</option>
-                            </select>
-                        </td>
-                        <td class="pb-3 text-center">
-                            <button type="button" onclick="removeRow(this)" class="text-red-400 hover:text-red-600 text-lg font-bold leading-none">&times;</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="border border-gray-300 text-xs w-full">
 
-            <!-- Add Another Button -->
-            <div class="flex justify-center mt-6">
-                <button
-                type="button"
-                onclick="addRow()"
-                class="border border-gray-400 text-gray-600 hover:border-green-700 hover:text-green-700 px-6 py-2 rounded-full text-sm font-semibold tracking-wide transition-colors duration-200">
-                + Add another
-                </button>
+            <!-- Header Row -->
+            <div class="flex items-stretch border-b border-gray-300">
+
+                <!-- Inclusive Dates -->
+                <div class="w-36 shrink-0 border-r border-gray-300 flex flex-col">
+                    <div class="px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-b border-gray-300 text-center">
+                        28. Inclusive Dates
+                        <span class="normal-case font-normal">(dd/mm/yyyy)</span>
+                    </div>
+                    <div class="flex flex-1">
+                        <div class="flex-1 px-2 py-1 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-center">From</div>
+                        <div class="flex-1 px-2 py-1 text-[10px] text-gray-600 uppercase font-semibold tracking-wide text-center">To</div>
+                    </div>
+                </div>
+
+                <!-- Position Title -->
+                <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Position Title</span>
+                    <span class="normal-case font-normal">(Write in full/Do not abbreviate)</span>
+                </div>
+
+                <!-- Department/Agency/Office/Company -->
+                <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Department / Agency / Office / Company</span>
+                    <span class="normal-case font-normal">(Write in full/Do not abbreviate)</span>
+                </div>
+
+                <!-- Monthly Salary -->
+                <div class="w-24 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Monthly</span>
+                    <span>Salary</span>
+                </div>
+
+                <!-- Salary Grade -->
+                <div class="w-20 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Salary</span>
+                    <span>Grade</span>
+                </div>
+
+                <!-- Status of Appointment -->
+                <div class="w-24 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Status of</span>
+                    <span>Appointment</span>
+                </div>
+
+                <!-- Gov't Service -->
+                <div class="w-16 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide flex flex-col items-center justify-center text-center">
+                    <span>Gov't</span>
+                    <span>Service</span>
+                    <span>(Y/N)</span>
+                </div>
+
             </div>
+
+            <!-- Input Rows -->
+            <div id="work-list" class="flex flex-col">
+                <div class="flex items-stretch border-b border-gray-300">
+                    <input type="text" name="work[0][from]"
+                        class="w-18 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="work[0][to]"
+                        class="w-18 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="work[0][position]"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                    <input type="text" name="work[0][department]"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                    <input type="text" name="work[0][monthly_salary]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="work[0][salary_grade]"
+                        class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="work[0][status]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="work[0][govt_service]"
+                        class="w-16 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                </div>
+            </div>
+
+            <!-- Add Row Button -->
+            <div class="px-2 py-1.5 border-t border-gray-300">
+                <button type="button" onclick="addWork()"
+                    class="text-xs text-green-700 hover:underline">+ Add Row</button>
+            </div>
+
         </div>
 
         <script>
-            function getRowHTML() {
-            return `
-                <td class="pb-3 pr-1">
-                <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </td>
-                <td class="pb-3 text-center text-gray-400 font-bold">—</td>
-                <td class="pb-3 pr-6 pl-1">
-                <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </td>
-                <td class="pr-6 pb-3">
-                <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </td>
-                <td class="pr-6 pb-3">
-                <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </td>
-                <td class="pr-6 pb-3">
-                <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </td>
-                <td class="pr-6 pb-3">
-                <select class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm bg-transparent">
-                    <option value=""></option>
-                    <option value="y">Y</option>
-                    <option value="n">N</option>
-                </select>
-                </td>
-                <td class="pb-3 text-center">
-                <button type="button" onclick="removeRow(this)" class="text-red-400 hover:text-red-600 text-lg font-bold leading-none">&times;</button>
-                </td>
-            `;
-            }
-
-            function addRow() {
-            const tbody = document.getElementById('work-list');
-            const row = document.createElement('tr');
-            row.className = 'work-row';
-            row.innerHTML = getRowHTML();
-            tbody.appendChild(row);
-            }
-
-            function removeRow(btn) {
-            const rows = document.querySelectorAll('.work-row');
-            if (rows.length > 1) {
-                btn.closest('.work-row').remove();
-            }
+            let workIndex = 1;
+            function addWork() {
+                const list = document.getElementById('work-list');
+                const row = document.createElement('div');
+                row.className = 'flex items-stretch border-b border-gray-300';
+                row.innerHTML = `
+                    <input type="text" name="work[${workIndex}][from]"
+                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="work[${workIndex}][to]"
+                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="work[${workIndex}][position]"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                    <input type="text" name="work[${workIndex}][department]"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                    <input type="text" name="work[${workIndex}][monthly_salary]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="work[${workIndex}][salary_grade]"
+                        class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="work[${workIndex}][status]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="work[${workIndex}][govt_service]"
+                        class="w-16 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                `;
+                list.appendChild(row);
+                workIndex++;
             }
         </script>
 
+        <!-- Navigation -->
         <div class="flex justify-between mt-8">
             <a href="{{ route('employees.create.step', 4) }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
                 &lsaquo; Back
