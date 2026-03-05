@@ -34,11 +34,11 @@
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm"">
                         
                         <!-- Name Extension -->    
-                        <span class="w-44 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                        <span class="w-40 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                             Name Extension <br>(Jr., Sr., II, III)
                         </span>
                         <select name="spouse_extension"
-                            class="w-24 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
+                            class="w-20 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                             <option value="">N/A</option>
                             <option>Jr.</option>
                             <option>Sr.</option>
@@ -107,12 +107,12 @@
                             First Name
                         </span>
                         <input type="text" name="father_first_name"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm border-r border-gray-300">
-                        <span class="w-44 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm border-r">
+                        <span class="w-40 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                             Name Extension <br>(Jr., Sr., II, III)
                         </span>
                         <select name="father_extension"
-                            class="w-24 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
+                            class="w-20 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                             <option value="">N/A</option>
                             <option>Jr.</option>
                             <option>Sr.</option>
@@ -132,11 +132,8 @@
 
                     <!-- Mother Maiden Name label -->
                     <div class="flex items-stretch border-b border-gray-300">
-                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-gray-300">
                             25. Mother's Maiden Name
-                        </span>
-                        <span class="flex-1 px-2 py-2 text-gray-400 text-[10px] italic flex items-center">
-                            Surname, First Name, Middle Name
                         </span>
                     </div>
 
@@ -168,6 +165,39 @@
                     </div>
                 </div>
 
+                <!-- Right Side: Name of Children + Date of Birth -->
+                <div class="flex-1 flex flex-col">
+
+                    <!-- Header Row -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 leading-tight flex flex-col justify-center">
+                            <span>23. Name of Children</span>
+                            <span class="normal-case font-normal">(Write full name and list all)</span>
+                        </div>
+                        <div class="w-40 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide leading-tight flex flex-col justify-center">
+                            <span>Date of Birth</span>
+                            <span class="normal-case font-normal">(dd/mm/yyyy)</span>
+                        </div>
+                    </div>
+
+                    <!-- Child Rows -->
+                    <div id="children-list" class="flex flex-col">
+                        <div class="flex items-stretch border-b border-gray-300">
+                            <input type="text" name="children[0][name]"
+                                class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                            <input type="date" name="children[0][dob]"
+                                class="w-40 shrink-0 px-2 py-2 outline-none border-gray-50 focus:bg-gray-50 bg-transparent text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Add Child Button -->
+                    <div class="px-2 py-1.5">
+                        <button type="button" onclick="addChild()"
+                            class="text-xs text-green-700 hover:underline">+ Add Child</button>
+                    </div>
+
+                </div>
+
             </div>
         </div>
 
@@ -181,3 +211,20 @@
         </div>
     </div>
 </form>
+
+<script>
+    let childIndex = 1;
+    function addChild() {
+        const list = document.getElementById('children-list');
+        const row = document.createElement('div');
+        row.className = 'flex items-stretch border-b border-gray-300';
+        row.innerHTML = `
+            <input type="text" name="children[${childIndex}][name]"
+                class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+            <input type="date" name="children[${childIndex}][dob]"
+                class="w-40 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+        `;
+        list.appendChild(row);
+        childIndex++;
+    }
+</script>
