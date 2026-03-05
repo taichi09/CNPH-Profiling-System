@@ -17,7 +17,7 @@
                     1. Surname
                 </span>
                 <input type="text" name="surname"
-                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
             </div>
 
             <!-- First Name -->
@@ -27,14 +27,14 @@
                     2. First Name
                 </span>
                 <input type="text" name="first_name"
-                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
 
                 <!-- Name Extension -->
                 <span class="w-44 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                     Name Extension <br>(Jr., Sr., II, III)
                 </span>
                 <select name="name_extension"
-                    class="w-60 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    class="w-60 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     <option value=""></option>
                     <option>Jr.</option>
                     <option>Sr.</option>
@@ -50,7 +50,7 @@
                     Middle Name
                 </span>
                 <input type="text" name="middle_name"
-                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
             </div>
 
             <div class="flex border-b border-gray-300">
@@ -64,7 +64,7 @@
                             3. Date of Birth <br><span class="normal-case font-normal text-[10px]">(mm/dd/yyyy)</span>
                         </span>
                         <input type="date" name="date_of_birth"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Place of Birth -->
@@ -73,7 +73,7 @@
                             4. Place of Birth
                         </span>
                         <input type="text" name="place_of_birth"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
                     <!-- Sex at Birth -->
@@ -162,7 +162,7 @@
                             7. Height <span class="lowercase">(m)</span>
                         </span>
                         <input type="text" name="height"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Weight -->
@@ -171,7 +171,7 @@
                             8. Weight <span class="lowercase">(kg)</span>
                         </span>
                         <input type="text" name="weight"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                 </div>
@@ -234,7 +234,7 @@
                             9. Blood Type
                         </span>
                         <input type="text" name="blood_type"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- UMID -->
@@ -243,7 +243,7 @@
                             10. UMID ID No.
                         </span>
                         <input type="text" name="umid"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Pag-IBIG -->
@@ -252,7 +252,7 @@
                             11. Pag-IBIG ID No.
                         </span>
                         <input type="text" name="pagibig"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- PhilHealth -->
@@ -261,7 +261,7 @@
                             12. PhilHealth No.
                         </span>
                         <input type="text" name="philhealth"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                 </div>
@@ -324,7 +324,7 @@
                             13. PhilSys No.
                         </span>
                         <input type="text" name="philsys"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- TIN -->
@@ -333,7 +333,7 @@
                             14. TIN No.
                         </span>
                         <input type="text" name="tin"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Agency Employee No -->
@@ -342,7 +342,7 @@
                             15. Agency Employee No.
                         </span>
                         <input type="text" name="agency_employee_no"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                 </div>
@@ -356,7 +356,7 @@
                             19. Telephone No.
                         </span>
                         <input type="text" name="telephone"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Mobile -->
@@ -365,7 +365,7 @@
                             20. Mobile No.
                         </span>
                         <input type="text" name="mobile"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Email -->
@@ -374,7 +374,7 @@
                             21. Email Address
                         </span>
                         <input type="email" name="email"
-                            class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                 </div>

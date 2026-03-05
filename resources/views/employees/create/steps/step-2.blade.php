@@ -3,7 +3,7 @@
 
     <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
         <!-- Header -->
-        <div class="mb-6 border-b pb-3">
+        <div class="mb-6 border-b pb-4">
             <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Family Background</h2>
             <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #6b7280;">Provide the needed information of the family.</p>
         </div>
