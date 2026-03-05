@@ -4,8 +4,8 @@
     <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
         <!-- Header -->
         <div class="mb-6 border-b pb-4">
-            <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Department &amp; Job Status</h2>
-            <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #6b7280;">Assign employee to Department and select job status.</p>
+            <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Other Information</h2>
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #6b7280;">Provide the needed other information.</p>
         </div>
 
         <!-- Body -->
@@ -66,7 +66,77 @@
                         class="text-xs text-green-700 hover:underline">+ Add Row</button>
                 </div>
             </div>
+
         </div>
+
+        <div class="border border-gray-300 text-xs w-full mt-5">
+            <!-- Second Section -->
+            <div class="flex items-stretch border-b border-gray-300 mt-0">
+
+                <!-- Landbank No. -->
+                <div class="flex items-stretch flex-1 border-r border-gray-300">
+                    <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                        Landbank No.
+                    </span>
+                    <input type="text" name="landbank_no"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                </div>
+
+                <!-- DBP No. -->
+                <div class="flex items-stretch flex-1 border-r border-gray-300">
+                    <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                        DBP No.
+                    </span>
+                    <input type="text" name="dbp_no"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                </div>
+
+            </div>
+
+            <div class="flex items-stretch border-b border-gray-300">
+
+                <!-- SSS ID -->
+                <div class="flex items-stretch flex-1 border-r border-gray-300">
+                    <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                        SSS ID
+                    </span>
+                    <input type="text" name="sss_id"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                </div>
+
+                <!-- Department Name -->
+                <div class="flex items-stretch flex-1 border-r border-gray-300">
+                    <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                        Department Name
+                    </span>
+                    <input type="text" name="department_name"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                </div>
+
+            </div>
+
+            <div class="flex items-stretch">
+
+                <!-- Employment Status -->
+                <div class="flex items-stretch flex-1">
+                    <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                        Employment Status
+                    </span>
+                    <select name="employment_status"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                        <option value="">-- Select --</option>
+                        <option>Regular</option>
+                        <option>Casual</option>
+                        <option>Contractual</option>
+                        <option>Job Order</option>
+                        <option>Coterminous</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        
 
         <script>
             let skillIndex = 1;
