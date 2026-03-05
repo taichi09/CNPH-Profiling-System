@@ -9,119 +9,88 @@
         </div>
 
         <!-- Body -->
-        <div class="w-full overflow-x-auto">
-            <table class="w-full table-fixed text-sm">
-                <colgroup>
-                    <col style="width: 30%">  <!-- Name & Address -->
-                    <col style="width: 10%">  <!-- From -->
-                    <col style="width: 2%">   <!-- Dash -->
-                    <col style="width: 10%">  <!-- To -->
-                    <col style="width: 20%">  <!-- Number of Hours -->
-                    <col style="width: 24%">  <!-- Position/Nature of Work -->
-                    <col style="width: 4%">   <!-- Remove -->
-                </colgroup>
-                <thead>
-                    <tr class="text-xs font-bold text-gray-700 uppercase tracking-wide align-top">
-                        <td class="pb-1 pr-6">
-                            Name &amp; Address of Organization
-                            <div class="font-normal normal-case text-gray-500">(Write in full)</div>
-                        </td>
-                        <td colspan="3" class="pb-1 pr-6">
-                            Inclusive Dates
-                            <div class="font-normal normal-case text-gray-500">(dd/mm/yyyy)</div>
-                        </td>
-                        <td class="pb-1 pr-6">
-                            Number of Hours
-                        </td>
-                        <td class="pb-1 pr-6">
-                            Position/Nature of Work
-                        </td>
-                    </tr>
-                    <tr class="text-xs text-gray-500">
-                        <td class="pb-2"></td>
-                        <td class="pb-2">From</td>
-                        <td></td>
-                        <td class="pb-2">To</td>
-                        <td colspan="3"></td>
-                    </tr>
-                </thead>
-                <tbody id="voluntary-list">
-                    <tr class="voluntary-row">
-                        <td class="pr-6 pb-3">
-                            <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                        </td>
-                        <td class="pb-3 pr-1">
-                            <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                        </td>
-                        <td class="pb-3 text-center text-gray-400 font-bold">—</td>
-                        <td class="pb-3 pr-6 pl-1">
-                            <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                        </td>
-                        <td class="pr-6 pb-3">
-                            <input type="number" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                        </td>
-                        <td class="pr-6 pb-3">
-                            <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                        </td>
-                        <td class="pb-3 text-center">
-                            <button type="button" onclick="removeRow(this)" class="text-red-400 hover:text-red-600 text-lg font-bold leading-none">&times;</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="border border-gray-300 text-xs w-full">
 
-            <!-- Add Another Button -->
-            <div class="flex justify-center mt-6">
-                <button
-                type="button"
-                onclick="addRow()"
-                class="border border-gray-400 text-gray-600 hover:border-green-700 hover:text-green-700 px-6 py-2 rounded-full text-sm font-semibold tracking-wide transition-colors duration-200">
-                + Add another
-                </button>
+            <!-- Header Row -->
+            <div class="flex items-stretch border-b border-gray-300">
+
+                <!-- Name & Address of Organization -->
+                <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>29. Name & Address of Organization</span>
+                    <span class="normal-case font-normal">(Write in full)</span>
+                </div>
+
+                <!-- Inclusive Dates -->
+                <div class="w-36 shrink-0 border-r border-gray-300 flex flex-col">
+                    <div class="px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-b border-gray-300 text-center">
+                        Inclusive Dates
+                        <span class="normal-case font-normal">(dd/mm/yyyy)</span>
+                    </div>
+                    <div class="flex flex-1">
+                        <div class="flex-1 px-2 py-1 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-center">From</div>
+                        <div class="flex-1 px-2 py-1 text-[10px] text-gray-600 uppercase font-semibold tracking-wide text-center">To</div>
+                    </div>
+                </div>
+
+                <!-- Number of Hours -->
+                <div class="w-24 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>Number of Hours</span>
+                </div>
+
+                <!-- Position/Nature of Work -->
+                <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide flex flex-col items-center justify-center text-center">
+                    <span>Position / Nature of Work</span>
+                </div>
+
             </div>
-        </div>       
 
+            <!-- Input Rows -->
+            <div id="voluntary-list" class="flex flex-col">
+                <div class="flex items-stretch border-b border-gray-300">
+                    <input type="text" name="voluntary[0][organization]"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                    <input type="text" name="voluntary[0][from]"
+                        class="w-18 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="voluntary[0][to]"
+                        class="w-18 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="voluntary[0][hours]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="voluntary[0][position]"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                </div>
+            </div>
+
+            <!-- Add Row Button -->
+            <div class="px-2 py-1.5 border-t border-gray-300">
+                <button type="button" onclick="addVoluntary()"
+                    class="text-xs text-green-700 hover:underline">+ Add Row</button>
+            </div>
+        </div>      
+        
         <script>
-            function getRowHTML() {
-            return `
-                <td class="pr-6 pb-3">
-                <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </td>
-                <td class="pb-3 pr-1">
-                <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </td>
-                <td class="pb-3 text-center text-gray-400 font-bold">—</td>
-                <td class="pb-3 pr-6 pl-1">
-                <input type="date" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </td>
-                <td class="pr-6 pb-3">
-                <input type="number" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </td>
-                <td class="pr-6 pb-3">
-                <input type="text" class="w-full border border-gray-300 focus:border-green-700 outline-none py-1.5 px-2 text-sm rounded-sm" />
-                </td>
-                <td class="pb-3 text-center">
-                <button type="button" onclick="removeRow(this)" class="text-red-400 hover:text-red-600 text-lg font-bold leading-none">&times;</button>
-                </td>
-            `;
-            }
-
-            function addRow() {
-            const tbody = document.getElementById('voluntary-list');
-            const row = document.createElement('tr');
-            row.className = 'voluntary-row';
-            row.innerHTML = getRowHTML();
-            tbody.appendChild(row);
-            }
-
-            function removeRow(btn) {
-            const rows = document.querySelectorAll('.voluntary-row');
-            if (rows.length > 1) {
-                btn.closest('.voluntary-row').remove();
-            }
+            let voluntaryIndex = 1;
+            function addVoluntary() {
+                const list = document.getElementById('voluntary-list');
+                const row = document.createElement('div');
+                row.className = 'flex items-stretch border-b border-gray-300';
+                row.innerHTML = `
+                    <input type="text" name="voluntary[${voluntaryIndex}][organization]"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                    <input type="text" name="voluntary[${voluntaryIndex}][from]"
+                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="voluntary[${voluntaryIndex}][to]"
+                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="voluntary[${voluntaryIndex}][hours]"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="voluntary[${voluntaryIndex}][position]"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                `;
+                list.appendChild(row);
+                voluntaryIndex++;
             }
         </script>
 
+        <!-- Navigation -->
         <div class="flex justify-between mt-8">
             <a href="{{ route('employees.create.step', 5) }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
                 &lsaquo; Back

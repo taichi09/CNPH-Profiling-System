@@ -9,38 +9,102 @@
         </div>
 
         <!-- Body -->
-        <div class="flex flex-col items-center gap-8">
-            <!-- Departments -->
-            <div class="w-48 text-center">
-                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Departments</label>
-                <p class="text-xs text-gray-400 mb-2">Please select Department</p>
-                <select class="w-full border border-gray-300 focus:border-green-700 outline-none py-2 px-3 text-sm rounded-sm bg-white">
-                    <option value="" disabled selected></option>
-                    <option>Human Resources</option>
-                    <option>Finance</option>
-                    <option>Operations</option>
-                    <option>Information Technology</option>
-                    <option>Legal</option>
-                </select>
+        <div class="border border-gray-300 text-xs w-full">
+
+            <!-- Header Row -->
+            <div class="flex items-stretch border-b border-gray-300">
+
+                <!-- Special Skills and Hobbies -->
+                <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center justify-center text-center">
+                    31. Special Skills and Hobbies
+                </div>
+
+                <!-- Non-Academic Distinctions -->
+                <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex flex-col items-center justify-center text-center">
+                    <span>32. Non-Academic Distinctions / Recognition</span>
+                    <span class="normal-case font-normal">(Write in full)</span>
+                </div>
+
+                <!-- Membership in Association -->
+                <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide flex flex-col items-center justify-center text-center">
+                    <span>33. Membership in Association/Organization</span>
+                    <span class="normal-case font-normal">(Write in full)</span>
+                </div>
+
             </div>
 
-            <!-- Job Status -->
-            <div class="w-48 text-center">
-                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Job Status</label>
-                <p class="text-xs text-gray-400 mb-2">Please select Job Status</p>
-                <select class="w-full border border-green-700 focus:border-green-700 outline-none py-2 px-3 text-sm rounded-sm bg-white">
-                <option value="" disabled selected></option>
-                <option>Regular</option>
-                <option>Probationary</option>
-                <option>Contractual</option>
-                <option>Part-time</option>
-                </select>
+            <!-- Input Rows -->
+            <div class="flex items-stretch border-b border-gray-300">
+                <div id="skills-list" class="flex-1 border-r border-gray-300 flex flex-col">
+                    <input type="text" name="skills[0]"
+                        class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                </div>
+
+                <div id="distinctions-list" class="flex-1 border-r border-gray-300 flex flex-col">
+                    <input type="text" name="distinctions[0]"
+                        class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                </div>
+
+                <div id="memberships-list" class="flex-1 flex flex-col">
+                    <input type="text" name="memberships[0]"
+                        class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                </div>
             </div>
 
-            <!-- Dashed divider with asterisk -->
-            <div class="flex items-center w-48 gap-2 my-2">   </div>
+            <!-- Add Row Buttons -->
+            <div class="flex border-t border-gray-300">
+                <div class="flex-1 px-2 py-1.5 border-r border-gray-300">
+                    <button type="button" onclick="addSkill()"
+                        class="text-xs text-green-700 hover:underline">+ Add Row</button>
+                </div>
+                <div class="flex-1 px-2 py-1.5 border-r border-gray-300">
+                    <button type="button" onclick="addDistinction()"
+                        class="text-xs text-green-700 hover:underline">+ Add Row</button>
+                </div>
+                <div class="flex-1 px-2 py-1.5">
+                    <button type="button" onclick="addMembership()"
+                        class="text-xs text-green-700 hover:underline">+ Add Row</button>
+                </div>
+            </div>
         </div>
 
+        <script>
+            let skillIndex = 1;
+            let distinctionIndex = 1;
+            let membershipIndex = 1;
+
+            function addSkill() {
+                const list = document.getElementById('skills-list');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = `skills[${skillIndex}]`;
+                input.className = 'w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-t border-gray-300';
+                list.appendChild(input);
+                skillIndex++;
+            }
+
+            function addDistinction() {
+                const list = document.getElementById('distinctions-list');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = `distinctions[${distinctionIndex}]`;
+                input.className = 'w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-t border-gray-300';
+                list.appendChild(input);
+                distinctionIndex++;
+            }
+
+            function addMembership() {
+                const list = document.getElementById('memberships-list');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = `memberships[${membershipIndex}]`;
+                input.className = 'w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-t border-gray-300';
+                list.appendChild(input);
+                membershipIndex++;
+            }
+        </script>
+
+        <!-- Navigation -->
         <div class="flex justify-between mt-8">
             <a href="{{ route('employees.create.step', 7) }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
                 &lsaquo; Back
