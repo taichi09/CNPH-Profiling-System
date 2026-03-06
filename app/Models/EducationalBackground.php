@@ -25,6 +25,6 @@ class EducationalBackground extends Model
 
     public function personalInformation()
     {
-        return $this->belongTo(PersonalInformation::class, 'employee_id', 'employee_id');
+        return $this->belongsTo(PersonalInformation::class, 'employee_id', 'employee_id');
     }
 }

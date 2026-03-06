@@ -20,7 +20,9 @@ class OtherInformation extends Model
         'membership_in_association',
         'landbank_no',
         'dbp_no',
-        'sss_id'
+        'sss_id',
+        'department_name',
+        'employment_status'
     ];
 
     public function personalInformation()
