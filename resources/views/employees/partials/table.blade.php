@@ -17,13 +17,14 @@
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
+            @forelse($employees as $index => $employee)
             <tr class="hover:bg-gray-50">
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">Mark Joseph</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">Rosales</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">Balbunan</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden lg:table-cell">HR Department</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">Permanent</td>
+                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $index + 1 }}</td>
+                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $employee->first_name }}</td>
+                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">{{ $employee->middle_name }}</td>
+                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $employee->surname }}</td>
+                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden lg:table-cell">—</td>
+                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">—</td>
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm">
                     <div class="flex gap-2">
                         <button type="button" class="py-1 px-2 sm:px-3 text-xs font-medium rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">View</button>
@@ -32,36 +33,13 @@
                 </td>
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm"></td>
             </tr>
-            <tr class="hover:bg-gray-50">
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">2</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">Mark Joseph</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">Rosales</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">Balbunan</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden lg:table-cell">HR Department</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">Permanent</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm">
-                    <div class="flex gap-2">
-                        <button type="button" class="py-1 px-2 sm:px-3 text-xs font-medium rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">View</button>
-                        <button type="button" class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-green-600 text-white hover:bg-green-700">Edit</button>
-                    </div>
+            @empty
+            <tr>
+                <td colspan="8" class="px-6 py-10 text-center text-sm text-gray-500">
+                    No employees found.
                 </td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm"></td>
             </tr>
-            <tr class="hover:bg-gray-50">
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">3</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">Mark Joseph</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">Rosales</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">Balbunan</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden lg:table-cell">HR Department</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">Permanent</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm">
-                    <div class="flex gap-2">
-                        <button type="button" class="py-1 px-2 sm:px-3 text-xs font-medium rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">View</button>
-                        <button type="button" class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-green-600 text-white hover:bg-green-700">Edit</button>
-                    </div>
-                </td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm"></td>
-            </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

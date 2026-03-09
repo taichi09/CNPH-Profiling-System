@@ -11,7 +11,8 @@ class EmployeeController extends Controller
 {
     //
     public function index(){
-        return view('employees.index');
+        $employees = \App\Models\PersonalInformation::orderBy('employee_id')->get();
+        return view('employees.index', compact('employees'));
     }
 
     public function create($step = 1)
