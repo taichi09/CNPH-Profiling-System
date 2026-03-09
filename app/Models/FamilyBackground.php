@@ -18,7 +18,7 @@ class FamilyBackground extends Model
         'spouse_name_extension', 'occupation', 'employer_business_name',
         'business_address', 'telephone_no', 'name_of_children', 'date_of_birth',
         'father_surname', 'father_first_name', 'father_middle_name',
-        'father_name_extension', 'mother_maiden_name', 'mother_surname',
+        'father_name_extension', 'mother_surname',
         'mother_first_name', 'mother_middle_name'
     ];
 
