@@ -17,30 +17,32 @@
                     1. Surname
                 </span>
                 <input type="text" name="surname"
+                    value="{{ old('surname', session('employee_step_1.surname')) }}"
                     class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
             </div>
 
             <!-- First Name -->
             <div class="flex items-stretch border-b border-gray-300">
-                <!-- Left: First Name label + input -->
                 <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
                     2. First Name
                 </span>
                 <input type="text" name="first_name"
+                    value="{{ old('first_name', session('employee_step_1.first_name')) }}"
                     class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
 
                 <!-- Name Extension -->
                 <span class="w-44 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                     Name Extension <br>(Jr., Sr., II, III)
                 </span>
+                @php $nameExt = old('name_extension', session('employee_step_1.name_extension')); @endphp
                 <select name="name_extension"
                     class="w-60 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     <option value=""></option>
-                    <option>Jr.</option>
-                    <option>Sr.</option>
-                    <option>II</option>
-                    <option>III</option>
-                    <option>IV</option>
+                    <option {{ $nameExt == 'Jr.' ? 'selected' : '' }}>Jr.</option>
+                    <option {{ $nameExt == 'Sr.' ? 'selected' : '' }}>Sr.</option>
+                    <option {{ $nameExt == 'II' ? 'selected' : '' }}>II</option>
+                    <option {{ $nameExt == 'III' ? 'selected' : '' }}>III</option>
+                    <option {{ $nameExt == 'IV' ? 'selected' : '' }}>IV</option>
                 </select>
             </div>
 
@@ -50,6 +52,7 @@
                     Middle Name
                 </span>
                 <input type="text" name="middle_name"
+                    value="{{ old('middle_name', session('employee_step_1.middle_name')) }}"
                     class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
             </div>
 
@@ -64,6 +67,7 @@
                             3. Date of Birth <br><span class="normal-case font-normal text-[10px]">(dd/mm/yyyy)</span>
                         </span>
                         <input type="date" name="date_of_birth"
+                            value="{{ old('date_of_birth', session('employee_step_1.date_of_birth')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -73,6 +77,7 @@
                             4. Place of Birth
                         </span>
                         <input type="text" name="place_of_birth"
+                            value="{{ old('place_of_birth', session('employee_step_1.place_of_birth')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -83,10 +88,11 @@
                         </span>
                         <div class="flex items-center gap-6 px-3 py-2 text-sm text-gray-700">
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="sex_at_birth" value="Male" class="accent-green-700"> Male
+                                @php $sex = old('sex_at_birth', session('employee_step_1.sex_at_birth')); @endphp
+                                <input type="radio" name="sex_at_birth" value="Male" class="accent-green-700" {{ $sex == 'Male' ? 'checked' : '' }}> Male
                             </label>
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="sex_at_birth" value="Female" class="accent-green-700"> Female
+                                <input type="radio" name="sex_at_birth" value="Female" class="accent-green-700" {{ $sex == 'Female' ? 'checked' : '' }}> Female
                             </label>
                         </div>
                     </div>
@@ -100,20 +106,22 @@
                     <!-- Filipino / Dual Citizenship -->
                     <div class="flex flex-row gap-1 text-sm text-gray-700">
                         <label class="flex items-center gap-1.5 cursor-pointer">
-                            <input type="radio" name="citizenship" value="Filipino" class="accent-green-700"> Filipino
+                            @php $citizenship = old('citizenship', session('employee_step_1.citizenship')); @endphp
+                            <input type="radio" name="citizenship" value="Filipino" class="accent-green-700" {{ $citizenship == 'Filipino' ? 'checked' : '' }}> Filipino
                         </label>
                         <label class="flex items-center gap-1.5 cursor-pointer">
-                            <input type="radio" name="citizenship" value="Dual Citizenship" class="accent-green-700"> Dual Citizenship
+                            <input type="radio" name="citizenship" value="Dual Citizenship" class="accent-green-700" {{ $citizenship == 'Dual Citizenship' ? 'checked' : '' }}> Dual Citizenship
                         </label>
                     </div>
 
                     <!-- By birth / By naturalization -->
                     <div class="flex gap-4 ml-28 text-[11px] text-gray-600">
                         <label class="flex items-center gap-1 cursor-pointer">
-                            <input type="radio" name="citizenship_type" value="by birth" class="accent-green-700"> by birth
+                            @php $citizenshipType = old('citizenship_type', session('employee_step_1.citizenship_type')); @endphp
+                            <input type="radio" name="citizenship_type" value="by birth" class="accent-green-700" {{ $citizenshipType == 'by birth' ? 'checked' : '' }}> by birth
                         </label>
                         <label class="flex items-center gap-1 cursor-pointer">
-                            <input type="radio" name="citizenship_type" value="by naturalization" class="accent-green-700"> by naturalization
+                            <input type="radio" name="citizenship_type" value="by naturalization" class="accent-green-700" {{ $citizenshipType == 'by naturalization' ? 'checked' : '' }}> by naturalization
                         </label>
                     </div>
 
@@ -121,6 +129,7 @@
                     <div class="mt-1">
                         <p class="text-[10px] text-gray-400 mb-0.5">If holder of dual citizenship, please indicate country:</p>
                         <input type="text" name="citizenship_country"
+                            value="{{ old('citizenship_country', session('employee_step_1.citizenship_country')) }}"
                             class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent uppercase text-sm">
                     </div>
                 </div>
@@ -137,21 +146,22 @@
                         <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
                             6. Civil Status
                         </span>
+                        @php $civilStatus = old('civil_status', session('employee_step_1.civil_status')); @endphp
                         <div class="flex flex-wrap items-center gap-x-4 gap-y-1 px-3 py-2 text-sm text-gray-700">
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="civil_status" value="Single" class="accent-green-700"> Single
+                                <input type="radio" name="civil_status" value="Single" class="accent-green-700" {{ $civilStatus == 'Single' ? 'checked' : '' }}> Single
                             </label>
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="civil_status" value="Married" class="accent-green-700"> Married
+                                <input type="radio" name="civil_status" value="Married" class="accent-green-700" {{ $civilStatus == 'Married' ? 'checked' : '' }}> Married
                             </label>
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="civil_status" value="Widowed" class="accent-green-700"> Widowed
+                                <input type="radio" name="civil_status" value="Widowed" class="accent-green-700" {{ $civilStatus == 'Widowed' ? 'checked' : '' }}> Widowed
                             </label>
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="civil_status" value="Separated" class="accent-green-700"> Separated
+                                <input type="radio" name="civil_status" value="Separated" class="accent-green-700" {{ $civilStatus == 'Separated' ? 'checked' : '' }}> Separated
                             </label>
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="civil_status" value="Others" class="accent-green-700"> Others
+                                <input type="radio" name="civil_status" value="Others" class="accent-green-700" {{ $civilStatus == 'Others' ? 'checked' : '' }}> Others
                             </label>
                         </div>
                     </div>
@@ -162,6 +172,7 @@
                             7. Height <span class="lowercase">(m)</span>
                         </span>
                         <input type="text" name="height"
+                            value="{{ old('height', session('employee_step_1.height')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -171,6 +182,7 @@
                             8. Weight <span class="lowercase">(kg)</span>
                         </span>
                         <input type="text" name="weight"
+                            value="{{ old('weight', session('employee_step_1.weight')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -184,31 +196,37 @@
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">House/Block/Lot No.</label>
                             <input type="text" name="res_house"
+                                value="{{ old('res_house', session('employee_step_1.res_house')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">Street</label>
                             <input type="text" name="res_street"
+                                value="{{ old('res_street', session('employee_step_1.res_street')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">Subdivision/Village</label>
                             <input type="text" name="res_subdivision"
+                                value="{{ old('res_subdivision', session('employee_step_1.res_subdivision')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">Barangay</label>
                             <input type="text" name="res_barangay"
+                                value="{{ old('res_barangay', session('employee_step_1.res_barangay')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">City/Municipality</label>
                             <input type="text" name="res_city"
+                                value="{{ old('res_city', session('employee_step_1.res_city')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">Province</label>
                             <input type="text" name="res_province"
+                                value="{{ old('res_province', session('employee_step_1.res_province')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                     </div>
@@ -217,6 +235,7 @@
                     <div class="flex items-center gap-2 mt-1">
                         <span class="text-[10px] text-gray-600 uppercase font-semibold tracking-wide shrink-0">Zip Code</span>
                         <input type="text" name="res_zip"
+                            value="{{ old('res_zip', session('employee_step_1.res_zip')) }}"
                             class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                     </div>
                 </div>
@@ -234,6 +253,7 @@
                             9. Blood Type
                         </span>
                         <input type="text" name="blood_type"
+                            value="{{ old('blood_type', session('employee_step_1.blood_type')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -243,6 +263,7 @@
                             10. UMID ID No.
                         </span>
                         <input type="text" name="umid"
+                            value="{{ old('umid', session('employee_step_1.umid')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -252,6 +273,7 @@
                             11. Pag-IBIG ID No.
                         </span>
                         <input type="text" name="pagibig"
+                            value="{{ old('pagibig', session('employee_step_1.pagibig')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -261,6 +283,7 @@
                             12. PhilHealth No.
                         </span>
                         <input type="text" name="philhealth"
+                            value="{{ old('philhealth', session('employee_step_1.philhealth')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -274,31 +297,37 @@
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">House/Block/Lot No.</label>
                             <input type="text" name="perm_house"
+                                value="{{ old('perm_house', session('employee_step_1.perm_house')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">Street</label>
                             <input type="text" name="perm_street"
+                                value="{{ old('perm_street', session('employee_step_1.perm_street')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">Subdivision/Village</label>
                             <input type="text" name="perm_subdivision"
+                                value="{{ old('perm_subdivision', session('employee_step_1.perm_subdivision')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">Barangay</label>
                             <input type="text" name="perm_barangay"
+                                value="{{ old('perm_barangay', session('employee_step_1.perm_barangay')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">City/Municipality</label>
                             <input type="text" name="perm_city"
+                                value="{{ old('perm_city', session('employee_step_1.perm_city')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">Province</label>
                             <input type="text" name="perm_province"
+                                value="{{ old('perm_province', session('employee_step_1.perm_province')) }}"
                                 class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                         </div>
                     </div>
@@ -307,6 +336,7 @@
                     <div class="flex items-center gap-2 mt-1">
                         <span class="text-[10px] text-gray-600 uppercase font-semibold tracking-wide shrink-0">Zip Code</span>
                         <input type="text" name="perm_zip"
+                            value="{{ old('perm_zip', session('employee_step_1.perm_zip')) }}"
                             class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                     </div>
                 </div>
@@ -324,6 +354,7 @@
                             13. PhilSys No.
                         </span>
                         <input type="text" name="philsys"
+                            value="{{ old('philsys', session('employee_step_1.philsys')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -333,6 +364,7 @@
                             14. TIN No.
                         </span>
                         <input type="text" name="tin"
+                            value="{{ old('tin', session('employee_step_1.tin')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -342,6 +374,7 @@
                             15. Agency Employee No.
                         </span>
                         <input type="text" name="agency_employee_no"
+                            value="{{ old('agency_employee_no', session('employee_step_1.agency_employee_no')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -356,6 +389,7 @@
                             19. Telephone No.
                         </span>
                         <input type="text" name="telephone"
+                            value="{{ old('telephone', session('employee_step_1.telephone')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -365,6 +399,7 @@
                             20. Mobile No.
                         </span>
                         <input type="text" name="mobile"
+                            value="{{ old('mobile', session('employee_step_1.mobile')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -374,6 +409,7 @@
                             21. Email Address
                         </span>
                         <input type="email" name="email"
+                            value="{{ old('email', session('employee_step_1.email')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
@@ -383,7 +419,7 @@
         
         <!-- Navigation -->
         <div class="flex justify-between mt-8">
-            <a href="{{ route('employees.index') }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
+            <a href="{{ route('employees.create.cancel') }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
                 &lsaquo; Cancel
             </a>
             <button type="submit" class="px-10 py-2 rounded-full bg-green-700 text-white text-sm font-semibold uppercase tracking-widest hover:bg-green-800">

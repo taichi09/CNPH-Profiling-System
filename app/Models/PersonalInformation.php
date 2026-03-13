@@ -10,7 +10,9 @@ class PersonalInformation extends Model
     protected $table = 'personal_information';
 
 
-    protected $primaryKey = 'employee_id';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     public $timestamps = true;
 

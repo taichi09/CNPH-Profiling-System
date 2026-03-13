@@ -56,20 +56,29 @@
 
             <!-- Input Rows -->
             <div id="ld-list" class="flex flex-col">
+                @php $lds = old('ld', session('employee_step_7.ld', [[]])); @endphp
+                @foreach($lds as $i => $row)
                 <div class="flex items-stretch border-b border-gray-300">
-                    <input type="text" name="ld[0][title]"
+                    <input type="text" name="ld[{{ $i }}][title]"
+                        value="{{ $row['title'] ?? '' }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="ld[0][from]"
+                    <input type="text" name="ld[{{ $i }}][from]"
+                        value="{{ $row['from'] ?? '' }}"
                         class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="ld[0][to]"
+                    <input type="text" name="ld[{{ $i }}][to]"
+                        value="{{ $row['to'] ?? '' }}"
                         class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="ld[0][hours]"
+                    <input type="text" name="ld[{{ $i }}][hours]"
+                        value="{{ $row['hours'] ?? '' }}"
                         class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="ld[0][type]"
+                    <input type="text" name="ld[{{ $i }}][type]"
+                        value="{{ $row['type'] ?? '' }}"
                         class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="ld[0][conducted_by]"
+                    <input type="text" name="ld[{{ $i }}][conducted_by]"
+                        value="{{ $row['conducted_by'] ?? '' }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
                 </div>
+                @endforeach
             </div>
 
             <!-- Add Row Button -->
@@ -80,7 +89,7 @@
         </div>
 
         <script>
-            let ldIndex = 1;
+            let ldIndex = {{ count(old('ld', session('employee_step_7.ld', [[]]))) }};
             function addLD() {
                 const list = document.getElementById('ld-list');
                 const row = document.createElement('div');

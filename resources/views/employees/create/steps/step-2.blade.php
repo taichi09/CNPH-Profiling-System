@@ -22,6 +22,7 @@
                             22. Spouse's Surname
                         </span>
                         <input type="text" name="spouse_surname"
+                            value="{{ old('spouse_surname', session('employee_step_2.spouse_surname')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -31,19 +32,21 @@
                             First Name
                         </span>
                         <input type="text" name="spouse_first_name"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm"">
+                            value="{{ old('spouse_first_name', session('employee_step_2.spouse_first_name')) }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                         
                         <!-- Name Extension -->    
                         <span class="w-40 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                             Name Extension <br>(Jr., Sr., II, III)
                         </span>
+                        @php $spouseExt = old('spouse_extension', session('employee_step_2.spouse_extension')); @endphp
                         <select name="spouse_extension"
                             class="w-20 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                             <option value="">N/A</option>
-                            <option>Jr.</option>
-                            <option>Sr.</option>
-                            <option>II</option>
-                            <option>III</option>
+                            <option {{ $spouseExt == 'Jr.' ? 'selected' : '' }}>Jr.</option>
+                            <option {{ $spouseExt == 'Sr.' ? 'selected' : '' }}>Sr.</option>
+                            <option {{ $spouseExt == 'II' ? 'selected' : '' }}>II</option>
+                            <option {{ $spouseExt == 'III' ? 'selected' : '' }}>III</option>
                         </select>
                     </div>
 
@@ -53,6 +56,7 @@
                             Middle Name
                         </span>
                         <input type="text" name="spouse_middle_name"
+                            value="{{ old('spouse_middle_name', session('employee_step_2.spouse_middle_name')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -62,6 +66,7 @@
                             Occupation
                         </span>
                         <input type="text" name="spouse_occupation"
+                            value="{{ old('spouse_occupation', session('employee_step_2.spouse_occupation')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -71,6 +76,7 @@
                             Employer/Business Name
                         </span>
                         <input type="text" name="spouse_employer"
+                            value="{{ old('spouse_employer', session('employee_step_2.spouse_employer')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -80,6 +86,7 @@
                             Business Address
                         </span>
                         <input type="text" name="spouse_business_address"
+                            value="{{ old('spouse_business_address', session('employee_step_2.spouse_business_address')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -89,6 +96,7 @@
                             Telephone No.
                         </span>
                         <input type="text" name="spouse_telephone"
+                            value="{{ old('spouse_telephone', session('employee_step_2.spouse_telephone')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -98,6 +106,7 @@
                             24. Father's Surname
                         </span>
                         <input type="text" name="father_surname"
+                            value="{{ old('father_surname', session('employee_step_2.father_surname')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -107,17 +116,19 @@
                             First Name
                         </span>
                         <input type="text" name="father_first_name"
+                            value="{{ old('father_first_name', session('employee_step_2.father_first_name')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm border-r">
                         <span class="w-40 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                             Name Extension <br>(Jr., Sr., II, III)
                         </span>
+                        @php $fatherExt = old('father_extension', session('employee_step_2.father_extension')); @endphp
                         <select name="father_extension"
                             class="w-20 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                             <option value="">N/A</option>
-                            <option>Jr.</option>
-                            <option>Sr.</option>
-                            <option>II</option>
-                            <option>III</option>
+                            <option {{ $fatherExt == 'Jr.' ? 'selected' : '' }}>Jr.</option>
+                            <option {{ $fatherExt == 'Sr.' ? 'selected' : '' }}>Sr.</option>
+                            <option {{ $fatherExt == 'II' ? 'selected' : '' }}>II</option>
+                            <option {{ $fatherExt == 'III' ? 'selected' : '' }}>III</option>
                         </select>
                     </div>
 
@@ -127,6 +138,7 @@
                             Middle Name
                         </span>
                         <input type="text" name="father_middle_name"
+                            value="{{ old('father_middle_name', session('employee_step_2.father_middle_name')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -143,6 +155,7 @@
                             Surname
                         </span>
                         <input type="text" name="mother_surname"
+                            value="{{ old('mother_surname', session('employee_step_2.mother_surname')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -152,6 +165,7 @@
                             First Name
                         </span>
                         <input type="text" name="mother_first_name"
+                            value="{{ old('mother_first_name', session('employee_step_2.mother_first_name')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
 
@@ -161,6 +175,7 @@
                             Middle Name
                         </span>
                         <input type="text" name="mother_middle_name"
+                            value="{{ old('mother_middle_name', session('employee_step_2.mother_middle_name')) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
                 </div>
@@ -182,12 +197,17 @@
 
                     <!-- Child Rows -->
                     <div id="children-list" class="flex flex-col">
+                        @php $children = old('children', session('employee_step_2.children', [[]])); @endphp
+                        @foreach($children as $i => $child)
                         <div class="flex items-stretch border-b border-gray-300">
-                            <input type="text" name="children[0][name]"
+                            <input type="text" name="children[{{ $i }}][name]"
+                                value="{{ $child['name'] ?? '' }}"
                                 class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                            <input type="date" name="children[0][dob]"
+                            <input type="date" name="children[{{ $i }}][dob]"
+                                value="{{ $child['dob'] ?? '' }}"
                                 class="w-40 shrink-0 px-2 py-2 outline-none border-gray-50 focus:bg-gray-50 bg-transparent text-sm">
                         </div>
+                        @endforeach
                     </div>
 
                     <!-- Add Child Button -->
@@ -213,7 +233,7 @@
 </form>
 
 <script>
-    let childIndex = 1;
+    let childIndex = {{ count(old('children', session('employee_step_2.children', [[]]))) }};
     function addChild() {
         const list = document.getElementById('children-list');
         const row = document.createElement('div');

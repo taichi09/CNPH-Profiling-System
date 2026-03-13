@@ -9,7 +9,9 @@ class LearningAndDevelopment extends Model
     //
     protected $table = 'learning_and_development_interventions';
 
-    protected $primaryKey = 'learning_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $primaryKey = 'employee_id';
 
     public $timestamps = false;
 
@@ -22,12 +24,6 @@ class LearningAndDevelopment extends Model
         'type_of_l_d',
         'conducted_sponsored_by',
     ];
-
-    // protected $casts = [
-    //     'inclusive_date_from' => 'date',
-    //     'inclusive_date_to' => 'date',
-    //     'number_of_hours' => 'float',
-    // ];
 
     public function personalInformation()
     {

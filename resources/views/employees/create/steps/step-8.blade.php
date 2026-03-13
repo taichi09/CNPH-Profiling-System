@@ -36,18 +36,30 @@
             <!-- Input Rows -->
             <div class="flex items-stretch border-b border-gray-300">
                 <div id="skills-list" class="flex-1 border-r border-gray-300 flex flex-col">
-                    <input type="text" name="skills[0]"
-                        class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    @php $skills = old('skills', session('employee_step_8.skills', [''])); @endphp
+                    @foreach($skills as $i => $skill)
+                    <input type="text" name="skills[{{ $i }}]"
+                        value="{{ $skill }}"
+                        class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm {{ $i > 0 ? 'border-t border-gray-300' : '' }}">
+                    @endforeach
                 </div>
 
                 <div id="distinctions-list" class="flex-1 border-r border-gray-300 flex flex-col">
-                    <input type="text" name="distinctions[0]"
-                        class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    @php $distinctions = old('distinctions', session('employee_step_8.distinctions', [''])); @endphp
+                    @foreach($distinctions as $i => $distinction)
+                    <input type="text" name="distinctions[{{ $i }}]"
+                        value="{{ $distinction }}"
+                        class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm {{ $i > 0 ? 'border-t border-gray-300' : '' }}">
+                    @endforeach
                 </div>
 
                 <div id="memberships-list" class="flex-1 flex flex-col">
-                    <input type="text" name="memberships[0]"
-                        class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                    @php $memberships = old('memberships', session('employee_step_8.memberships', [''])); @endphp
+                    @foreach($memberships as $i => $membership)
+                    <input type="text" name="memberships[{{ $i }}]"
+                        value="{{ $membership }}"
+                        class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm {{ $i > 0 ? 'border-t border-gray-300' : '' }}">
+                    @endforeach
                 </div>
             </div>
 
@@ -79,6 +91,7 @@
                         Landbank No.
                     </span>
                     <input type="text" name="landbank_no"
+                        value="{{ old('landbank_no', session('employee_step_8.landbank_no')) }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
                 </div>
 
@@ -88,6 +101,7 @@
                         DBP No.
                     </span>
                     <input type="text" name="dbp_no"
+                        value="{{ old('dbp_no', session('employee_step_8.dbp_no')) }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
                 </div>
 
@@ -101,6 +115,7 @@
                         SSS ID
                     </span>
                     <input type="text" name="sss_id"
+                        value="{{ old('sss_id', session('employee_step_8.sss_id')) }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
                 </div>
 
@@ -110,6 +125,7 @@
                         Department Name
                     </span>
                     <input type="text" name="department_name"
+                        value="{{ old('department_name', session('employee_step_8.department_name')) }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
                 </div>
 
@@ -122,14 +138,15 @@
                     <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                         Employment Status
                     </span>
+                    @php $empStatus = old('employment_status', session('employee_step_8.employment_status')); @endphp
                     <select name="employment_status"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
                         <option value="">-- Select --</option>
-                        <option>Regular</option>
-                        <option>Casual</option>
-                        <option>Contractual</option>
-                        <option>Job Order</option>
-                        <option>Coterminous</option>
+                        <option {{ $empStatus == 'Regular' ? 'selected' : '' }}>Regular</option>
+                        <option {{ $empStatus == 'Casual' ? 'selected' : '' }}>Casual</option>
+                        <option {{ $empStatus == 'Contractual' ? 'selected' : '' }}>Contractual</option>
+                        <option {{ $empStatus == 'Job Order' ? 'selected' : '' }}>Job Order</option>
+                        <option {{ $empStatus == 'Coterminous' ? 'selected' : '' }}>Coterminous</option>
                     </select>
                 </div>
 
@@ -139,9 +156,9 @@
         
 
         <script>
-            let skillIndex = 1;
-            let distinctionIndex = 1;
-            let membershipIndex = 1;
+            let skillIndex = {{ count(old('skills', session('employee_step_8.skills', ['']))) }};
+            let distinctionIndex = {{ count(old('distinctions', session('employee_step_8.distinctions', ['']))) }};
+            let membershipIndex = {{ count(old('memberships', session('employee_step_8.memberships', ['']))) }};
 
             function addSkill() {
                 const list = document.getElementById('skills-list');

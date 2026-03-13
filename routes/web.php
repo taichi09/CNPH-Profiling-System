@@ -26,7 +26,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
-    // Add these two lines right here:
+
+    Route::get('/employees/create/cancel', [EmployeeController::class, 'cancelCreate'])
+    ->name('employees.create.cancel');
     Route::get('/employees/create/{step?}', [EmployeeController::class, 'create'])
         ->name('employees.create.step')
         ->where('step', '[1-8]');
@@ -34,6 +36,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('employees.create.step.post');
 
     Route::post('/employees/import', [EmployeeController::class, 'import'])->name('employees.import');
+
+    Route::get('/employees/{id}', [EmployeeController::class, 'show'])->name('employees.show');
 
     Route::get('/departments', [DepartmentController::class, 'index'])->name('departments.index');
     Route::post('/departments', [DepartmentController::class, 'store'])->name('departments.store');

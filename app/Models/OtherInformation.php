@@ -9,8 +9,10 @@ class OtherInformation extends Model
     //
     protected $table = 'other_information';
 
-    protected $primaryKey = 'other_info_id';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $primaryKey = 'employee_id';
+    
     public $timestamps = false;
 
     protected $fillable = [

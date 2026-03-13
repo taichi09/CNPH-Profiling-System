@@ -9,7 +9,9 @@ class VoluntaryWork extends Model
     //
     protected $table = 'voluntary_work';
 
-    protected $primaryKey = 'voluntary_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $primaryKey = 'employee_id';
 
     public $timestamps = false;
 
@@ -21,11 +23,6 @@ class VoluntaryWork extends Model
         'number_of_hours',
         'position_nature_of_work',
     ];
-
-    // protected $casts = [
-    //     'inclusive_date_from' => 'date',
-    //     'inclusive_date_to' => 'date',
-    // ];
 
     public function personalInformation()
     {

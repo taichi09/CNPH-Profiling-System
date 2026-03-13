@@ -54,20 +54,29 @@
 
             <!-- Input Rows -->
             <div id="eligibility-list" class="flex flex-col">
+                @php $eligibilities = old('eligibility', session('employee_step_4.eligibility', [[]])); @endphp
+                @foreach($eligibilities as $i => $row)
                 <div class="flex items-stretch border-b border-gray-300">
-                    <input type="text" name="eligibility[0][name]"
+                    <input type="text" name="eligibility[{{ $i }}][name]"
+                        value="{{ $row['name'] ?? '' }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="eligibility[0][rating]"
+                    <input type="text" name="eligibility[{{ $i }}][rating]"
+                        value="{{ $row['rating'] ?? '' }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="eligibility[0][date]"
+                    <input type="text" name="eligibility[{{ $i }}][date]"
+                        value="{{ $row['date'] ?? '' }}"
                         class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="eligibility[0][place]"
+                    <input type="text" name="eligibility[{{ $i }}][place]"
+                        value="{{ $row['place'] ?? '' }}"
                         class="w-36 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="eligibility[0][license_no]"
+                    <input type="text" name="eligibility[{{ $i }}][license_no]"
+                        value="{{ $row['license_no'] ?? '' }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="eligibility[0][license_valid]"
+                    <input type="text" name="eligibility[{{ $i }}][license_valid]"
+                        value="{{ $row['license_valid'] ?? '' }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
                 </div>
+                @endforeach
             </div>
 
             <!-- Add Row Button -->
@@ -78,7 +87,7 @@
         </div>
 
         <script>
-            let eligibilityIndex = 1;
+            let eligibilityIndex = {{ count(old('eligibility', session('employee_step_4.eligibility', [[]]))) }};
             function addEligibility() {
                 const list = document.getElementById('eligibility-list');
                 const row = document.createElement('div');

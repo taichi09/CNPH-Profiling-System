@@ -67,24 +67,35 @@
 
             <!-- Input Rows -->
             <div id="work-list" class="flex flex-col">
+                @php $works = old('work', session('employee_step_5.work', [[]])); @endphp
+                @foreach($works as $i => $row)
                 <div class="flex items-stretch border-b border-gray-300">
-                    <input type="text" name="work[0][from]"
-                        class="w-18 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="work[0][to]"
-                        class="w-18 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="work[0][position]"
+                    <input type="text" name="work[{{ $i }}][from]"
+                        value="{{ $row['from'] ?? '' }}"
+                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="work[{{ $i }}][to]"
+                        value="{{ $row['to'] ?? '' }}"
+                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="work[{{ $i }}][position]"
+                        value="{{ $row['position'] ?? '' }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="work[0][department]"
+                    <input type="text" name="work[{{ $i }}][department]"
+                        value="{{ $row['department'] ?? '' }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="work[0][monthly_salary]"
+                    <input type="text" name="work[{{ $i }}][monthly_salary]"
+                        value="{{ $row['monthly_salary'] ?? '' }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="work[0][salary_grade]"
+                    <input type="text" name="work[{{ $i }}][salary_grade]"
+                        value="{{ $row['salary_grade'] ?? '' }}"
                         class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="work[0][status]"
+                    <input type="text" name="work[{{ $i }}][status]"
+                        value="{{ $row['status'] ?? '' }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="work[0][govt_service]"
+                    <input type="text" name="work[{{ $i }}][govt_service]"
+                        value="{{ $row['govt_service'] ?? '' }}"
                         class="w-16 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
                 </div>
+                @endforeach
             </div>
 
             <!-- Add Row Button -->
@@ -96,7 +107,7 @@
         </div>
 
         <script>
-            let workIndex = 1;
+            let workIndex = {{ count(old('work', session('employee_step_5.work', [[]]))) }};
             function addWork() {
                 const list = document.getElementById('work-list');
                 const row = document.createElement('div');

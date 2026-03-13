@@ -9,11 +9,10 @@ class WorkExperience extends Model
 
     protected $table = 'work_experience';
 
-    protected $primaryKey = 'job_id';
-
-    public $incrementing = true;
-    protected $keyType = 'int';
-
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $primaryKey = 'employee_id';
+    
     public $timestamps = false;
 
     protected $fillable = [
@@ -22,6 +21,8 @@ class WorkExperience extends Model
         'inclusive_date_to',
         'position_title',
         'department_agency_office_company',
+        'monthly_salary',
+        'salary_grade',
         'status_of_appointment',
         'govt_service',
     ];

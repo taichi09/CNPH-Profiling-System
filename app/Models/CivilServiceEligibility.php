@@ -9,7 +9,9 @@ class CivilServiceEligibility extends Model
     //
     protected $table = 'civil_service_eligibility';
 
-    protected $primaryKey = 'cse_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $primaryKey = 'employee_id';
 
     public $timestamps = false;
 
@@ -22,10 +24,6 @@ class CivilServiceEligibility extends Model
         'license_no',
         'license_validity',
     ];
-
-    // protected $casts = [
-    //     'license_validity' => 'date',
-    // ];
 
     public function personalInformation()
     {

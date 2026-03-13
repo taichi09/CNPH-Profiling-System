@@ -46,18 +46,26 @@
 
             <!-- Input Rows -->
             <div id="voluntary-list" class="flex flex-col">
+                @php $voluntaries = old('voluntary', session('employee_step_6.voluntary', [[]])); @endphp
+                @foreach($voluntaries as $i => $row)
                 <div class="flex items-stretch border-b border-gray-300">
-                    <input type="text" name="voluntary[0][organization]"
+                    <input type="text" name="voluntary[{{ $i }}][organization]"
+                        value="{{ $row['organization'] ?? '' }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="voluntary[0][from]"
-                        class="w-18 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="voluntary[0][to]"
-                        class="w-18 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="voluntary[0][hours]"
+                    <input type="text" name="voluntary[{{ $i }}][from]"
+                        value="{{ $row['from'] ?? '' }}"
+                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="voluntary[{{ $i }}][to]"
+                        value="{{ $row['to'] ?? '' }}"
+                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                    <input type="text" name="voluntary[{{ $i }}][hours]"
+                        value="{{ $row['hours'] ?? '' }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="voluntary[0][position]"
+                    <input type="text" name="voluntary[{{ $i }}][position]"
+                        value="{{ $row['position'] ?? '' }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
                 </div>
+                @endforeach
             </div>
 
             <!-- Add Row Button -->
@@ -68,7 +76,7 @@
         </div>      
         
         <script>
-            let voluntaryIndex = 1;
+            let voluntaryIndex = {{ count(old('voluntary', session('employee_step_6.voluntary', [[]]))) }};
             function addVoluntary() {
                 const list = document.getElementById('voluntary-list');
                 const row = document.createElement('div');
