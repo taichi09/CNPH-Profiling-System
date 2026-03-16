@@ -37,6 +37,34 @@
                 @include('employees.partials.search-bar')
             </div>
 
+            <!-- Tabs -->
+            <div class="px-4 sm:px-6 pt-4 border-b border-gray-200">
+                <nav class="flex gap-6">
+                    <a href="{{ route('employees.index', ['tab' => 'active']) }}"
+                        class="pb-3 text-sm font-semibold border-b-2 transition-colors
+                        {{ $tab === 'active'
+                            ? 'border-green-700 text-green-700'
+                            : 'border-transparent text-gray-500 hover:text-gray-700' }}">
+                        All Employees
+                        <span class="ml-1 px-2 py-0.5 rounded-full text-xs
+                            {{ $tab === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
+                            {{ $activeCount }}
+                        </span>
+                    </a>
+                    <a href="{{ route('employees.index', ['tab' => 'resigned']) }}"
+                        class="pb-3 text-sm font-semibold border-b-2 transition-colors
+                        {{ $tab === 'resigned'
+                            ? 'border-green-700 text-green-700'
+                            : 'border-transparent text-gray-500 hover:text-gray-700' }}">
+                        Resigned
+                        <span class="ml-1 px-2 py-0.5 rounded-full text-xs
+                            {{ $tab === 'resigned' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
+                            {{ $resignedCount }}
+                        </span>
+                    </a>
+                </nav>
+            </div>
+
             <!-- Table -->
             @include('employees.partials.table')
         </div>

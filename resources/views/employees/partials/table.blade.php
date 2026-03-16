@@ -54,7 +54,7 @@
             @if ($employees->onFirstPage())
                 <span class="px-3 py-1 text-sm text-gray-400 border border-gray-200 rounded cursor-not-allowed">Previous</span>
             @else
-                <a href="{{ $employees->previousPageUrl() }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Previous</a>
+                <a href="{{ $employees->previousPageUrl() }}&tab={{ request('tab', 'active') }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Previous</a>
             @endif
 
             {{-- Page Numbers --}}
@@ -62,13 +62,13 @@
                 @if ($page == $employees->currentPage())
                     <span class="px-3 py-1 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded">{{ $page }}</span>
                 @else
-                    <a href="{{ $url }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">{{ $page }}</a>
+                    <a href="{{ $url }}&tab={{ request('tab', 'active') }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">{{ $page }}</a>
                 @endif
             @endforeach
 
             {{-- Next --}}
             @if ($employees->hasMorePages())
-                <a href="{{ $employees->nextPageUrl() }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Next</a>
+                <a href="{{ $employees->nextPageUrl() }}&tab={{ request('tab', 'active') }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Next</a>
             @else
                 <span class="px-3 py-1 text-sm text-gray-400 border border-gray-200 rounded cursor-not-allowed">Next</span>
             @endif

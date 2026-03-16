@@ -18,10 +18,28 @@ use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $employees = PersonalInformation::orderBy('employee_id')->paginate(10);
-        return view('employees.index', compact('employees'));
+        $tab = $request->get('tab', 'active');
+
+        if ($tab === 'resigned') {
+            $employees = PersonalInformation::join('other_information', 'personal_information.employee_id', '=', 'other_information.employee_id')
+                ->where('other_information.employment_status', 'Resigned')
+                ->select('personal_information.*')
+                ->orderBy('personal_information.employee_id')
+                ->paginate(10);
+        } else {
+            $employees = PersonalInformation::join('other_information', 'personal_information.employee_id', '=', 'other_information.employee_id')
+                ->where('other_information.employment_status', '!=', 'Resigned')
+                ->select('personal_information.*')
+                ->orderBy('personal_information.employee_id')
+                ->paginate(10);
+        }
+
+        $activeCount   = \App\Models\OtherInformation::where('employment_status', '!=', 'Resigned')->count();
+        $resignedCount = \App\Models\OtherInformation::where('employment_status', 'Resigned')->count();
+
+        return view('employees.index', compact('employees', 'tab', 'activeCount', 'resignedCount'));
     }
 
     public function cancelCreate()
