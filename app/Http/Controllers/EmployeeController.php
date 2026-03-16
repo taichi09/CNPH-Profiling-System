@@ -23,15 +23,15 @@ class EmployeeController extends Controller
         $tab = $request->get('tab', 'active');
 
         if ($tab === 'resigned') {
-            $employees = PersonalInformation::join('other_information', 'personal_information.employee_id', '=', 'other_information.employee_id')
+            $employees = PersonalInformation::leftJoin('other_information', 'personal_information.employee_id', '=', 'other_information.employee_id')
                 ->where('other_information.employment_status', 'Resigned')
-                ->select('personal_information.*')
+                ->select('personal_information.*', 'other_information.department_name', 'other_information.employment_status')
                 ->orderBy('personal_information.employee_id')
                 ->paginate(10);
         } else {
-            $employees = PersonalInformation::join('other_information', 'personal_information.employee_id', '=', 'other_information.employee_id')
+            $employees = PersonalInformation::leftJoin('other_information', 'personal_information.employee_id', '=', 'other_information.employee_id')
                 ->where('other_information.employment_status', '!=', 'Resigned')
-                ->select('personal_information.*')
+                ->select('personal_information.*', 'other_information.department_name', 'other_information.employment_status')
                 ->orderBy('personal_information.employee_id')
                 ->paginate(10);
         }
