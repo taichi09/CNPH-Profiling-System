@@ -185,17 +185,19 @@ class EmployeeController extends Controller
                 'grad' => 'Graduate Studies',
             ];
             foreach ($levels as $prefix => $label) {
-                if (!empty($s3["{$prefix}_school"])) {
+                $rows = $s3[$prefix] ?? [[]];
+                if (empty($rows)) $rows = [[]];
+                foreach ($rows as $row) {
                     EducationalBackground::create([
                         'employee_id' => $employeeId,
                         'level' => $label,
-                        'name_of_school' => $s3["{$prefix}_school"] ?? 'N/A',
-                        'basic_education' => $s3["{$prefix}_course"] ?? 'N/A',
-                        'period_of_attendance_from' => $s3["{$prefix}_from"] ?? 'N/A',
-                        'period_of_attendance_to' => $s3["{$prefix}_to"] ?? 'N/A',
-                        'highest_level' => $s3["{$prefix}_units"] ?? 'N/A',
-                        'year_graduated' => $s3["{$prefix}_year_grad"] ?? 'N/A',
-                        'scholarship_academic_honors_recieved' => $s3["{$prefix}_honors"] ?? 'N/A',
+                        'name_of_school' => !empty($row['school']) ? $row['school'] : 'N/A',
+                        'basic_education' => !empty($row['course']) ? $row['course'] : 'N/A',
+                        'period_of_attendance_from' => !empty($row['from']) ? $row['from'] : 'N/A',
+                        'period_of_attendance_to' => !empty($row['to']) ? $row['to'] : 'N/A',
+                        'highest_level' => !empty($row['units']) ? $row['units'] : 'N/A',
+                        'year_graduated' => !empty($row['year_grad']) ? $row['year_grad'] : 'N/A',
+                        'scholarship_academic_honors_recieved' => !empty($row['honors']) ? $row['honors'] : 'N/A',
                     ]);
                 }
             }

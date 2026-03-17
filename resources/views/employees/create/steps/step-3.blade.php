@@ -64,78 +64,137 @@
 
             </div>
 
-            <!-- Elementary Row -->
-            <div class="flex items-stretch border-b border-gray-300">
-                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
-                    Elementary
+            <!-- Elementary Rows -->
+            <div id="elem-list">
+                @php $elemRows = old('elem', session('employee_step_3.elem', [[]])); @endphp
+                @foreach($elemRows as $i => $row)
+                <div class="flex items-stretch border-b border-gray-300">
+                    <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
+                        {{ $i === 0 ? 'Elementary' : '' }}
+                    </div>
+                    <input type="text" name="elem[{{ $i }}][school]" value="{{ $row['school'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="elem[{{ $i }}][course]" value="{{ $row['course'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="elem[{{ $i }}][from]" value="{{ $row['from'] ?? '' }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="elem[{{ $i }}][to]" value="{{ $row['to'] ?? '' }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="elem[{{ $i }}][units]" value="{{ $row['units'] ?? '' }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="elem[{{ $i }}][year_grad]" value="{{ $row['year_grad'] ?? '' }}" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="elem[{{ $i }}][honors]" value="{{ $row['honors'] ?? '' }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
-                <input type="text" name="elem_school" value="{{ old('elem_school', session('employee_step_3.elem_school')) }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="elem_course" value="{{ old('elem_course', session('employee_step_3.elem_course')) }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="elem_from" value="{{ old('elem_from', session('employee_step_3.elem_from')) }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="elem_to" value="{{ old('elem_to', session('employee_step_3.elem_to')) }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="elem_units" value="{{ old('elem_units', session('employee_step_3.elem_units')) }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="elem_year_grad" value="{{ old('elem_year_grad', session('employee_step_3.elem_year_grad')) }}" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="elem_honors" value="{{ old('elem_honors', session('employee_step_3.elem_honors')) }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                @endforeach
+            </div>
+            <div class="flex border-b border-gray-300">
+                <div class="w-32 shrink-0 border-r border-gray-300"></div>
+                <div class="px-2 py-1">
+                    <button type="button" onclick="addEduRow('elem', 'Elementary')"
+                        class="text-xs text-green-700 hover:underline">+ Add Row</button>
+                </div>
             </div>
 
-            <!-- Secondary Row -->
-            <div class="flex items-stretch border-b border-gray-300">
-                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
-                    Secondary
+            <!-- Secondary Rows -->
+            <div id="sec-list">
+                @php $secRows = old('sec', session('employee_step_3.sec', [[]])); @endphp
+                @foreach($secRows as $i => $row)
+                <div class="flex items-stretch border-b border-gray-300">
+                    <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
+                        {{ $i === 0 ? 'Secondary' : '' }}
+                    </div>
+                    <input type="text" name="sec[{{ $i }}][school]" value="{{ $row['school'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="sec[{{ $i }}][course]" value="{{ $row['course'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="sec[{{ $i }}][from]" value="{{ $row['from'] ?? '' }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="sec[{{ $i }}][to]" value="{{ $row['to'] ?? '' }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="sec[{{ $i }}][units]" value="{{ $row['units'] ?? '' }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="sec[{{ $i }}][year_grad]" value="{{ $row['year_grad'] ?? '' }}" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="sec[{{ $i }}][honors]" value="{{ $row['honors'] ?? '' }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
-                <input type="text" name="sec_school" value="{{ old('sec_school', session('employee_step_3.sec_school')) }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="sec_course" value="{{ old('sec_course', session('employee_step_3.sec_course')) }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="sec_from" value="{{ old('sec_from', session('employee_step_3.sec_from')) }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="sec_to" value="{{ old('sec_to', session('employee_step_3.sec_to')) }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="sec_units" value="{{ old('sec_units', session('employee_step_3.sec_units')) }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="sec_year_grad" value="{{ old('sec_year_grad', session('employee_step_3.sec_year_grad')) }}" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="sec_honors" value="{{ old('sec_honors', session('employee_step_3.sec_honors')) }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                @endforeach
+            </div>
+            <div class="flex border-b border-gray-300">
+                <div class="w-32 shrink-0 border-r border-gray-300"></div>
+                <div class="px-2 py-1">
+                    <button type="button" onclick="addEduRow('sec', 'Secondary')"
+                        class="text-xs text-green-700 hover:underline">+ Add Row</button>
+                </div>
             </div>
 
-            <!-- Vocational/Trade Course Row -->
-            <div class="flex items-stretch border-b border-gray-300">
-                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center leading-tight">
-                    Vocational/<br>Trade Course
+            <!-- Vocational Rows -->
+            <div id="voc-list">
+                @php $vocRows = old('voc', session('employee_step_3.voc', [[]])); @endphp
+                @foreach($vocRows as $i => $row)
+                <div class="flex items-stretch border-b border-gray-300">
+                    <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center leading-tight">
+                        {{ $i === 0 ? 'Vocational/ Trade Course' : '' }}
+                    </div>
+                    <input type="text" name="voc[{{ $i }}][school]" value="{{ $row['school'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="voc[{{ $i }}][course]" value="{{ $row['course'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="voc[{{ $i }}][from]" value="{{ $row['from'] ?? '' }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="voc[{{ $i }}][to]" value="{{ $row['to'] ?? '' }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="voc[{{ $i }}][units]" value="{{ $row['units'] ?? '' }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="voc[{{ $i }}][year_grad]" value="{{ $row['year_grad'] ?? '' }}" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="voc[{{ $i }}][honors]" value="{{ $row['honors'] ?? '' }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
-                <input type="text" name="voc_school" value="{{ old('voc_school', session('employee_step_3.voc_school')) }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="voc_course" value="{{ old('voc_course', session('employee_step_3.voc_course')) }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="voc_from" value="{{ old('voc_from', session('employee_step_3.voc_from')) }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="voc_to" value="{{ old('voc_to', session('employee_step_3.voc_to')) }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="voc_units" value="{{ old('voc_units', session('employee_step_3.voc_units')) }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="voc_year_grad" value="{{ old('voc_year_grad', session('employee_step_3.voc_year_grad')) }}" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="voc_honors" value="{{ old('voc_honors', session('employee_step_3.voc_honors')) }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                @endforeach
+            </div>
+            <div class="flex border-b border-gray-300">
+                <div class="w-32 shrink-0 border-r border-gray-300"></div>
+                <div class="px-2 py-1">
+                    <button type="button" onclick="addEduRow('voc', 'Vocational/ Trade Course')"
+                        class="text-xs text-green-700 hover:underline">+ Add Row</button>
+                </div>
             </div>
 
-            <!-- College Row -->
-            <div class="flex items-stretch border-b border-gray-300">
-                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
-                    College
+            <!-- College Rows -->
+            <div id="col-list">
+                @php $colRows = old('col', session('employee_step_3.col', [[]])); @endphp
+                @foreach($colRows as $i => $row)
+                <div class="flex items-stretch border-b border-gray-300">
+                    <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
+                        {{ $i === 0 ? 'College' : '' }}
+                    </div>
+                    <input type="text" name="col[{{ $i }}][school]" value="{{ $row['school'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="col[{{ $i }}][course]" value="{{ $row['course'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="col[{{ $i }}][from]" value="{{ $row['from'] ?? '' }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="col[{{ $i }}][to]" value="{{ $row['to'] ?? '' }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="col[{{ $i }}][units]" value="{{ $row['units'] ?? '' }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="col[{{ $i }}][year_grad]" value="{{ $row['year_grad'] ?? '' }}" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="col[{{ $i }}][honors]" value="{{ $row['honors'] ?? '' }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
-                <input type="text" name="col_school" value="{{ old('col_school', session('employee_step_3.col_school')) }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="col_course" value="{{ old('col_course', session('employee_step_3.col_course')) }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="col_from" value="{{ old('col_from', session('employee_step_3.col_from')) }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="col_to" value="{{ old('col_to', session('employee_step_3.col_to')) }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="col_units" value="{{ old('col_units', session('employee_step_3.col_units')) }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="col_year_grad" value="{{ old('col_year_grad', session('employee_step_3.col_year_grad')) }}" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="col_honors" value="{{ old('col_honors', session('employee_step_3.col_honors')) }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                @endforeach
+            </div>
+            <div class="flex border-b border-gray-300">
+                <div class="w-32 shrink-0 border-r border-gray-300"></div>
+                <div class="px-2 py-1">
+                    <button type="button" onclick="addEduRow('col', 'College')"
+                        class="text-xs text-green-700 hover:underline">+ Add Row</button>
+                </div>
             </div>
 
-            <!-- Graduate Studies Row -->
-            <div class="flex items-stretch">
-                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
-                    Graduate Studies
+            <!-- Graduate Studies Rows -->
+            <div id="grad-list">
+                @php $gradRows = old('grad', session('employee_step_3.grad', [[]])); @endphp
+                @foreach($gradRows as $i => $row)
+                <div class="flex items-stretch border-b border-gray-300">
+                    <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center">
+                        {{ $i === 0 ? 'Graduate Studies' : '' }}
+                    </div>
+                    <input type="text" name="grad[{{ $i }}][school]" value="{{ $row['school'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="grad[{{ $i }}][course]" value="{{ $row['course'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="grad[{{ $i }}][from]" value="{{ $row['from'] ?? '' }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="grad[{{ $i }}][to]" value="{{ $row['to'] ?? '' }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="grad[{{ $i }}][units]" value="{{ $row['units'] ?? '' }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="grad[{{ $i }}][year_grad]" value="{{ $row['year_grad'] ?? '' }}" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <input type="text" name="grad[{{ $i }}][honors]" value="{{ $row['honors'] ?? '' }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
-                <input type="text" name="grad_school" value="{{ old('grad_school', session('employee_step_3.grad_school')) }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="grad_course" value="{{ old('grad_course', session('employee_step_3.grad_course')) }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="grad_from" value="{{ old('grad_from', session('employee_step_3.grad_from')) }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="grad_to" value="{{ old('grad_to', session('employee_step_3.grad_to')) }}" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="grad_units" value="{{ old('grad_units', session('employee_step_3.grad_units')) }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="text" name="grad_year_grad" value="{{ old('grad_year_grad', session('employee_step_3.grad_year_grad')) }}" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="grad_honors" value="{{ old('grad_honors', session('employee_step_3.grad_honors')) }}" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                @endforeach
+            </div>
+            <div class="flex">
+                <div class="w-32 shrink-0 border-r border-gray-300"></div>
+                <div class="px-2 py-1">
+                    <button type="button" onclick="addEduRow('grad', 'Graduate Studies')"
+                        class="text-xs text-green-700 hover:underline">+ Add Row</button>
+                </div>
             </div>
         
         </div>
-
 
         <!-- Navigation -->
         <div class="flex justify-between mt-8">
@@ -147,4 +206,33 @@
             </button>
         </div>
     </div>
+
+    <script>
+        const eduIndexes = {
+            elem: {{ count(old('elem', session('employee_step_3.elem', [[]]))) }},
+            sec: {{ count(old('sec', session('employee_step_3.sec', [[]]))) }},
+            voc: {{ count(old('voc', session('employee_step_3.voc', [[]]))) }},
+            col: {{ count(old('col', session('employee_step_3.col', [[]]))) }},
+            grad: {{ count(old('grad', session('employee_step_3.grad', [[]]))) }},
+        };
+
+        function addEduRow(prefix, label) {
+            const list = document.getElementById(`${prefix}-list`);
+            const i = eduIndexes[prefix];
+            const row = document.createElement('div');
+            row.className = 'flex items-stretch border-b border-gray-300';
+            row.innerHTML = `
+                <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center"></div>
+                <input type="text" name="${prefix}[${i}][school]" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="${prefix}[${i}][course]" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="${prefix}[${i}][from]" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="${prefix}[${i}][to]" class="w-14 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="${prefix}[${i}][units]" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="${prefix}[${i}][year_grad]" class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="${prefix}[${i}][honors]" class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+            `;
+            list.appendChild(row);
+            eduIndexes[prefix]++;
+        }
+    </script>
 </form>
