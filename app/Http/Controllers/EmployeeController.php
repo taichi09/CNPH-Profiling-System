@@ -249,18 +249,18 @@ class EmployeeController extends Controller
             }
 
             // --- Step 7: Learning & Development ---
-            foreach ($s7['ld'] ?? [] as $row) {
-                if (!empty($row['title'])) {
-                    LearningAndDevelopment::create([
-                        'employee_id' => $employeeId,
-                        'title_of_learning_and_development_interventions' => $row['title'] ?? 'N/A',
-                        'inclusive_date_from' => $row['from'] ?? 'N/A',
-                        'inclusive_date_to' => $row['to'] ?? 'N/A',
-                        'number_of_hours' => $row['hours'] ?? 0,
-                        'type_of_l_d' => $row['type'] ?? 'N/A',
-                        'conducted_sponsored_by' => $row['conducted_by'] ?? 'N/A',
-                    ]);
-                }
+            $ld = $s7['ld'] ?? [[]];
+            if (empty($ld)) $ld = [[]];
+            foreach ($ld as $row) {
+                LearningAndDevelopment::create([
+                    'employee_id' => $employeeId,
+                    'title_of_learning_and_development_interventions' => !empty($row['title']) ? $row['title'] : 'N/A',
+                    'inclusive_date_from' => !empty($row['from']) ? $row['from'] : 'N/A',
+                    'inclusive_date_to' => !empty($row['to']) ? $row['to'] : 'N/A',
+                    'number_of_hours' => !empty($row['hours']) ? $row['hours'] : 'N/A',
+                    'type_of_l_d' => !empty($row['type']) ? $row['type'] : 'N/A',
+                    'conducted_sponsored_by' => !empty($row['conducted_by']) ? $row['conducted_by'] : 'N/A',
+                ]);
             }
 
             // --- Step 8: Other Information ---
