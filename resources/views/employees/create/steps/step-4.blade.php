@@ -59,7 +59,7 @@
                 <div class="flex items-stretch border-b border-gray-300">
                     <input type="text" name="eligibility[{{ $i }}][name]"
                         value="{{ $row['name'] ?? '' }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="eligibility[{{ $i }}][rating]"
                         value="{{ $row['rating'] ?? '' }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
@@ -68,13 +68,13 @@
                         class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="eligibility[{{ $i }}][place]"
                         value="{{ $row['place'] ?? '' }}"
-                        class="w-36 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                        class="w-36 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="eligibility[{{ $i }}][license_no]"
                         value="{{ $row['license_no'] ?? '' }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="eligibility[{{ $i }}][license_valid]"
                         value="{{ $row['license_valid'] ?? '' }}"
-                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
                 @endforeach
             </div>
@@ -86,31 +86,6 @@
             </div>
         </div>
 
-        <script>
-            let eligibilityIndex = {{ count(old('eligibility', session('employee_step_4.eligibility', [[]]))) }};
-            function addEligibility() {
-                const list = document.getElementById('eligibility-list');
-                const row = document.createElement('div');
-                row.className = 'flex items-stretch border-b border-gray-300';
-                row.innerHTML = `
-                    <input type="text" name="eligibility[${eligibilityIndex}][name]"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="eligibility[${eligibilityIndex}][rating]"
-                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="eligibility[${eligibilityIndex}][date]"
-                        class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="eligibility[${eligibilityIndex}][place]"
-                        class="w-36 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="eligibility[${eligibilityIndex}][license_no]"
-                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="eligibility[${eligibilityIndex}][license_valid]"
-                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
-                `;
-                list.appendChild(row);
-                eligibilityIndex++;
-            }
-        </script>
-
         <!-- Navigation -->
         <div class="flex justify-between mt-8">
             <a href="{{ route('employees.create.step', 3) }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
@@ -121,4 +96,29 @@
             </button>
         </div>
     </div>
+
+    <script>
+        let eligibilityIndex = {{ count(old('eligibility', session('employee_step_4.eligibility', [[]]))) }};
+        function addEligibility() {
+            const list = document.getElementById('eligibility-list');
+            const row = document.createElement('div');
+            row.className = 'flex items-stretch border-b border-gray-300';
+            row.innerHTML = `
+                <input type="text" name="eligibility[${eligibilityIndex}][name]"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="eligibility[${eligibilityIndex}][rating]"
+                    class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="eligibility[${eligibilityIndex}][date]"
+                    class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="eligibility[${eligibilityIndex}][place]"
+                    class="w-36 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="eligibility[${eligibilityIndex}][license_no]"
+                    class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="eligibility[${eligibilityIndex}][license_valid]"
+                    class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+            `;
+            list.appendChild(row);
+            eligibilityIndex++;
+        }
+    </script>
 </form>

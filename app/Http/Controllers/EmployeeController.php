@@ -203,18 +203,18 @@ class EmployeeController extends Controller
             }
 
             // --- Step 4: Civil Service Eligibility ---
-            foreach ($s4['eligibility'] ?? [] as $row) {
-                if (!empty($row['name'])) {
-                    CivilServiceEligibility::create([
-                        'employee_id' => $employeeId,
-                        'eligibility' => $row['name'] ?? 'N/A',
-                        'rating' => $row['rating'] ?? 'N/A',
-                        'date_of_examination' => $row['date'] ?? 'N/A',
-                        'place_of_examination' => $row['place'] ?? 'N/A',
-                        'license_no' => $row['license_no'] ?? 'N/A',
-                        'license_validity' => $row['license_valid'] ?? 'N/A',
-                    ]);
-                }
+            $eligibilities = $s4['eligibility'] ?? [[]];
+            if (empty($eligibilities)) $eligibilities = [[]];
+            foreach ($eligibilities as $row) {
+                CivilServiceEligibility::create([
+                    'employee_id' => $employeeId,
+                    'eligibility' => !empty($row['name']) ? $row['name'] : 'N/A',
+                    'rating' => !empty($row['rating']) ? $row['rating'] : 'N/A',
+                    'date_of_examination' => !empty($row['date']) ? $row['date'] : 'N/A',
+                    'place_of_examination' => !empty($row['place']) ? $row['place'] : 'N/A',
+                    'license_no' => !empty($row['license_no']) ? $row['license_no'] : 'N/A',
+                    'license_validity' => !empty($row['license_valid']) ? $row['license_valid'] : 'N/A',
+                ]);
             }
 
             // --- Step 5: Work Experience ---
