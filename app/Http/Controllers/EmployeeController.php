@@ -152,8 +152,8 @@ class EmployeeController extends Controller
 
             // --- Step 2: Family Background ---
             $children  = $s2['children'] ?? [];
-            $childNames = implode(',', array_filter(array_column($children, 'name')));
-            $childDobs  = implode(',', array_filter(array_column($children, 'dob')));
+            $childNames = implode('; ', array_filter(array_column($children, 'name')));
+            $childDobs  = implode('; ', array_filter(array_column($children, 'dob')));
 
             FamilyBackground::create([
                 'employee_id' => $employeeId,

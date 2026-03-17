@@ -40,14 +40,18 @@
                             Name Extension <br>(Jr., Sr., II, III)
                         </span>
                         @php $spouseExt = old('spouse_extension', session('employee_step_2.spouse_extension')); @endphp
-                        <select name="spouse_extension"
+                        <input type="text" name="spouse_extension"
+                            list="spouse_ext_options"
+                            value="{{ $spouseExt }}"
+                            placeholder="Select or type"
                             class="w-20 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
-                            <option value="">N/A</option>
-                            <option {{ $spouseExt == 'Jr.' ? 'selected' : '' }}>Jr.</option>
-                            <option {{ $spouseExt == 'Sr.' ? 'selected' : '' }}>Sr.</option>
-                            <option {{ $spouseExt == 'II' ? 'selected' : '' }}>II</option>
-                            <option {{ $spouseExt == 'III' ? 'selected' : '' }}>III</option>
-                        </select>
+                        <datalist id="spouse_ext_options">
+                            <option value="Jr.">
+                            <option value="Sr.">
+                            <option value="II">
+                            <option value="III">
+                            <option value="IV">
+                        </datalist>
                     </div>
 
                     <!-- Spouse Middle Name -->
@@ -122,14 +126,18 @@
                             Name Extension <br>(Jr., Sr., II, III)
                         </span>
                         @php $fatherExt = old('father_extension', session('employee_step_2.father_extension')); @endphp
-                        <select name="father_extension"
+                        <input type="text" name="father_extension"
+                            list="father_ext_options"
+                            value="{{ $fatherExt }}"
+                            placeholder="Select or type"
                             class="w-20 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
-                            <option value="">N/A</option>
-                            <option {{ $fatherExt == 'Jr.' ? 'selected' : '' }}>Jr.</option>
-                            <option {{ $fatherExt == 'Sr.' ? 'selected' : '' }}>Sr.</option>
-                            <option {{ $fatherExt == 'II' ? 'selected' : '' }}>II</option>
-                            <option {{ $fatherExt == 'III' ? 'selected' : '' }}>III</option>
-                        </select>
+                        <datalist id="father_ext_options">
+                            <option value="Jr.">
+                            <option value="Sr.">
+                            <option value="II">
+                            <option value="III">
+                            <option value="IV">
+                        </datalist>
                     </div>
 
                     <!-- Father Middle Name -->
@@ -181,7 +189,7 @@
                 </div>
 
                 <!-- Right Side: Name of Children + Date of Birth -->
-                <div class="flex-1 flex flex-col">
+                <div class="flex-1 flex flex-col px-3 py-2">
 
                     <!-- Header Row -->
                     <div class="flex items-stretch border-b border-gray-300">
@@ -205,7 +213,7 @@
                                 class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
                             <input type="date" name="children[{{ $i }}][dob]"
                                 value="{{ $child['dob'] ?? '' }}"
-                                class="w-40 shrink-0 px-2 py-2 outline-none border-gray-50 focus:bg-gray-50 bg-transparent text-sm">
+                                class="w-40 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-gray-300">
                         </div>
                         @endforeach
                     </div>
@@ -242,7 +250,7 @@
             <input type="text" name="children[${childIndex}][name]"
                 class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
             <input type="date" name="children[${childIndex}][dob]"
-                class="w-40 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                class="w-40 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-gray-300">
         `;
         list.appendChild(row);
         childIndex++;
