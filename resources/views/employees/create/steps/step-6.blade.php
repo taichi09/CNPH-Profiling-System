@@ -51,7 +51,7 @@
                 <div class="flex items-stretch border-b border-gray-300">
                     <input type="text" name="voluntary[{{ $i }}][organization]"
                         value="{{ $row['organization'] ?? '' }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="voluntary[{{ $i }}][from]"
                         value="{{ $row['from'] ?? '' }}"
                         class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
@@ -63,7 +63,7 @@
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="voluntary[{{ $i }}][position]"
                         value="{{ $row['position'] ?? '' }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
                 @endforeach
             </div>
