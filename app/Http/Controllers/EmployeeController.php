@@ -61,25 +61,25 @@ class EmployeeController extends Controller
     {
         $data = $request->except('_token');
 
-        // Build combined citizenship value
-        $citizenshipParts = array_filter([
-            $data['citizenship'] ?? '',
-            $data['citizenship_type'] ?? '',
-            $data['citizenship_country'] ?? '',
-        ]);
-        $data['citizenship'] = implode('//', $citizenshipParts) ?: 'N/A';
+        if ((int)$step === 1) {
+            // Build combined citizenship value
+            $citizenshipParts = array_filter([
+                $data['citizenship'] ?? '',
+                $data['citizenship_type'] ?? '',
+                $data['citizenship_country'] ?? '',
+            ]);
+            $data['citizenship'] = implode('//', $citizenshipParts) ?: 'N/A';
+            unset($data['citizenship_type']);
+            unset($data['citizenship_country']);
 
-        // Remove the sub-fields since they're now merged
-        unset($data['citizenship_type']);
-        unset($data['citizenship_country']);
-
-        // Merge civil_status_other into civil_status if Others is selected
-        if (isset($data['civil_status']) && $data['civil_status'] === 'Others') {
-            if (!empty($data['civil_status_other'])) {
-                $data['civil_status'] = $data['civil_status_other'];
+            // Merge civil_status_other into civil_status if Others is selected
+            if (isset($data['civil_status']) && $data['civil_status'] === 'Others') {
+                if (!empty($data['civil_status_other'])) {
+                    $data['civil_status'] = $data['civil_status_other'];
+                }
             }
+            unset($data['civil_status_other']);
         }
-        unset($data['civil_status_other']);
 
         $request->session()->put("employee_step_{$step}", $data);
 
