@@ -74,29 +74,6 @@
                     class="text-xs text-green-700 hover:underline">+ Add Row</button>
             </div>
         </div>      
-        
-        <script>
-            let voluntaryIndex = {{ count(old('voluntary', session('employee_step_6.voluntary', [[]]))) }};
-            function addVoluntary() {
-                const list = document.getElementById('voluntary-list');
-                const row = document.createElement('div');
-                row.className = 'flex items-stretch border-b border-gray-300';
-                row.innerHTML = `
-                    <input type="text" name="voluntary[${voluntaryIndex}][organization]"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="voluntary[${voluntaryIndex}][from]"
-                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="voluntary[${voluntaryIndex}][to]"
-                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="voluntary[${voluntaryIndex}][hours]"
-                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="voluntary[${voluntaryIndex}][position]"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
-                `;
-                list.appendChild(row);
-                voluntaryIndex++;
-            }
-        </script>
 
         <!-- Navigation -->
         <div class="flex justify-between mt-8">
@@ -108,4 +85,27 @@
             </button>
         </div>
     </div>
+
+    <script>
+        let voluntaryIndex = {{ count(old('voluntary', session('employee_step_6.voluntary', [[]]))) }};
+        function addVoluntary() {
+            const list = document.getElementById('voluntary-list');
+            const row = document.createElement('div');
+            row.className = 'flex items-stretch border-b border-gray-300';
+            row.innerHTML = `
+                <input type="text" name="voluntary[${voluntaryIndex}][organization]"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="voluntary[${voluntaryIndex}][from]"
+                    class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                <input type="text" name="voluntary[${voluntaryIndex}][to]"
+                    class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                <input type="text" name="voluntary[${voluntaryIndex}][hours]"
+                    class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="voluntary[${voluntaryIndex}][position]"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+            `;
+            list.appendChild(row);
+            voluntaryIndex++;
+        }
+    </script>
 </form>

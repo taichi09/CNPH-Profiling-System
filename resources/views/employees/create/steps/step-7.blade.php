@@ -61,7 +61,7 @@
                 <div class="flex items-stretch border-b border-gray-300">
                     <input type="text" name="ld[{{ $i }}][title]"
                         value="{{ $row['title'] ?? '' }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="ld[{{ $i }}][from]"
                         value="{{ $row['from'] ?? '' }}"
                         class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
@@ -76,7 +76,7 @@
                         class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="ld[{{ $i }}][conducted_by]"
                         value="{{ $row['conducted_by'] ?? '' }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
                 @endforeach
             </div>
@@ -88,31 +88,6 @@
             </div>
         </div>
 
-        <script>
-            let ldIndex = {{ count(old('ld', session('employee_step_7.ld', [[]]))) }};
-            function addLD() {
-                const list = document.getElementById('ld-list');
-                const row = document.createElement('div');
-                row.className = 'flex items-stretch border-b border-gray-300';
-                row.innerHTML = `
-                    <input type="text" name="ld[${ldIndex}][title]"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="ld[${ldIndex}][from]"
-                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="ld[${ldIndex}][to]"
-                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="ld[${ldIndex}][hours]"
-                        class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="ld[${ldIndex}][type]"
-                        class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="ld[${ldIndex}][conducted_by]"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
-                `;
-                list.appendChild(row);
-                ldIndex++;
-            }
-        </script>
-
         <!-- Navigation -->
         <div class="flex justify-between mt-8">
             <a href="{{ route('employees.create.step', 6) }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
@@ -123,4 +98,29 @@
             </button>
         </div>
     </div>
+
+    <script>
+        let ldIndex = {{ count(old('ld', session('employee_step_7.ld', [[]]))) }};
+        function addLD() {
+            const list = document.getElementById('ld-list');
+            const row = document.createElement('div');
+            row.className = 'flex items-stretch border-b border-gray-300';
+            row.innerHTML = `
+                <input type="text" name="ld[${ldIndex}][title]"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="ld[${ldIndex}][from]"
+                    class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                <input type="text" name="ld[${ldIndex}][to]"
+                    class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                <input type="text" name="ld[${ldIndex}][hours]"
+                    class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="ld[${ldIndex}][type]"
+                    class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="ld[${ldIndex}][conducted_by]"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+            `;
+            list.appendChild(row);
+            ldIndex++;
+        }
+    </script>
 </form>

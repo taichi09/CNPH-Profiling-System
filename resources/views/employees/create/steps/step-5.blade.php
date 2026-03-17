@@ -106,35 +106,6 @@
 
         </div>
 
-        <script>
-            let workIndex = {{ count(old('work', session('employee_step_5.work', [[]]))) }};
-            function addWork() {
-                const list = document.getElementById('work-list');
-                const row = document.createElement('div');
-                row.className = 'flex items-stretch border-b border-gray-300';
-                row.innerHTML = `
-                    <input type="text" name="work[${workIndex}][from]"
-                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="work[${workIndex}][to]"
-                        class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="work[${workIndex}][position]"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="work[${workIndex}][department]"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                    <input type="text" name="work[${workIndex}][monthly_salary]"
-                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="work[${workIndex}][salary_grade]"
-                        class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="work[${workIndex}][status]"
-                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="work[${workIndex}][govt_service]"
-                        class="w-16 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
-                `;
-                list.appendChild(row);
-                workIndex++;
-            }
-        </script>
-
         <!-- Navigation -->
         <div class="flex justify-between mt-8">
             <a href="{{ route('employees.create.step', 4) }}" class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
@@ -145,4 +116,33 @@
             </button>
         </div>
     </div>
+
+    <script>
+        let workIndex = {{ count(old('work', session('employee_step_5.work', [[]]))) }};
+        function addWork() {
+            const list = document.getElementById('work-list');
+            const row = document.createElement('div');
+            row.className = 'flex items-stretch border-b border-gray-300';
+            row.innerHTML = `
+                <input type="text" name="work[${workIndex}][from]"
+                    class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                <input type="text" name="work[${workIndex}][to]"
+                    class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
+                <input type="text" name="work[${workIndex}][position]"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="work[${workIndex}][department]"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="work[${workIndex}][monthly_salary]"
+                    class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="work[${workIndex}][salary_grade]"
+                    class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="work[${workIndex}][status]"
+                    class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                <input type="text" name="work[${workIndex}][govt_service]"
+                    class="w-16 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+            `;
+            list.appendChild(row);
+            workIndex++;
+        }
+    </script>
 </form>
