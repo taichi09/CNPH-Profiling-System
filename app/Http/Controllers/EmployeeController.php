@@ -235,17 +235,17 @@ class EmployeeController extends Controller
             }
 
             // --- Step 6: Voluntary Work ---
-            foreach ($s6['voluntary'] ?? [] as $row) {
-                if (!empty($row['organization'])) {
-                    VoluntaryWork::create([
-                        'employee_id' => $employeeId,
-                        'name_and_address_of_organization' => $row['organization'] ?? 'N/A',
-                        'inclusive_date_from' => $row['from'] ?? 'N/A',
-                        'inclusive_date_to' => $row['to'] ?? 'N/A',
-                        'number_of_hours' => $row['hours'] ?? 0,
-                        'position_nature_of_work' => $row['position'] ?? 'N/A',
-                    ]);
-                }
+            $voluntary = $s6['voluntary'] ?? [[]];
+            if (empty($voluntary)) $voluntary = [[]];
+            foreach ($voluntary as $row) {
+                VoluntaryWork::create([
+                    'employee_id' => $employeeId,
+                    'name_and_address_of_organization' => !empty($row['organization']) ? $row['organization'] : 'N/A',
+                    'inclusive_date_from' => !empty($row['from']) ? $row['from'] : 'N/A',
+                    'inclusive_date_to' => !empty($row['to']) ? $row['to'] : 'N/A',
+                    'number_of_hours' => !empty($row['hours']) ? $row['hours'] : 'N/A',
+                    'position_nature_of_work' => !empty($row['position']) ? $row['position'] : 'N/A',
+                ]);
             }
 
             // --- Step 7: Learning & Development ---
