@@ -292,7 +292,39 @@ class EmployeeController extends Controller
 
         Excel::import(new EmployeePdsImport, $request->file('file'));
 
-        return back()->with('success', 'All employee data imported successfully.');
+        // Regenerate IDs for all imported employees that don't have CNPH- prefix
+        $imported = PersonalInformation::where('employee_id', 'not like', 'CNPH-%')->get();
+
+        DB::transaction(function () use ($imported) {
+            foreach ($imported as $employee) {
+                $oldId = $employee->employee_id;
+
+                // Generate new unique CNPH- ID
+                do {
+                    $newId = 'CNPH-' . strtoupper(substr(str_replace('-', '', \Illuminate\Support\Str::uuid()), 0, 8));
+                } while (PersonalInformation::where('employee_id', $newId)->exists());
+
+                // Update all 8 tables
+                PersonalInformation::where('employee_id', $oldId)
+                    ->update(['employee_id' => $newId]);
+                FamilyBackground::where('employee_id', $oldId)
+                    ->update(['employee_id' => $newId]);
+                EducationalBackground::where('employee_id', $oldId)
+                    ->update(['employee_id' => $newId]);
+                CivilServiceEligibility::where('employee_id', $oldId)
+                    ->update(['employee_id' => $newId]);
+                WorkExperience::where('employee_id', $oldId)
+                    ->update(['employee_id' => $newId]);
+                VoluntaryWork::where('employee_id', $oldId)
+                    ->update(['employee_id' => $newId]);
+                LearningAndDevelopment::where('employee_id', $oldId)
+                    ->update(['employee_id' => $newId]);
+                OtherInformation::where('employee_id', $oldId)
+                    ->update(['employee_id' => $newId]);
+            }
+        });
+
+        return back()->with('success', 'All employee data imported and IDs generated successfully.');
     }
 
     public function show($id)
