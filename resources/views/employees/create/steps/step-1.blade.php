@@ -35,15 +35,18 @@
                     Name Extension <br>(Jr., Sr., II, III)
                 </span>
                 @php $nameExt = old('name_extension', session('employee_step_1.name_extension')); @endphp
-                <select name="name_extension"
+                <input type="text" name="name_extension"
+                    list="ext_options"
+                    value="{{ $nameExt }}"
+                    placeholder="Select or type"
                     class="w-60 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
-                    <option value=""></option>
-                    <option {{ $nameExt == 'Jr.' ? 'selected' : '' }}>Jr.</option>
-                    <option {{ $nameExt == 'Sr.' ? 'selected' : '' }}>Sr.</option>
-                    <option {{ $nameExt == 'II' ? 'selected' : '' }}>II</option>
-                    <option {{ $nameExt == 'III' ? 'selected' : '' }}>III</option>
-                    <option {{ $nameExt == 'IV' ? 'selected' : '' }}>IV</option>
-                </select>
+                <datalist id="ext_options">
+                    <option value="Jr.">
+                    <option value="Sr.">
+                    <option value="II">
+                    <option value="III">
+                    <option value="IV">
+                </datalist>
             </div>
 
             <!-- Middle Name -->
@@ -89,10 +92,10 @@
                         <div class="flex items-center gap-6 px-3 py-2 text-sm text-gray-700">
                             <label class="flex items-center gap-1.5 cursor-pointer">
                                 @php $sex = old('sex_at_birth', session('employee_step_1.sex_at_birth')); @endphp
-                                <input type="radio" name="sex_at_birth" value="Male" class="accent-green-700" {{ $sex == 'Male' ? 'checked' : '' }}> Male
+                                <input type="radio" name="sex_at_birth" value="MALE" class="accent-green-700" {{ $sex == 'Male' ? 'checked' : '' }}> Male
                             </label>
                             <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="sex_at_birth" value="Female" class="accent-green-700" {{ $sex == 'Female' ? 'checked' : '' }}> Female
+                                <input type="radio" name="sex_at_birth" value="FEMALE" class="accent-green-700" {{ $sex == 'Female' ? 'checked' : '' }}> Female
                             </label>
                         </div>
                     </div>
@@ -107,10 +110,10 @@
                     <div class="flex flex-row gap-1 text-sm text-gray-700">
                         <label class="flex items-center gap-1.5 cursor-pointer">
                             @php $citizenship = old('citizenship', session('employee_step_1.citizenship')); @endphp
-                            <input type="radio" name="citizenship" value="Filipino" class="accent-green-700" {{ $citizenship == 'Filipino' ? 'checked' : '' }}> Filipino
+                            <input type="radio" name="citizenship" value="FILIPINO" class="accent-green-700" {{ $citizenship == 'Filipino' ? 'checked' : '' }}> Filipino
                         </label>
                         <label class="flex items-center gap-1.5 cursor-pointer">
-                            <input type="radio" name="citizenship" value="Dual Citizenship" class="accent-green-700" {{ $citizenship == 'Dual Citizenship' ? 'checked' : '' }}> Dual Citizenship
+                            <input type="radio" name="citizenship" value="DUAL CITIZENSHIP" class="accent-green-700" {{ $citizenship == 'Dual Citizenship' ? 'checked' : '' }}> Dual Citizenship
                         </label>
                     </div>
 
@@ -118,10 +121,10 @@
                     <div class="flex gap-4 ml-28 text-[11px] text-gray-600">
                         <label class="flex items-center gap-1 cursor-pointer">
                             @php $citizenshipType = old('citizenship_type', session('employee_step_1.citizenship_type')); @endphp
-                            <input type="radio" name="citizenship_type" value="by birth" class="accent-green-700" {{ $citizenshipType == 'by birth' ? 'checked' : '' }}> by birth
+                            <input type="radio" name="citizenship_type" value="BY BIRTH" class="accent-green-700" {{ $citizenshipType == 'by birth' ? 'checked' : '' }}> by birth
                         </label>
                         <label class="flex items-center gap-1 cursor-pointer">
-                            <input type="radio" name="citizenship_type" value="by naturalization" class="accent-green-700" {{ $citizenshipType == 'by naturalization' ? 'checked' : '' }}> by naturalization
+                            <input type="radio" name="citizenship_type" value="BY NATURALIZATION" class="accent-green-700" {{ $citizenshipType == 'by naturalization' ? 'checked' : '' }}> by naturalization
                         </label>
                     </div>
 
@@ -146,23 +149,40 @@
                         <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
                             6. Civil Status
                         </span>
-                        @php $civilStatus = old('civil_status', session('employee_step_1.civil_status')); @endphp
-                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 px-3 py-2 text-sm text-gray-700">
-                            <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="civil_status" value="Single" class="accent-green-700" {{ $civilStatus == 'Single' ? 'checked' : '' }}> Single
-                            </label>
-                            <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="civil_status" value="Married" class="accent-green-700" {{ $civilStatus == 'Married' ? 'checked' : '' }}> Married
-                            </label>
-                            <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="civil_status" value="Widowed" class="accent-green-700" {{ $civilStatus == 'Widowed' ? 'checked' : '' }}> Widowed
-                            </label>
-                            <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="civil_status" value="Separated" class="accent-green-700" {{ $civilStatus == 'Separated' ? 'checked' : '' }}> Separated
-                            </label>
-                            <label class="flex items-center gap-1.5 cursor-pointer">
-                                <input type="radio" name="civil_status" value="Others" class="accent-green-700" {{ $civilStatus == 'Others' ? 'checked' : '' }}> Others
-                            </label>
+                        @php
+                            $civilStatus = old('civil_status', session('employee_step_1.civil_status'));
+                            $isOther = !in_array($civilStatus, ['Single', 'Married', 'Widowed', 'Separated', '']);
+                        @endphp
+                        <div class="px-3 py-2 text-sm text-gray-700">
+                            <div class="grid grid-cols-2 gap-x-6 gap-y-1">
+                                <!-- Column 1: Single, Widowed, Others -->
+                                <div class="flex flex-col gap-1">
+                                    <label class="flex items-center gap-1.5 cursor-pointer">
+                                        <input type="radio" name="civil_status" value="Single" class="accent-green-700" {{ $civilStatus == 'Single' ? 'checked' : '' }}> Single
+                                    </label>
+                                    <label class="flex items-center gap-1.5 cursor-pointer">
+                                        <input type="radio" name="civil_status" value="Widowed" class="accent-green-700" {{ $civilStatus == 'Widowed' ? 'checked' : '' }}> Widowed
+                                    </label>
+                                    <label class="flex items-center gap-1.5 cursor-pointer">
+                                        <input type="radio" name="civil_status" value="Others" class="accent-green-700" {{ $isOther ? 'checked' : '' }}> Other/s:
+                                    </label>
+                                </div>
+                                <!-- Column 2: Married, Separated, Others text field -->
+                                <div class="flex flex-col gap-1">
+                                    <label class="flex items-center gap-1.5 cursor-pointer">
+                                        <input type="radio" name="civil_status" value="Married" class="accent-green-700" {{ $civilStatus == 'Married' ? 'checked' : '' }}> Married
+                                    </label>
+                                    <label class="flex items-center gap-1.5 cursor-pointer">
+                                        <input type="radio" name="civil_status" value="Separated" class="accent-green-700" {{ $civilStatus == 'Separated' ? 'checked' : '' }}> Separated
+                                    </label>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <input type="text" name="civil_status_other"
+                                            value="{{ $isOther ? $civilStatus : '' }}"
+                                            placeholder="If others, specify"
+                                            class="w-full border-b border-gray-400 outline-none bg-transparent text-xs py-0.5 text-gray-600">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -253,8 +273,20 @@
                             9. Blood Type
                         </span>
                         <input type="text" name="blood_type"
+                            list="blood_type_options"
                             value="{{ old('blood_type', session('employee_step_1.blood_type')) }}"
+                            placeholder="Select or type"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
+                        <datalist id="blood_type_options">
+                            <option value="A+">
+                            <option value="A-">
+                            <option value="B+">
+                            <option value="B-">
+                            <option value="AB+">
+                            <option value="AB-">
+                            <option value="O+">
+                            <option value="O-">
+                        </datalist>
                     </div>
 
                     <!-- UMID -->
@@ -291,7 +323,14 @@
 
                 <!-- Right Side: Permanent Address spanning all 4 rows -->
                 <div class="w-[50%] shrink-0 px-3 py-2 flex flex-col gap-2">
-                    <span class="text-gray-600 uppercase font-semibold tracking-wide">18. Permanent Address</span>
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-600 uppercase font-semibold tracking-wide">18. Permanent Address</span>
+                        <label class="flex items-center gap-1.5 cursor-pointer text-[10px] text-gray-500 normal-case font-normal">
+                            <input type="checkbox" id="same_as_residential" class="accent-green-700"
+                                onchange="copyResidentialToPermanent(this)">
+                            Same as Residential Address
+                        </label>
+                    </div>
 
                     <div class="grid grid-cols-2 gap-x-3 gap-y-2">
                         <div>
@@ -427,4 +466,39 @@
             </button>
         </div>
     </div>
+
+    <script>
+        function copyResidentialToPermanent(checkbox) {
+            const fields = ['house', 'street', 'subdivision', 'barangay', 'city', 'province', 'zip'];
+            fields.forEach(function(field) {
+                const res = document.querySelector(`input[name="res_${field}"]`);
+                const perm = document.querySelector(`input[name="perm_${field}"]`);
+                if (checkbox.checked) {
+                    perm.value = res.value;
+                    perm.readOnly = true;
+                } else {
+                    perm.value = '';
+                    perm.readOnly = false;
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const fields = ['house', 'street', 'subdivision', 'barangay', 'city', 'province', 'zip'];
+            const allMatch = fields.every(function(field) {
+                const res = document.querySelector(`input[name="res_${field}"]`);
+                const perm = document.querySelector(`input[name="perm_${field}"]`);
+                return res && perm && res.value !== '' && res.value === perm.value;
+            });
+
+            if (allMatch) {
+                const checkbox = document.getElementById('same_as_residential');
+                checkbox.checked = true;
+                fields.forEach(function(field) {
+                    const perm = document.querySelector(`input[name="perm_${field}"]`);
+                    if (perm) perm.readOnly = true;
+                });
+            }
+        });
+    </script>
 </form>

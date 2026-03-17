@@ -6,7 +6,7 @@
             <!-- Header -->
             <div class="p-4 sm:p-6 border-b border-gray-200">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-                    <h2 class="text-xl font-bold text-green-800">All Employees</h2>
+                    <h2 class="text-xl font-bold text-green-800">Employee Records</h2>
                     <div class="flex flex-col sm:flex-row gap-3">
                         {{-- Filter Button --}}
                         <button type="button" class="py-2 px-4 inline-flex items-center justify-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
@@ -45,10 +45,10 @@
                         {{ $tab === 'active'
                             ? 'border-green-700 text-green-700'
                             : 'border-transparent text-gray-500 hover:text-gray-700' }}">
-                        All Employees
+                        Active
                         <span class="ml-1 px-2 py-0.5 rounded-full text-xs
                             {{ $tab === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
-                            {{ $activeCount }}
+                            {{ $activeCount > 99 ? '99+' : $activeCount }}
                         </span>
                     </a>
                     <a href="{{ route('employees.index', ['tab' => 'resigned']) }}"
@@ -59,7 +59,7 @@
                         Resigned
                         <span class="ml-1 px-2 py-0.5 rounded-full text-xs
                             {{ $tab === 'resigned' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
-                            {{ $resignedCount }}
+                            {{ $resignedCount > 99 ? '99+' : $resignedCount }}
                         </span>
                     </a>
                 </nav>

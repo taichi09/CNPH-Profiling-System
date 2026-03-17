@@ -59,7 +59,29 @@ class EmployeeController extends Controller
 
     public function storeStep(Request $request, $step)
     {
-        $request->session()->put("employee_step_{$step}", $request->except('_token'));
+        $data = $request->except('_token');
+
+        // Build combined citizenship value
+        $citizenshipParts = array_filter([
+            $data['citizenship'] ?? '',
+            $data['citizenship_type'] ?? '',
+            $data['citizenship_country'] ?? '',
+        ]);
+        $data['citizenship'] = implode('//', $citizenshipParts) ?: 'N/A';
+
+        // Remove the sub-fields since they're now merged
+        unset($data['citizenship_type']);
+        unset($data['citizenship_country']);
+
+        // Merge civil_status_other into civil_status if Others is selected
+        if (isset($data['civil_status']) && $data['civil_status'] === 'Others') {
+            if (!empty($data['civil_status_other'])) {
+                $data['civil_status'] = $data['civil_status_other'];
+            }
+        }
+        unset($data['civil_status_other']);
+
+        $request->session()->put("employee_step_{$step}", $data);
 
         if ((int)$step < 8) {
             return redirect()->route('employees.create.step', (int)$step + 1);
@@ -85,14 +107,14 @@ class EmployeeController extends Controller
         // Helper to build full address string from parts
         $buildAddress = function (array $data, string $prefix): string {
             $parts = array_filter([
-                $data["{$prefix}_house"] ?? '',
-                $data["{$prefix}_street"] ?? '',
-                $data["{$prefix}_subdivision"] ?? '',
-                $data["{$prefix}_barangay"] ?? '',
-                $data["{$prefix}_city"] ?? '',
-                $data["{$prefix}_province"] ?? '',
+                $data["{$prefix}_house"] ?? 'N/A',
+                $data["{$prefix}_street"] ?? 'N/A',
+                $data["{$prefix}_subdivision"] ?? 'N/A',
+                $data["{$prefix}_barangay"] ?? 'N/A',
+                $data["{$prefix}_city"] ?? 'N/A',
+                $data["{$prefix}_province"] ?? 'N/A',
             ]);
-            return implode(', ', $parts) ?: 'N/A';
+            return implode('//', $parts) ?: 'N/A';
         };
 
         DB::transaction(function () use (
@@ -109,8 +131,8 @@ class EmployeeController extends Controller
                 'place_of_birth' => $s1['place_of_birth'] ?? 'N/A',
                 'sex_at_birth' => $s1['sex_at_birth'] ?? 'N/A',
                 'civil_status' => $s1['civil_status'] ?? 'N/A',
-                'height' => $s1['height'] ?? 0,
-                'weight' => $s1['weight'] ?? 0,
+                'height' => $s1['height'] ?? 'N/A',
+                'weight' => $s1['weight'] ?? 'N/A',
                 'blood_type' => $s1['blood_type'] ?? 'N/A',
                 'umid_id_no' => $s1['umid'] ?? 'N/A',
                 'pagibig_id_no' => $s1['pagibig'] ?? 'N/A',

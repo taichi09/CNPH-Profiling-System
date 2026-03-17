@@ -142,11 +142,14 @@
                     <select name="employment_status"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
                         <option value="">-- Select --</option>
+                        <option {{ $empStatus == 'Permanent' ? 'selected' : '' }}>Permanent</option>
+                        <option {{ $empStatus == 'Contract Of Service' ? 'selected' : '' }}>Contract of Service</option>
                         <option {{ $empStatus == 'Regular' ? 'selected' : '' }}>Regular</option>
                         <option {{ $empStatus == 'Casual' ? 'selected' : '' }}>Casual</option>
                         <option {{ $empStatus == 'Contractual' ? 'selected' : '' }}>Contractual</option>
                         <option {{ $empStatus == 'Job Order' ? 'selected' : '' }}>Job Order</option>
                         <option {{ $empStatus == 'Coterminous' ? 'selected' : '' }}>Coterminous</option>
+                        <option {{ $empStatus == 'Resigned' ? 'selected' : '' }}>Resigned</option>
                     </select>
                 </div>
 
