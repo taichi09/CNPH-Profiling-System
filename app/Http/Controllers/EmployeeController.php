@@ -218,20 +218,20 @@ class EmployeeController extends Controller
             }
 
             // --- Step 5: Work Experience ---
-            foreach ($s5['work'] ?? [] as $row) {
-                if (!empty($row['position'])) {
-                    WorkExperience::create([
-                        'employee_id' => $employeeId,
-                        'inclusive_date_from' => $row['from'] ?? 'N/A',
-                        'inclusive_date_to' => $row['to'] ?? 'N/A',
-                        'position_title' => $row['position'] ?? 'N/A',
-                        'department_agency_office_company' => $row['department'] ?? 'N/A',
-                        'monthly_salary' => $row['monthly_salary'] ?? 'N/A',
-                        'salary_grade' => $row['salary_grade'] ?? 'N/A',
-                        'status_of_appointment' => $row['status'] ?? 'N/A',
-                        'govt_service' => $row['govt_service'] ?? 'N/A',
-                    ]);
-                }
+            $work = $s5['work'] ?? [[]];
+            if (empty($work)) $work = [[]];
+            foreach ($work as $row) {
+                WorkExperience::create([
+                    'employee_id' => $employeeId,
+                    'inclusive_date_from' => !empty($row['from']) ? $row['from'] : 'N/A',
+                    'inclusive_date_to' => !empty($row['to']) ? $row['to'] : 'N/A',
+                    'position_title' => !empty($row['position']) ? $row['position'] : 'N/A',
+                    'department_agency_office_company' => !empty($row['department']) ? $row['department'] : 'N/A',
+                    'monthly_salary' => !empty($row['monthly_salary']) ? $row['monthly_salary'] : 'N/A',
+                    'salary_grade' => !empty($row['salary_grade']) ? $row['salary_grade'] : 'N/A',
+                    'status_of_appointment' => !empty($row['status']) ? $row['status'] : 'N/A',
+                    'govt_service' => !empty($row['govt_service']) ? $row['govt_service'] : 'N/A',
+                ]);
             }
 
             // --- Step 6: Voluntary Work ---
