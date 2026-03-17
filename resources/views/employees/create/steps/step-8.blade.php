@@ -166,7 +166,7 @@
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.name = `skills[${skillIndex}]`;
-                input.className = 'w-full px-2 py-2 outline-none focus:bg-gray-50 bg-white text-sm border-t border-gray-300';
+                input.className = 'w-full px-2 py-2 outline-none focus:bg-gray-50 bg-white text-sm border-t border-gray-300 border-gray-300 text-center';
                 list.appendChild(input);
                 skillIndex++;
             }
@@ -176,7 +176,7 @@
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.name = `distinctions[${distinctionIndex}]`;
-                input.className = 'w-full px-2 py-2 outline-none focus:bg-gray-50 bg-white text-sm border-t border-gray-300';
+                input.className = 'w-full px-2 py-2 outline-none focus:bg-gray-50 bg-white text-sm border-t border-gray-300 border-gray-300 text-center';
                 list.appendChild(input);
                 distinctionIndex++;
             }
@@ -186,7 +186,7 @@
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.name = `memberships[${membershipIndex}]`;
-                input.className = 'w-full px-2 py-2 outline-none focus:bg-gray-50 bg-white text-sm border-t border-gray-300';
+                input.className = 'w-full px-2 py-2 outline-none focus:bg-gray-50 bg-white text-sm border-t border-gray-300 border-gray-300 text-center';
                 list.appendChild(input);
                 membershipIndex++;
             }
