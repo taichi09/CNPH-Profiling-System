@@ -97,12 +97,10 @@ class EmployeeController extends Controller
         $s7 = $request->session()->get('employee_step_7', []);
         $s8 = $request->session()->get('employee_step_8', []);
 
-        // Generate employee_id
-        $latest = PersonalInformation::orderBy('employee_id', 'desc')->first();
-        $nextNumber = $latest
-            ? (int) filter_var($latest->employee_id, FILTER_SANITIZE_NUMBER_INT) + 1
-            : 1;
-        $employeeId = (string) $nextNumber;
+        // Generate unique employee_id
+        do {
+            $employeeId = 'CNPH-' . strtoupper(substr(str_replace('-', '', \Illuminate\Support\Str::uuid()), 0, 8));
+        } while (PersonalInformation::where('employee_id', $employeeId)->exists());
 
         // Helper to build full address string from parts
         $buildAddress = function (array $data, string $prefix): string {
