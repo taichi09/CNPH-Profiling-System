@@ -15,6 +15,10 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+                'pds-arial': ['Arial', 'sans-serif'],
+                'pds-arial-black': ['"Arial Black"', 'Arial', 'sans-serif'],
+                'pds-arial-narrow': ['"Arial Narrow"', 'Arial', 'sans-serif'],
+                'pds-calibri': ['Calibri', '"Trebuchet MS"', 'sans-serif'],
             },
         },
     },

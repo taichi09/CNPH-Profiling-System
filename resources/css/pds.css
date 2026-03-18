@@ -1,0 +1,263 @@
+/* ── Reset ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 7.5pt;
+    color: #000;
+}
+
+/* ── Action Bar ── */
+.action-bar {
+    width: 100%;
+    margin: 0 auto 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #d1d5db;
+    background: white;
+    color: #374151;
+}
+.btn-green {
+    background: #15803d;
+    color: white;
+    border: none;
+}
+.btn-green:hover { background: #166534; }
+
+/* ── PDS Page ── */
+.pds-page {
+    width: 1100px;
+    min-width: 1100px;
+    margin: 0 auto 24px;
+    background: white;
+    border: 2px solid #000;
+    overflow: hidden;
+}
+
+/* ── PDS Header ── */
+.pds-header {
+    border-bottom: 1px solid #000;
+}
+.pds-header-top {
+    display: flex;
+    align-items: center;
+    padding: 6px 4px 4px;
+}
+.pds-header-left {
+    font-size: 7pt;
+    line-height: 1.4;
+    min-width: 120px;
+    align-self: flex-start;
+}
+
+.pds-header-left .form-no {
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+}
+.pds-header-left .revised {
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: normal;
+}
+
+.pds-header-left .revised {
+    font-style: italic;
+    font-size: 9pt;
+}
+.pds-header-center {
+    flex: 1;
+    text-align: center;
+}
+
+.pds-title {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 22pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #000;
+    letter-spacing: 1px;
+}
+
+.pds-warning-block {
+    padding: 3px 4px 0;
+}
+
+.pds-warning {
+    font-family: Arial, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.pds-guide {
+    font-family: Arial, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.pds-instruction-row {
+    display: flex;
+    align-items: center;
+    padding: 2px 4px;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-size: 9pt;
+    border-bottom: 2px solid #000;
+    margin-top: -4px;
+}
+
+.pds-instruction-row .do-not {
+    font-weight: bold;
+    margin-left: 4px;
+}
+
+/* ── Section Headers ── */
+.section-header {
+    background: #969696;
+    color: #fff;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0px 6px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #000;
+}
+
+/* ── PDS Tables ── */
+.pds-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 7pt;
+}
+.pds-table td,
+.pds-table th {
+    border: 1px solid #000;
+    padding: 2px 4px;
+    vertical-align: top;
+}
+.pds-table th {
+    background: #e8e8e8;
+    font-size: 6pt;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+/* ── Cell Label / Value ── */
+.cell-label {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-size: 8pt;
+    font-weight: normal;
+    color: #444;
+    text-transform: uppercase;
+    display: block;
+    line-height: 1.2;
+}
+
+.cell-value {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    display: block;
+    min-height: 10px;
+    line-height: 1.4;
+}
+
+.cell-shaded {
+    background: #f0f0f0;
+}
+
+/* ── Signature Row ── */
+.sig-row {
+    display: flex;
+    border-top: 1px solid #000;
+}
+.sig-cell {
+    flex: 1;
+    padding: 4px 6px;
+    font-size: 6pt;
+    font-style: italic;
+}
+.sig-cell + .sig-cell {
+    border-left: 1px solid #000;
+}
+.sig-line {
+    border-bottom: 1px solid #000;
+    min-height: 18px;
+    margin-bottom: 2px;
+}
+
+/* ── Page Number ── */
+.page-num {
+    text-align: center;
+    font-size: 6pt;
+    font-style: italic;
+    padding: 2px 5px;
+    border-top: 1px solid #000;
+    font-weight: bold;
+}
+
+/* ── Checkbox inline ── */
+.pds-checkbox {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border: 1px solid #000;
+    margin-right: 3px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 9px;
+    font-size: 7pt;
+}
+
+/* ── Continue note ── */
+.continue-note {
+    font-size: 6pt;
+    font-style: italic;
+    padding: 2px 4px;
+    border-top: 1px solid #000;
+}
+
+/* ── Remove inner borders for name label cells ── */
+.pds-table td.label-cell {
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+}
+
+/* ── Print ── */
+@media print {
+    .action-bar { display: none !important; }
+    body { margin: 0; }
+    .pds-page {
+        margin: 0;
+        border: none;
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
+    .pds-page:last-child { page-break-after: avoid; }
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+}
