@@ -245,9 +245,9 @@ body {
     border-right: none;
 }
 
-.pds-table {
+/* .pds-table {
     table-layout: fixed;
-}
+} */
 
 /* ── Print ── */
 @media print {

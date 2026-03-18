@@ -144,7 +144,7 @@
                                 Male
                             </span>
                         </td>
-                        <td style="border:none; text-align:right; padding-right: 35px; width:50%;">
+                        <td style="border:none; text-align:right; padding-right: 23.5px; width:50%;">
                             <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">
                                     {{ strtolower(trim($personal->sex_at_birth ?? '')) === 'female' ? '✓' : '' }}
@@ -414,18 +414,194 @@
             </td>
         </tr>
 
-    </table>
+        {{-- ── Section Header Row: Family Background ── --}}
+        <tr>
+            <td colspan="10" style="padding:0; border:none;">
+                <div class="section-header">II.&nbsp;Family Background</div>
+            </td>
+        </tr>
 
-    <div class="section-header">II.&nbsp;Family Background</div>
+        {{-- Row 1: Spouse Surname | Children headers --}}
+        <tr>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">22.</span></td>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">Spouse's Surname</span></td>
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->spouse_surname ?? null) }}</span>
+            </td>
+            <td colspan="2" style="background:#EAEAEA;" class="label-cell">
+                <span class="cell-label">23. Name of Children (Write full name and list all)</span>
+            </td>
+            <td colspan="2" style="background:#EAEAEA; border-left:1px solid #000;" class="label-cell">
+                <span class="cell-label">Date of Birth (dd/mm/yyyy)</span>
+            </td>
+        </tr>
 
-    <table class="pds-table">
+        {{-- Row 2: First Name | Name Extension | Child 1 --}}
+        <tr>
+            <td style="background:#EAEAEA;" class="label-cell"></td>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">First Name</span></td>
+            <td colspan="2" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->spouse_first_name ?? null) }}</span>
+            </td>
+            <td colspan="2" style="background:#EAEAEA; border-right:none;" class="label-cell">
+                <span class="cell-label" style="font-size:7pt;">Name Extension (Jr., Sr.)</span>
+                <span class="cell-value" style="font-size:9pt;">{{ $na($family->spouse_name_extension ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+                {{ isset($childNames[0]) && $na($childNames[0]) !== 'N/A' ? $childNames[0] : '' }}
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+                {{ isset($childDobs[0]) && $na($childDobs[0]) !== 'N/A' ? $childDobs[0] : '' }}
+            </td>
+        </tr>
 
-    </table>
+        {{-- Row 3: Middle Name | Child 2 --}}
+        <tr>
+            <td style="background:#EAEAEA;" class="label-cell"></td>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">Middle Name</span></td>
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->spouse_middle_name ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+                {{ isset($childNames[1]) && $na($childNames[1]) !== 'N/A' ? $childNames[1] : '' }}
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+                {{ isset($childDobs[1]) && $na($childDobs[1]) !== 'N/A' ? $childDobs[1] : '' }}
+            </td>
+        </tr>
 
-    <div class="section-header">III.&nbsp;Educational Background</div>
+        {{-- Occupation --}}
+        <tr>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Occupation</span></td>
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->occupation ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+        </tr>
 
-    <table class="pds-table">
-        
+        {{-- Employer/Business Name --}}
+        <tr>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Employer/Business Name</span></td>
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->employer_business_name ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+        </tr>
+
+        {{-- Business Address --}}
+        <tr>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Business Address</span></td>
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->business_address ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+        </tr>
+
+        {{-- Telephone No. --}}
+        <tr>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Telephone No.</span></td>
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->telephone_no ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+        </tr>
+
+        {{-- Father's Surname --}}
+        <tr>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">24.</span></td>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">Father's Surname</span></td>            
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->father_surname ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+        </tr>
+
+        {{-- Father's First Name + Name Extension --}}
+        <tr>
+            <td style="background:#EAEAEA;" class="label-cell"></td>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">First Name</span></td>
+            <td colspan="2" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->father_first_name ?? null) }}</span>
+            </td>
+            <td colspan="2" style="background:#EAEAEA; border-right:none;" class="label-cell">
+                <span class="cell-label" style="font-size:7pt;">Name Extension (Jr., Sr.)</span>
+                <span class="cell-value" style="font-size:9pt;">{{ $na($family->father_name_extension ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+        </tr>
+
+        {{-- Father's Middle Name --}}
+        <tr>
+            <td style="background:#EAEAEA;" class="label-cell"></td>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">Middle Name</span></td>
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->father_middle_name ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+        </tr>
+
+        {{-- Mother's Maiden Name header --}}
+        <tr>
+            <td style="background:#EAEAEA; border-top:1px solid #000;" class="label-cell"><span class="cell-label">25.</span></td>
+            <td colspan="5" style="background:#EAEAEA; border-top:1px solid #000;" class="label-cell">
+                <span class="cell-label">Mother's Maiden Name</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+        </tr>
+
+        {{-- Mother's Surname --}}
+        <tr>
+            <td style="background:#EAEAEA;" class="label-cell"></td>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">Surname</span></td>
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->mother_surname ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+        </tr>
+
+        {{-- Mother's First Name --}}
+        <tr>
+            <td style="background:#EAEAEA;" class="label-cell"></td>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">First Name</span></td>
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->mother_first_name ?? null) }}</span>
+            </td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+            <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
+        </tr>
+
+        {{-- Mother's Middle Name + Continue note --}}
+        <tr>
+            <td style="background:#EAEAEA;" class="label-cell"></td>
+            <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">Middle Name</span></td>
+            <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
+                <span class="cell-value">{{ $na($family->mother_middle_name ?? null) }}</span>
+            </td>
+            <td colspan="4" style="border-left:1px solid #000; padding:6px 4px; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-style:italic; font-weight:bold; background:#EAEAEA;">
+                (Continue on separate sheet if necessary)
+            </td>
+        </tr>
+
+        {{-- ── Section Header Row: Educational Background ── --}}
+        <tr>
+            <td colspan="10" style="padding:0; border:none;">
+                <div class="section-header">III.&nbsp;Educational Background</div>
+            </td>
+        </tr>
+
     </table>
 
 </div>
