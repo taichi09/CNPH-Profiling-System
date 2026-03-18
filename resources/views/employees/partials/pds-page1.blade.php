@@ -280,6 +280,140 @@
             </td>
         </tr>
 
+        {{-- Blood Type | Permanent Address (rowspan 3) --}}
+        <tr>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">9.</span></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Blood Type</span></td>
+            <td colspan="2" style="text-align:center; vertical-align:middle;">
+                <span class="cell-value">{{ $na($personal->blood_type) }}</span>
+            </td>
+            {{-- Permanent Address label rowspan 3 --}}
+            <td colspan="2" rowspan="3" style="background:#EAEAEA; vertical-align:top; padding:2px 4px; border-top:1px solid #000;" class="label-cell">
+                <span class="cell-label">18. Permanent Address</span>
+            </td>
+            {{-- House/Lot No. + Street --}}
+            <td colspan="4" style="padding:0;">
+                <table style="width:100%; border-collapse:collapse; border-top:1px solid #d0d0d0;">
+                    <tr>
+                        <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['house']) !== 'N/A' ? $permAddr['house'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">House/Block/Lot No.</span>
+                        </td>
+                        <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['street']) !== 'N/A' ? $permAddr['street'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Street</span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        {{-- UMID | Subdivision + Barangay --}}
+        <tr>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">10.</span></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">UMID ID No.</span></td>
+            <td colspan="2" style="text-align:center; vertical-align:middle;">
+                <span class="cell-value">{{ $na($personal->umid_id_no) }}</span>
+            </td>
+            <td colspan="4" style="padding:0;">
+                <table style="width:100%; border-collapse:collapse; border-top:1px solid #d0d0d0;">
+                    <tr>
+                        <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['subdivision']) !== 'N/A' ? $permAddr['subdivision'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Subdivision/Village</span>
+                        </td>
+                        <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['barangay']) !== 'N/A' ? $permAddr['barangay'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Barangay</span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        {{-- Pag-IBIG | City + Province --}}
+        <tr>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">11.</span></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Pag-IBIG ID No.</span></td>
+            <td colspan="2" style="text-align:center; vertical-align:middle;">
+                <span class="cell-value">{{ $na($personal->pagibig_id_no) }}</span>
+            </td>
+            <td colspan="4" style="padding:0;">
+                <table style="width:100%; border-collapse:collapse; border-top:1px solid #d0d0d0;">
+                    <tr>
+                        <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['city']) !== 'N/A' ? $permAddr['city'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">City/Municipality</span>
+                        </td>
+                        <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['province']) !== 'N/A' ? $permAddr['province'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Province</span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        {{-- PhilHealth | ZIP Code --}}
+        <tr>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">12.</span></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">PhilHealth No.</span></td>
+            <td colspan="2" style="text-align:center; vertical-align:middle;">
+                <span class="cell-value">{{ $na($personal->philhealth_id_no) }}</span>
+            </td>
+            <td colspan="2" style="background:#EAEAEA; vertical-align:middle; padding:2px 4px; text-align:center;" class="label-cell">
+                <span class="cell-label">ZIP Code</span>
+            </td>
+            <td colspan="4" style="vertical-align:middle; text-align:center; padding-top:8px; padding-bottom:8px;">
+                <span class="cell-value" style="display:block; text-align:center;">{{ $na($personal->permanent_zip_code) }}</span>
+            </td>
+        </tr>
+
+        {{-- PhilSys | Telephone --}}
+        <tr>
+            <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">13.</span></td>
+            <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">PhilSys Number (PSN):</span></td>
+            <td colspan="2" style="text-align:center; vertical-align:middle;">
+                <span class="cell-value">{{ $na($personal->philsys_no) }}</span>
+            </td>
+            <td colspan="2" style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell">
+                <span class="cell-label">19. Telephone No.</span>
+            </td>
+            <td colspan="4" style="text-align:center; vertical-align:middle;">
+                <span class="cell-value">{{ $na($personal->telephone_no) }}</span>
+            </td>
+        </tr>
+
+        {{-- TIN | Mobile --}}
+        <tr>
+            <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">14.</span></td>
+            <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">TIN No.</span></td>
+            <td colspan="2" style="text-align:center; vertical-align:middle;">
+                <span class="cell-value">{{ $na($personal->tin_no) }}</span>
+            </td>
+            <td colspan="2" style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell">
+                <span class="cell-label">20. Mobile No.</span>
+            </td>
+            <td colspan="4" style="text-align:center; vertical-align:middle;">
+                <span class="cell-value">{{ $na($personal->mobile_no) }}</span>
+            </td>
+        </tr>
+
+        {{-- Agency Employee No. | Email --}}
+        <tr>
+            <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">15.</span></td>
+            <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Agency Employee No.</span></td>
+            <td colspan="2" style="text-align:center; vertical-align:middle;">
+                <span class="cell-value">{{ $na($personal->agency_employee_no) }}</span>
+            </td>
+            <td colspan="2" style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell">
+                <span class="cell-label">21. E-mail Address (if any)</span>
+            </td>
+            <td colspan="4" style="text-align:center; vertical-align:middle;">
+                <span class="cell-value">{{ $na($personal->email_address) }}</span>
+            </td>
+        </tr>
+
     </table>
 
     {{-- <div class="section-header">II.&nbsp;&nbsp;Family Background</div>
