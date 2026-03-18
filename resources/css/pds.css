@@ -245,6 +245,10 @@ body {
     border-right: none;
 }
 
+.pds-table {
+    table-layout: fixed;
+}
+
 /* ── Print ── */
 @media print {
     .action-bar { display: none !important; }
