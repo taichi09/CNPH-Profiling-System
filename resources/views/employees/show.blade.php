@@ -51,7 +51,7 @@
                         'province' => $parts[5] ?? 'N/A',
                     ];
                 };
-                $resAddr  = $parseAddress($personal->residential_address ?? '');
+                $resAddr= $parseAddress($personal->residential_address ?? '');
                 $permAddr = $parseAddress($personal->permanent_address ?? '');
             @endphp
 

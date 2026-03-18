@@ -419,6 +419,12 @@
     <div class="section-header">II.&nbsp;Family Background</div>
 
     <table class="pds-table">
+
+    </table>
+
+    <div class="section-header">III.&nbsp;Educational Background</div>
+
+    <table class="pds-table">
         
     </table>
 
