@@ -213,11 +213,11 @@
                     <tr style="border-top:1px solid #d0d0d0;">
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['house']) !== 'N/A' ? $resAddr['house'] : '' }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; margin-top:2px; padding-top:1px;">House/Block/Lot No.</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">House/Block/Lot No.</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['street']) !== 'N/A' ? $resAddr['street'] : '' }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; margin-top:2px; padding-top:1px;">Street</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Street</span>
                         </td>
                     </tr>
                 </table>
@@ -231,11 +231,11 @@
                     <tr style="border-top:1px solid #d0d0d0;">
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['subdivision']) !== 'N/A' ? $resAddr['subdivision'] : '' }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; margin-top:2px; padding-top:1px;">Subdivision/Village</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Subdivision/Village</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['barangay']) !== 'N/A' ? $resAddr['barangay'] : '' }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; margin-top:2px; padding-top:1px;">Barangay</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Barangay</span>
                         </td>
                     </tr>
                 </table>
@@ -254,11 +254,11 @@
                     <tr style="border-top:1px solid #d0d0d0;">
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['city']) !== 'N/A' ? $resAddr['city'] : '' }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; margin-top:2px; padding-top:1px;">City/Municipality</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">City/Municipality</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['province']) !== 'N/A' ? $resAddr['province'] : '' }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; margin-top:2px; padding-top:1px;">Province</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Province</span>
                         </td>
                     </tr>
                 </table>
@@ -373,13 +373,13 @@
         <tr>
             <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">13.</span></td>
             <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">PhilSys Number (PSN):</span></td>
-            <td colspan="2" style="text-align:center; vertical-align:middle;">
+            <td colspan="2" style="text-align:center; vertical-align:middle; padding-top:8px; padding-bottom:8px;">
                 <span class="cell-value">{{ $na($personal->philsys_no) }}</span>
             </td>
             <td colspan="2" style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell">
                 <span class="cell-label">19. Telephone No.</span>
             </td>
-            <td colspan="4" style="text-align:center; vertical-align:middle;">
+            <td colspan="4" style="text-align:center; vertical-align:middle; padding-top:8px; padding-bottom:8px;">
                 <span class="cell-value">{{ $na($personal->telephone_no) }}</span>
             </td>
         </tr>
@@ -388,13 +388,13 @@
         <tr>
             <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">14.</span></td>
             <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">TIN No.</span></td>
-            <td colspan="2" style="text-align:center; vertical-align:middle;">
+            <td colspan="2" style="text-align:center; vertical-align:middle; padding-top:8px; padding-bottom:8px;">
                 <span class="cell-value">{{ $na($personal->tin_no) }}</span>
             </td>
             <td colspan="2" style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell">
                 <span class="cell-label">20. Mobile No.</span>
             </td>
-            <td colspan="4" style="text-align:center; vertical-align:middle;">
+            <td colspan="4" style="text-align:center; vertical-align:middle; padding-top:8px; padding-bottom:8px;">
                 <span class="cell-value">{{ $na($personal->mobile_no) }}</span>
             </td>
         </tr>
@@ -403,13 +403,13 @@
         <tr>
             <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">15.</span></td>
             <td style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Agency Employee No.</span></td>
-            <td colspan="2" style="text-align:center; vertical-align:middle;">
+            <td colspan="2" style="text-align:center; vertical-align:middle; padding-top:8px; padding-bottom:8px;">
                 <span class="cell-value">{{ $na($personal->agency_employee_no) }}</span>
             </td>
             <td colspan="2" style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell">
                 <span class="cell-label">21. E-mail Address (if any)</span>
             </td>
-            <td colspan="4" style="text-align:center; vertical-align:middle;">
+            <td colspan="4" style="text-align:center; vertical-align:middle; padding-top:8px; padding-bottom:8px;">
                 <span class="cell-value">{{ $na($personal->email_address) }}</span>
             </td>
         </tr>
