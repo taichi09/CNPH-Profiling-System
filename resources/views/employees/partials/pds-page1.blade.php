@@ -144,7 +144,7 @@
                                 Male
                             </span>
                         </td>
-                        <td style="border:none; text-align:right; padding-right: 39px; width:50%;">
+                        <td style="border:none; text-align:right; padding-right: 35px; width:50%;">
                             <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">
                                     {{ strtolower(trim($personal->sex_at_birth ?? '')) === 'female' ? '✓' : '' }}
@@ -410,7 +410,7 @@
                 <span class="cell-label">21. E-mail Address (if any)</span>
             </td>
             <td colspan="4" style="text-align:center; vertical-align:middle; padding-top:8px; padding-bottom:8px;">
-                <span class="cell-value">{{ $na($personal->email_address) }}</span>
+                <span class="cell-value" style="color:blue; text-decoration:underline;">{{ $na($personal->email_address) }}</span>
             </td>
         </tr>
 
