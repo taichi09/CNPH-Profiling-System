@@ -722,7 +722,7 @@
 
         {{-- Continue note --}}
         <tr>
-            <td colspan="10" style="padding:2px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; font-weight:bold; color:#ff0202; vertical-align:middle; text-align:center;">
+            <td colspan="10" style="padding:2px 4px; background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; font-weight:bold; color:#ff0202; vertical-align:middle; text-align:center;">
                 (Continue on separate sheet if necessary)
             </td>
         </tr>
