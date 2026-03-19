@@ -632,7 +632,7 @@
             </td>
             {{-- If 12 or fewer children: show continue note as one merged cell --}}
             @if(count($childNames) <= 12)
-                <td colspan="4" style="border-left:1px solid #000; padding:6px 4px; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-style:italic; font-weight:bold; background:#EAEAEA;">
+                <td colspan="4" style="border-left:1px solid #000; padding:6px 4px; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-style:italic; font-weight:bold; background:#EAEAEA; color:#ff0202;">
                     (Continue on separate sheet if necessary)
                 </td>
             @else
@@ -666,6 +666,64 @@
         <tr>
             <td colspan="10" style="padding:0; border:none;">
                 <div class="section-header">III.&nbsp;Educational Background</div>
+            </td>
+        </tr>
+
+        {{-- Education Table Header --}}
+        <tr>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:3%; border-right:none;">26.</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:10%; border-left:none;">LEVEL</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:20%;">NAME OF SCHOOL<br><span style="font-style:italic; font-weight:normal;">(Write in full)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:20%;">BASIC EDUCATION/DEGREE/COURSE<br><span style="font-style:italic; font-weight:normal;">(Write in full)</span></td>
+            <td colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:12%;">PERIOD OF ATTENDANCE</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:12%;">HIGHEST LEVEL/<br>UNITS EARNED<br><span style="font-style:italic; font-weight:normal;">(if not graduated)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:10%;">YEAR<br>GRADUATED</td>
+            <td rowspan="2" colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:13%;">SCHOLARSHIP/<br>ACADEMIC HONORS<br>RECEIVED</td>
+        </tr>
+        <tr>
+            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">From</td>
+            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">To</td>
+        </tr>
+
+        {{-- Education rows by level --}}
+        @foreach($levelOrder as $level)
+            @php $rows = $eduByLevel[$level] ?? [null]; @endphp
+            @foreach($rows as $idx => $e)
+                <tr>
+                    @if($idx === 0)
+                        <td colspan="2" rowspan="{{ count($rows) }}" style="background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; vertical-align:middle; padding:4px 10px; text-align:left; text-uppercase;">
+                            {{ $level }}
+                        </td>
+                    @endif
+                    <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                        {{ $e ? $na($e->name_of_school) : '' }}
+                    </td>
+                    <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                        {{ $e ? $na($e->basic_education) : '' }}
+                    </td>
+                    <td style="text-align:center; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                        {{ $e ? $na($e->period_of_attendance_from) : '' }}
+                    </td>
+                    <td style="text-align:center; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                        {{ $e ? $na($e->period_of_attendance_to) : '' }}
+                    </td>
+                    <td style="text-align:center; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                        {{ $e ? $na($e->highest_level) : '' }}
+                    </td>
+                    <td style="text-align:center; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                        {{ $e ? $na($e->year_graduated) : '' }}
+                    </td>
+                    <td colspan="2" style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                        {{ $e ? $na($e->scholarship_academic_honors_recieved) : '' }}
+                    </td>
+                </tr>
+            @endforeach
+        @endforeach
+
+        {{-- Continue note --}}
+        <tr>
+            <td colspan="10" style="padding:2px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; font-weight:bold; color:#ff0202; vertical-align:middle; text-align:center;">
+                (Continue on separate sheet if necessary)
             </td>
         </tr>
 
