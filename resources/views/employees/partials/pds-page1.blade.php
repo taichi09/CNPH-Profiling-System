@@ -650,7 +650,8 @@
         @if(count($childNames) > 13)
             @for($ci = 13; $ci < count($childNames); $ci++)
                 <tr>
-                    <td colspan="6" style="padding-top:4px; padding-bottom:4px; background:#EAEAEA;"></td>
+                    <td colspan="6" style="padding-top:4px; padding-bottom:4px; background:#EAEAEA;
+                        {{ $ci > 13 ? 'border-top:none; border-bottom:none; border-left:none;' : 'border-bottom:none; border-left:none;' }}"></td>
                     <td colspan="2" style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
                         {{ isset($childNames[$ci]) && $na($childNames[$ci]) !== 'N/A' ? $childNames[$ci] : '' }}
                     </td>
