@@ -581,8 +581,8 @@
 
         {{-- Mother's Maiden Name header | Child 10 --}}
         <tr>
-            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000; padding-top:8px; padding-bottom:8px;" class="label-cell"><span class="cell-label">25.</span></td>
-            <td colspan="5" style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000; padding-top:8px; padding-bottom:8px;" class="label-cell">
+            <td style="background:#EAEAEA; border-top:1px solid #000; padding-top:8px; padding-bottom:8px;" class="label-cell"><span class="cell-label">25.</span></td>
+            <td colspan="5" style="background:#EAEAEA; border-top:1px solid #000; padding-top:8px; padding-bottom:8px;" class="label-cell">
                 <span class="cell-label">Mother's Maiden Name</span>
             </td>
             <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
