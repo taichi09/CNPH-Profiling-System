@@ -113,8 +113,8 @@
                 <div style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-align:center; margin-bottom:4px;">
                     Pls. indicate country:
                 </div>
-                <div style="border-top:1px solid #000; padding:3px 4px; font-family:Arial,sans-serif; font-size:10pt; font-weight:normal; min-height:18px;">
-                    {{ $citizenCountry ?: '' }}
+                <div style="border-top:1px solid #000; padding:3px 4px; font-family:Arial,sans-serif; font-size:8pt; font-weight:normal; min-height:18px;">
+                    {{ $citizenCountry ?: 'N/A' }}
                 </div>
 
             </td>
@@ -212,11 +212,11 @@
                 <table style="width:100%; border-collapse:collapse;">
                     <tr style="border-top:1px solid #d0d0d0;">
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['house']) !== 'N/A' ? $resAddr['house'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['house']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">House/Block/Lot No.</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['street']) !== 'N/A' ? $resAddr['street'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['street']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Street</span>
                         </td>
                     </tr>
@@ -230,11 +230,11 @@
                 <table style="width:100%; border-collapse:collapse;">
                     <tr style="border-top:1px solid #d0d0d0;">
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['subdivision']) !== 'N/A' ? $resAddr['subdivision'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['subdivision']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Subdivision/Village</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['barangay']) !== 'N/A' ? $resAddr['barangay'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['barangay']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Barangay</span>
                         </td>
                     </tr>
@@ -253,11 +253,11 @@
                 <table style="width:100%; border-collapse:collapse;">
                     <tr style="border-top:1px solid #d0d0d0;">
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['city']) !== 'N/A' ? $resAddr['city'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['city']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">City/Municipality</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($resAddr['province']) !== 'N/A' ? $resAddr['province'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['province']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Province</span>
                         </td>
                     </tr>
@@ -296,11 +296,11 @@
                 <table style="width:100%; border-collapse:collapse; border-top:1px solid #d0d0d0;">
                     <tr>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['house']) !== 'N/A' ? $permAddr['house'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['house']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">House/Block/Lot No.</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['street']) !== 'N/A' ? $permAddr['street'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['street']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Street</span>
                         </td>
                     </tr>
@@ -319,11 +319,11 @@
                 <table style="width:100%; border-collapse:collapse; border-top:1px solid #d0d0d0;">
                     <tr>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['subdivision']) !== 'N/A' ? $permAddr['subdivision'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['subdivision']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Subdivision/Village</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['barangay']) !== 'N/A' ? $permAddr['barangay'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['barangay']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Barangay</span>
                         </td>
                     </tr>
@@ -342,11 +342,11 @@
                 <table style="width:100%; border-collapse:collapse; border-top:1px solid #d0d0d0;">
                     <tr>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['city']) !== 'N/A' ? $permAddr['city'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['city']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">City/Municipality</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:normal; display:block;">{{ $na($permAddr['province']) !== 'N/A' ? $permAddr['province'] : '' }}</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['province']) }}</span>
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Province</span>
                         </td>
                     </tr>
@@ -553,8 +553,8 @@
 
         {{-- Mother's Maiden Name header --}}
         <tr>
-            <td style="background:#EAEAEA; border-top:1px solid #000;" class="label-cell"><span class="cell-label">25.</span></td>
-            <td colspan="5" style="background:#EAEAEA; border-top:1px solid #000;" class="label-cell">
+            <td style="background:#EAEAEA; border-top:1px solid #000; padding-top:8px; padding-bottom:8px;" class="label-cell"><span class="cell-label">25.</span></td>
+            <td colspan="5" style="background:#EAEAEA; border-top:1px solid #000; padding-top:8px; padding-bottom:8px;" class="label-cell">
                 <span class="cell-label">Mother's Maiden Name</span>
             </td>
             <td colspan="2" style="border-left:1px solid #000; padding-top:8px; padding-bottom:8px;"></td>
