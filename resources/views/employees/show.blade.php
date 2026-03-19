@@ -11,12 +11,16 @@
                 $childNames = [];
                 $childDobs  = [];
                 if ($family) {
-                    $childNames = is_array($family->name_of_children)
-                        ? $family->name_of_children
-                        : array_map('trim', explode(';', $family->name_of_children ?? ''));
-                    $childDobs = is_array($family->date_of_birth)
-                        ? $family->date_of_birth
-                        : array_map('trim', explode(';', $family->date_of_birth ?? ''));
+                    // Get raw values directly from DB attributes, bypassing accessors
+                    $rawNames = $family->getAttributes()['name_of_children'] ?? '';
+                    $rawDobs  = $family->getAttributes()['date_of_birth'] ?? '';
+
+                    // Detect separator — semicolon or comma
+                    $nameSep = str_contains($rawNames, ';') ? ';' : ',';
+                    $dobSep  = str_contains($rawDobs, ';') ? ';' : ',';
+
+                    $childNames = array_values(array_filter(array_map('trim', explode($nameSep, $rawNames))));
+                    $childDobs  = array_values(array_filter(array_map('trim', explode($dobSep, $rawDobs))));
                 }
 
                 /* ── Education by level ── */
