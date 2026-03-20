@@ -8,7 +8,7 @@
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Department</th>
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">Job Status</th>
-                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Action</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -22,9 +22,14 @@
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">{{ $employee->employment_status ?? '—' }}</td>
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm">
                     <div class="flex gap-2">
-                        <a href="{{ route('employees.show', $employee->employee_id) }}" class="py-1 px-2 sm:px-3 text-xs font-medium rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">View</a>
-                        <button type="button" class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-green-600 text-white hover:bg-green-700">Edit</button>
-                    </div>
+                         <a href="{{ route('employees.show', $employee->employee_id) }}" class="py-1 px-2 sm:px-3 text-xs font-medium rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">View</a>
+                         <button type="button" class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-green-600 text-white hover:bg-green-700">Edit</button>
+                         <button type="button"
+                            onclick="openResignModal('{{ $employee->employee_id }}', '{{ $employee->first_name }} {{ $employee->surname }}')"
+                            class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-red-600 text-white hover:bg-red-700">
+                            Delete
+                        </button>
+                     </div>
                 </td>
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm"></td>
             </tr>
@@ -70,3 +75,4 @@
         </div>
     </div>
 @endif
+

@@ -343,4 +343,12 @@ class EmployeeController extends Controller
             'work', 'voluntary', 'learning', 'other'
         ));
     }
+    public function resign($id)
+{
+    DB::table('other_information')
+        ->where('employee_id', $id)
+        ->update(['employment_status' => 'RESIGNED']);
+
+    return back()->with('success', 'Employee marked as resigned.');
+}
 }
