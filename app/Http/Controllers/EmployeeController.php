@@ -351,4 +351,21 @@ class EmployeeController extends Controller
 
     return back()->with('success', 'Employee marked as resigned.');
 }
+public function reinstate(Request $request, $id)
+{
+    $request->validate([
+        'employment_status' => 'required|string',
+        'department'        => 'required|string',
+    ]);
+
+    DB::table('other_information')
+        ->where('employee_id', $id)
+        ->update([
+            'employment_status' => $request->employment_status,
+            'department_name'   => $request->department,
+        ]);
+
+    return back()->with('success', 'Employee has been reinstated successfully.');
+}
+
 }

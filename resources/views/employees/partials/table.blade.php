@@ -22,20 +22,36 @@
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">{{ $employee->employment_status ?? '—' }}</td>
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm">
                     <div class="flex gap-2">
-                         <a href="{{ route('employees.show', $employee->employee_id) }}" class="py-1 px-2 sm:px-3 text-xs font-medium rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">View</a>
-                         <button type="button" class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-green-600 text-white hover:bg-green-700">Edit</button>
-                         <button type="button"
-                            onclick="openResignModal('{{ $employee->employee_id }}', '{{ $employee->first_name }} {{ $employee->surname }}')"
-                            class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-red-600 text-white hover:bg-red-700">
-                            Delete
-                        </button>
-                     </div>
+                        <a href="{{ route('employees.show', $employee->employee_id) }}"
+                            class="py-1 px-2 sm:px-3 text-xs font-medium rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
+                            View
+                        </a>
+
+                        @if ($tab === 'active')
+                            <button type="button"
+                                class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-green-600 text-white hover:bg-green-700">
+                                Edit
+                            </button>
+                            <button type="button"
+                                onclick="openResignModal('{{ $employee->employee_id }}', '{{ $employee->first_name }} {{ $employee->surname }}')"
+                                class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-red-600 text-white hover:bg-red-700">
+                                Delete
+                            </button>
+                        @endif
+
+                        @if ($tab === 'resigned')
+                            <button type="button"
+                                onclick="openReinstateModal('{{ $employee->employee_id }}', '{{ $employee->first_name }} {{ $employee->surname }}')"
+                                class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-blue-600 text-white hover:bg-blue-700">
+                                Reinstate
+                            </button>
+                        @endif
+                    </div>
                 </td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm"></td>
             </tr>
             @empty
             <tr>
-                <td colspan="8" class="px-6 py-10 text-center text-sm text-gray-500">
+                <td colspan="7" class="px-6 py-10 text-center text-sm text-gray-500">
                     No employees found.
                 </td>
             </tr>
@@ -54,7 +70,8 @@
             @if ($employees->onFirstPage())
                 <span class="px-3 py-1 text-sm text-gray-400 border border-gray-200 rounded cursor-not-allowed">Previous</span>
             @else
-                <a href="{{ $employees->previousPageUrl() }}&tab={{ request('tab', 'active') }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Previous</a>
+                <a href="{{ $employees->previousPageUrl() }}&tab={{ request('tab', 'active') }}"
+                    class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Previous</a>
             @endif
 
             {{-- Page Numbers --}}
@@ -62,17 +79,18 @@
                 @if ($page == $employees->currentPage())
                     <span class="px-3 py-1 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded">{{ $page }}</span>
                 @else
-                    <a href="{{ $url }}&tab={{ request('tab', 'active') }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">{{ $page }}</a>
+                    <a href="{{ $url }}&tab={{ request('tab', 'active') }}"
+                        class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">{{ $page }}</a>
                 @endif
             @endforeach
 
             {{-- Next --}}
             @if ($employees->hasMorePages())
-                <a href="{{ $employees->nextPageUrl() }}&tab={{ request('tab', 'active') }}" class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Next</a>
+                <a href="{{ $employees->nextPageUrl() }}&tab={{ request('tab', 'active') }}"
+                    class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Next</a>
             @else
                 <span class="px-3 py-1 text-sm text-gray-400 border border-gray-200 rounded cursor-not-allowed">Next</span>
             @endif
         </div>
     </div>
 @endif
-

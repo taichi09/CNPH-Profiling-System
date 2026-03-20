@@ -73,10 +73,30 @@
     {{-- Import Modal --}}
     @include('employees.partials.import-modal')
     @include('employees.partials.delete-confirmation-modal')
+    @include('employees.partials.reinstate-modal')
 
 
     
     <script src="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.js"></script>
+    <script>
+        function openReinstateModal(employeeId, employeeName) {
+    document.getElementById('reinstateEmployeeName').textContent = employeeName;
+    document.getElementById('reinstateForm').action = `/employees/${employeeId}/reinstate`;
+    const modal = document.getElementById('reinstateModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function closeReinstateModal() {
+    const modal = document.getElementById('reinstateModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+document.getElementById('reinstateModal').addEventListener('click', function (e) {
+    if (e.target === this) closeReinstateModal();
+});
+    </script>
 
     <script>
     function openResignModal(employeeId, employeeName) {
