@@ -43,7 +43,7 @@
                 <span class="cell-label" style="font-size:7pt;">Name Extension (Jr., Sr.)</span>
             </td>
             <td colspan="2" style="width:8%; border-left:none; background: #EAEAEA;">
-                <span class="cell-value"">{{ $na($personal->extension) }}</span>
+                <span class="cell-value">{{ $na($personal->extension) }}</span>
             </td>
         </tr>
 
@@ -144,7 +144,7 @@
                                 Male
                             </span>
                         </td>
-                        <td style="border:none; text-align:right; padding-right: 29.9px; width:50%;">
+                        <td style="border:none; text-align:right; padding-right: 35.5px; width:50%;">
                             <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-transform:none;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">
                                     {{ strtolower(trim($personal->sex_at_birth ?? '')) === 'female' ? '✓' : '' }}

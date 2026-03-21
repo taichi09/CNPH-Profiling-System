@@ -1,119 +1,125 @@
 <div class="pds-page">
+
     <div class="section-header">IV.&nbsp;&nbsp;Civil Service Eligibility</div>
 
-    <table class="pds-table" style="table-layout:fixed; width:100%;">
-        <colgroup>
-            <col style="width:3%">
-            <col style="width:32%">
-            <col style="width:10%">
-            <col style="width:15%">
-            <col style="width:18%">
-            <col style="width:12%">
-            <col style="width:10%">
-        </colgroup>
+    <table class="pds-table">
 
+        {{-- Header --}}
         <tr>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">27.</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">CES/CSEE/CAREER SERVICE/RA 1080 (BOARD/BAR)/UNDER SPECIAL LAWS/CATEGORY II/IV ELIGIBILITY and ELIGIBILITIES FOR UNIFORMED PERSONNEL</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">RATING<br><span style="font-weight:normal; font-style:italic;">(If Applicable)</span></td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">DATE OF EXAMINATION /<br>CONFERMENT</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">PLACE OF EXAMINATION /<br>CONFERMENT</td>
-            <td colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">LICENSE (if applicable)</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:top; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:3%; border-right:none; padding-top:4px;">27.</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:35%; border-left:none;">CES/CSEE/CAREER SERVICE/RA 1080 (BOARD/BAR)/UNDER SPECIAL LAWS/CATEGORY II/IV ELIGIBILITY and ELIGIBILITIES FOR UNIFORMED PERSONNEL</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:10%;">RATING<br><span style="font-weight:normal; font-style:italic; text-transform:none;">(If Applicable)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:16%;">DATE OF EXAMINATION /<br>CONFERMENT</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:18%;">PLACE OF EXAMINATION /<br>CONFERMENT</td>
+            <td colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:18%;">LICENSE <span style="text-transform:none;">(if applicable)</span></td>
         </tr>
         <tr>
-            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">NUMBER</td>
-            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">Valid Until</td>
+            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:9%;">NUMBER</td>
+            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:9%;">Valid Until</td>
         </tr>
 
-        @php $minRows = max($eligibility->count(), 7); @endphp
-        @for($i = 0; $i < $minRows; $i++)
+        {{-- Data rows — always show 5 rows minimum --}}
+        @for($i = 0; $i < 5; $i++)
             @php $e = $eligibility[$i] ?? null; @endphp
-            <tr>
-                <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;"></td>
-                <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+            <tr style="height:36px;">
+                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center; border-right:none;"></td>
+                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; border-left:none; text-align:center;">
                     {{ $e ? $na($e->eligibility) : '' }}
                 </td>
-                <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ $e ? $na($e->rating) : '' }}
                 </td>
-                <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ $e ? $na($e->date_of_examination) : '' }}
                 </td>
-                <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ $e ? $na($e->place_of_examination) : '' }}
                 </td>
-                <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ $e ? $na($e->license_no) : '' }}
                 </td>
-                <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ $e ? $na($e->license_validity) : '' }}
                 </td>
             </tr>
         @endfor
 
-        <tr>
-            <td colspan="7" style="padding:2px 4px; background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; font-weight:bold; color:#ff0202; text-align:center;">
-                (Continue on separate sheet if necessary)
-            </td>
-        </tr>
+        {{-- Extra rows if more than 5 eligibility records --}}
+        @if($eligibility->count() > 5)
+            @for($i = 5; $i < $eligibility->count(); $i++)
+                @php $e = $eligibility[$i]; @endphp
+                <tr style="height:36px;">
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center; border-right:none;"></td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; border-left:none; text-align:center;">
+                        {{ $na($e->eligibility) }}
+                    </td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($e->rating) }}
+                    </td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($e->date_of_examination) }}
+                    </td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($e->place_of_examination) }}
+                    </td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($e->license_no) }}
+                    </td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($e->license_validity) }}
+                    </td>
+                </tr>
+            @endfor
+        @endif
+
+        {{-- Continue note — only shown when 5 or fewer records --}}
+        @if($eligibility->count() <= 5)
+            <tr>
+                <td colspan="7" style="padding:2px 4px; background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; font-weight:bold; color:#ff0202; text-align:center; text-transform:none;">
+                    (Continue on separate sheet if necessary)
+                </td>
+            </tr>
+        @endif
 
     </table>
 
-    <div class="section-header">V.&nbsp;&nbsp;Work Experience</div>
-    <div style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; font-weight:bold; padding:2px 4px; border-bottom:1px solid #000;">
-        (Include private employment. Start from your recent work.) Description of duties should be indicated in the attached Work Experience Sheet.
+    <div class="section-header" style="font-style:italic;">
+        V.&nbsp;&nbsp;Work Experience
+        <div style="font-size:11pt; font-style:italic; font-weight:bold; text-transform:none; margin-top:2px;">
+            (Include private employment. Start from your recent work.) Description of duties should be indicated in the attached Work Experience Sheet.
+        </div>
     </div>
 
-    <table class="pds-table" style="table-layout:fixed; width:100%;">
-        <colgroup>
-            <col style="width:3%">
-            <col style="width:9%">
-            <col style="width:9%">
-            <col style="width:22%">
-            <col style="width:22%">
-            <col style="width:10%">
-            <col style="width:8%">
-            <col style="width:10%">
-            <col style="width:7%">
-        </colgroup>
+    <table class="pds-table">
 
+        {{-- Header --}}
         <tr>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">28.</td>
-            <td colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">INCLUSIVE DATES<br>(dd/mm/yyyy)</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">POSITION TITLE<br><span style="font-weight:normal; font-style:italic;">(Write in full/Do not abbreviate)</span></td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">DEPARTMENT / AGENCY / OFFICE / COMPANY<br><span style="font-weight:normal; font-style:italic;">(Write in full/Do not abbreviate)</span></td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">MONTHLY SALARY</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">SALARY GRADE &amp;<br>STEP</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">STATUS OF<br>APPOINTMENT</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">GOV'T<br>SERVICE<br>(Y/N)</td>
+            <td colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:21%;">28.&nbsp;&nbsp;INCLUSIVE DATES<br><span style="text-transform:none;">(dd/mm/yyyy)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:27%;">POSITION TITLE<br><span style="font-weight:normal; font-style:italic; text-transform:none;">(Write in full/Do not abbreviate)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:34%;">DEPARTMENT / AGENCY / OFFICE / COMPANY<br><span style="font-weight:normal; font-style:italic; text-transform:none;">(Write in full/Do not abbreviate)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:9%;">STATUS OF<br>APPOINTMENT</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:9%;">GOV'T<br>SERVICE<br><span style="text-transform:none;">(Y/N)</span></td>
         </tr>
         <tr>
-            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">From</td>
-            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; font-weight:bold;">To</td>
+            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:10%;">From</td>
+            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:11%;">To</td>
         </tr>
 
-        @php $minWork = max($work->count(), 24); @endphp
-        @for($i = 0; $i < $minWork; $i++)
+        {{-- Data rows — always show 5 rows minimum --}}
+        @for($i = 0; $i < 5; $i++)
             @php $w = $work[$i] ?? null; @endphp
-            <tr>
-                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;"></td>
+            <tr style="height:36px;">
                 <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ $w ? $na($w->inclusive_date_from) : '' }}
                 </td>
                 <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ $w ? $na($w->inclusive_date_to) : '' }}
                 </td>
-                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ $w ? $na($w->position_title) : '' }}
                 </td>
-                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ $w ? $na($w->department_agency_office_company) : '' }}
-                </td>
-                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
-                    {{ $w ? $na($w->monthly_salary) : '' }}
-                </td>
-                <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
-                    {{ $w ? $na($w->salary_grade) : '' }}
                 </td>
                 <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ $w ? $na($w->status_of_appointment) : '' }}
@@ -124,25 +130,42 @@
             </tr>
         @endfor
 
-        <tr>
-            <td colspan="9" style="padding:2px 4px; background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; font-weight:bold; color:#ff0202; text-align:center;">
-                (Continue on separate sheet if necessary)
-            </td>
-        </tr>
+        {{-- Extra rows if more than 5 work records --}}
+        @if($work->count() > 5)
+            @for($i = 5; $i < $work->count(); $i++)
+                @php $w = $work[$i]; @endphp
+                <tr style="height:36px;">
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($w->inclusive_date_from) }}
+                    </td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($w->inclusive_date_to) }}
+                    </td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($w->position_title) }}
+                    </td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($w->department_agency_office_company) }}
+                    </td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($w->status_of_appointment) }}
+                    </td>
+                    <td style="padding:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $na($w->govt_service) }}
+                    </td>
+                </tr>
+            @endfor
+        @endif
+
+        {{-- Continue note — only shown when 5 or fewer records --}}
+        @if($work->count() <= 5)
+            <tr>
+                <td colspan="7" style="padding:2px 4px; background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; font-weight:bold; color:#ff0202; text-align:center; text-transform:none;">
+                    (Continue on separate sheet if necessary)
+                </td>
+            </tr>
+        @endif
 
     </table>
-
-    <div class="sig-row">
-        <div class="sig-cell" style="flex:2;">
-            <div class="sig-line"></div>
-            SIGNATURE &nbsp;<em>(wet signature/e-signature/digital certificate)</em>
-        </div>
-        <div class="sig-cell" style="flex:1;">
-            <div class="sig-line"></div>
-            DATE
-        </div>
-    </div>
-
-    <div class="page-num">CS FORM 212 (Revised 2025), Page 2 of 4</div>
 
 </div>
