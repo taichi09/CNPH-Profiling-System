@@ -94,7 +94,10 @@
 
         {{-- Header --}}
         <tr>
-            <td colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:21%;">28.&nbsp;&nbsp;INCLUSIVE DATES<br><span style="text-transform:none;">(dd/mm/yyyy)</span></td>
+            <td colspan="2" style="background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:21%; padding:3px 4px; vertical-align:top; position:relative;">
+                <span style="position:absolute; top:3px; left:4px;">28.</span>
+                <div style="text-align:center;">INCLUSIVE DATES<br><span style="text-transform:none;">(dd/mm/yyyy)</span></div>
+            </td>
             <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:27%;">POSITION TITLE<br><span style="font-weight:normal; font-style:italic; text-transform:none;">(Write in full/Do not abbreviate)</span></td>
             <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:34%;">DEPARTMENT / AGENCY / OFFICE / COMPANY<br><span style="font-weight:normal; font-style:italic; text-transform:none;">(Write in full/Do not abbreviate)</span></td>
             <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:9%;">STATUS OF<br>APPOINTMENT</td>
