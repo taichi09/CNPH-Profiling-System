@@ -24,7 +24,7 @@
                 }
 
                 /* ── Education by level ── */
-                $levelOrder = ['Elementary', 'Secondary', 'Vocational/Trade Course', 'College', 'Graduate Studies'];
+                $levelOrder = ['ELEMENTARY', 'SECONDARY', 'VOCATIONAL/TRADE COURSE', 'COLLEGE', 'GRADUATE STUDIES'];
                 $eduByLevel = [];
                 foreach ($education as $e) {
                     $eduByLevel[$e->level][] = $e;
@@ -68,10 +68,10 @@
             @include('employees.partials.pds-page1')
 
             {{-- Page 2: Civil Service Eligibility + Work Experience --}}
-            @include('employees.partials.pds-page2')
+            {{-- @include('employees.partials.pds-page2') --}}
 
             {{-- Page 3: Voluntary Work + L&D + Other Info --}}
-            @include('employees.partials.pds-page3')
+            {{-- @include('employees.partials.pds-page3') --}}
 
         </div>
     </main>

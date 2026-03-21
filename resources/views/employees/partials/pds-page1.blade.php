@@ -144,7 +144,7 @@
                                 Male
                             </span>
                         </td>
-                        <td style="border:none; text-align:right; padding-right: 23.5px; width:50%;">
+                        <td style="border:none; text-align:right; padding-right: 35.5px; width:50%;">
                             <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">
                                     {{ strtolower(trim($personal->sex_at_birth ?? '')) === 'female' ? '✓' : '' }}
@@ -436,7 +436,7 @@
             </td>
         </tr>
 
-{{-- Row 2: First Name | Name Extension | Child 1 --}}
+        {{-- Row 2: First Name | Name Extension | Child 1 --}}
         <tr>
             <td style="background:#EAEAEA;" class="label-cell"></td>
             <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">First Name</span></td>
@@ -447,11 +447,11 @@
                 <span class="cell-label" style="font-size:7pt;">Name Extension (Jr., Sr.)</span>
                 <span class="cell-value" style="font-size:9pt;">{{ $na($family->spouse_name_extension ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
-                {{ isset($childNames[0]) && $na($childNames[0]) !== 'N/A' ? $childNames[0] : '' }}
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                {{ isset($childNames[0]) && $na($childNames[0]) !== 'N/A' ? $childNames[0] : 'N/A' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
-                {{ isset($childDobs[0]) && $na($childDobs[0]) !== 'N/A' ? $childDobs[0] : '' }}
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                {{ isset($childDobs[0]) && $na($childDobs[0]) !== 'N/A' ? $childDobs[0] : 'N/A' }}
             </td>
         </tr>
 
@@ -462,10 +462,10 @@
             <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
                 <span class="cell-value">{{ $na($family->spouse_middle_name ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[1]) && $na($childNames[1]) !== 'N/A' ? $childNames[1] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[1]) && $na($childDobs[1]) !== 'N/A' ? $childDobs[1] : '' }}
             </td>
         </tr>
@@ -477,10 +477,10 @@
             <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
                 <span class="cell-value">{{ $na($family->occupation ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[2]) && $na($childNames[2]) !== 'N/A' ? $childNames[2] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[2]) && $na($childDobs[2]) !== 'N/A' ? $childDobs[2] : '' }}
             </td>
         </tr>
@@ -492,10 +492,10 @@
             <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
                 <span class="cell-value">{{ $na($family->employer_business_name ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[3]) && $na($childNames[3]) !== 'N/A' ? $childNames[3] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[3]) && $na($childDobs[3]) !== 'N/A' ? $childDobs[3] : '' }}
             </td>
         </tr>
@@ -507,10 +507,10 @@
             <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
                 <span class="cell-value">{{ $na($family->business_address ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[4]) && $na($childNames[4]) !== 'N/A' ? $childNames[4] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[4]) && $na($childDobs[4]) !== 'N/A' ? $childDobs[4] : '' }}
             </td>
         </tr>
@@ -522,25 +522,25 @@
             <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
                 <span class="cell-value">{{ $na($family->telephone_no ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[5]) && $na($childNames[5]) !== 'N/A' ? $childNames[5] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[5]) && $na($childDobs[5]) !== 'N/A' ? $childDobs[5] : '' }}
             </td>
         </tr>
 
         {{-- Father's Surname | Child 7 --}}
         <tr>
-            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">24.</span></td>
-            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Father's Surname</span></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000;" class="label-cell"><span class="cell-label">24.</span></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000;" class="label-cell"><span class="cell-label">Father's Surname</span></td>
             <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
                 <span class="cell-value">{{ $na($family->father_surname ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[6]) && $na($childNames[6]) !== 'N/A' ? $childNames[6] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[6]) && $na($childDobs[6]) !== 'N/A' ? $childDobs[6] : '' }}
             </td>
         </tr>
@@ -556,10 +556,10 @@
                 <span class="cell-label" style="font-size:7pt;">Name Extension (Jr., Sr.)</span>
                 <span class="cell-value" style="font-size:9pt;">{{ $na($family->father_name_extension ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[7]) && $na($childNames[7]) !== 'N/A' ? $childNames[7] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[7]) && $na($childDobs[7]) !== 'N/A' ? $childDobs[7] : '' }}
             </td>
         </tr>
@@ -571,10 +571,10 @@
             <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
                 <span class="cell-value">{{ $na($family->father_middle_name ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[8]) && $na($childNames[8]) !== 'N/A' ? $childNames[8] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[8]) && $na($childDobs[8]) !== 'N/A' ? $childDobs[8] : '' }}
             </td>
         </tr>
@@ -585,10 +585,10 @@
             <td colspan="5" style="background:#EAEAEA; border-top:1px solid #000; padding-top:8px; padding-bottom:8px;" class="label-cell">
                 <span class="cell-label">Mother's Maiden Name</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[9]) && $na($childNames[9]) !== 'N/A' ? $childNames[9] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[9]) && $na($childDobs[9]) !== 'N/A' ? $childDobs[9] : '' }}
             </td>
         </tr>
@@ -600,10 +600,10 @@
             <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
                 <span class="cell-value">{{ $na($family->mother_surname ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[10]) && $na($childNames[10]) !== 'N/A' ? $childNames[10] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[10]) && $na($childDobs[10]) !== 'N/A' ? $childDobs[10] : '' }}
             </td>
         </tr>
@@ -615,10 +615,10 @@
             <td colspan="4" style="padding-top:8px; padding-bottom:8px; text-align:left; vertical-align:middle; padding-left:6px;">
                 <span class="cell-value">{{ $na($family->mother_first_name ?? null) }}</span>
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childNames[11]) && $na($childNames[11]) !== 'N/A' ? $childNames[11] : '' }}
             </td>
-            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+            <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                 {{ isset($childDobs[11]) && $na($childDobs[11]) !== 'N/A' ? $childDobs[11] : '' }}
             </td>
         </tr>
@@ -637,10 +637,10 @@
                 </td>
             @else
                 {{-- More than 12: show child 13 values in two separate cells --}}
-                <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+                <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ isset($childNames[12]) && $na($childNames[12]) !== 'N/A' ? $childNames[12] : '' }}
                 </td>
-                <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle;">
+                <td colspan="2" style="border-left:1px solid #000; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:10pt; font-weight:bold; vertical-align:middle; text-align:center;">
                     {{ isset($childDobs[12]) && $na($childDobs[12]) !== 'N/A' ? $childDobs[12] : '' }}
                 </td>
             @endif
@@ -662,28 +662,29 @@
             @endfor
         @endif
 
-        {{-- ── Section Header Row: Educational Background ── --}}
-        <tr>
-            <td colspan="10" style="padding:0; border:none;">
-                <div class="section-header">III.&nbsp;Educational Background</div>
-            </td>
-        </tr>
+    </table>
 
-        {{-- Education Table Header --}}
+    {{-- ── Section Header: same style as Personal Info and Family Background ── --}}
+    <div class="section-header">III.&nbsp;Educational Background</div>
+
+    {{-- Separate table so column widths can be different from above ── --}}
+    <table class="pds-table">
+
+        {{-- Header row — widths set directly on cells, same as other sections --}}
         <tr>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:3%; border-right:none;">26.</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:10%; border-left:none;">LEVEL</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:20%;">NAME OF SCHOOL<br><span style="font-style:italic; font-weight:normal;">(Write in full)</span></td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:20%;">BASIC EDUCATION/DEGREE/COURSE<br><span style="font-style:italic; font-weight:normal;">(Write in full)</span></td>
-            <td colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:12%;">PERIOD OF ATTENDANCE</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:12%;">HIGHEST LEVEL/<br>UNITS EARNED<br><span style="font-style:italic; font-weight:normal;">(if not graduated)</span></td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:10%;">YEAR<br>GRADUATED</td>
-            <td rowspan="2" colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:13%;">SCHOLARSHIP/<br>ACADEMIC HONORS<br>RECEIVED</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; border-right:none; width:3%;">26.</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; border-left:none; width:13%;">LEVEL</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:25%;">NAME OF SCHOOL<br><span style="font-style:italic; font-weight:normal;">(Write in full)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:22%;">BASIC EDUCATION/DEGREE/COURSE<br><span style="font-style:italic; font-weight:normal;">(Write in full)</span></td>
+            <td colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:14%;">PERIOD OF ATTENDANCE</td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:9%;">HIGHEST LEVEL/<br>UNITS EARNED<br><span style="font-style:italic; font-weight:normal;">(if not graduated)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:5%;">YEAR<br>GRADUATED</td>
+            <td rowspan="2" colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:9%;">SCHOLARSHIP/<br>ACADEMIC HONORS<br>RECEIVED</td>
         </tr>
         <tr>
-            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">From</td>
-            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">To</td>
-        </tr>
+            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:7%;">From</td>
+            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:7%;">To</td>
+        </tr>   
 
         {{-- Education rows by level --}}
         @foreach($levelOrder as $level)
@@ -691,30 +692,30 @@
             @foreach($rows as $idx => $e)
                 <tr>
                     @if($idx === 0)
-                        <td colspan="2" rowspan="{{ count($rows) }}" style="background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; vertical-align:middle; padding:4px 10px; text-align:left; text-uppercase;">
+                        <td colspan="2" rowspan="{{ count($rows) }}" style="background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; vertical-align:middle; padding:4px 6px; text-align:left;">
                             {{ $level }}
                         </td>
                     @endif
-                    <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
-                        {{ $e ? $na($e->name_of_school) : '' }}
-                    </td>
-                    <td style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
-                        {{ $e ? $na($e->basic_education) : '' }}
+                    <td style="text-align:center; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                        {{ $e ? $na($e->name_of_school) : 'N/A' }}
                     </td>
                     <td style="text-align:center; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
-                        {{ $e ? $na($e->period_of_attendance_from) : '' }}
+                        {{ $e ? $na($e->basic_education) : 'N/A' }}
                     </td>
                     <td style="text-align:center; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
-                        {{ $e ? $na($e->period_of_attendance_to) : '' }}
+                        {{ $e ? $na($e->period_of_attendance_from) : 'N/A' }}
                     </td>
                     <td style="text-align:center; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
-                        {{ $e ? $na($e->highest_level) : '' }}
+                        {{ $e ? $na($e->period_of_attendance_to) : 'N/A' }}
                     </td>
                     <td style="text-align:center; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
-                        {{ $e ? $na($e->year_graduated) : '' }}
+                        {{ $e ? $na($e->highest_level) : 'N/A' }}
                     </td>
-                    <td colspan="2" style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
-                        {{ $e ? $na($e->scholarship_academic_honors_recieved) : '' }}
+                    <td style="text-align:center; padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle;">
+                        {{ $e ? $na($e->year_graduated) : 'N/A' }}
+                    </td>
+                    <td colspan="2" style="padding:6px 4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:9pt; font-weight:bold; vertical-align:middle; text-align:center;">
+                        {{ $e ? $na($e->scholarship_academic_honors_recieved) : 'N/A' }}
                     </td>
                 </tr>
             @endforeach
