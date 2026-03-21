@@ -28,7 +28,7 @@
         <tr>
             <td style="width:3%; background:#EAEAEA;" class="label-cell"><span class="cell-label">1.</span></td>
             <td style="width:13%; background:#EAEAEA;" class="label-cell"><span class="cell-label">Surname</span></td>
-            <td colspan="8">
+            <td colspan="8" style="padding-top:8px; padding-bottom:8px;">
                 <span class="cell-value">{{ $na($personal->surname) }}</span>
             </td>
         </tr>
@@ -36,7 +36,7 @@
         <tr>
             <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">2.</span></td>
             <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">First Name</span></td>
-            <td colspan="5" style="width:45%">
+            <td colspan="5" style="width:45%; padding-top:8px; padding-bottom:8px;">
                 <span class="cell-value">{{ $na($personal->first_name) }}</span>
             </td>
             <td style="width:12%; background:#EAEAEA; border-right:none;" class="label-cell">
@@ -50,7 +50,7 @@
         <tr>
             <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label"></span></td>
             <td style="background:#EAEAEA;" class="label-cell"><span class="cell-label">Middle Name</span></td>
-            <td colspan="8">
+            <td colspan="8" style="padding-top:8px; padding-bottom:8px;">
                 <span class="cell-value">{{ $na($personal->middle_name) }}</span>
             </td>
         </tr>
@@ -70,7 +70,7 @@
             <td colspan="2" rowspan="3" style="background:#EAEAEA; vertical-align:top; padding:3px 4px;">
                 <span class="cell-label">16. Citizenship</span>
                 <br><br>
-                <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; text-align:center; margin-top:0px; margin-bottom:10px;">
+                <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; text-align:center; margin-top:4px; margin-bottom:6px; text-transform:none;">
                     If holder of dual citizenship,<br>please indicate the details.
                 </span>
             </td>
@@ -110,7 +110,7 @@
                 </div>
 
                 {{-- Row 3: Pls. indicate country --}}
-                <div style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-align:center; margin-bottom:4px;">
+                <div style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-align:center; margin-bottom:4px; text-transform:none;">
                     Pls. indicate country:
                 </div>
                 <div style="border-top:1px solid #000; padding:3px 4px; font-family:Arial,sans-serif; font-size:8pt; font-weight:normal; min-height:18px;">
@@ -137,15 +137,15 @@
                 <table style="width:100%; border-collapse:collapse;">
                     <tr>
                         <td style="border:none; text-align:left; padding-left:12px; width:50%;">
-                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">
+                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-transform:none;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">
                                     {{ strtolower(trim($personal->sex_at_birth ?? '')) === 'male' ? '✓' : '' }}
                                 </span>
                                 Male
                             </span>
                         </td>
-                        <td style="border:none; text-align:right; padding-right: 35.5px; width:50%;">
-                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">
+                        <td style="border:none; text-align:right; padding-right: 29.9px; width:50%;">
+                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-transform:none;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">
                                     {{ strtolower(trim($personal->sex_at_birth ?? '')) === 'female' ? '✓' : '' }}
                                 </span>
@@ -167,13 +167,13 @@
                 <table style="width:100%; border-collapse:collapse;">
                     <tr>
                         <td style="border:none; width:50%; padding:2px 0; text-align:left;">
-                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">
+                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-transform:none;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">{{ $cs === 'single' ? '✓' : '' }}</span>
                                 Single
                             </span>
                         </td>
                         <td style="border:none; width:50%; padding:2px 0; padding-left:32px;">
-                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">
+                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-transform:none;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">{{ $cs === 'married' ? '✓' : '' }}</span>
                                 Married
                             </span>
@@ -181,13 +181,13 @@
                     </tr>
                     <tr>
                         <td style="border:none; padding:2px 0; text-align:left;">
-                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">
+                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-transform:none;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">{{ $cs === 'widowed' ? '✓' : '' }}</span>
                                 Widowed
                             </span>
                         </td>
                         <td style="border:none; padding:2px 0; padding-left:32px;">
-                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">
+                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-transform:none;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">{{ $cs === 'separated' ? '✓' : '' }}</span>
                                 Separated
                             </span>
@@ -195,7 +195,7 @@
                     </tr>
                     <tr>
                         <td style="border:none; padding:2px 0; text-align:left;" colspan="2">
-                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt;">
+                            <span style="display:inline-flex; align-items:center; gap:4px; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; text-transform:none;">
                                 <span style="display:inline-block; width:10px; height:10px; border:1px solid #000; text-align:center; line-height:10px; font-size:8pt;">{{ !in_array($cs, ['single','married','widowed','separated']) && $cs !== '' ? '✓' : '' }}</span>
                                 Other/s: <span style="font-weight:bold;">{{ !in_array($cs, ['single','married','widowed','separated']) ? $personal->civil_status : '' }}</span>
                             </span>
@@ -213,11 +213,11 @@
                     <tr style="border-top:1px solid #d0d0d0;">
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['house']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">House/Block/Lot No.</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">House/Block/Lot No.</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['street']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Street</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">Street</span>
                         </td>
                     </tr>
                 </table>
@@ -231,11 +231,11 @@
                     <tr style="border-top:1px solid #d0d0d0;">
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['subdivision']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Subdivision/Village</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">Subdivision/Village</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['barangay']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Barangay</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">Barangay</span>
                         </td>
                     </tr>
                 </table>
@@ -245,7 +245,7 @@
         {{-- Height | City + Province --}}
         <tr>
             <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">7.</span></td>
-            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Height (m)</span></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Height <span style="text-transform:none;">(m)</span></span></td>
             <td colspan="2" style="text-align:center; vertical-align:middle;">
                 <span class="cell-value">{{ $na($personal->height) }}</span>
             </td>
@@ -254,11 +254,11 @@
                     <tr style="border-top:1px solid #d0d0d0;">
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['city']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">City/Municipality</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">City/Municipality</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($resAddr['province']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Province</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">Province</span>
                         </td>
                     </tr>
                 </table>
@@ -268,7 +268,7 @@
         {{-- Weight | ZIP Code --}}
         <tr>
             <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">8.</span></td>
-            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Weight (kg)</span></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Weight <span style="text-transform:none;">(kg)</span></span></td>
             <td colspan="2" style="text-align:center; vertical-align:middle; padding-top:8px; padding-bottom:8px;">
                 <span class="cell-value">{{ $na($personal->weight) }}</span>
             </td>
@@ -297,11 +297,11 @@
                     <tr>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['house']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">House/Block/Lot No.</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">House/Block/Lot No.</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['street']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Street</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">Street</span>
                         </td>
                     </tr>
                 </table>
@@ -320,11 +320,11 @@
                     <tr>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['subdivision']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Subdivision/Village</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">Subdivision/Village</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['barangay']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Barangay</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">Barangay</span>
                         </td>
                     </tr>
                 </table>
@@ -343,11 +343,11 @@
                     <tr>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['city']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">City/Municipality</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">City/Municipality</span>
                         </td>
                         <td style="border:none; width:50%; vertical-align:bottom; padding:2px 4px; height:28px; text-align:center;">
                             <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; display:block;">{{ $na($permAddr['province']) }}</span>
-                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px;">Province</span>
+                            <span style="font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; display:block; border-top:1px solid #d0d0d0; margin-top:2px; padding-top:1px; text-transform:none;">Province</span>
                         </td>
                     </tr>
                 </table>
@@ -407,10 +407,10 @@
                 <span class="cell-value">{{ $na($personal->agency_employee_no) }}</span>
             </td>
             <td colspan="2" style="background:#EAEAEA;; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell">
-                <span class="cell-label">21. E-mail Address (if any)</span>
+                <span class="cell-label">21. E-mail Address <span style="text-transform:none;">(if any)</span></span>
             </td>
             <td colspan="4" style="text-align:center; vertical-align:middle; padding-top:8px; padding-bottom:8px;">
-                <span class="cell-value" style="color:blue; text-decoration:underline;">{{ $na($personal->email_address) }}</span>
+                <span class="cell-value" style="color:blue; text-decoration:underline; text-transform:none;">{{ $na($personal->email_address) }}</span>
             </td>
         </tr>
 
@@ -429,10 +429,10 @@
                 <span class="cell-value">{{ $na($family->spouse_surname ?? null) }}</span>
             </td>
             <td colspan="2" style="background:#EAEAEA;" class="label-cell">
-                <span class="cell-label">23. Name of Children (Write full name and list all)</span>
+                <span class="cell-label">23. Name of Children <span style="text-transform:none;">(Write full name and list all)</span></span>
             </td>
-            <td colspan="2" style="background:#EAEAEA; border-left:1px solid #000;" class="label-cell">
-                <span class="cell-label">Date of Birth (dd/mm/yyyy)</span>
+            <td colspan="2" style="background:#EAEAEA; border-left:1px solid #000; text-align:center;" class="label-cell">
+                <span class="cell-label">Date of Birth <span style="text-transform:none;">(dd/mm/yyyy)</span></span>
             </td>
         </tr>
 
@@ -632,7 +632,7 @@
             </td>
             {{-- If 12 or fewer children: show continue note as one merged cell --}}
             @if(count($childNames) <= 12)
-                <td colspan="4" style="border-left:1px solid #000; padding:6px 4px; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-style:italic; font-weight:bold; background:#EAEAEA; color:#ff0202;">
+                <td colspan="4" style="border-left:1px solid #000; padding:6px 4px; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-style:italic; font-weight:bold; background:#EAEAEA; color:#ff0202; text-transform:none;">
                     (Continue on separate sheet if necessary)
                 </td>
             @else
@@ -674,16 +674,16 @@
         <tr>
             <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; border-right:none; width:3%;">26.</td>
             <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; border-left:none; width:13%;">LEVEL</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:25%;">NAME OF SCHOOL<br><span style="font-style:italic; font-weight:normal;">(Write in full)</span></td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:22%;">BASIC EDUCATION/DEGREE/COURSE<br><span style="font-style:italic; font-weight:normal;">(Write in full)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:25%;">NAME OF SCHOOL<br><span style="font-style:italic; font-weight:normal; text-transform:none;">(Write in full)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:22%;">BASIC EDUCATION/DEGREE/COURSE<br><span style="font-style:italic; font-weight:normal; text-transform:none;">(Write in full)</span></td>
             <td colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:14%;">PERIOD OF ATTENDANCE</td>
-            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:9%;">HIGHEST LEVEL/<br>UNITS EARNED<br><span style="font-style:italic; font-weight:normal;">(if not graduated)</span></td>
+            <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:9%;">HIGHEST LEVEL/<br>UNITS EARNED<br><span style="font-style:italic; font-weight:normal; text-transform:none;">(if not graduated)</span></td>
             <td rowspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:5%;">YEAR<br>GRADUATED</td>
             <td rowspan="2" colspan="2" style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:7pt; width:9%;">SCHOLARSHIP/<br>ACADEMIC HONORS<br>RECEIVED</td>
         </tr>
         <tr>
-            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:7%;">From</td>
-            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:7%;">To</td>
+            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:7%; text-transform:none;">From</td>
+            <td style="background:#EAEAEA; text-align:center; vertical-align:middle; font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; width:7%; text-transform:none;">To</td>
         </tr>   
 
         {{-- Education rows by level --}}
@@ -723,7 +723,7 @@
 
         {{-- Continue note --}}
         <tr>
-            <td colspan="10" style="padding:2px 4px; background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; font-weight:bold; color:#ff0202; vertical-align:middle; text-align:center;">
+            <td colspan="10" style="padding:2px 4px; background:#EAEAEA; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; font-style:italic; font-weight:bold; color:#ff0202; vertical-align:middle; text-align:center; text-transform:none;">
                 (Continue on separate sheet if necessary)
             </td>
         </tr>

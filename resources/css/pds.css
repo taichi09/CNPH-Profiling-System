@@ -147,12 +147,15 @@ body {
     border-collapse: collapse;
     font-size: 7pt;
 }
+
 .pds-table td,
 .pds-table th {
     border: 1px solid #000;
     padding: 2px 4px;
     vertical-align: top;
+    text-transform: uppercase;
 }
+
 .pds-table th {
     background: #e8e8e8;
     font-size: 6pt;
