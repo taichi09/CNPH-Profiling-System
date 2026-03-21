@@ -3,28 +3,23 @@
 namespace App\Imports;
 
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
-use App\Imports\PersonalInformationImport;
-use App\Imports\FamilyBackgroundImport;
-use App\Imports\EducationalBackgroundImport;
-use App\Imports\CivilServiceEligibilityImport;
-use App\Imports\WorkExperienceImport;
-use App\Imports\VoluntaryWorkImport;
-use App\Imports\LearningAndDevelopmentImport;
-use App\Imports\OtherInformationImport;
 
 class EmployeePdsImport implements WithMultipleSheets
 {
     public function sheets(): array
     {
+        // Instantiate once and share into all related importers
+        $personalImport = new PersonalInformationImport();
+
         return [
-            'personal_information' => new PersonalInformationImport(),
-            'family_background' => new FamilyBackgroundImport(),
-            'educational_background' => new EducationalBackgroundImport(),
-            'civil_service_eligibility' => new CivilServiceEligibilityImport(),
-            'work_experience' => new WorkExperienceImport(),
-            'voluntary_work' => new VoluntaryWorkImport(),
-            'learning_and_development' => new LearningAndDevelopmentImport(),
-            'other_information' => new OtherInformationImport(),
+            'personal_information'      => $personalImport,
+            'family_background'         => new FamilyBackgroundImport($personalImport),
+            'educational_background'    => new EducationalBackgroundImport($personalImport),
+            'civil_service_eligibility' => new CivilServiceEligibilityImport($personalImport),
+            'work_experience'           => new WorkExperienceImport($personalImport),
+            'voluntary_work'            => new VoluntaryWorkImport($personalImport),
+            'learning_and_development'  => new LearningAndDevelopmentImport($personalImport),
+            'other_information'         => new OtherInformationImport($personalImport),
         ];
     }
 }

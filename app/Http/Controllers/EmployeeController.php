@@ -15,6 +15,10 @@ use App\Models\OtherInformation;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Carbon;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 
 class EmployeeController extends Controller
 {
@@ -284,48 +288,55 @@ class EmployeeController extends Controller
             ->with('success', "Employee {$employeeId} added successfully.");
     }
 
-    public function import(Request $request)
-    {
+public function import(Request $request)
+{
+    // ── Path A: confirmed from preview (temp file already stored) ──
+    if ($request->has('temp_path')) {
+        $request->validate(['temp_path' => 'required|string']);
+
+        $tempPath = $request->input('temp_path');
+
+        if (! Storage::exists($tempPath)) {
+            return back()->withErrors(['file' => 'Session expired. Please re-upload the file.']);
+        }
+
+        Excel::import(new EmployeePdsImport, Storage::path($tempPath));
+        Storage::delete($tempPath);   // clean up
+
+    // ── Path B: direct upload (fallback, no preview) ──
+    } else {
         $request->validate([
             'file' => 'required|mimes:xlsx,xlsm,xls|max:10240',
         ]);
-
         Excel::import(new EmployeePdsImport, $request->file('file'));
-
-        // Regenerate IDs for all imported employees that don't have CNPH- prefix
-        $imported = PersonalInformation::where('employee_id', 'not like', 'CNPH-%')->get();
-
-        DB::transaction(function () use ($imported) {
-            foreach ($imported as $employee) {
-                $oldId = $employee->employee_id;
-
-                // Generate new unique CNPH- ID
-                do {
-                    $newId = 'CNPH-' . strtoupper(substr(str_replace('-', '', \Illuminate\Support\Str::uuid()), 0, 8));
-                } while (PersonalInformation::where('employee_id', $newId)->exists());
-
-                // Update all 8 tables
-                PersonalInformation::where('employee_id', $oldId)
-                    ->update(['employee_id' => $newId]);
-                FamilyBackground::where('employee_id', $oldId)
-                    ->update(['employee_id' => $newId]);
-                EducationalBackground::where('employee_id', $oldId)
-                    ->update(['employee_id' => $newId]);
-                CivilServiceEligibility::where('employee_id', $oldId)
-                    ->update(['employee_id' => $newId]);
-                WorkExperience::where('employee_id', $oldId)
-                    ->update(['employee_id' => $newId]);
-                VoluntaryWork::where('employee_id', $oldId)
-                    ->update(['employee_id' => $newId]);
-                LearningAndDevelopment::where('employee_id', $oldId)
-                    ->update(['employee_id' => $newId]);
-                OtherInformation::where('employee_id', $oldId)
-                    ->update(['employee_id' => $newId]);
-            }
-        });
-
-        return back()->with('success', 'All employee data imported and IDs generated successfully.');
     }
+
+    // ── Regenerate IDs for any record that still lacks CNPH- prefix ──
+    $imported = PersonalInformation::where('employee_id', 'not like', 'CNPH-%')->get();
+
+    DB::transaction(function () use ($imported) {
+        foreach ($imported as $employee) {
+            $oldId = $employee->employee_id;
+
+            do {
+                $newId = 'CNPH-' . strtoupper(
+                    substr(str_replace('-', '', \Illuminate\Support\Str::uuid()), 0, 8)
+                );
+            } while (PersonalInformation::where('employee_id', $newId)->exists());
+
+            PersonalInformation::where('employee_id', $oldId)->update(['employee_id' => $newId]);
+            FamilyBackground::where('employee_id', $oldId)->update(['employee_id' => $newId]);
+            EducationalBackground::where('employee_id', $oldId)->update(['employee_id' => $newId]);
+            CivilServiceEligibility::where('employee_id', $oldId)->update(['employee_id' => $newId]);
+            WorkExperience::where('employee_id', $oldId)->update(['employee_id' => $newId]);
+            VoluntaryWork::where('employee_id', $oldId)->update(['employee_id' => $newId]);
+            LearningAndDevelopment::where('employee_id', $oldId)->update(['employee_id' => $newId]);
+            OtherInformation::where('employee_id', $oldId)->update(['employee_id' => $newId]);
+        }
+    });
+
+    return back()->with('success', 'All employee data imported and IDs generated successfully.');
+}
 
     public function show($id)
     {
@@ -367,5 +378,198 @@ public function reinstate(Request $request, $id)
 
     return back()->with('success', 'Employee has been reinstated successfully.');
 }
+public function importPreview(Request $request)
+{
+    $request->validate([
+        'file' => 'required|mimes:xlsx,xlsm,xls|max:10240',
+    ]);
 
+    // Store temporarily so we can reuse the same file on confirm
+    $tempPath = $request->file('file')->store('import_temp');
+
+    $fullPath = Storage::path($tempPath);
+    $spreadsheet = IOFactory::load($fullPath);
+
+    // ── Read the personal_information sheet only for preview ──
+    $sheet = null;
+    foreach ($spreadsheet->getWorksheetIterator() as $ws) {
+        if (strtolower(trim($ws->getTitle())) === 'personal_information') {
+            $sheet = $ws;
+            break;
+        }
+    }
+
+    if (! $sheet) {
+        Storage::delete($tempPath);
+        return response()->json([
+            'message' => 'Sheet "personal_information" not found in the uploaded file.'
+        ], 422);
+    }
+
+    $rows         = $sheet->toArray(null, true, true, true);
+    $headingRow   = null;
+    $headings     = [];
+    $new          = [];
+    $updated      = [];
+    $duplicate    = [];
+    $seenInFile   = [];   // catch duplicates within the same file
+
+    foreach ($rows as $rowIndex => $row) {
+        // ── Detect heading row (contains 'employee_id') ──
+        if ($headingRow === null) {
+            $normalized = array_map(fn($v) => strtolower(trim((string) $v)), $row);
+            if (in_array('employee_id', $normalized, true)) {
+                $headingRow = $rowIndex;
+                // Map heading name → column letter
+                foreach ($row as $col => $val) {
+                    $headings[strtolower(trim((string) $val))] = $col;
+                }
+            }
+            continue;
+        }
+
+        // ── Helper: pull a value by heading name ──
+        $get = function (string $key) use ($row, $headings): string {
+            return isset($headings[$key]) ? trim((string) ($row[$headings[$key]] ?? '')) : '';
+        };
+
+        $surname    = $get('surname');
+        $firstName  = $get('first_name');
+        $middleName = $get('middle_name');
+        $dobRaw     = $get('date_of_birth');
+
+        // Skip completely blank rows
+        if ($surname === '' && $firstName === '') continue;
+
+        $dob      = $this->parseDatePreview($dobRaw);
+        $fileKey  = strtolower("{$surname}|{$firstName}|{$middleName}|{$dob}");
+        $fullName = trim("{$surname}, {$firstName}" . ($middleName ? " {$middleName}" : ''));
+
+        // ── Duplicate within this file ──
+        if (isset($seenInFile[$fileKey])) {
+            $duplicate[] = [
+                'name'   => $fullName,
+                'reason' => 'Duplicate entry within the uploaded file — will be skipped',
+            ];
+            continue;
+        }
+        $seenInFile[$fileKey] = true;
+
+        // ── Check against DB (match by surname + first_name + middle_name + DOB) ──
+        $existing = PersonalInformation::whereRaw('LOWER(TRIM(surname)) = ?',    [strtolower($surname)])
+            ->whereRaw('LOWER(TRIM(first_name)) = ?',  [strtolower($firstName)])
+            ->whereRaw('LOWER(TRIM(middle_name)) = ?', [strtolower($middleName)])
+            ->whereDate('date_of_birth', $dob ?: '0000-00-00')
+            ->first();
+
+        if ($existing) {
+            // ── Check if any tracked field actually changed ──
+            $changes = $this->detectChanges($existing, $row, $headings, $get);
+
+            if (empty($changes)) {
+                $duplicate[] = [
+                    'name'        => $fullName,
+                    'employee_id' => $existing->employee_id,
+                    'reason'      => 'Identical record already exists — will be skipped',
+                ];
+            } else {
+                $updated[] = [
+                    'name'        => $fullName,
+                    'employee_id' => $existing->employee_id,
+                    'changes'     => implode(', ', $changes),
+                ];
+            }
+        } else {
+            $new[] = ['name' => $fullName];
+        }
+    }
+
+    return response()->json([
+        'temp_path' => $tempPath,
+        'new'       => $new,
+        'updated'   => $updated,
+        'duplicate' => $duplicate,
+        'summary'   => [
+            'new_count'       => count($new),
+            'updated_count'   => count($updated),
+            'duplicate_count' => count($duplicate),
+        ],
+    ]);
+}
+private function parseDatePreview($value): ?string
+{
+    if (empty($value)) return null;
+
+    if (is_numeric($value)) {
+        return ExcelDate::excelToDateTimeObject($value)->format('Y-m-d');
+    }
+
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+        return $value;
+    }
+
+    if (preg_match('/^(\d{2})\/(\d{2})\/(\d{4})$/', $value, $m)) {
+        try {
+            return ((int) $m[1] > 12)
+                ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d')
+                : Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    try {
+        return Carbon::parse($value)->format('Y-m-d');
+    } catch (\Exception $e) {
+        return null;
+    }
+}
+
+/**
+ * Compare incoming row data against the existing DB record.
+ * Returns a human-readable list of changed field labels.
+ */
+private function detectChanges(
+    PersonalInformation $existing,
+    array $row,
+    array $headings,
+    callable $get
+): array {
+    $changes = [];
+
+    $fieldsToCheck = [
+        'extension'            => 'Extension',
+        'place_of_birth'       => 'Place of Birth',
+        'sex_at_birth'         => 'Sex',
+        'civil_status'         => 'Civil Status',
+        'height'               => 'Height',
+        'weight'               => 'Weight',
+        'blood_type'           => 'Blood Type',
+        'umid_id_no'           => 'UMID No.',
+        'pagibig_id_no'        => 'Pag-IBIG No.',
+        'philhealth_id_no'     => 'PhilHealth No.',
+        'philsys_no'           => 'PhilSys No.',
+        'tin_no'               => 'TIN No.',
+        'agency_employee_no'   => 'Agency Employee No.',
+        'citizenship'          => 'Citizenship',
+        'residential_address'  => 'Residential Address',
+        'residential_zip_code' => 'Residential ZIP',
+        'permanent_address'    => 'Permanent Address',
+        'permanent_zip_code'   => 'Permanent ZIP',
+        'telephone_no'         => 'Telephone No.',
+        'mobile_no'            => 'Mobile No.',
+        'email_address'        => 'Email Address',
+    ];
+
+    foreach ($fieldsToCheck as $column => $label) {
+        $incoming = strtolower(trim((string) $get($column)));
+        $existing_ = strtolower(trim((string) ($existing->$column ?? '')));
+
+        if ($incoming !== '' && $incoming !== $existing_) {
+            $changes[] = $label;
+        }
+    }
+
+    return $changes;
+}
 }

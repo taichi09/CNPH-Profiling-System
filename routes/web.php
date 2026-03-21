@@ -48,6 +48,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::patch('employees/{id}/resign', [EmployeeController::class, 'resign'])->name('employees.resign');
     Route::patch('employees/{id}/reinstate', [EmployeeController::class, 'reinstate'])->name('employees.reinstate');
+    Route::post('/employees/import/preview', [EmployeeController::class, 'importPreview'])
+    ->name('employees.import.preview');
+
 });
 
 
