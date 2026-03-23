@@ -6,7 +6,7 @@
             <div class="p-4 sm:p-6 border-b border-gray-200">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
                     <h2 class="text-xl font-bold text-green-800">Employee Records</h2>
-                    <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex flex-col sm:flex-row gap-3 overflow-visible">
 
                         {{-- Filter Button + Panel --}}
                         <div class="relative" x-data="filterPanel()" @click.away="open = false">
@@ -37,7 +37,7 @@
                                 x-transition:leave="transition ease-in duration-100"
                                 x-transition:leave-start="opacity-100 scale-100 translate-y-0"
                                 x-transition:leave-end="opacity-0 scale-95 -translate-y-1"
-                                class="absolute left-0 mt-2 w-[520px] max-w-[90vw] bg-white rounded-xl shadow-xl border border-gray-200 z-50 overflow-hidden">
+                                class="absolute left-0 sm:left-auto sm:right-0 mt-2 w-[480px] max-w-[calc(100vw-2rem)] bg-white rounded-xl shadow-xl border border-gray-200 z-50 overflow-hidden">
 
                                 {{-- Panel Header --}}
                                 <div class="flex items-center justify-between px-5 py-3 border-b border-gray-100 bg-gray-50">
