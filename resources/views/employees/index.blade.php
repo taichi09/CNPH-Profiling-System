@@ -1,4 +1,20 @@
 <x-app-layout>
+
+    {{-- Dark backdrop for filter panel --}}
+    <div
+        x-data
+        x-show="$store.filter.open"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        @click="$store.filter.open = false"
+        class="fixed inset-0 bg-black/40 z-40"
+        style="display:none;">
+    </div>
+
     <main class="lg:ml-72 p-4 sm:p-6 transition-all duration-300">
         <div class="bg-white rounded-lg shadow">
 
@@ -6,12 +22,12 @@
             <div class="p-4 sm:p-6 border-b border-gray-200">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
                     <h2 class="text-xl font-bold text-green-800">Employee Records</h2>
-                    <div class="flex flex-col sm:flex-row gap-3 overflow-visible">
+                    <div class="flex flex-col sm:flex-row gap-3">
 
                         {{-- Filter Button + Panel --}}
-                        <div class="relative" x-data="filterPanel()" @click.away="open = false">
+                        <div x-data="filterPanel()" @keydown.escape.window="$store.filter.open = false">
                             <button
-                                @click="open = !open"
+                                @click="$store.filter.open = !$store.filter.open"
                                 type="button"
                                 :class="activeCount > 0
                                     ? 'border-green-600 bg-green-50 text-green-800'
@@ -28,28 +44,29 @@
                                 </span>
                             </button>
 
-                            {{-- Filter Dropdown Panel --}}
+                            {{-- Filter Modal Panel — fixed centered, above backdrop z-50 --}}
                             <div
-                                x-show="open"
-                                x-transition:enter="transition ease-out duration-150"
-                                x-transition:enter-start="opacity-0 scale-95 -translate-y-1"
-                                x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-                                x-transition:leave="transition ease-in duration-100"
-                                x-transition:leave-start="opacity-100 scale-100 translate-y-0"
-                                x-transition:leave-end="opacity-0 scale-95 -translate-y-1"
-                                class="absolute left-0 sm:left-auto sm:right-0 mt-2 w-[480px] max-w-[calc(100vw-2rem)] bg-white rounded-xl shadow-xl border border-gray-200 z-50 overflow-hidden">
+                                x-show="$store.filter.open"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 scale-95"
+                                x-transition:enter-end="opacity-100 scale-100"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 scale-100"
+                                x-transition:leave-end="opacity-0 scale-95"
+                                class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 overflow-hidden"
+                                style="display:none;">
 
                                 {{-- Panel Header --}}
-                                <div class="flex items-center justify-between px-5 py-3 border-b border-gray-100 bg-gray-50">
+                                <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-gray-50">
                                     <span class="text-sm font-semibold text-gray-700">Filter Employees</span>
-                                    <button @click="open = false" class="text-gray-400 hover:text-gray-600">
+                                    <button @click="$store.filter.open = false" class="text-gray-400 hover:text-gray-600 transition-colors">
                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                                         </svg>
                                     </button>
                                 </div>
 
-                                <div class="p-5 space-y-5 max-h-[70vh] overflow-y-auto">
+                                <div class="p-5 space-y-5 max-h-[65vh] overflow-y-auto">
 
                                     {{-- Department --}}
                                     <div>
@@ -63,8 +80,7 @@
                                                         ? 'bg-green-100 border-green-600 text-green-800 font-medium'
                                                         : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'"
                                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-colors">
-                                                    <span
-                                                        :class="isActive('dept', dept) ? 'bg-green-600' : 'bg-gray-300'"
+                                                    <span :class="isActive('dept', dept) ? 'bg-green-600' : 'bg-gray-300'"
                                                         class="w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
                                                     <span x-text="dept"></span>
                                                 </button>
@@ -84,8 +100,7 @@
                                                         ? 'bg-green-100 border-green-600 text-green-800 font-medium'
                                                         : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'"
                                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-colors">
-                                                    <span
-                                                        :class="isActive('age', group) ? 'bg-green-600' : 'bg-gray-300'"
+                                                    <span :class="isActive('age', group) ? 'bg-green-600' : 'bg-gray-300'"
                                                         class="w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
                                                     <span x-text="group"></span>
                                                 </button>
@@ -93,36 +108,37 @@
                                         </div>
                                     </div>
 
-                                    {{-- Birth Year Range --}}
+                                    {{-- Birth Year — Select Dropdowns --}}
                                     <div>
-                                        <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center justify-between mb-3">
                                             <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">Birth Year</p>
-                                            <span class="text-xs text-green-700 font-semibold">
+                                            <span class="text-xs text-green-700 font-semibold bg-green-50 border border-green-200 px-2 py-0.5 rounded-full">
                                                 <span x-text="birthFrom"></span> – <span x-text="birthTo"></span>
                                             </span>
                                         </div>
-                                        <div class="space-y-2">
-                                            <div class="flex items-center gap-3">
-                                                <span class="text-xs text-gray-400 w-6">From</span>
-                                                <input
-                                                    type="range"
-                                                    min="1950" max="2006" step="1"
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <label class="block text-xs text-gray-500 mb-1">From</label>
+                                                <select
                                                     x-model="birthFrom"
-                                                    @input="if(parseInt(birthFrom) > parseInt(birthTo)) birthTo = birthFrom; updateActive()"
-                                                    class="flex-1 h-1.5 rounded-full accent-green-700 cursor-pointer">
+                                                    @change="if(parseInt(birthFrom) > parseInt(birthTo)) birthTo = birthFrom; updateActive()"
+                                                    class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                                    <template x-for="y in yearRange" :key="y">
+                                                        <option :value="y" x-text="y" :selected="y == birthFrom"></option>
+                                                    </template>
+                                                </select>
                                             </div>
-                                            <div class="flex items-center gap-3">
-                                                <span class="text-xs text-gray-400 w-6">To</span>
-                                                <input
-                                                    type="range"
-                                                    min="1950" max="2006" step="1"
+                                            <div>
+                                                <label class="block text-xs text-gray-500 mb-1">To</label>
+                                                <select
                                                     x-model="birthTo"
-                                                    @input="if(parseInt(birthTo) < parseInt(birthFrom)) birthFrom = birthTo; updateActive()"
-                                                    class="flex-1 h-1.5 rounded-full accent-green-700 cursor-pointer">
+                                                    @change="if(parseInt(birthTo) < parseInt(birthFrom)) birthFrom = birthTo; updateActive()"
+                                                    class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                                                    <template x-for="y in yearRange" :key="y">
+                                                        <option :value="y" x-text="y" :selected="y == birthTo"></option>
+                                                    </template>
+                                                </select>
                                             </div>
-                                        </div>
-                                        <div class="flex justify-between text-xs text-gray-400 mt-1 px-0.5">
-                                            <span>1950</span><span>2006</span>
                                         </div>
                                     </div>
 
@@ -138,8 +154,7 @@
                                                         ? 'bg-green-100 border-green-600 text-green-800 font-medium'
                                                         : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'"
                                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-colors">
-                                                    <span
-                                                        :class="isActive('type', type) ? 'bg-green-600' : 'bg-gray-300'"
+                                                    <span :class="isActive('type', type) ? 'bg-green-600' : 'bg-gray-300'"
                                                         class="w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
                                                     <span x-text="type"></span>
                                                 </button>
@@ -159,8 +174,7 @@
                                                         ? 'bg-green-100 border-green-600 text-green-800 font-medium'
                                                         : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'"
                                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-colors">
-                                                    <span
-                                                        :class="isActive('gender', g) ? 'bg-green-600' : 'bg-gray-300'"
+                                                    <span :class="isActive('gender', g) ? 'bg-green-600' : 'bg-gray-300'"
                                                         class="w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
                                                     <span x-text="g"></span>
                                                 </button>
@@ -175,12 +189,12 @@
                                     <button
                                         @click="resetFilters()"
                                         type="button"
-                                        class="text-xs text-gray-500 hover:text-gray-700 underline underline-offset-2">
+                                        class="text-xs text-gray-500 hover:text-red-600 transition-colors underline underline-offset-2">
                                         Reset all
                                     </button>
                                     <div class="flex gap-2">
                                         <button
-                                            @click="open = false"
+                                            @click="$store.filter.open = false"
                                             type="button"
                                             class="py-1.5 px-4 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50">
                                             Cancel
@@ -215,11 +229,6 @@
                             Add Employee
                         </a>
                     </div>
-                </div>
-
-                {{-- Active Filter Tags --}}
-                <div x-data="filterPanel()" id="active-filter-tags" class="hidden">
-                    {{-- Rendered by Alpine after apply --}}
                 </div>
 
                 {{-- Search Bar --}}
@@ -266,11 +275,17 @@
 
     <script src="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.js"></script>
 
-    {{-- Alpine Filter Component --}}
+    {{-- Alpine Global Store + Filter Component --}}
     <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('filter', { open: false });
+        });
+
         function filterPanel() {
+            const currentYear = new Date().getFullYear();
+            const startYear   = 1950;
+
             return {
-                open: false,
                 activeCount: 0,
 
                 departments: [
@@ -283,21 +298,27 @@
                     'HR',
                     'IT',
                 ],
-                ageGroups: ['18–25', '26–35', '36–45', '46–55', '56+'],
+                ageGroups:       ['18–25', '26–35', '36–45', '46–55', '56+'],
                 employmentTypes: ['Regular', 'Contractual', 'Part-time', 'Job Order'],
-                genders: ['Male', 'Female'],
+                genders:         ['Male', 'Female'],
+
+                get yearRange() {
+                    const years = [];
+                    for (let y = startYear; y <= currentYear; y++) years.push(y);
+                    return years;
+                },
 
                 selected: {
-                    dept: [],
-                    age: [],
-                    type: [],
+                    dept:   [],
+                    age:    [],
+                    type:   [],
                     gender: [],
                 },
 
-                birthFrom: 1960,
-                birthTo: 2006,
+                birthFrom:        1960,
+                birthTo:          currentYear,
                 defaultBirthFrom: 1960,
-                defaultBirthTo: 2006,
+                defaultBirthTo:   currentYear,
 
                 toggleFilter(group, value) {
                     const idx = this.selected[group].indexOf(value);
@@ -321,16 +342,16 @@
                         this.selected.gender.length;
                     const rangeChanged =
                         (parseInt(this.birthFrom) !== this.defaultBirthFrom ||
-                         parseInt(this.birthTo) !== this.defaultBirthTo) ? 1 : 0;
+                         parseInt(this.birthTo)   !== this.defaultBirthTo) ? 1 : 0;
                     this.activeCount = chipCount + rangeChanged;
                 },
 
                 resetFilters() {
-                    this.selected = { dept: [], age: [], type: [], gender: [] };
-                    this.birthFrom = this.defaultBirthFrom;
-                    this.birthTo = this.defaultBirthTo;
-                    this.activeCount = 0;
-                    // Redirect to base URL to clear query params
+                    this.selected            = { dept: [], age: [], type: [], gender: [] };
+                    this.birthFrom           = this.defaultBirthFrom;
+                    this.birthTo             = this.defaultBirthTo;
+                    this.activeCount         = 0;
+                    this.$store.filter.open  = false;
                     const url = new URL(window.location.href);
                     url.search = '?tab={{ $tab }}';
                     window.location.href = url.toString();
@@ -358,11 +379,11 @@
                     if (parseInt(this.birthTo) !== this.defaultBirthTo)
                         params.set('birth_to', this.birthTo);
 
+                    this.$store.filter.open = false;
                     window.location.href = '?' + params.toString();
                 },
 
                 init() {
-                    // Restore state from URL on page load
                     const params = new URLSearchParams(window.location.search);
 
                     if (params.get('departments'))
@@ -389,7 +410,7 @@
         }
     </script>
 
-    {{-- Reinstate Modal Script --}}
+    {{-- Reinstate Modal --}}
     <script>
         function openReinstateModal(employeeId, employeeName) {
             document.getElementById('reinstateEmployeeName').textContent = employeeName;
@@ -410,7 +431,7 @@
         });
     </script>
 
-    {{-- Resign Modal Script --}}
+    {{-- Resign Modal --}}
     <script>
         function openResignModal(employeeId, employeeName) {
             document.getElementById('resignEmployeeName').textContent = employeeName;
