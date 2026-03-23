@@ -78,36 +78,78 @@
 </div>
 
 @if ($employees->hasPages())
-    <div class="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
+    <div class="px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3">
         <p class="text-sm text-gray-500">
-            Showing {{ $employees->firstItem() }} to {{ $employees->lastItem() }} of {{ $employees->total() }} results
+            Showing <span class="font-medium text-gray-700">{{ $employees->firstItem() }}</span>
+            to <span class="font-medium text-gray-700">{{ $employees->lastItem() }}</span>
+            of <span class="font-medium text-gray-700">{{ $employees->total() }}</span> results
         </p>
+
         <div class="flex items-center gap-x-1">
+
             {{-- Previous --}}
             @if ($employees->onFirstPage())
-                <span class="px-3 py-1 text-sm text-gray-400 border border-gray-200 rounded cursor-not-allowed">Previous</span>
+                <span class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-400 border border-gray-200 rounded-lg cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    Prev
+                </span>
             @else
                 <a href="{{ $employees->previousPageUrl() }}&tab={{ request('tab', 'active') }}"
-                    class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Previous</a>
+                    class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    Prev
+                </a>
             @endif
 
-            {{-- Page Numbers --}}
-            @foreach ($employees->getUrlRange(1, $employees->lastPage()) as $page => $url)
-                @if ($page == $employees->currentPage())
-                    <span class="px-3 py-1 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded">{{ $page }}</span>
-                @else
-                    <a href="{{ $url }}&tab={{ request('tab', 'active') }}"
-                        class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">{{ $page }}</a>
+            {{-- Page Numbers with ellipsis --}}
+            @php
+                $current = $employees->currentPage();
+                $last = $employees->lastPage();
+                $tab = request('tab', 'active');
+            @endphp
+
+            {{-- Always show first page --}}
+            @if ($current > 3)
+                <a href="{{ $employees->url(1) }}&tab={{ $tab }}"
+                    class="px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">1</a>
+                @if ($current > 4)
+                    <span class="px-2 py-1.5 text-sm text-gray-400">...</span>
                 @endif
-            @endforeach
+            @endif
+
+            {{-- Pages around current --}}
+            @for ($page = max(1, $current - 2); $page <= min($last, $current + 2); $page++)
+                @if ($page == $current)
+                    <span class="px-3 py-1.5 text-sm font-semibold text-white bg-green-700 border border-green-700 rounded-lg">{{ $page }}</span>
+                @else
+                    <a href="{{ $employees->url($page) }}&tab={{ $tab }}"
+                        class="px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">{{ $page }}</a>
+                @endif
+            @endfor
+
+            {{-- Always show last page --}}
+            @if ($current < $last - 2)
+                @if ($current < $last - 3)
+                    <span class="px-2 py-1.5 text-sm text-gray-400">...</span>
+                @endif
+                <a href="{{ $employees->url($last) }}&tab={{ $tab }}"
+                    class="px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">{{ $last }}</a>
+            @endif
 
             {{-- Next --}}
             @if ($employees->hasMorePages())
                 <a href="{{ $employees->nextPageUrl() }}&tab={{ request('tab', 'active') }}"
-                    class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50">Next</a>
+                    class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    Next
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
             @else
-                <span class="px-3 py-1 text-sm text-gray-400 border border-gray-200 rounded cursor-not-allowed">Next</span>
+                <span class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-400 border border-gray-200 rounded-lg cursor-not-allowed">
+                    Next
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </span>
             @endif
+
         </div>
     </div>
 @endif
