@@ -1,19 +1,207 @@
 <x-app-layout>
 
-    {{-- Dark backdrop for filter panel --}}
+ 
     <div
         x-data
         x-show="$store.filter.open"
-        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
         @click="$store.filter.open = false"
         class="fixed inset-0 bg-black/40 z-40"
         style="display:none;">
     </div>
+
+    {{-- Drawer --}}
+    <div
+        x-data="filterPanel()"
+        x-show="$store.filter.open"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="translate-x-full opacity-0"
+        x-transition:enter-end="translate-x-0 opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="translate-x-0 opacity-100"
+        x-transition:leave-end="translate-x-full opacity-0"
+        @keydown.escape.window="$store.filter.open = false"
+        class="fixed top-0 right-0 h-full w-80 sm:w-96 bg-white shadow-2xl z-50 flex flex-col"
+        style="display:none;">
+
+        {{-- Drawer Header --}}
+        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-gray-50 flex-shrink-0">
+            <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+                </svg>
+                <span class="text-sm font-semibold text-gray-700">Filter Employees</span>
+                <span
+                    x-show="activeCount > 0"
+                    x-text="activeCount + ' active'"
+                    class="text-xs bg-green-100 text-green-800 font-medium px-2 py-0.5 rounded-full">
+                </span>
+            </div>
+            <button @click="$store.filter.open = false" class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-md hover:bg-gray-200">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        {{-- Drawer Body (scrollable) --}}
+        <div class="flex-1 overflow-y-auto px-5 py-4 space-y-6">
+
+            {{-- Department --}}
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2.5">Department</p>
+                <div class="flex flex-wrap gap-2">
+                    <template x-for="dept in departments" :key="dept">
+                        <button
+                            type="button"
+                            @click="toggleFilter('dept', dept)"
+                            :class="isActive('dept', dept)
+                                ? 'bg-green-100 border-green-600 text-green-800 font-medium'
+                                : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300'"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-all">
+                            <span :class="isActive('dept', dept) ? 'bg-green-600' : 'bg-gray-300'"
+                                class="w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors"></span>
+                            <span x-text="dept"></span>
+                        </button>
+                    </template>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-100"></div>
+
+            {{-- Age Group --}}
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2.5">Age Group</p>
+                <div class="flex flex-wrap gap-2">
+                    <template x-for="group in ageGroups" :key="group">
+                        <button
+                            type="button"
+                            @click="toggleFilter('age', group)"
+                            :class="isActive('age', group)
+                                ? 'bg-green-100 border-green-600 text-green-800 font-medium'
+                                : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300'"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-all">
+                            <span :class="isActive('age', group) ? 'bg-green-600' : 'bg-gray-300'"
+                                class="w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors"></span>
+                            <span x-text="group"></span>
+                        </button>
+                    </template>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-100"></div>
+
+            {{-- Birth Year --}}
+            <div>
+                <div class="flex items-center justify-between mb-2.5">
+                    <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">Birth Year</p>
+                    <span class="text-xs text-green-700 font-semibold bg-green-50 border border-green-200 px-2 py-0.5 rounded-full">
+                        <span x-text="birthFrom"></span> – <span x-text="birthTo"></span>
+                    </span>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">From</label>
+                        <select
+                            x-model="birthFrom"
+                            @change="if(parseInt(birthFrom) > parseInt(birthTo)) birthTo = birthFrom; updateActive()"
+                            class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                            <template x-for="y in yearRange" :key="y">
+                                <option :value="y" x-text="y" :selected="y == birthFrom"></option>
+                            </template>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">To</label>
+                        <select
+                            x-model="birthTo"
+                            @change="if(parseInt(birthTo) < parseInt(birthFrom)) birthFrom = birthTo; updateActive()"
+                            class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                            <template x-for="y in yearRange" :key="y">
+                                <option :value="y" x-text="y" :selected="y == birthTo"></option>
+                            </template>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-100"></div>
+
+            {{-- Employment Type --}}
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2.5">Employment Type</p>
+                <div class="flex flex-wrap gap-2">
+                    <template x-for="type in employmentTypes" :key="type">
+                        <button
+                            type="button"
+                            @click="toggleFilter('type', type)"
+                            :class="isActive('type', type)
+                                ? 'bg-green-100 border-green-600 text-green-800 font-medium'
+                                : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300'"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-all">
+                            <span :class="isActive('type', type) ? 'bg-green-600' : 'bg-gray-300'"
+                                class="w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors"></span>
+                            <span x-text="type"></span>
+                        </button>
+                    </template>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-100"></div>
+
+            {{-- Gender --}}
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2.5">Gender</p>
+                <div class="flex flex-wrap gap-2">
+                    <template x-for="g in genders" :key="g">
+                        <button
+                            type="button"
+                            @click="toggleFilter('gender', g)"
+                            :class="isActive('gender', g)
+                                ? 'bg-green-100 border-green-600 text-green-800 font-medium'
+                                : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300'"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-all">
+                            <span :class="isActive('gender', g) ? 'bg-green-600' : 'bg-gray-300'"
+                                class="w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors"></span>
+                            <span x-text="g"></span>
+                        </button>
+                    </template>
+                </div>
+            </div>
+
+        </div>
+
+        {{-- Drawer Footer --}}
+        <div class="flex items-center justify-between px-5 py-4 border-t border-gray-200 bg-gray-50 flex-shrink-0">
+            <button
+                @click="resetFilters()"
+                type="button"
+                class="text-xs text-gray-500 hover:text-red-600 transition-colors underline underline-offset-2">
+                Reset all
+            </button>
+            <div class="flex gap-2">
+                <button
+                    @click="$store.filter.open = false"
+                    type="button"
+                    class="py-2 px-4 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-100 transition-colors">
+                    Cancel
+                </button>
+                <button
+                    @click="applyFilters()"
+                    type="button"
+                    class="py-2 px-4 text-xs font-semibold rounded-lg bg-green-700 text-white hover:bg-green-800 transition-colors">
+                    Apply Filters
+                </button>
+            </div>
+        </div>
+
+    </div>
+    {{-- End Drawer --}}
 
     <main class="lg:ml-72 p-4 sm:p-6 transition-all duration-300">
         <div class="bg-white rounded-lg shadow">
@@ -24,12 +212,12 @@
                     <h2 class="text-xl font-bold text-green-800">Employee Records</h2>
                     <div class="flex flex-col sm:flex-row gap-3">
 
-                        {{-- Filter Button + Panel --}}
-                        <div x-data="filterPanel()" @keydown.escape.window="$store.filter.open = false">
+                        {{-- Filter Trigger Button --}}
+                        <div x-data="filterBadge()">
                             <button
-                                @click="$store.filter.open = !$store.filter.open"
+                                @click="$store.filter.open = true"
                                 type="button"
-                                :class="activeCount > 0
+                                :class="count > 0
                                     ? 'border-green-600 bg-green-50 text-green-800'
                                     : 'border-gray-200 bg-white text-gray-800'"
                                 class="py-2 px-4 inline-flex items-center justify-center gap-x-2 text-sm font-medium rounded-lg border shadow-sm hover:bg-gray-50 transition-colors">
@@ -38,178 +226,12 @@
                                 </svg>
                                 Filter
                                 <span
-                                    x-show="activeCount > 0"
-                                    x-text="activeCount"
+                                    x-show="count > 0"
+                                    x-text="count"
                                     class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-green-700 text-white text-xs font-semibold">
                                 </span>
                             </button>
-
-                            {{-- Filter Modal Panel — fixed centered, above backdrop z-50 --}}
-                            <div
-                                x-show="$store.filter.open"
-                                x-transition:enter="transition ease-out duration-200"
-                                x-transition:enter-start="opacity-0 scale-95"
-                                x-transition:enter-end="opacity-100 scale-100"
-                                x-transition:leave="transition ease-in duration-150"
-                                x-transition:leave-start="opacity-100 scale-100"
-                                x-transition:leave-end="opacity-0 scale-95"
-                                class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 overflow-hidden"
-                                style="display:none;">
-
-                                {{-- Panel Header --}}
-                                <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-gray-50">
-                                    <span class="text-sm font-semibold text-gray-700">Filter Employees</span>
-                                    <button @click="$store.filter.open = false" class="text-gray-400 hover:text-gray-600 transition-colors">
-                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <div class="p-5 space-y-5 max-h-[65vh] overflow-y-auto">
-
-                                    {{-- Department --}}
-                                    <div>
-                                        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Department</p>
-                                        <div class="flex flex-wrap gap-2">
-                                            <template x-for="dept in departments" :key="dept">
-                                                <button
-                                                    type="button"
-                                                    @click="toggleFilter('dept', dept)"
-                                                    :class="isActive('dept', dept)
-                                                        ? 'bg-green-100 border-green-600 text-green-800 font-medium'
-                                                        : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'"
-                                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-colors">
-                                                    <span :class="isActive('dept', dept) ? 'bg-green-600' : 'bg-gray-300'"
-                                                        class="w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                                                    <span x-text="dept"></span>
-                                                </button>
-                                            </template>
-                                        </div>
-                                    </div>
-
-                                    {{-- Age Group --}}
-                                    <div>
-                                        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Age Group</p>
-                                        <div class="flex flex-wrap gap-2">
-                                            <template x-for="group in ageGroups" :key="group">
-                                                <button
-                                                    type="button"
-                                                    @click="toggleFilter('age', group)"
-                                                    :class="isActive('age', group)
-                                                        ? 'bg-green-100 border-green-600 text-green-800 font-medium'
-                                                        : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'"
-                                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-colors">
-                                                    <span :class="isActive('age', group) ? 'bg-green-600' : 'bg-gray-300'"
-                                                        class="w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                                                    <span x-text="group"></span>
-                                                </button>
-                                            </template>
-                                        </div>
-                                    </div>
-
-                                    {{-- Birth Year — Select Dropdowns --}}
-                                    <div>
-                                        <div class="flex items-center justify-between mb-3">
-                                            <p class="text-xs font-semibold uppercase tracking-widest text-gray-400">Birth Year</p>
-                                            <span class="text-xs text-green-700 font-semibold bg-green-50 border border-green-200 px-2 py-0.5 rounded-full">
-                                                <span x-text="birthFrom"></span> – <span x-text="birthTo"></span>
-                                            </span>
-                                        </div>
-                                        <div class="grid grid-cols-2 gap-3">
-                                            <div>
-                                                <label class="block text-xs text-gray-500 mb-1">From</label>
-                                                <select
-                                                    x-model="birthFrom"
-                                                    @change="if(parseInt(birthFrom) > parseInt(birthTo)) birthTo = birthFrom; updateActive()"
-                                                    class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                                                    <template x-for="y in yearRange" :key="y">
-                                                        <option :value="y" x-text="y" :selected="y == birthFrom"></option>
-                                                    </template>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label class="block text-xs text-gray-500 mb-1">To</label>
-                                                <select
-                                                    x-model="birthTo"
-                                                    @change="if(parseInt(birthTo) < parseInt(birthFrom)) birthFrom = birthTo; updateActive()"
-                                                    class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                                                    <template x-for="y in yearRange" :key="y">
-                                                        <option :value="y" x-text="y" :selected="y == birthTo"></option>
-                                                    </template>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {{-- Employment Type --}}
-                                    <div>
-                                        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Employment Type</p>
-                                        <div class="flex flex-wrap gap-2">
-                                            <template x-for="type in employmentTypes" :key="type">
-                                                <button
-                                                    type="button"
-                                                    @click="toggleFilter('type', type)"
-                                                    :class="isActive('type', type)
-                                                        ? 'bg-green-100 border-green-600 text-green-800 font-medium'
-                                                        : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'"
-                                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-colors">
-                                                    <span :class="isActive('type', type) ? 'bg-green-600' : 'bg-gray-300'"
-                                                        class="w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                                                    <span x-text="type"></span>
-                                                </button>
-                                            </template>
-                                        </div>
-                                    </div>
-
-                                    {{-- Gender --}}
-                                    <div>
-                                        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Gender</p>
-                                        <div class="flex flex-wrap gap-2">
-                                            <template x-for="g in genders" :key="g">
-                                                <button
-                                                    type="button"
-                                                    @click="toggleFilter('gender', g)"
-                                                    :class="isActive('gender', g)
-                                                        ? 'bg-green-100 border-green-600 text-green-800 font-medium'
-                                                        : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'"
-                                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs transition-colors">
-                                                    <span :class="isActive('gender', g) ? 'bg-green-600' : 'bg-gray-300'"
-                                                        class="w-1.5 h-1.5 rounded-full flex-shrink-0"></span>
-                                                    <span x-text="g"></span>
-                                                </button>
-                                            </template>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                {{-- Panel Footer --}}
-                                <div class="flex items-center justify-between px-5 py-3 border-t border-gray-100 bg-gray-50">
-                                    <button
-                                        @click="resetFilters()"
-                                        type="button"
-                                        class="text-xs text-gray-500 hover:text-red-600 transition-colors underline underline-offset-2">
-                                        Reset all
-                                    </button>
-                                    <div class="flex gap-2">
-                                        <button
-                                            @click="$store.filter.open = false"
-                                            type="button"
-                                            class="py-1.5 px-4 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50">
-                                            Cancel
-                                        </button>
-                                        <button
-                                            @click="applyFilters()"
-                                            type="button"
-                                            class="py-1.5 px-4 text-xs font-semibold rounded-lg bg-green-700 text-white hover:bg-green-800 transition-colors">
-                                            Apply Filters
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        {{-- End Filter --}}
 
                         {{-- Import Button --}}
                         <button type="button" id="import-btn"
@@ -230,6 +252,50 @@
                         </a>
                     </div>
                 </div>
+
+                {{-- Active filter pills summary --}}
+                @if(request()->hasAny(['departments','age_groups','employment_types','genders','birth_from','birth_to']))
+                <div class="flex flex-wrap gap-2 mb-3">
+                    @if(request('departments'))
+                        @foreach(explode(',', request('departments')) as $d)
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-300">
+                            {{ $d }}
+                            <a href="{{ request()->fullUrlWithQuery(['departments' => implode(',', array_diff(explode(',', request('departments')), [$d])) ?: null]) }}" class="ml-0.5 hover:text-red-600">✕</a>
+                        </span>
+                        @endforeach
+                    @endif
+                    @if(request('employment_types'))
+                        @foreach(explode(',', request('employment_types')) as $t)
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 border border-blue-300">
+                            {{ $t }}
+                        </span>
+                        @endforeach
+                    @endif
+                    @if(request('genders'))
+                        @foreach(explode(',', request('genders')) as $g)
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 border border-purple-300">
+                            {{ $g }}
+                        </span>
+                        @endforeach
+                    @endif
+                    @if(request('age_groups'))
+                        @foreach(explode(',', request('age_groups')) as $a)
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 border border-amber-300">
+                            Age {{ $a }}
+                        </span>
+                        @endforeach
+                    @endif
+                    @if(request('birth_from') || request('birth_to'))
+                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800 border border-teal-300">
+                            Born {{ request('birth_from', '1960') }}–{{ request('birth_to', date('Y')) }}
+                        </span>
+                    @endif
+                    <a href="{{ route('employees.index', ['tab' => $tab]) }}"
+                        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-300 hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors">
+                        Clear all
+                    </a>
+                </div>
+                @endif
 
                 {{-- Search Bar --}}
                 @include('employees.partials.search-bar')
@@ -275,11 +341,26 @@
 
     <script src="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.js"></script>
 
-    {{-- Alpine Global Store + Filter Component --}}
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.store('filter', { open: false });
         });
+
+       
+        function filterBadge() {
+            return {
+                get count() {
+                    const params = new URLSearchParams(window.location.search);
+                    let n = 0;
+                    if (params.get('departments'))     n += params.get('departments').split(',').length;
+                    if (params.get('age_groups'))      n += params.get('age_groups').split(',').length;
+                    if (params.get('employment_types'))n += params.get('employment_types').split(',').length;
+                    if (params.get('genders'))         n += params.get('genders').split(',').length;
+                    if (params.get('birth_from') || params.get('birth_to')) n += 1;
+                    return n;
+                }
+            }
+        }
 
         function filterPanel() {
             const currentYear = new Date().getFullYear();
@@ -347,14 +428,12 @@
                 },
 
                 resetFilters() {
-                    this.selected            = { dept: [], age: [], type: [], gender: [] };
-                    this.birthFrom           = this.defaultBirthFrom;
-                    this.birthTo             = this.defaultBirthTo;
-                    this.activeCount         = 0;
-                    this.$store.filter.open  = false;
-                    const url = new URL(window.location.href);
-                    url.search = '?tab={{ $tab }}';
-                    window.location.href = url.toString();
+                    this.selected           = { dept: [], age: [], type: [], gender: [] };
+                    this.birthFrom          = this.defaultBirthFrom;
+                    this.birthTo            = this.defaultBirthTo;
+                    this.activeCount        = 0;
+                    this.$store.filter.open = false;
+                    window.location.href    = '?tab={{ $tab }}';
                 },
 
                 applyFilters() {
@@ -363,24 +442,19 @@
 
                     if (this.selected.dept.length)
                         params.set('departments', this.selected.dept.join(','));
-
                     if (this.selected.age.length)
                         params.set('age_groups', this.selected.age.join(','));
-
                     if (this.selected.type.length)
                         params.set('employment_types', this.selected.type.join(','));
-
                     if (this.selected.gender.length)
                         params.set('genders', this.selected.gender.join(','));
-
                     if (parseInt(this.birthFrom) !== this.defaultBirthFrom)
                         params.set('birth_from', this.birthFrom);
-
                     if (parseInt(this.birthTo) !== this.defaultBirthTo)
                         params.set('birth_to', this.birthTo);
 
                     this.$store.filter.open = false;
-                    window.location.href = '?' + params.toString();
+                    window.location.href    = '?' + params.toString();
                 },
 
                 init() {
@@ -388,19 +462,14 @@
 
                     if (params.get('departments'))
                         this.selected.dept = params.get('departments').split(',');
-
                     if (params.get('age_groups'))
                         this.selected.age = params.get('age_groups').split(',');
-
                     if (params.get('employment_types'))
                         this.selected.type = params.get('employment_types').split(',');
-
                     if (params.get('genders'))
                         this.selected.gender = params.get('genders').split(',');
-
                     if (params.get('birth_from'))
                         this.birthFrom = parseInt(params.get('birth_from'));
-
                     if (params.get('birth_to'))
                         this.birthTo = parseInt(params.get('birth_to'));
 
@@ -419,13 +488,11 @@
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }
-
         function closeReinstateModal() {
             const modal = document.getElementById('reinstateModal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
-
         document.getElementById('reinstateModal').addEventListener('click', function (e) {
             if (e.target === this) closeReinstateModal();
         });
@@ -440,13 +507,11 @@
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }
-
         function closeResignModal() {
             const modal = document.getElementById('resignModal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
-
         document.getElementById('resignModal').addEventListener('click', function (e) {
             if (e.target === this) closeResignModal();
         });
