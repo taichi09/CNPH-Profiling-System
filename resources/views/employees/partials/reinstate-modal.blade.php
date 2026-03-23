@@ -41,8 +41,9 @@
                     <optgroup label="Medical">
                         <option value="Medical - Doctors">Medical - Doctors</option>
                         <option value="Medical - Nurses">Medical - Nurses</option>
+                        <option value="Medical - Nursing Attendant">Medical - Nursing Attendant</option>
                         <option value="Medical - Midwives">Medical - Midwives</option>
-                        <option value="Medical - Allied Health">Medical - Allied Health</option>
+                        <option value="Medical - Respiratory Therapist">Medical - Respiratory Therapist</option>
                     </optgroup>
                     <optgroup label="Administrative">
                         <option value="HR">HR</option>
