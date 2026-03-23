@@ -299,7 +299,7 @@
                     'IT',
                 ],
                 ageGroups:       ['18–25', '26–35', '36–45', '46–55', '56+'],
-                employmentTypes: ['Regular', 'Contractual', 'Part-time', 'Job Order'],
+                employmentTypes: ['Permanent', 'COS', 'Job Order'],
                 genders:         ['Male', 'Female'],
 
                 get yearRange() {

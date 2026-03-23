@@ -26,22 +26,89 @@ class EmployeeController extends Controller
     {
         $tab = $request->get('tab', 'active');
 
+        // ── Base query ──────────────────────────────────────────────────────────
+        $query = PersonalInformation::leftJoin(
+                'other_information',
+                'personal_information.employee_id',
+                '=',
+                'other_information.employee_id'
+            )
+            ->select(
+                'personal_information.*',
+                'other_information.department_name',
+                'other_information.employment_status'
+            );
+
+        // ── Tab: active / resigned ───────────────────────────────────────────────
         if ($tab === 'resigned') {
-            $employees = PersonalInformation::leftJoin('other_information', 'personal_information.employee_id', '=', 'other_information.employee_id')
-                ->where('other_information.employment_status', 'Resigned')
-                ->select('personal_information.*', 'other_information.department_name', 'other_information.employment_status')
-                ->orderBy('personal_information.employee_id')
-                ->paginate(10);
+            $query->where('other_information.employment_status', 'Resigned');
         } else {
-            $employees = PersonalInformation::leftJoin('other_information', 'personal_information.employee_id', '=', 'other_information.employee_id')
-                ->where('other_information.employment_status', '!=', 'Resigned')
-                ->select('personal_information.*', 'other_information.department_name', 'other_information.employment_status')
-                ->orderBy('personal_information.employee_id')
-                ->paginate(10);
+            $query->where('other_information.employment_status', '!=', 'Resigned');
         }
 
-        $activeCount   = \App\Models\OtherInformation::where('employment_status', '!=', 'Resigned')->count();
-        $resignedCount = \App\Models\OtherInformation::where('employment_status', 'Resigned')->count();
+        // ── Filter: Department ───────────────────────────────────────────────────
+        if ($request->filled('departments')) {
+            $depts = explode(',', $request->get('departments'));
+            $query->whereIn('other_information.department_name', $depts);
+        }
+
+        // ── Filter: Employment Type ──────────────────────────────────────────────
+        if ($request->filled('employment_types')) {
+            $types = explode(',', $request->get('employment_types'));
+            $query->whereIn('other_information.employment_status', $types);
+        }
+
+        // ── Filter: Gender (sex_at_birth column on personal_information) ─────────
+        if ($request->filled('genders')) {
+            $genders = explode(',', $request->get('genders'));
+            $query->whereIn('personal_information.sex_at_birth', $genders);
+        }
+
+        // ── Filter: Birth Year range ─────────────────────────────────────────────
+        if ($request->filled('birth_from')) {
+            $query->whereYear('personal_information.date_of_birth', '>=', (int) $request->get('birth_from'));
+        }
+        if ($request->filled('birth_to')) {
+            $query->whereYear('personal_information.date_of_birth', '<=', (int) $request->get('birth_to'));
+        }
+
+        // ── Filter: Age Group ────────────────────────────────────────────────────
+        // Age is derived from date_of_birth at query time using TIMESTAMPDIFF.
+        // Each selected group expands into a BETWEEN clause joined with OR.
+        if ($request->filled('age_groups')) {
+            $groups = explode(',', $request->get('age_groups'));
+
+            $ageMap = [
+                '18–25' => [18, 25],
+                '26–35' => [26, 35],
+                '36–45' => [36, 45],
+                '46–55' => [46, 55],
+                '56+'   => [56, 150],
+            ];
+
+            $query->where(function ($q) use ($groups, $ageMap) {
+                foreach ($groups as $group) {
+                    $group = trim($group);
+                    if (isset($ageMap[$group])) {
+                        [$min, $max] = $ageMap[$group];
+                        $q->orWhereBetween(
+                            DB::raw('TIMESTAMPDIFF(YEAR, personal_information.date_of_birth, CURDATE())'),
+                            [$min, $max]
+                        );
+                    }
+                }
+            });
+        }
+
+        // ── Paginate & preserve query params ────────────────────────────────────
+        $employees = $query
+            ->orderBy('personal_information.employee_id')
+            ->paginate(10)
+            ->withQueryString();   // keeps all ?tab=&departments=&... in pagination links
+
+        // ── Counts (always based on status only, not filters) ───────────────────
+        $activeCount   = OtherInformation::where('employment_status', '!=', 'Resigned')->count();
+        $resignedCount = OtherInformation::where('employment_status', 'Resigned')->count();
 
         return view('employees.index', compact('employees', 'tab', 'activeCount', 'resignedCount'));
     }
@@ -66,7 +133,6 @@ class EmployeeController extends Controller
         $data = $request->except('_token');
 
         if ((int)$step === 1) {
-            // Build combined citizenship value
             $citizenshipParts = array_filter([
                 $data['citizenship'] ?? '',
                 $data['citizenship_type'] ?? '',
@@ -76,7 +142,6 @@ class EmployeeController extends Controller
             unset($data['citizenship_type']);
             unset($data['citizenship_country']);
 
-            // Merge civil_status_other into civil_status if Others is selected
             if (isset($data['civil_status']) && $data['civil_status'] === 'Others') {
                 if (!empty($data['civil_status_other'])) {
                     $data['civil_status'] = $data['civil_status_other'];
@@ -91,7 +156,6 @@ class EmployeeController extends Controller
             return redirect()->route('employees.create.step', (int)$step + 1);
         }
 
-        // Step 8 — gather all session data
         $s1 = $request->session()->get('employee_step_1', []);
         $s2 = $request->session()->get('employee_step_2', []);
         $s3 = $request->session()->get('employee_step_3', []);
@@ -101,12 +165,10 @@ class EmployeeController extends Controller
         $s7 = $request->session()->get('employee_step_7', []);
         $s8 = $request->session()->get('employee_step_8', []);
 
-        // Generate unique employee_id
         do {
             $employeeId = 'CNPH-' . strtoupper(substr(str_replace('-', '', \Illuminate\Support\Str::uuid()), 0, 8));
         } while (PersonalInformation::where('employee_id', $employeeId)->exists());
 
-        // Helper to build full address string from parts
         $buildAddress = function (array $data, string $prefix): string {
             $parts = array_filter([
                 $data["{$prefix}_house"] ?? 'N/A',
@@ -122,68 +184,65 @@ class EmployeeController extends Controller
         DB::transaction(function () use (
             $employeeId, $s1, $s2, $s3, $s4, $s5, $s6, $s7, $s8, $buildAddress
         ) {
-            // --- Step 1: Personal Information ---
             PersonalInformation::create([
-                'employee_id' => $employeeId,
-                'surname' => $s1['surname'] ?? 'N/A',
-                'first_name' => $s1['first_name'] ?? 'N/A',
-                'middle_name' => $s1['middle_name'] ?? 'N/A',
-                'extension' => $s1['name_extension'] ?? 'N/A',
-                'date_of_birth' => !empty($s1['date_of_birth']) ? $s1['date_of_birth'] : null,
-                'place_of_birth' => $s1['place_of_birth'] ?? 'N/A',
-                'sex_at_birth' => $s1['sex_at_birth'] ?? 'N/A',
-                'civil_status' => $s1['civil_status'] ?? 'N/A',
-                'height' => $s1['height'] ?? 'N/A',
-                'weight' => $s1['weight'] ?? 'N/A',
-                'blood_type' => $s1['blood_type'] ?? 'N/A',
-                'umid_id_no' => $s1['umid'] ?? 'N/A',
-                'pagibig_id_no' => $s1['pagibig'] ?? 'N/A',
-                'philhealth_id_no' => $s1['philhealth'] ?? 'N/A',
-                'philsys_no' => $s1['philsys'] ?? 'N/A',
-                'tin_no' => $s1['tin'] ?? 'N/A',
-                'agency_employee_no' => $s1['agency_employee_no'] ?? 'N/A',
-                'citizenship' => $s1['citizenship'] ?? 'N/A',
-                'residential_address' => $buildAddress($s1, 'res'),
+                'employee_id'          => $employeeId,
+                'surname'              => $s1['surname'] ?? 'N/A',
+                'first_name'           => $s1['first_name'] ?? 'N/A',
+                'middle_name'          => $s1['middle_name'] ?? 'N/A',
+                'extension'            => $s1['name_extension'] ?? 'N/A',
+                'date_of_birth'        => !empty($s1['date_of_birth']) ? $s1['date_of_birth'] : null,
+                'place_of_birth'       => $s1['place_of_birth'] ?? 'N/A',
+                'sex_at_birth'         => $s1['sex_at_birth'] ?? 'N/A',
+                'civil_status'         => $s1['civil_status'] ?? 'N/A',
+                'height'               => $s1['height'] ?? 'N/A',
+                'weight'               => $s1['weight'] ?? 'N/A',
+                'blood_type'           => $s1['blood_type'] ?? 'N/A',
+                'umid_id_no'           => $s1['umid'] ?? 'N/A',
+                'pagibig_id_no'        => $s1['pagibig'] ?? 'N/A',
+                'philhealth_id_no'     => $s1['philhealth'] ?? 'N/A',
+                'philsys_no'           => $s1['philsys'] ?? 'N/A',
+                'tin_no'               => $s1['tin'] ?? 'N/A',
+                'agency_employee_no'   => $s1['agency_employee_no'] ?? 'N/A',
+                'citizenship'          => $s1['citizenship'] ?? 'N/A',
+                'residential_address'  => $buildAddress($s1, 'res'),
                 'residential_zip_code' => $s1['res_zip'] ?? 'N/A',
-                'permanent_address' => $buildAddress($s1, 'perm'),
-                'permanent_zip_code' => $s1['perm_zip'] ?? 'N/A',
-                'telephone_no' => $s1['telephone'] ?? 'N/A',
-                'mobile_no' => $s1['mobile'] ?? 'N/A',
-                'email_address' => $s1['email'] ?? 'N/A',
+                'permanent_address'    => $buildAddress($s1, 'perm'),
+                'permanent_zip_code'   => $s1['perm_zip'] ?? 'N/A',
+                'telephone_no'         => $s1['telephone'] ?? 'N/A',
+                'mobile_no'            => $s1['mobile'] ?? 'N/A',
+                'email_address'        => $s1['email'] ?? 'N/A',
             ]);
 
-            // --- Step 2: Family Background ---
-            $children  = $s2['children'] ?? [];
+            $children   = $s2['children'] ?? [];
             $childNames = implode('; ', array_filter(array_column($children, 'name')));
             $childDobs  = implode('; ', array_filter(array_column($children, 'dob')));
 
             FamilyBackground::create([
-                'employee_id' => $employeeId,
-                'spouse_surname' => $s2['spouse_surname'] ?? 'N/A',
-                'spouse_first_name' => $s2['spouse_first_name'] ?? 'N/A',
-                'spouse_middle_name' => $s2['spouse_middle_name'] ?? 'N/A',
-                'spouse_name_extension' => $s2['spouse_extension'] ?? 'N/A',
-                'occupation' => $s2['spouse_occupation'] ?? 'N/A',
-                'employer_business_name' => $s2['spouse_employer'] ?? 'N/A',
-                'business_address' => $s2['spouse_business_address'] ?? 'N/A',
-                'telephone_no' => $s2['spouse_telephone'] ?? 'N/A',
-                'name_of_children' => $childNames ?: 'N/A',
-                'date_of_birth' => $childDobs ?: 'N/A',
-                'father_surname' => $s2['father_surname'] ?? 'N/A',
-                'father_first_name' => $s2['father_first_name'] ?? 'N/A',
-                'father_middle_name' => $s2['father_middle_name'] ?? 'N/A',
-                'father_name_extension' => $s2['father_extension'] ?? 'N/A',
-                'mother_surname' => $s2['mother_surname'] ?? 'N/A',
-                'mother_first_name' => $s2['mother_first_name'] ?? 'N/A',
-                'mother_middle_name' => $s2['mother_middle_name'] ?? 'N/A',
+                'employee_id'               => $employeeId,
+                'spouse_surname'            => $s2['spouse_surname'] ?? 'N/A',
+                'spouse_first_name'         => $s2['spouse_first_name'] ?? 'N/A',
+                'spouse_middle_name'        => $s2['spouse_middle_name'] ?? 'N/A',
+                'spouse_name_extension'     => $s2['spouse_extension'] ?? 'N/A',
+                'occupation'                => $s2['spouse_occupation'] ?? 'N/A',
+                'employer_business_name'    => $s2['spouse_employer'] ?? 'N/A',
+                'business_address'          => $s2['spouse_business_address'] ?? 'N/A',
+                'telephone_no'              => $s2['spouse_telephone'] ?? 'N/A',
+                'name_of_children'          => $childNames ?: 'N/A',
+                'date_of_birth'             => $childDobs ?: 'N/A',
+                'father_surname'            => $s2['father_surname'] ?? 'N/A',
+                'father_first_name'         => $s2['father_first_name'] ?? 'N/A',
+                'father_middle_name'        => $s2['father_middle_name'] ?? 'N/A',
+                'father_name_extension'     => $s2['father_extension'] ?? 'N/A',
+                'mother_surname'            => $s2['mother_surname'] ?? 'N/A',
+                'mother_first_name'         => $s2['mother_first_name'] ?? 'N/A',
+                'mother_middle_name'        => $s2['mother_middle_name'] ?? 'N/A',
             ]);
 
-            // --- Step 3: Educational Background ---
             $levels = [
                 'elem' => 'ELEMENTARY',
-                'sec' => 'SECONDARY',
-                'voc' => 'VOCATIONAL/TRADE COURSE',
-                'col' => 'COLLEGE',
+                'sec'  => 'SECONDARY',
+                'voc'  => 'VOCATIONAL/TRADE COURSE',
+                'col'  => 'COLLEGE',
                 'grad' => 'GRADUATE STUDIES',
             ];
             foreach ($levels as $prefix => $label) {
@@ -191,95 +250,89 @@ class EmployeeController extends Controller
                 if (empty($rows)) $rows = [[]];
                 foreach ($rows as $row) {
                     EducationalBackground::create([
-                        'employee_id' => $employeeId,
-                        'level' => $label,
-                        'name_of_school' => !empty($row['school']) ? $row['school'] : 'N/A',
-                        'basic_education' => !empty($row['course']) ? $row['course'] : 'N/A',
-                        'period_of_attendance_from' => !empty($row['from']) ? $row['from'] : 'N/A',
-                        'period_of_attendance_to' => !empty($row['to']) ? $row['to'] : 'N/A',
-                        'highest_level' => !empty($row['units']) ? $row['units'] : 'N/A',
-                        'year_graduated' => !empty($row['year_grad']) ? $row['year_grad'] : 'N/A',
+                        'employee_id'                          => $employeeId,
+                        'level'                                => $label,
+                        'name_of_school'                       => !empty($row['school']) ? $row['school'] : 'N/A',
+                        'basic_education'                      => !empty($row['course']) ? $row['course'] : 'N/A',
+                        'period_of_attendance_from'            => !empty($row['from']) ? $row['from'] : 'N/A',
+                        'period_of_attendance_to'              => !empty($row['to']) ? $row['to'] : 'N/A',
+                        'highest_level'                        => !empty($row['units']) ? $row['units'] : 'N/A',
+                        'year_graduated'                       => !empty($row['year_grad']) ? $row['year_grad'] : 'N/A',
                         'scholarship_academic_honors_recieved' => !empty($row['honors']) ? $row['honors'] : 'N/A',
                     ]);
                 }
             }
 
-            // --- Step 4: Civil Service Eligibility ---
             $eligibilities = $s4['eligibility'] ?? [[]];
             if (empty($eligibilities)) $eligibilities = [[]];
             foreach ($eligibilities as $row) {
                 CivilServiceEligibility::create([
-                    'employee_id' => $employeeId,
-                    'eligibility' => !empty($row['name']) ? $row['name'] : 'N/A',
-                    'rating' => !empty($row['rating']) ? $row['rating'] : 'N/A',
-                    'date_of_examination' => !empty($row['date']) ? $row['date'] : 'N/A',
-                    'place_of_examination' => !empty($row['place']) ? $row['place'] : 'N/A',
-                    'license_no' => !empty($row['license_no']) ? $row['license_no'] : 'N/A',
-                    'license_validity' => !empty($row['license_valid']) ? $row['license_valid'] : 'N/A',
+                    'employee_id'        => $employeeId,
+                    'eligibility'        => !empty($row['name']) ? $row['name'] : 'N/A',
+                    'rating'             => !empty($row['rating']) ? $row['rating'] : 'N/A',
+                    'date_of_examination'=> !empty($row['date']) ? $row['date'] : 'N/A',
+                    'place_of_examination'=> !empty($row['place']) ? $row['place'] : 'N/A',
+                    'license_no'         => !empty($row['license_no']) ? $row['license_no'] : 'N/A',
+                    'license_validity'   => !empty($row['license_valid']) ? $row['license_valid'] : 'N/A',
                 ]);
             }
 
-            // --- Step 5: Work Experience ---
             $work = $s5['work'] ?? [[]];
             if (empty($work)) $work = [[]];
             foreach ($work as $row) {
                 WorkExperience::create([
-                    'employee_id' => $employeeId,
-                    'inclusive_date_from' => !empty($row['from']) ? $row['from'] : 'N/A',
-                    'inclusive_date_to' => !empty($row['to']) ? $row['to'] : 'N/A',
-                    'position_title' => !empty($row['position']) ? $row['position'] : 'N/A',
-                    'department_agency_office_company' => !empty($row['department']) ? $row['department'] : 'N/A',
-                    'monthly_salary' => !empty($row['monthly_salary']) ? $row['monthly_salary'] : 'N/A',
-                    'salary_grade' => !empty($row['salary_grade']) ? $row['salary_grade'] : 'N/A',
-                    'status_of_appointment' => !empty($row['status']) ? $row['status'] : 'N/A',
-                    'govt_service' => !empty($row['govt_service']) ? $row['govt_service'] : 'N/A',
+                    'employee_id'                          => $employeeId,
+                    'inclusive_date_from'                  => !empty($row['from']) ? $row['from'] : 'N/A',
+                    'inclusive_date_to'                    => !empty($row['to']) ? $row['to'] : 'N/A',
+                    'position_title'                       => !empty($row['position']) ? $row['position'] : 'N/A',
+                    'department_agency_office_company'     => !empty($row['department']) ? $row['department'] : 'N/A',
+                    'monthly_salary'                       => !empty($row['monthly_salary']) ? $row['monthly_salary'] : 'N/A',
+                    'salary_grade'                         => !empty($row['salary_grade']) ? $row['salary_grade'] : 'N/A',
+                    'status_of_appointment'                => !empty($row['status']) ? $row['status'] : 'N/A',
+                    'govt_service'                         => !empty($row['govt_service']) ? $row['govt_service'] : 'N/A',
                 ]);
             }
 
-            // --- Step 6: Voluntary Work ---
             $voluntary = $s6['voluntary'] ?? [[]];
             if (empty($voluntary)) $voluntary = [[]];
             foreach ($voluntary as $row) {
                 VoluntaryWork::create([
-                    'employee_id' => $employeeId,
-                    'name_and_address_of_organization' => !empty($row['organization']) ? $row['organization'] : 'N/A',
-                    'inclusive_date_from' => !empty($row['from']) ? $row['from'] : 'N/A',
-                    'inclusive_date_to' => !empty($row['to']) ? $row['to'] : 'N/A',
-                    'number_of_hours' => !empty($row['hours']) ? $row['hours'] : 'N/A',
-                    'position_nature_of_work' => !empty($row['position']) ? $row['position'] : 'N/A',
+                    'employee_id'                        => $employeeId,
+                    'name_and_address_of_organization'   => !empty($row['organization']) ? $row['organization'] : 'N/A',
+                    'inclusive_date_from'                => !empty($row['from']) ? $row['from'] : 'N/A',
+                    'inclusive_date_to'                  => !empty($row['to']) ? $row['to'] : 'N/A',
+                    'number_of_hours'                    => !empty($row['hours']) ? $row['hours'] : 'N/A',
+                    'position_nature_of_work'            => !empty($row['position']) ? $row['position'] : 'N/A',
                 ]);
             }
 
-            // --- Step 7: Learning & Development ---
             $ld = $s7['ld'] ?? [[]];
             if (empty($ld)) $ld = [[]];
             foreach ($ld as $row) {
                 LearningAndDevelopment::create([
-                    'employee_id' => $employeeId,
-                    'title_of_learning_and_development_interventions' => !empty($row['title']) ? $row['title'] : 'N/A',
-                    'inclusive_date_from' => !empty($row['from']) ? $row['from'] : 'N/A',
-                    'inclusive_date_to' => !empty($row['to']) ? $row['to'] : 'N/A',
-                    'number_of_hours' => !empty($row['hours']) ? $row['hours'] : 'N/A',
-                    'type_of_l_d' => !empty($row['type']) ? $row['type'] : 'N/A',
-                    'conducted_sponsored_by' => !empty($row['conducted_by']) ? $row['conducted_by'] : 'N/A',
+                    'employee_id'                                          => $employeeId,
+                    'title_of_learning_and_development_interventions'      => !empty($row['title']) ? $row['title'] : 'N/A',
+                    'inclusive_date_from'                                  => !empty($row['from']) ? $row['from'] : 'N/A',
+                    'inclusive_date_to'                                    => !empty($row['to']) ? $row['to'] : 'N/A',
+                    'number_of_hours'                                      => !empty($row['hours']) ? $row['hours'] : 'N/A',
+                    'type_of_l_d'                                          => !empty($row['type']) ? $row['type'] : 'N/A',
+                    'conducted_sponsored_by'                               => !empty($row['conducted_by']) ? $row['conducted_by'] : 'N/A',
                 ]);
             }
 
-            // --- Step 8: Other Information ---
             OtherInformation::create([
-                'employee_id' => $employeeId,
+                'employee_id'              => $employeeId,
                 'special_skills_and_hobbies' => implode(',', array_filter($s8['skills'] ?? [])) ?: 'N/A',
                 'non_academic_distinction' => implode(',', array_filter($s8['distinctions'] ?? [])) ?: 'N/A',
-                'membership_in_association'  => implode(',', array_filter($s8['memberships'] ?? [])) ?: 'N/A',
-                'landbank_no' => $s8['landbank_no'] ?? 'N/A',
-                'dbp_no' => $s8['dbp_no'] ?? 'N/A',
-                'sss_id' => $s8['sss_id'] ?? 'N/A',
-                'department_name' => $s8['department_name'] ?? 'N/A',
-                'employment_status' => $s8['employment_status'] ?? 'N/A',
+                'membership_in_association'=> implode(',', array_filter($s8['memberships'] ?? [])) ?: 'N/A',
+                'landbank_no'              => $s8['landbank_no'] ?? 'N/A',
+                'dbp_no'                   => $s8['dbp_no'] ?? 'N/A',
+                'sss_id'                   => $s8['sss_id'] ?? 'N/A',
+                'department_name'          => $s8['department_name'] ?? 'N/A',
+                'employment_status'        => $s8['employment_status'] ?? 'N/A',
             ]);
         });
 
-        // Clean up session
         for ($i = 1; $i <= 8; $i++) {
             $request->session()->forget("employee_step_{$i}");
         }
@@ -290,7 +343,6 @@ class EmployeeController extends Controller
 
     public function import(Request $request)
     {
-        // ── Path A: confirmed from preview (temp file already stored) ──
         if ($request->has('temp_path')) {
             $request->validate(['temp_path' => 'required|string']);
 
@@ -301,9 +353,7 @@ class EmployeeController extends Controller
             }
 
             Excel::import(new EmployeePdsImport, Storage::path($tempPath));
-            Storage::delete($tempPath);   // clean up
-
-        // ── Path B: direct upload (fallback, no preview) ──
+            Storage::delete($tempPath);
         } else {
             $request->validate([
                 'file' => 'required|mimes:xlsx,xlsm,xls|max:10240',
@@ -311,7 +361,6 @@ class EmployeeController extends Controller
             Excel::import(new EmployeePdsImport, $request->file('file'));
         }
 
-        // ── Regenerate IDs for any record that still lacks CNPH- prefix ──
         $imported = PersonalInformation::where('employee_id', 'not like', 'CNPH-%')->get();
 
         DB::transaction(function () use ($imported) {
@@ -340,20 +389,21 @@ class EmployeeController extends Controller
 
     public function show($id)
     {
-        $personal    = \App\Models\PersonalInformation::where('employee_id', $id)->firstOrFail();
-        $family      = \App\Models\FamilyBackground::where('employee_id', $id)->first();
-        $education   = \App\Models\EducationalBackground::where('employee_id', $id)->get();
-        $eligibility = \App\Models\CivilServiceEligibility::where('employee_id', $id)->get();
-        $work        = \App\Models\WorkExperience::where('employee_id', $id)->get();
-        $voluntary   = \App\Models\VoluntaryWork::where('employee_id', $id)->get();
-        $learning    = \App\Models\LearningAndDevelopment::where('employee_id', $id)->get();
-        $other       = \App\Models\OtherInformation::where('employee_id', $id)->first();
+        $personal    = PersonalInformation::where('employee_id', $id)->firstOrFail();
+        $family      = FamilyBackground::where('employee_id', $id)->first();
+        $education   = EducationalBackground::where('employee_id', $id)->get();
+        $eligibility = CivilServiceEligibility::where('employee_id', $id)->get();
+        $work        = WorkExperience::where('employee_id', $id)->get();
+        $voluntary   = VoluntaryWork::where('employee_id', $id)->get();
+        $learning    = LearningAndDevelopment::where('employee_id', $id)->get();
+        $other       = OtherInformation::where('employee_id', $id)->first();
 
         return view('employees.show', compact(
             'personal', 'family', 'education', 'eligibility',
             'work', 'voluntary', 'learning', 'other'
         ));
     }
+
     public function resign($id)
     {
         DB::table('other_information')
@@ -362,6 +412,7 @@ class EmployeeController extends Controller
 
         return back()->with('success', 'Employee marked as resigned.');
     }
+
     public function reinstate(Request $request, $id)
     {
         $request->validate([
@@ -378,19 +429,17 @@ class EmployeeController extends Controller
 
         return back()->with('success', 'Employee has been reinstated successfully.');
     }
+
     public function importPreview(Request $request)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xlsm,xls|max:10240',
         ]);
 
-        // Store temporarily so we can reuse the same file on confirm
-        $tempPath = $request->file('file')->store('import_temp');
-
-        $fullPath = Storage::path($tempPath);
+        $tempPath    = $request->file('file')->store('import_temp');
+        $fullPath    = Storage::path($tempPath);
         $spreadsheet = IOFactory::load($fullPath);
 
-        // ── Read the personal_information sheet only for preview ──
         $sheet = null;
         foreach ($spreadsheet->getWorksheetIterator() as $ws) {
             if (strtolower(trim($ws->getTitle())) === 'personal_information') {
@@ -406,21 +455,19 @@ class EmployeeController extends Controller
             ], 422);
         }
 
-        $rows         = $sheet->toArray(null, true, true, true);
-        $headingRow   = null;
-        $headings     = [];
-        $new          = [];
-        $updated      = [];
-        $duplicate    = [];
-        $seenInFile   = [];   // catch duplicates within the same file
+        $rows       = $sheet->toArray(null, true, true, true);
+        $headingRow = null;
+        $headings   = [];
+        $new        = [];
+        $updated    = [];
+        $duplicate  = [];
+        $seenInFile = [];
 
         foreach ($rows as $rowIndex => $row) {
-            // ── Detect heading row (contains 'employee_id') ──
             if ($headingRow === null) {
                 $normalized = array_map(fn($v) => strtolower(trim((string) $v)), $row);
                 if (in_array('employee_id', $normalized, true)) {
                     $headingRow = $rowIndex;
-                    // Map heading name → column letter
                     foreach ($row as $col => $val) {
                         $headings[strtolower(trim((string) $val))] = $col;
                     }
@@ -428,7 +475,6 @@ class EmployeeController extends Controller
                 continue;
             }
 
-            // ── Helper: pull a value by heading name ──
             $get = function (string $key) use ($row, $headings): string {
                 return isset($headings[$key]) ? trim((string) ($row[$headings[$key]] ?? '')) : '';
             };
@@ -438,14 +484,12 @@ class EmployeeController extends Controller
             $middleName = $get('middle_name');
             $dobRaw     = $get('date_of_birth');
 
-            // Skip completely blank rows
             if ($surname === '' && $firstName === '') continue;
 
             $dob      = $this->parseDatePreview($dobRaw);
             $fileKey  = strtolower("{$surname}|{$firstName}|{$middleName}|{$dob}");
             $fullName = trim("{$surname}, {$firstName}" . ($middleName ? " {$middleName}" : ''));
 
-            // ── Duplicate within this file ──
             if (isset($seenInFile[$fileKey])) {
                 $duplicate[] = [
                     'name'   => $fullName,
@@ -455,7 +499,6 @@ class EmployeeController extends Controller
             }
             $seenInFile[$fileKey] = true;
 
-            // ── Check against DB (match by surname + first_name + middle_name + DOB) ──
             $existing = PersonalInformation::whereRaw('LOWER(TRIM(surname)) = ?',    [strtolower($surname)])
                 ->whereRaw('LOWER(TRIM(first_name)) = ?',  [strtolower($firstName)])
                 ->whereRaw('LOWER(TRIM(middle_name)) = ?', [strtolower($middleName)])
@@ -463,7 +506,6 @@ class EmployeeController extends Controller
                 ->first();
 
             if ($existing) {
-                // ── Check if any tracked field actually changed ──
                 $changes = $this->detectChanges($existing, $row, $headings, $get);
 
                 if (empty($changes)) {
@@ -496,6 +538,7 @@ class EmployeeController extends Controller
             ],
         ]);
     }
+
     private function parseDatePreview($value): ?string
     {
         if (empty($value)) return null;
@@ -525,10 +568,6 @@ class EmployeeController extends Controller
         }
     }
 
-    /**
-     * Compare incoming row data against the existing DB record.
-     * Returns a human-readable list of changed field labels.
-     */
     private function detectChanges(
         PersonalInformation $existing,
         array $row,
@@ -562,7 +601,7 @@ class EmployeeController extends Controller
         ];
 
         foreach ($fieldsToCheck as $column => $label) {
-            $incoming = strtolower(trim((string) $get($column)));
+            $incoming  = strtolower(trim((string) $get($column)));
             $existing_ = strtolower(trim((string) ($existing->$column ?? '')));
 
             if ($incoming !== '' && $incoming !== $existing_) {
