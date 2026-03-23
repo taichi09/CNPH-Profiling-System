@@ -19,7 +19,24 @@
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">{{ $employee->middle_name }}</td>
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $employee->surname }}</td>
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden lg:table-cell">{{ $employee->department_name ?? '—' }}</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">{{ $employee->employment_status ?? '—' }}</td>
+                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">
+    @php
+        $status = $employee->employment_status ?? null;
+        $statusClasses = match(strtolower($status ?? '')) {
+            'permanent'  => 'bg-green-100 text-green-800',
+            'job order'  => 'bg-yellow-100 text-yellow-800',
+            'cos'        => 'bg-blue-100 text-blue-800',
+            default      => 'bg-gray-100 text-gray-600',
+        };
+    @endphp
+    @if ($status)
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $statusClasses }}">
+            {{ $status }}
+        </span>
+    @else
+        <span class="text-gray-400">—</span>
+    @endif
+</td>
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm">
                     <div class="flex gap-2">
                         <a href="{{ route('employees.show', $employee->employee_id) }}"
