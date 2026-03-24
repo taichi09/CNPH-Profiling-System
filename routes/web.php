@@ -39,6 +39,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/employees/{id}', [EmployeeController::class, 'show'])->name('employees.show');
 
+    Route::get('/employees/{id}/edit/{step?}', [EmployeeController::class, 'editStep'])
+        ->name('employees.edit.step')
+        ->where('step', '[1-8]');
+    Route::post('/employees/{id}/edit/{step}', [EmployeeController::class, 'editStepPost'])
+        ->name('employees.edit.step.post');
+
     Route::get('/departments', [DepartmentController::class, 'index'])->name('departments.index');
     Route::post('/departments', [DepartmentController::class, 'store'])->name('departments.store');
     Route::put('/departments/{department}', [DepartmentController::class, 'update']);

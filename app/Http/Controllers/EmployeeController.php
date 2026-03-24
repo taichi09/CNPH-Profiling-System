@@ -611,4 +611,110 @@ class EmployeeController extends Controller
 
         return $changes;
     }
+
+    public function editStep(Request $request, $id, $step = 1)
+    {
+        $employee = PersonalInformation::with([
+            'familyBackground',
+            'educations',
+            'eligibilities',
+            'workExperiences',
+            'voluntaryWorks',
+            'learningAndDevelopments',
+            'otherInformations',
+        ])->findOrFail($id);
+
+        return view('employees.edit.index', [
+            'employee'    => $employee,
+            'currentStep' => (int) $step,
+        ]);
+    }
+
+    public function editStepPost(Request $request, $id, $step)
+    {
+        $employee = PersonalInformation::findOrFail($id);
+
+        match ((int) $step) {
+            1 => $employee->update($request->only([
+                    'surname', 'first_name', 'middle_name', 'extension',
+                    'date_of_birth', 'place_of_birth', 'sex_at_birth',
+                    'civil_status', 'height', 'weight', 'blood_type',
+                    'umid_id_no', 'pagibig_id_no', 'philhealth_id_no',
+                    'philsys_no', 'tin_no', 'agency_employee_no',
+                    'citizenship', 'residential_address', 'residential_zip_code',
+                    'permanent_address', 'permanent_zip_code', 'telephone_no',
+                    'mobile_no', 'email_address',
+                ])),
+
+            2 => $employee->familyBackground()->updateOrCreate(
+                    ['employee_id' => $employee->employee_id],
+                    $request->only([
+                        'spouse_surname', 'spouse_first_name', 'spouse_middle_name',
+                        'spouse_name_extension', 'occupation', 'employer_business_name',
+                        'business_address', 'telephone_no', 'name_of_children',
+                        'date_of_birth', 'father_surname', 'father_first_name',
+                        'father_middle_name', 'father_name_extension', 'mother_surname',
+                        'mother_first_name', 'mother_middle_name',
+                    ])
+                ),
+
+            3 => $this->syncHasMany($employee->educations(), $request->input('education', []), [
+                    'level', 'name_of_school', 'basic_education',
+                    'period_of_attendance_from', 'period_of_attendance_to',
+                    'highest_level', 'year_graduated',
+                    'scholarship_academic_honors_recieved',
+                ]),
+
+            4 => $this->syncHasMany($employee->eligibilities(), $request->input('eligibility', []), [
+                    'eligibility', 'rating', 'date_of_examination',
+                    'place_of_examination', 'license_no', 'license_validity',
+                ]),
+
+            5 => $this->syncHasMany($employee->workExperiences(), $request->input('work', []), [
+                    'inclusive_date_from', 'inclusive_date_to', 'position_title',
+                    'department_agency_office_company', 'monthly_salary',
+                    'salary_grade', 'status_of_appointment', 'govt_service',
+                ]),
+
+            6 => $this->syncHasMany($employee->voluntaryWorks(), $request->input('voluntary', []), [
+                    'name_and_address_of_organization', 'inclusive_date_from',
+                    'inclusive_date_to', 'number_of_hours', 'position_nature_of_work',
+                ]),
+
+            7 => $this->syncHasMany($employee->learningAndDevelopments(), $request->input('ld', []), [
+                    'title_of_learning_and_development_interventions',
+                    'inclusive_date_from', 'inclusive_date_to',
+                    'number_of_hours', 'type_of_l_d', 'conducted_sponsored_by',
+                ]),
+
+            8 => $employee->otherInformations()->updateOrCreate(
+                    ['employee_id' => $employee->employee_id],
+                    $request->only([
+                        'special_skills_and_hobbies', 'non_academic_distinction',
+                        'membership_in_association', 'landbank_no', 'dbp_no',
+                        'sss_id', 'department_name', 'employment_status',
+                    ])
+                ),
+        };
+
+        $nextStep = (int) $step + 1;
+
+        if ($nextStep > 8) {
+            return redirect()->route('employees.show', $id)
+                ->with('success', 'Employee updated successfully!');
+        }
+
+        return redirect()->route('employees.edit.step', ['id' => $id, 'step' => $nextStep]);
+    }
+
+    private function syncHasMany($relation, array $rows, array $fields)
+    {
+        $relation->delete();
+        foreach ($rows as $row) {
+            $data = array_intersect_key($row, array_flip($fields));
+            if (array_filter($data)) {
+                $relation->create($data);
+            }
+        }
+    }
 }
