@@ -440,6 +440,11 @@
                     const params = new URLSearchParams();
                     params.set('tab', '{{ $tab }}');
 
+                    const currentUrlParams = new URLSearchParams(window.location.search);
+                    if (currentUrlParams.has('search')) {
+                        params.set('search', currentUrlParams.get('search'));
+                    }
+
                     if (this.selected.dept.length)
                         params.set('departments', this.selected.dept.join(','));
                     if (this.selected.age.length)
