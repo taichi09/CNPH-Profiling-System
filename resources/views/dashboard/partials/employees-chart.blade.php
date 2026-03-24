@@ -11,55 +11,29 @@
     
 <!-- Chart.js Initialization -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const ctx = document.getElementById('departmentChart').getContext('2d');
-        
-        const departmentChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['IT', 'HR', 'Finance', 'Sales', 'Marketing', 'Operations'],
-                datasets: [{
-                    label: 'Employees',
-                    data: [45, 28, 85, 92, 62, 78],
-                    backgroundColor: '#0d9488', // teal-600
-                    borderRadius: 4,
-                    barThickness: 50
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return 'Employees: ' + context.parsed.y;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: {
-                            stepSize: 25
-                        },
-                        grid: {
-                            display: true,
-                            drawBorder: false
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('departmentChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($departmentLabels) !!},
+            datasets: [{
+                data: {!! json_encode($departmentCounts) !!},
+                backgroundColor: ['#0d9488','#0891b2','#7c3aed','#db2777','#d97706','#16a34a'],
+                borderRadius: 6,
+                barThickness: 24
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.06)' } },
+                y: { grid: { display: false } }
             }
-        });
+        }
     });
+});
 </script>

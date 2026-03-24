@@ -14,7 +14,7 @@
     <!-- Promotions Card -->
     <div class="bg-white rounded-lg shadow p-6">
         <div class="text-sm text-gray-600 mb-2">Job Orders</div>
-        <div class="text-4xl font-bold text-gray-800">400</div>
+        <div class="text-4xl font-bold text-gray-800">{{ $JobOrderCount }}</div>
     </div>
 
     <!-- Net Hires Card -->
