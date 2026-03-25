@@ -22,29 +22,39 @@ use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 
 class EmployeeController extends Controller
 {
-    public function index(Request $request)
-    {
-        $tab = $request->get('tab', 'active');
+        public function index(Request $request)
+            {
+                $tab = $request->get('tab', 'active');
+                $search = $request->get('search');
 
-        // ── Base query ──────────────────────────────────────────────────────────
-        $query = PersonalInformation::leftJoin(
-                'other_information',
-                'personal_information.employee_id',
-                '=',
-                'other_information.employee_id'
-            )
-            ->select(
-                'personal_information.*',
-                'other_information.department_name',
-                'other_information.employment_status'
-            );
+                // ── Base query ──────────────────────────────────────────────────────────
+                $query = PersonalInformation::leftJoin(
+                        'other_information',
+                        'personal_information.employee_id',
+                        '=',
+                        'other_information.employee_id'
+                    )
+                    ->select(
+                        'personal_information.*',
+                        'other_information.department_name',
+                        'other_information.employment_status'
+                    );
 
-        // ── Tab: active / resigned ───────────────────────────────────────────────
-        if ($tab === 'resigned') {
-            $query->where('other_information.employment_status', 'Resigned');
-        } else {
-            $query->where('other_information.employment_status', '!=', 'Resigned');
-        }
+                // ── Tab: active / resigned ───────────────────────────────────────────────
+                if ($tab === 'resigned') {
+                    $query->where('other_information.employment_status', 'Resigned');
+                } else {
+                    $query->where('other_information.employment_status', '!=', 'Resigned');
+                }
+
+                // ── NAME SEARCH ONLY (Disregard ID) ─────────────────────────────────────
+                if ($request->filled('search')) {
+                    $query->where(function ($q) use ($search) {
+                        $q->where('personal_information.surname', 'LIKE', "%{$search}%")
+                        ->orWhere('personal_information.first_name', 'LIKE', "%{$search}%")
+                        ->orWhere('personal_information.middle_name', 'LIKE', "%{$search}%");
+                    });
+                }
 
         // ── Filter: Department ───────────────────────────────────────────────────
         if ($request->filled('departments')) {
@@ -101,16 +111,20 @@ class EmployeeController extends Controller
         }
 
         // ── Paginate & preserve query params ────────────────────────────────────
-        $employees = $query
-            ->orderBy('personal_information.employee_id')
-            ->paginate(10)
-            ->withQueryString();   // keeps all ?tab=&departments=&... in pagination links
+        $employees = $query->orderBy('personal_information.surname', 'asc')
+                       ->paginate(10)
+                       ->withQueryString();
 
-        // ── Counts (always based on status only, not filters) ───────────────────
-        $activeCount   = OtherInformation::where('employment_status', '!=', 'Resigned')->count();
-        $resignedCount = OtherInformation::where('employment_status', 'Resigned')->count();
+    // ── SMOOTH SEARCH CHECK ─────────────────────────────────────────────────
+    // If it's an AJAX request, return ONLY the table partial
+    if ($request->ajax()) {
+        return view('employees.partials.table', compact('employees', 'tab'))->render();
+    }
 
-        return view('employees.index', compact('employees', 'tab', 'activeCount', 'resignedCount'));
+    $activeCount   = OtherInformation::where('employment_status', '!=', 'Resigned')->count();
+    $resignedCount = OtherInformation::where('employment_status', 'Resigned')->count();
+
+    return view('employees.index', compact('employees', 'tab', 'activeCount', 'resignedCount'));
     }
 
     public function cancelCreate()

@@ -130,7 +130,9 @@
             </div>
 
             {{-- Table --}}
-            @include('employees.partials.table')
+            <div id="table-container">
+    @include('employees.partials.table')
+</div>
         </div>
     </main>
 
