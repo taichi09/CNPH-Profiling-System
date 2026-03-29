@@ -24,7 +24,7 @@
                 }
 
                 /* ── Education by level ── */
-                $levelOrder = ['ELEMENTARY', 'SECONDARY', 'VOCATIONAL/TRADE COURSE', 'COLLEGE', 'GRADUATE STUDIES'];
+                $levelOrder = ['Elementary', 'Secondary', 'Vocational/Trade Course', 'College', 'Graduate Studies'];
                 $eduByLevel = [];
                 foreach ($education as $e) {
                     $eduByLevel[$e->level][] = $e;

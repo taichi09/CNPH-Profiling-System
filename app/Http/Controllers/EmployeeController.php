@@ -253,11 +253,11 @@ class EmployeeController extends Controller
             ]);
 
             $levels = [
-                'elem' => 'ELEMENTARY',
-                'sec'  => 'SECONDARY',
-                'voc'  => 'VOCATIONAL/TRADE COURSE',
-                'col'  => 'COLLEGE',
-                'grad' => 'GRADUATE STUDIES',
+                'elem' => 'Elementary',
+                'sec'  => 'Secondary',
+                'voc'  => 'Vocational/Trade Course',
+                'col'  => 'College',
+                'grad' => 'Graduate Studies',
             ];
             foreach ($levels as $prefix => $label) {
                 $rows = $s3[$prefix] ?? [[]];
@@ -653,12 +653,7 @@ class EmployeeController extends Controller
 
             2 => $this->updateFamilyBackground($request, $employee),
 
-            3 => $this->syncHasMany($employee->educations(), $request->input('education', []), [
-                    'level', 'name_of_school', 'basic_education',
-                    'period_of_attendance_from', 'period_of_attendance_to',
-                    'highest_level', 'year_graduated',
-                    'scholarship_academic_honors_recieved',
-                ]),
+            3 => $this->updateEducationalBackground($request, $employee),
 
             4 => $this->syncHasMany($employee->eligibilities(), $request->input('eligibility', []), [
                     'eligibility', 'rating', 'date_of_examination',
@@ -800,6 +795,36 @@ class EmployeeController extends Controller
                 'mother_middle_name' => $s2['mother_middle_name'] ?? null,
             ]
         );
+    }
+
+    private function updateEducationalBackground(Request $request, PersonalInformation $employee): void
+    {
+        $employee->educations()->delete();
+
+        $levels = [
+            'elem' => 'Elementary',
+            'sec' => 'Secondary',
+            'voc' => 'Vocational/Trade Course',
+            'col' => 'College',
+            'grad' => 'Graduate Studies',
+        ];
+
+        foreach ($levels as $prefix => $levelLabel) {
+            foreach ($request->input($prefix, []) as $row) {
+                if (!empty(array_filter($row))) {
+                    $employee->educations()->create([
+                        'level' => $levelLabel,
+                        'name_of_school' => $row['school'] ?? null,
+                        'basic_education' => $row['course'] ?? null,
+                        'period_of_attendance_from' => $row['from'] ?? null,
+                        'period_of_attendance_to' => $row['to'] ?? null,
+                        'highest_level' => $row['units'] ?? null,
+                        'year_graduated' => $row['year_grad'] ?? null,
+                        'scholarship_academic_honors_recieved' => $row['honors'] ?? null,
+                    ]);
+                }
+            }
+        }
     }
 
     private function syncHasMany($relation, array $rows, array $fields)
