@@ -59,17 +59,17 @@
                 @endphp
                 @foreach($works as $i => $work)
                 <div class="flex items-stretch border-b border-gray-300">
-                    <input type="text" name="work[{{ $i }}][inclusive_date_from]"
-                        value="{{ old("work.$i.inclusive_date_from", $work->inclusive_date_from ?? '') }}"
+                    <input type="text" name="work[{{ $i }}][from]"
+                        value="{{ old("work.$i.from", $work->inclusive_date_from ?? '') }}"
                         class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="work[{{ $i }}][inclusive_date_to]"
-                        value="{{ old("work.$i.inclusive_date_to", $work->inclusive_date_to ?? '') }}"
+                    <input type="text" name="work[{{ $i }}][to]"
+                        value="{{ old("work.$i.to", $work->inclusive_date_to ?? '') }}"
                         class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="work[{{ $i }}][position_title]"
-                        value="{{ old("work.$i.position_title", $work->position_title ?? '') }}"
+                    <input type="text" name="work[{{ $i }}][position]"
+                        value="{{ old("work.$i.position", $work->position_title ?? '') }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="work[{{ $i }}][department_agency_office_company]"
-                        value="{{ old("work.$i.department_agency_office_company", $work->department_agency_office_company ?? '') }}"
+                    <input type="text" name="work[{{ $i }}][department]"
+                        value="{{ old("work.$i.department", $work->department_agency_office_company ?? '') }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="work[{{ $i }}][monthly_salary]"
                         value="{{ old("work.$i.monthly_salary", $work->monthly_salary ?? '') }}"
@@ -77,12 +77,12 @@
                     <input type="text" name="work[{{ $i }}][salary_grade]"
                         value="{{ old("work.$i.salary_grade", $work->salary_grade ?? '') }}"
                         class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="work[{{ $i }}][status_of_appointment]"
-                        value="{{ old("work.$i.status_of_appointment", $work->status_of_appointment ?? '') }}"
+                    <input type="text" name="work[{{ $i }}][status]"
+                        value="{{ old("work.$i.status", $work->status_of_appointment ?? '') }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="work[{{ $i }}][govt_service]"
                         value="{{ old("work.$i.govt_service", $work->govt_service ?? '') }}"
-                        class="w-16 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                        class="w-16 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
                 @endforeach
             </div>
@@ -114,22 +114,22 @@
             const row = document.createElement('div');
             row.className = 'flex items-stretch border-b border-gray-300';
             row.innerHTML = `
-                <input type="text" name="work[${workIndex}][inclusive_date_from]"
+                <input type="text" name="work[${workIndex}][from]"
                     class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                <input type="text" name="work[${workIndex}][inclusive_date_to]"
+                <input type="text" name="work[${workIndex}][to]"
                     class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                <input type="text" name="work[${workIndex}][position_title]"
+                <input type="text" name="work[${workIndex}][position]"
                     class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="work[${workIndex}][department_agency_office_company]"
+                <input type="text" name="work[${workIndex}][department]"
                     class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 <input type="text" name="work[${workIndex}][monthly_salary]"
                     class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 <input type="text" name="work[${workIndex}][salary_grade]"
                     class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="work[${workIndex}][status_of_appointment]"
+                <input type="text" name="work[${workIndex}][status]"
                     class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 <input type="text" name="work[${workIndex}][govt_service]"
-                    class="w-16 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                    class="w-16 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
             `;
             list.appendChild(row);
             workIndex++;

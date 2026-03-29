@@ -657,11 +657,7 @@ class EmployeeController extends Controller
 
             4 => $this->updateCivilServiceEligibility($request, $employee),
 
-            5 => $this->syncHasMany($employee->workExperiences(), $request->input('work', []), [
-                    'inclusive_date_from', 'inclusive_date_to', 'position_title',
-                    'department_agency_office_company', 'monthly_salary',
-                    'salary_grade', 'status_of_appointment', 'govt_service',
-                ]),
+            5 => $this->updateWorkExperience($request, $employee),
 
             6 => $this->syncHasMany($employee->voluntaryWorks(), $request->input('voluntary', []), [
                     'name_and_address_of_organization', 'inclusive_date_from',
@@ -837,6 +833,26 @@ class EmployeeController extends Controller
                     'place_of_examination' => $row['place'] ?? null,
                     'license_no' => $row['license_no'] ?? null,
                     'license_validity' => $row['license_valid'] ?? null,
+                ]);
+            }
+        }
+    }
+
+    private function updateWorkExperience(Request $request, PersonalInformation $employee): void
+    {
+        $employee->workExperiences()->delete();
+
+        foreach ($request->input('work', []) as $row) {
+            if (!empty(array_filter($row))) {
+                $employee->workExperiences()->create([
+                    'inclusive_date_from' => $row['from'] ?? null,
+                    'inclusive_date_to' => $row['to'] ?? null,
+                    'position_title' => $row['position'] ?? null,
+                    'department_agency_office_company' => $row['department'] ?? null,
+                    'monthly_salary' => $row['monthly_salary'] ?? null,
+                    'salary_grade' => $row['salary_grade'] ?? null,
+                    'status_of_appointment' => $row['status'] ?? null,
+                    'govt_service' => $row['govt_service'] ?? null,
                 ]);
             }
         }
