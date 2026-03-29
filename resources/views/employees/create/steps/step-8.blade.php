@@ -148,7 +148,6 @@
                         <option {{ $empStatus == 'Casual' ? 'selected' : '' }}>Casual</option>
                         <option {{ $empStatus == 'Contractual' ? 'selected' : '' }}>Contractual</option>
                         <option {{ $empStatus == 'Job Order' ? 'selected' : '' }}>Job Order</option>
-                        <option {{ $empStatus == 'Coterminous' ? 'selected' : '' }}>Coterminous</option>
                         <option {{ $empStatus == 'Resigned' ? 'selected' : '' }}>Resigned</option>
                     </select>
                 </div>
