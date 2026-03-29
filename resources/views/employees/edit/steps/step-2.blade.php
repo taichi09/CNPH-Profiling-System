@@ -8,139 +8,229 @@
             <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #6b7280;">Update family background details.</p>
         </div>
 
-        @php $family = $employee->familyBackground; @endphp
+        @php
+            $family     = $employee->familyBackground;
+            $childNames = is_array($family->name_of_children ?? null) ? $family->name_of_children : [];
+            $childDobs  = is_array($family->date_of_birth ?? null)    ? $family->date_of_birth    : [];
+            $childCount = max(count($childNames), 1);
+        @endphp
 
-        {{-- Spouse --}}
-        <div class="mb-4 border-b pb-4">
-            <h3 class="text-sm font-bold text-green-700 uppercase mb-3">Spouse Information</h3>
-            <div class="grid grid-cols-4 gap-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Surname</label>
-                    <input type="text" name="spouse_surname" value="{{ old('spouse_surname', $family->spouse_surname ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">First Name</label>
-                    <input type="text" name="spouse_first_name" value="{{ old('spouse_first_name', $family->spouse_first_name ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Middle Name</label>
-                    <input type="text" name="spouse_middle_name" value="{{ old('spouse_middle_name', $family->spouse_middle_name ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Extension</label>
-                    <input type="text" name="spouse_name_extension" value="{{ old('spouse_name_extension', $family->spouse_name_extension ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-            </div>
-            <div class="grid grid-cols-4 gap-4 mt-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Occupation</label>
-                    <input type="text" name="occupation" value="{{ old('occupation', $family->occupation ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Employer/Business Name</label>
-                    <input type="text" name="employer_business_name" value="{{ old('employer_business_name', $family->employer_business_name ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Business Address</label>
-                    <input type="text" name="business_address" value="{{ old('business_address', $family->business_address ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Telephone No.</label>
-                    <input type="text" name="telephone_no" value="{{ old('telephone_no', $family->telephone_no ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-            </div>
-        </div>
+        <!-- Body -->
+        <div class="border border-gray-300 text-xs w-full">
 
-        {{-- Father --}}
-        <div class="mb-4 border-b pb-4">
-            <h3 class="text-sm font-bold text-green-700 uppercase mb-3">Father's Information</h3>
-            <div class="grid grid-cols-4 gap-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Surname</label>
-                    <input type="text" name="father_surname" value="{{ old('father_surname', $family->father_surname ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">First Name</label>
-                    <input type="text" name="father_first_name" value="{{ old('father_first_name', $family->father_first_name ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Middle Name</label>
-                    <input type="text" name="father_middle_name" value="{{ old('father_middle_name', $family->father_middle_name ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Extension</label>
-                    <input type="text" name="father_name_extension" value="{{ old('father_name_extension', $family->father_name_extension ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-            </div>
-        </div>
+            <div class="flex border-b border-gray-300">
 
-        {{-- Mother --}}
-        <div class="mb-4 border-b pb-4">
-            <h3 class="text-sm font-bold text-green-700 uppercase mb-3">Mother's Information</h3>
-            <div class="grid grid-cols-3 gap-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Surname</label>
-                    <input type="text" name="mother_surname" value="{{ old('mother_surname', $family->mother_surname ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">First Name</label>
-                    <input type="text" name="mother_first_name" value="{{ old('mother_first_name', $family->mother_first_name ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Middle Name</label>
-                    <input type="text" name="mother_middle_name" value="{{ old('mother_middle_name', $family->mother_middle_name ?? '') }}"
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-700">
-                </div>
-            </div>
-        </div>
+                <!-- Left Side -->
+                <div class="flex-1 border-r border-gray-300">
 
-        {{-- Children --}}
-        <div class="mb-4">
-            <h3 class="text-sm font-bold text-green-700 uppercase mb-3">Children</h3>
-            <div class="border border-gray-300">
-                <div class="flex border-b border-gray-300 bg-gray-50">
-                    <div class="flex-1 px-3 py-2 text-[10px] font-semibold text-gray-600 uppercase border-r border-gray-300">Name</div>
-                    <div class="w-40 px-3 py-2 text-[10px] font-semibold text-gray-600 uppercase">Date of Birth</div>
-                </div>
-                @php
-                    $childNames = is_array($family->name_of_children ?? null)
-                        ? $family->name_of_children
-                        : [];
-                    $childDobs = is_array($family->date_of_birth ?? null)
-                        ? $family->date_of_birth
-                        : [];
-                    $childCount = max(count($childNames), 1);
-                @endphp
-                <div id="children-list">
-                    @for($i = 0; $i < $childCount; $i++)
-                    <div class="flex border-b border-gray-300">
-                        <input type="text" name="name_of_children[{{ $i }}]"
-                            value="{{ old("name_of_children.$i", $childNames[$i] ?? '') }}"
-                            class="flex-1 px-3 py-2 text-sm outline-none focus:bg-gray-50 border-r border-gray-300">
-                        <input type="text" name="date_of_birth[{{ $i }}]"
-                            value="{{ old("date_of_birth.$i", $childDobs[$i] ?? '') }}"
-                            class="w-40 px-3 py-2 text-sm outline-none focus:bg-gray-50">
+                    <!-- Spouse Surname -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            22. Spouse's Surname
+                        </span>
+                        <input type="text" name="spouse_surname"
+                            value="{{ old('spouse_surname', $family->spouse_surname ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
                     </div>
-                    @endfor
+
+                    <!-- Spouse First Name + Extension -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            First Name
+                        </span>
+                        <input type="text" name="spouse_first_name"
+                            value="{{ old('spouse_first_name', $family->spouse_first_name ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                        <span class="w-40 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                            Name Extension <br>(Jr., Sr., II, III)
+                        </span>
+                        @php $spouseExt = old('spouse_extension', $family->spouse_name_extension ?? ''); @endphp
+                        <input type="text" name="spouse_extension"
+                            list="spouse_ext_options"
+                            value="{{ $spouseExt }}"
+                            placeholder="Select or type"
+                            class="w-20 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
+                        <datalist id="spouse_ext_options">
+                            <option value="Jr.">
+                            <option value="Sr.">
+                            <option value="II">
+                            <option value="III">
+                            <option value="IV">
+                        </datalist>
+                    </div>
+
+                    <!-- Spouse Middle Name -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            Middle Name
+                        </span>
+                        <input type="text" name="spouse_middle_name"
+                            value="{{ old('spouse_middle_name', $family->spouse_middle_name ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
+                    <!-- Occupation -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            Occupation
+                        </span>
+                        <input type="text" name="spouse_occupation"
+                            value="{{ old('spouse_occupation', $family->occupation ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
+                    <!-- Employer/Business Name -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            Employer/Business Name
+                        </span>
+                        <input type="text" name="spouse_employer"
+                            value="{{ old('spouse_employer', $family->employer_business_name ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
+                    <!-- Business Address -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            Business Address
+                        </span>
+                        <input type="text" name="spouse_business_address"
+                            value="{{ old('spouse_business_address', $family->business_address ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
+                    <!-- Telephone No -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            Telephone No.
+                        </span>
+                        <input type="text" name="spouse_telephone"
+                            value="{{ old('spouse_telephone', $family->telephone_no ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
+                    <!-- Father Surname -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            24. Father's Surname
+                        </span>
+                        <input type="text" name="father_surname"
+                            value="{{ old('father_surname', $family->father_surname ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
+                    <!-- Father First Name + Extension -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            First Name
+                        </span>
+                        <input type="text" name="father_first_name"
+                            value="{{ old('father_first_name', $family->father_first_name ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm border-r">
+                        <span class="w-40 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                            Name Extension <br>(Jr., Sr., II, III)
+                        </span>
+                        @php $fatherExt = old('father_extension', $family->father_name_extension ?? ''); @endphp
+                        <input type="text" name="father_extension"
+                            list="father_ext_options"
+                            value="{{ $fatherExt }}"
+                            placeholder="Select or type"
+                            class="w-20 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
+                        <datalist id="father_ext_options">
+                            <option value="Jr.">
+                            <option value="Sr.">
+                            <option value="II">
+                            <option value="III">
+                            <option value="IV">
+                        </datalist>
+                    </div>
+
+                    <!-- Father Middle Name -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            Middle Name
+                        </span>
+                        <input type="text" name="father_middle_name"
+                            value="{{ old('father_middle_name', $family->father_middle_name ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
+                    <!-- Mother Maiden Name label -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-gray-300">
+                            25. Mother's Maiden Name
+                        </span>
+                    </div>
+
+                    <!-- Mother Surname -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            Surname
+                        </span>
+                        <input type="text" name="mother_surname"
+                            value="{{ old('mother_surname', $family->mother_surname ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
+                    <!-- Mother First Name -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            First Name
+                        </span>
+                        <input type="text" name="mother_first_name"
+                            value="{{ old('mother_first_name', $family->mother_first_name ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
+                    <!-- Mother Middle Name -->
+                    <div class="flex items-stretch">
+                        <span class="w-48 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300">
+                            Middle Name
+                        </span>
+                        <input type="text" name="mother_middle_name"
+                            value="{{ old('mother_middle_name', $family->mother_middle_name ?? '') }}"
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    </div>
+
                 </div>
-                <div class="px-3 py-2">
-                    <button type="button" onclick="addChild()"
-                        class="text-xs text-green-700 hover:underline">+ Add Row</button>
+
+                <!-- Right Side: Children -->
+                <div class="flex-1 flex flex-col px-3 py-2">
+
+                    <!-- Header Row -->
+                    <div class="flex items-stretch border-b border-gray-300">
+                        <div class="flex-1 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 leading-tight flex flex-col justify-center">
+                            <span>23. Name of Children</span>
+                            <span class="normal-case font-normal">(Write full name and list all)</span>
+                        </div>
+                        <div class="w-40 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide leading-tight flex flex-col justify-center">
+                            <span>Date of Birth</span>
+                            <span class="normal-case font-normal">(dd/mm/yyyy)</span>
+                        </div>
+                    </div>
+
+                    <!-- Child Rows -->
+                    <div id="children-list" class="flex flex-col">
+                        @for($i = 0; $i < $childCount; $i++)
+                        <div class="flex items-stretch border-b border-gray-300">
+                            <input type="text" name="children[{{ $i }}][name]"
+                                value="{{ old("children.$i.name", $childNames[$i] ?? '') }}"
+                                class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                            <input type="date" name="children[{{ $i }}][dob]"
+                                value="{{ old("children.$i.dob", $childDobs[$i] ?? '') }}"
+                                class="w-40 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-gray-300">
+                        </div>
+                        @endfor
+                    </div>
+
+                    <!-- Add Child Button -->
+                    <div class="px-2 py-1.5">
+                        <button type="button" onclick="addChild()"
+                            class="text-xs text-green-700 hover:underline">+ Add Child</button>
+                    </div>
+
                 </div>
+
             </div>
         </div>
 
@@ -162,12 +252,12 @@
         function addChild() {
             const list = document.getElementById('children-list');
             const row = document.createElement('div');
-            row.className = 'flex border-b border-gray-300';
+            row.className = 'flex items-stretch border-b border-gray-300';
             row.innerHTML = `
-                <input type="text" name="name_of_children[${childIndex}]"
-                    class="flex-1 px-3 py-2 text-sm outline-none focus:bg-gray-50 border-r border-gray-300">
-                <input type="text" name="date_of_birth[${childIndex}]"
-                    class="w-40 px-3 py-2 text-sm outline-none focus:bg-gray-50">
+                <input type="text" name="children[${childIndex}][name]"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
+                <input type="date" name="children[${childIndex}][dob]"
+                    class="w-40 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-gray-300">
             `;
             list.appendChild(row);
             childIndex++;

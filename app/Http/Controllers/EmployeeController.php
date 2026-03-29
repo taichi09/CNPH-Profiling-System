@@ -649,28 +649,9 @@ class EmployeeController extends Controller
         $employee = PersonalInformation::findOrFail($id);
 
         match ((int) $step) {
-            1 => $employee->update($request->only([
-                    'surname', 'first_name', 'middle_name', 'extension',
-                    'date_of_birth', 'place_of_birth', 'sex_at_birth',
-                    'civil_status', 'height', 'weight', 'blood_type',
-                    'umid_id_no', 'pagibig_id_no', 'philhealth_id_no',
-                    'philsys_no', 'tin_no', 'agency_employee_no',
-                    'citizenship', 'residential_address', 'residential_zip_code',
-                    'permanent_address', 'permanent_zip_code', 'telephone_no',
-                    'mobile_no', 'email_address',
-                ])),
+            1 => $this->updatePersonalInformation($request, $employee),
 
-            2 => $employee->familyBackground()->updateOrCreate(
-                    ['employee_id' => $employee->employee_id],
-                    $request->only([
-                        'spouse_surname', 'spouse_first_name', 'spouse_middle_name',
-                        'spouse_name_extension', 'occupation', 'employer_business_name',
-                        'business_address', 'telephone_no', 'name_of_children',
-                        'date_of_birth', 'father_surname', 'father_first_name',
-                        'father_middle_name', 'father_name_extension', 'mother_surname',
-                        'mother_first_name', 'mother_middle_name',
-                    ])
-                ),
+            2 => $this->updateFamilyBackground($request, $employee),
 
             3 => $this->syncHasMany($employee->educations(), $request->input('education', []), [
                     'level', 'name_of_school', 'basic_education',
@@ -718,7 +699,107 @@ class EmployeeController extends Controller
                 ->with('success', 'Employee updated successfully!');
         }
 
-        return redirect()->route('employees.edit.step', ['id' => $id, 'step' => $nextStep]);
+        return redirect()->route('employees.edit.step', ['id' => $id, 'step' => $nextStep])
+            ->with('success', 'Step ' . $step . ' saved successfully!');
+    }
+
+    private function updatePersonalInformation(Request $request, PersonalInformation $employee): void
+    {
+        $s1 = $request->all();
+
+        // Build citizenship string
+        $citizenship = implode('//', array_filter([
+            $s1['citizenship'] ?? '',
+            $s1['citizenship_type'] ?? '',
+            $s1['citizenship_country'] ?? '',
+        ], fn($v) => $v !== ''));
+        $citizenship = $citizenship ?: 'N/A';
+
+        // Handle civil status "Others"
+        $civilStatus = $s1['civil_status'] ?? 'N/A';
+        if ($civilStatus === 'Others') {
+            $civilStatus = !empty($s1['civil_status_other']) ? $s1['civil_status_other'] : ($employee->civil_status ?? 'N/A');
+        }
+
+        $employee->update([
+            'surname' => $s1['surname'] ?? $employee->surname,
+            'first_name' => $s1['first_name'] ?? $employee->first_name,
+            'middle_name' => $s1['middle_name'] ?? $employee->middle_name,
+            'extension' => $s1['name_extension'] ?? $employee->extension,
+            'date_of_birth' => !empty($s1['date_of_birth']) ? $s1['date_of_birth'] : $employee->date_of_birth,
+            'place_of_birth' => $s1['place_of_birth'] ?? $employee->place_of_birth,
+            'sex_at_birth' => $s1['sex_at_birth'] ?? $employee->sex_at_birth,
+            'civil_status' => $civilStatus, 
+            'height' => $s1['height'] ?? $employee->height,
+            'weight' => $s1['weight'] ?? $employee->weight,
+            'blood_type' => $s1['blood_type'] ?? $employee->blood_type,
+            'umid_id_no' => $s1['umid'] ?? $employee->umid_id_no,
+            'pagibig_id_no' => $s1['pagibig'] ?? $employee->pagibig_id_no,
+            'philhealth_id_no' => $s1['philhealth'] ?? $employee->philhealth_id_no,
+            'philsys_no' => $s1['philsys'] ?? $employee->philsys_no,
+            'tin_no' => $s1['tin'] ?? $employee->tin_no,
+            'agency_employee_no' => $s1['agency_employee_no'] ?? $employee->agency_employee_no,
+            'citizenship' => $citizenship,
+            'residential_address' => implode('//', array_filter([
+                                        $s1['res_house'] ?? '',
+                                        $s1['res_street'] ?? '',
+                                        $s1['res_subdivision'] ?? '',
+                                        $s1['res_barangay'] ?? '',
+                                        $s1['res_city'] ?? '',
+                                        $s1['res_province'] ?? '',
+                                    ], fn($v) => $v !== '')),
+            'residential_zip_code' => isset($s1['res_zip']) && $s1['res_zip'] !== '' ? $s1['res_zip'] : null,
+            'permanent_address' => implode('//', array_filter([
+                                        $s1['perm_house'] ?? '',
+                                        $s1['perm_street'] ?? '',
+                                        $s1['perm_subdivision'] ?? '',
+                                        $s1['perm_barangay'] ?? '',
+                                        $s1['perm_city'] ?? '',
+                                        $s1['perm_province'] ?? '',
+                                    ], fn($v) => $v !== '')),
+            'permanent_zip_code' => isset($s1['perm_zip']) && $s1['perm_zip'] !== '' ? $s1['perm_zip'] : null,
+            'telephone_no' => $s1['telephone'] ?? $employee->telephone_no,
+            'mobile_no' => $s1['mobile'] ?? $employee->mobile_no,
+            'email_address' => $s1['email'] ?? $employee->email_address,
+        ]);
+    }
+
+    private function updateFamilyBackground(Request $request, PersonalInformation $employee): void
+    {
+        $s2 = $request->all();
+
+        $children = $s2['children'] ?? [];
+        $childNames = [];
+        $childDobs  = [];
+        foreach ($children as $child) {
+            if (!empty($child['name'])) {
+                $childNames[] = $child['name'];
+                $childDobs[]  = $child['dob'] ?? '';
+            }
+        }
+
+        $employee->familyBackground()->updateOrCreate(
+            ['employee_id' => $employee->employee_id],
+            [
+                'spouse_surname' => $s2['spouse_surname'] ?? null,
+                'spouse_first_name' => $s2['spouse_first_name'] ?? null,
+                'spouse_middle_name' => $s2['spouse_middle_name'] ?? null,
+                'spouse_name_extension' => $s2['spouse_extension'] ?? null,
+                'occupation' => $s2['spouse_occupation'] ?? null,
+                'employer_business_name' => $s2['spouse_employer'] ?? null,
+                'business_address' => $s2['spouse_business_address'] ?? null,
+                'telephone_no' => $s2['spouse_telephone'] ?? null,
+                'name_of_children' => implode(',', $childNames),
+                'date_of_birth' => implode(',', $childDobs),
+                'father_surname' => $s2['father_surname'] ?? null,
+                'father_first_name' => $s2['father_first_name'] ?? null,
+                'father_middle_name' => $s2['father_middle_name'] ?? null,
+                'father_name_extension' => $s2['father_extension'] ?? null,
+                'mother_surname' => $s2['mother_surname'] ?? null,
+                'mother_first_name' => $s2['mother_first_name'] ?? null,
+                'mother_middle_name' => $s2['mother_middle_name'] ?? null,
+            ]
+        );
     }
 
     private function syncHasMany($relation, array $rows, array $fields)

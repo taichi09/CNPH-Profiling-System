@@ -48,6 +48,27 @@
                 @endforeach
             </div>
 
+            {{-- Toast Notification --}}
+            @if(session('success'))
+                <div id="toast"
+                    class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-green-700 text-white text-sm font-medium px-5 py-3 rounded-lg shadow-lg transition-opacity duration-500">
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    {{ session('success') }}
+                </div>
+
+                <script>
+                    setTimeout(function () {
+                        const toast = document.getElementById('toast');
+                        if (toast) {
+                            toast.style.opacity = '0';
+                            setTimeout(() => toast.remove(), 500);
+                        }
+                    }, 3000);
+                </script>
+            @endif
+
             {{-- Step Content --}}
             @include('employees.edit.steps.step-' . $currentStep, ['employee' => $employee])
 
