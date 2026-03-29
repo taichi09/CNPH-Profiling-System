@@ -655,10 +655,7 @@ class EmployeeController extends Controller
 
             3 => $this->updateEducationalBackground($request, $employee),
 
-            4 => $this->syncHasMany($employee->eligibilities(), $request->input('eligibility', []), [
-                    'eligibility', 'rating', 'date_of_examination',
-                    'place_of_examination', 'license_no', 'license_validity',
-                ]),
+            4 => $this->updateCivilServiceEligibility($request, $employee),
 
             5 => $this->syncHasMany($employee->workExperiences(), $request->input('work', []), [
                     'inclusive_date_from', 'inclusive_date_to', 'position_title',
@@ -823,6 +820,24 @@ class EmployeeController extends Controller
                         'scholarship_academic_honors_recieved' => $row['honors'] ?? null,
                     ]);
                 }
+            }
+        }
+    }
+
+    private function updateCivilServiceEligibility(Request $request, PersonalInformation $employee): void
+    {
+        $employee->eligibilities()->delete();
+
+        foreach ($request->input('eligibility', []) as $row) {
+            if (!empty(array_filter($row))) {
+                $employee->eligibilities()->create([
+                    'eligibility' => $row['name'] ?? null,
+                    'rating' => $row['rating'] ?? null,
+                    'date_of_examination' => $row['date'] ?? null,
+                    'place_of_examination' => $row['place'] ?? null,
+                    'license_no' => $row['license_no'] ?? null,
+                    'license_validity' => $row['license_valid'] ?? null,
+                ]);
             }
         }
     }

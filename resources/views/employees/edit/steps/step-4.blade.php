@@ -50,24 +50,24 @@
                 @endphp
                 @foreach($eligibilities as $i => $eli)
                 <div class="flex items-stretch border-b border-gray-300">
-                    <input type="text" name="eligibility[{{ $i }}][eligibility]"
-                        value="{{ old("eligibility.$i.eligibility", $eli->eligibility ?? '') }}"
+                    <input type="text" name="eligibility[{{ $i }}][name]"
+                        value="{{ old("eligibility.$i.name", $eli->eligibility ?? '') }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="eligibility[{{ $i }}][rating]"
                         value="{{ old("eligibility.$i.rating", $eli->rating ?? '') }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="eligibility[{{ $i }}][date_of_examination]"
-                        value="{{ old("eligibility.$i.date_of_examination", $eli->date_of_examination ?? '') }}"
+                    <input type="text" name="eligibility[{{ $i }}][date]"
+                        value="{{ old("eligibility.$i.date", $eli->date_of_examination ?? '') }}"
                         class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="eligibility[{{ $i }}][place_of_examination]"
-                        value="{{ old("eligibility.$i.place_of_examination", $eli->place_of_examination ?? '') }}"
+                    <input type="text" name="eligibility[{{ $i }}][place]"
+                        value="{{ old("eligibility.$i.place", $eli->place_of_examination ?? '') }}"
                         class="w-36 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="eligibility[{{ $i }}][license_no]"
                         value="{{ old("eligibility.$i.license_no", $eli->license_no ?? '') }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="eligibility[{{ $i }}][license_validity]"
-                        value="{{ old("eligibility.$i.license_validity", $eli->license_validity ?? '') }}"
-                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                    <input type="text" name="eligibility[{{ $i }}][license_valid]"
+                        value="{{ old("eligibility.$i.license_valid", $eli->license_validity ?? '') }}"
+                        class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
                 @endforeach
             </div>
@@ -99,18 +99,18 @@
             const row = document.createElement('div');
             row.className = 'flex items-stretch border-b border-gray-300';
             row.innerHTML = `
-                <input type="text" name="eligibility[${eligibilityIndex}][eligibility]"
+                <input type="text" name="eligibility[${eligibilityIndex}][name]"
                     class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 <input type="text" name="eligibility[${eligibilityIndex}][rating]"
                     class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="eligibility[${eligibilityIndex}][date_of_examination]"
+                <input type="text" name="eligibility[${eligibilityIndex}][date]"
                     class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="eligibility[${eligibilityIndex}][place_of_examination]"
+                <input type="text" name="eligibility[${eligibilityIndex}][place]"
                     class="w-36 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 <input type="text" name="eligibility[${eligibilityIndex}][license_no]"
                     class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="eligibility[${eligibilityIndex}][license_validity]"
-                    class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                <input type="text" name="eligibility[${eligibilityIndex}][license_valid]"
+                    class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
             `;
             list.appendChild(row);
             eligibilityIndex++;
