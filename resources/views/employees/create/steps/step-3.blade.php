@@ -122,7 +122,7 @@
                 @foreach($vocRows as $i => $row)
                 <div class="flex items-stretch border-b border-gray-300">
                     <div class="w-32 shrink-0 px-2 py-2 text-[10px] text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 flex items-center leading-tight">
-                        {{ $i === 0 ? 'Vocational/ Trade Course' : '' }}
+                        {{ $i === 0 ? 'Vocational/Trade Course' : '' }}
                     </div>
                     <input type="text" name="voc[{{ $i }}][school]" value="{{ $row['school'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <input type="text" name="voc[{{ $i }}][course]" value="{{ $row['course'] ?? '' }}" class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
@@ -137,7 +137,7 @@
             <div class="flex border-b border-gray-300">
                 <div class="w-32 shrink-0 border-r border-gray-300"></div>
                 <div class="px-2 py-1">
-                    <button type="button" onclick="addEduRow('voc', 'Vocational/ Trade Course')"
+                    <button type="button" onclick="addEduRow('voc', 'Vocational/Trade Course')"
                         class="text-xs text-green-700 hover:underline">+ Add Row</button>
                 </div>
             </div>
