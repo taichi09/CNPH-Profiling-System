@@ -9,18 +9,18 @@
 
                 /* ── Children ── */
                 $childNames = [];
-                $childDobs  = [];
+                $childDobs = [];
                 if ($family) {
                     // Get raw values directly from DB attributes, bypassing accessors
                     $rawNames = $family->getAttributes()['name_of_children'] ?? '';
-                    $rawDobs  = $family->getAttributes()['date_of_birth'] ?? '';
+                    $rawDobs = $family->getAttributes()['date_of_birth'] ?? '';
 
                     // Detect separator — semicolon or comma
                     $nameSep = str_contains($rawNames, ';') ? ';' : ',';
-                    $dobSep  = str_contains($rawDobs, ';') ? ';' : ',';
+                    $dobSep = str_contains($rawDobs, ';') ? ';' : ',';
 
                     $childNames = array_values(array_filter(array_map('trim', explode($nameSep, $rawNames))));
-                    $childDobs  = array_values(array_filter(array_map('trim', explode($dobSep, $rawDobs))));
+                    $childDobs = array_values(array_filter(array_map('trim', explode($dobSep, $rawDobs))));
                 }
 
                 /* ── Education by level ── */
@@ -55,7 +55,7 @@
                         'province' => $parts[5] ?? 'N/A',
                     ];
                 };
-                $resAddr= $parseAddress($personal->residential_address ?? '');
+                $resAddr = $parseAddress($personal->residential_address ?? '');
                 $permAddr = $parseAddress($personal->permanent_address ?? '');
             @endphp
 
