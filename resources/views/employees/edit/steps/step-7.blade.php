@@ -52,24 +52,24 @@
                 @endphp
                 @foreach($lds as $i => $ld)
                 <div class="flex items-stretch border-b border-gray-300">
-                    <input type="text" name="ld[{{ $i }}][title_of_learning_and_development_interventions]"
-                        value="{{ old("ld.$i.title_of_learning_and_development_interventions", $ld->title_of_learning_and_development_interventions ?? '') }}"
+                    <input type="text" name="ld[{{ $i }}][title]"
+                        value="{{ old("ld.$i.title", $ld->title_of_learning_and_development_interventions ?? '') }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="ld[{{ $i }}][inclusive_date_from]"
-                        value="{{ old("ld.$i.inclusive_date_from", $ld->inclusive_date_from ?? '') }}"
+                    <input type="text" name="ld[{{ $i }}][from]"
+                        value="{{ old("ld.$i.from", $ld->inclusive_date_from ?? '') }}"
                         class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="ld[{{ $i }}][inclusive_date_to]"
-                        value="{{ old("ld.$i.inclusive_date_to", $ld->inclusive_date_to ?? '') }}"
+                    <input type="text" name="ld[{{ $i }}][to]"
+                        value="{{ old("ld.$i.to", $ld->inclusive_date_to ?? '') }}"
                         class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="ld[{{ $i }}][number_of_hours]"
-                        value="{{ old("ld.$i.number_of_hours", $ld->number_of_hours ?? '') }}"
+                    <input type="text" name="ld[{{ $i }}][hours]"
+                        value="{{ old("ld.$i.hours", $ld->number_of_hours ?? '') }}"
                         class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="ld[{{ $i }}][type_of_l_d]"
-                        value="{{ old("ld.$i.type_of_l_d", $ld->type_of_l_d ?? '') }}"
+                    <input type="text" name="ld[{{ $i }}][type]"
+                        value="{{ old("ld.$i.type", $ld->type_of_l_d ?? '') }}"
                         class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="ld[{{ $i }}][conducted_sponsored_by]"
-                        value="{{ old("ld.$i.conducted_sponsored_by", $ld->conducted_sponsored_by ?? '') }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                    <input type="text" name="ld[{{ $i }}][conducted_by]"
+                        value="{{ old("ld.$i.conducted_by", $ld->conducted_sponsored_by ?? '') }}"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
                 @endforeach
             </div>
@@ -101,18 +101,18 @@
             const row = document.createElement('div');
             row.className = 'flex items-stretch border-b border-gray-300';
             row.innerHTML = `
-                <input type="text" name="ld[${ldIndex}][title_of_learning_and_development_interventions]"
+                <input type="text" name="ld[${ldIndex}][title]"
                     class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="ld[${ldIndex}][inclusive_date_from]"
+                <input type="text" name="ld[${ldIndex}][from]"
                     class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                <input type="text" name="ld[${ldIndex}][inclusive_date_to]"
+                <input type="text" name="ld[${ldIndex}][to]"
                     class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                <input type="text" name="ld[${ldIndex}][number_of_hours]"
+                <input type="text" name="ld[${ldIndex}][hours]"
                     class="w-20 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="ld[${ldIndex}][type_of_l_d]"
+                <input type="text" name="ld[${ldIndex}][type]"
                     class="w-28 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="ld[${ldIndex}][conducted_sponsored_by]"
-                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                <input type="text" name="ld[${ldIndex}][conducted_by]"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
             `;
             list.appendChild(row);
             ldIndex++;

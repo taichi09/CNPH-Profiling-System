@@ -661,11 +661,7 @@ class EmployeeController extends Controller
 
             6 => $this->updateVoluntaryWork($request, $employee),
 
-            7 => $this->syncHasMany($employee->learningAndDevelopments(), $request->input('ld', []), [
-                    'title_of_learning_and_development_interventions',
-                    'inclusive_date_from', 'inclusive_date_to',
-                    'number_of_hours', 'type_of_l_d', 'conducted_sponsored_by',
-                ]),
+            7 => $this->updateLearningAndDevelopment($request, $employee),
 
             8 => $employee->otherInformations()->updateOrCreate(
                     ['employee_id' => $employee->employee_id],
@@ -867,6 +863,24 @@ class EmployeeController extends Controller
                     'inclusive_date_to' => $row['to'] ?? null,
                     'number_of_hours' => $row['hours'] ?? null,
                     'position_nature_of_work' => $row['position'] ?? null,
+                ]);
+            }
+        }
+    }
+
+    private function updateLearningAndDevelopment(Request $request, PersonalInformation $employee): void
+    {
+        $employee->learningAndDevelopments()->delete();
+
+        foreach ($request->input('ld', []) as $row) {
+            if (!empty(array_filter($row))) {
+                $employee->learningAndDevelopments()->create([
+                    'title_of_learning_and_development_interventions' => $row['title'] ?? null,
+                    'inclusive_date_from' => $row['from'] ?? null,
+                    'inclusive_date_to' => $row['to'] ?? null,
+                    'number_of_hours' => $row['hours'] ?? null,
+                    'type_of_l_d' => $row['type'] ?? null,
+                    'conducted_sponsored_by' => $row['conducted_by'] ?? null,
                 ]);
             }
         }
