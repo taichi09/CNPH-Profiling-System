@@ -12,14 +12,14 @@ class EmployeePdsImport implements WithMultipleSheets
         $personalImport = new PersonalInformationImport();
 
         return [
-            'personal_information'      => $personalImport,
-            'family_background'         => new FamilyBackgroundImport($personalImport),
-            'educational_background'    => new EducationalBackgroundImport($personalImport),
+            'personal_information' => $personalImport,
+            'family_background' => new FamilyBackgroundImport($personalImport),
+            'educational_background' => new EducationalBackgroundImport($personalImport),
             'civil_service_eligibility' => new CivilServiceEligibilityImport($personalImport),
-            'work_experience'           => new WorkExperienceImport($personalImport),
-            'voluntary_work'            => new VoluntaryWorkImport($personalImport),
-            'learning_and_development'  => new LearningAndDevelopmentImport($personalImport),
-            'other_information'         => new OtherInformationImport($personalImport),
+            'work_experience' => new WorkExperienceImport($personalImport),
+            'voluntary_work' => new VoluntaryWorkImport($personalImport),
+            'learning_and_development' => new LearningAndDevelopmentImport($personalImport),
+            'other_information' => new OtherInformationImport($personalImport),
         ];
     }
 }

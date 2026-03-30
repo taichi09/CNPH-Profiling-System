@@ -12,13 +12,13 @@ class LearningAndDevelopmentImport extends SkippableImport
         if ($this->isDuplicate($row)) return null;
 
         return new LearningAndDevelopment([
-            'employee_id'                                      => $row['employee_id'],
+            'employee_id' => $row['employee_id'],
             'title_of_learning_and_development_interventions' => $row['title_of_learning_and_development_interventions'],
-            'inclusive_date_from'                             => $row['inclusive_date_from'],
-            'inclusive_date_to'                               => $row['inclusive_date_to'],
-            'number_of_hours'                                 => $row['number_of_hours'],
-            'type_of_l_d'                                     => $row['type_of_l_d'],
-            'conducted_sponsored_by'                          => $row['conducted_sponsored_by'],
+            'inclusive_date_from' => $row['inclusive_date_from'],
+            'inclusive_date_to' => $row['inclusive_date_to'],
+            'number_of_hours' => $row['number_of_hours'],
+            'type_of_l_d' => $row['type_of_l_d'],
+            'conducted_sponsored_by' => $row['conducted_sponsored_by'],
         ]);
     }
 }
