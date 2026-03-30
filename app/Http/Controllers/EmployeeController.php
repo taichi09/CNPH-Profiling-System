@@ -636,7 +636,7 @@ class EmployeeController extends Controller
             'voluntaryWorks',
             'learningAndDevelopments',
             'otherInformations',
-        ])->findOrFail($id);
+        ])->where('employee_id', $id)->firstOrFail();
 
         return view('employees.edit.index', [
             'employee'    => $employee,
@@ -646,7 +646,7 @@ class EmployeeController extends Controller
 
     public function editStepPost(Request $request, $id, $step)
     {
-        $employee = PersonalInformation::findOrFail($id);
+        $employee = PersonalInformation::where('employee_id', $id)->firstOrFail();
 
         match ((int) $step) {
             1 => $this->updatePersonalInformation($request, $employee),

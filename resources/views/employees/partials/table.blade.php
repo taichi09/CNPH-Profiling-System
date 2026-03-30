@@ -46,7 +46,7 @@
 
                         @if ($tab === 'active')
                             <button type="button"
-                                onclick="window.location='{{ route('employees.edit.step', ['id' => $employee->id, 'step' => 1]) }}'"
+                                onclick="window.location='{{ route('employees.edit.step', ['id' => $employee->employee_id, 'step' => 1]) }}'"
                                 class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-green-600 text-white hover:bg-green-700">
                                 Edit
                             </button>
