@@ -27,7 +27,7 @@
     <!-- Backdrop (shared) -->
     <div id="modal-backdrop" style="display:none;position:fixed;inset:0;background:rgba(17,24,39,0.6);z-index:9998;"></div>
 
-    <!-- ========== Edit Department Modal ========== -->
+    <!-- Edit Department Modal -->
     <div id="edit-department-modal"
         style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;padding-top:5rem;padding-left:clamp(1rem, 20vw, 22rem);"
         class="flex items-start justify-center"
@@ -81,9 +81,9 @@
 
         </div>
     </div>
-    <!-- ========== End Edit Modal ========== -->
+    <!-- End Edit Modal -->
 
-    <!-- ========== Add Department Modal ========== -->
+    <!-- Add Department Modal -->
     <div id="add-department-modal"
         style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;padding-top:5rem;padding-left:clamp(1rem, 20vw, 22rem);"
         class="flex items-start justify-center"
@@ -136,9 +136,9 @@
 
         </div>
     </div>
-    <!-- ========== End Add Modal ========== -->
+    <!-- End Add Modal -->
 
-    <!-- ========== Success Modal ========== -->
+    <!-- Success Modal -->
     <div id="success-modal"
         style="display:none;position:fixed;inset:0;z-index:10000;"
         class="flex items-center justify-center">
@@ -180,246 +180,246 @@
 
         </div>
     </div>
-    <!-- ========== End Success Modal ========== -->
+    <!-- End Success Modal -->
 
     <script src="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.js"></script>
-<script>
-    // ── Element References ──
-    const modal         = document.getElementById('add-department-modal');
-    const modalBox      = document.getElementById('modal-box');
-    const backdrop      = document.getElementById('modal-backdrop');
-    const openBtn       = document.getElementById('open-add-modal-btn');
-    const closeXBtn     = document.getElementById('modal-close-x');
-    const cancelBtn     = document.getElementById('modal-cancel-btn');
-    const form          = document.getElementById('add-department-form');
+    <script>
+        // ── Element References ──
+        const modal = document.getElementById('add-department-modal');
+        const modalBox = document.getElementById('modal-box');
+        const backdrop = document.getElementById('modal-backdrop');
+        const openBtn = document.getElementById('open-add-modal-btn');
+        const closeXBtn = document.getElementById('modal-close-x');
+        const cancelBtn = document.getElementById('modal-cancel-btn');
+        const form = document.getElementById('add-department-form');
 
-    const successModal    = document.getElementById('success-modal');
-    const successModalBox = document.getElementById('success-modal-box');
-    const successCloseX   = document.getElementById('success-close-x');
-    const successOkBtn    = document.getElementById('success-ok-btn');
-    const successMessage  = document.getElementById('success-modal-message');
-    const successSub      = document.getElementById('success-modal-sub');
+        const successModal = document.getElementById('success-modal');
+        const successModalBox = document.getElementById('success-modal-box');
+        const successCloseX = document.getElementById('success-close-x');
+        const successOkBtn = document.getElementById('success-ok-btn');
+        const successMessage = document.getElementById('success-modal-message');
+        const successSub = document.getElementById('success-modal-sub');
 
-    const editModal     = document.getElementById('edit-department-modal');
-    const editModalBox  = document.getElementById('edit-modal-box');
-    const editCloseX    = document.getElementById('edit-modal-close-x');
-    const editCancelBtn = document.getElementById('edit-modal-cancel-btn');
-    const editForm      = document.getElementById('edit-department-form');
+        const editModal = document.getElementById('edit-department-modal');
+        const editModalBox = document.getElementById('edit-modal-box');
+        const editCloseX = document.getElementById('edit-modal-close-x');
+        const editCancelBtn = document.getElementById('edit-modal-cancel-btn');
+        const editForm = document.getElementById('edit-department-form');
 
-    // ── Add Modal ──
-    function openModal() {
-        modal.style.display = 'flex';
-        modal.style.pointerEvents = 'auto';
-        backdrop.style.display = 'block';
-        document.body.classList.add('overflow-hidden');
-        requestAnimationFrame(() => {
-            modalBox.classList.remove('scale-95', 'opacity-0');
-            modalBox.classList.add('scale-100', 'opacity-100');
-        });
-    }
+        // ── Add Modal ──
+        function openModal() {
+            modal.style.display = 'flex';
+            modal.style.pointerEvents = 'auto';
+            backdrop.style.display = 'block';
+            document.body.classList.add('overflow-hidden');
+            requestAnimationFrame(() => {
+                modalBox.classList.remove('scale-95', 'opacity-0');
+                modalBox.classList.add('scale-100', 'opacity-100');
+            });
+        }
 
-    function closeModal() {
-        modalBox.classList.remove('scale-100', 'opacity-100');
-        modalBox.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-            modal.style.display = 'none';
-            modal.style.pointerEvents = 'none';
-            backdrop.style.display = 'none';
-            document.body.classList.remove('overflow-hidden');
-        }, 200);
-    }
+        function closeModal() {
+            modalBox.classList.remove('scale-100', 'opacity-100');
+            modalBox.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                modal.style.pointerEvents = 'none';
+                backdrop.style.display = 'none';
+                document.body.classList.remove('overflow-hidden');
+            }, 200);
+        }
 
-    // ── Edit Modal ──
-    function openEditModal(id, name) {
-        document.getElementById('edit-department-id').value = id;
-        document.getElementById('edit-department-name').value = name;
-        document.getElementById('edit-dept-name-error').classList.add('hidden');
-        editModal.style.display = 'flex';
-        editModal.style.pointerEvents = 'auto';
-        backdrop.style.display = 'block';
-        document.body.classList.add('overflow-hidden');
-        requestAnimationFrame(() => {
-            editModalBox.classList.remove('scale-95', 'opacity-0');
-            editModalBox.classList.add('scale-100', 'opacity-100');
-        });
-    }
+        // ── Edit Modal ──
+        function openEditModal(id, name) {
+            document.getElementById('edit-department-id').value = id;
+            document.getElementById('edit-department-name').value = name;
+            document.getElementById('edit-dept-name-error').classList.add('hidden');
+            editModal.style.display = 'flex';
+            editModal.style.pointerEvents = 'auto';
+            backdrop.style.display = 'block';
+            document.body.classList.add('overflow-hidden');
+            requestAnimationFrame(() => {
+                editModalBox.classList.remove('scale-95', 'opacity-0');
+                editModalBox.classList.add('scale-100', 'opacity-100');
+            });
+        }
 
-    function closeEditModal() {
-        editModalBox.classList.remove('scale-100', 'opacity-100');
-        editModalBox.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-            editModal.style.display = 'none';
-            editModal.style.pointerEvents = 'none';
-            backdrop.style.display = 'none';
-            document.body.classList.remove('overflow-hidden');
-        }, 200);
-    }
+        function closeEditModal() {
+            editModalBox.classList.remove('scale-100', 'opacity-100');
+            editModalBox.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                editModal.style.display = 'none';
+                editModal.style.pointerEvents = 'none';
+                backdrop.style.display = 'none';
+                document.body.classList.remove('overflow-hidden');
+            }, 200);
+        }
 
-    // ── Success Modal ──
-    function openSuccessModal(message, sub) {
-        successMessage.textContent = message || 'Operation successful.';
-        successSub.textContent = sub || 'The department has been saved and is now available in the list.';
-        successModal.style.display = 'flex';
-        backdrop.style.display = 'block';
-        document.body.classList.add('overflow-hidden');
-        requestAnimationFrame(() => {
-            successModalBox.classList.remove('scale-95', 'opacity-0');
-            successModalBox.classList.add('scale-100', 'opacity-100');
-        });
-    }
+        // ── Success Modal ──
+        function openSuccessModal(message, sub) {
+            successMessage.textContent = message || 'Operation successful.';
+            successSub.textContent = sub || 'The department has been saved and is now available in the list.';
+            successModal.style.display = 'flex';
+            backdrop.style.display = 'block';
+            document.body.classList.add('overflow-hidden');
+            requestAnimationFrame(() => {
+                successModalBox.classList.remove('scale-95', 'opacity-0');
+                successModalBox.classList.add('scale-100', 'opacity-100');
+            });
+        }
 
-    function closeSuccessModal() {
-        successModalBox.classList.remove('scale-100', 'opacity-100');
-        successModalBox.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-            successModal.style.display = 'none';
-            backdrop.style.display = 'none';
-            document.body.classList.remove('overflow-hidden');
-            location.reload();
-        }, 200);
-    }
+        function closeSuccessModal() {
+            successModalBox.classList.remove('scale-100', 'opacity-100');
+            successModalBox.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                successModal.style.display = 'none';
+                backdrop.style.display = 'none';
+                document.body.classList.remove('overflow-hidden');
+                location.reload();
+            }, 200);
+        }
 
-    // ── Event Listeners ──
-    openBtn.addEventListener('click', openModal);
-    closeXBtn.addEventListener('click', closeModal);
-    cancelBtn.addEventListener('click', closeModal);
-    editCloseX.addEventListener('click', closeEditModal);
-    editCancelBtn.addEventListener('click', closeEditModal);
-    successCloseX.addEventListener('click', closeSuccessModal);
-    successOkBtn.addEventListener('click', closeSuccessModal);
+        // ── Event Listeners ──
+        openBtn.addEventListener('click', openModal);
+        closeXBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        editCloseX.addEventListener('click', closeEditModal);
+        editCancelBtn.addEventListener('click', closeEditModal);
+        successCloseX.addEventListener('click', closeSuccessModal);
+        successOkBtn.addEventListener('click', closeSuccessModal);
 
-    backdrop.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (editModal.style.display === 'flex') { closeEditModal(); return; }
-        if (modal.style.display === 'flex') { closeModal(); return; }
-        if (successModal.style.display === 'flex') { closeSuccessModal(); return; }
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
+        backdrop.addEventListener('click', (e) => {
+            e.stopPropagation();
             if (editModal.style.display === 'flex') { closeEditModal(); return; }
             if (modal.style.display === 'flex') { closeModal(); return; }
             if (successModal.style.display === 'flex') { closeSuccessModal(); return; }
-        }
-    });
+        });
 
-    // ── Edit button delegation ──
-    document.addEventListener('click', function (e) {
-        const editBtn = e.target.closest('.edit-btn');
-        if (editBtn) {
-            e.stopPropagation();
-            const id   = editBtn.dataset.id;
-            const name = editBtn.dataset.name;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (editModal.style.display === 'flex') { closeEditModal(); return; }
+                if (modal.style.display === 'flex') { closeModal(); return; }
+                if (successModal.style.display === 'flex') { closeSuccessModal(); return; }
+            }
+        });
+
+        // ── Edit button delegation ──
+        document.addEventListener('click', function (e) {
+            const editBtn = e.target.closest('.edit-btn');
+            if (editBtn) {
+                e.stopPropagation();
+                const id = editBtn.dataset.id;
+                const name = editBtn.dataset.name;
+                if (!id) {
+                    console.error('Edit button missing data-id attribute');
+                    return;
+                }
+                openEditModal(id, name);
+            }
+        });
+
+        // ── Add Department Form Submit ──
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const deptNameError = document.getElementById('dept-name-error');
+            const submitBtn = document.querySelector('[form="add-department-form"]');
+
+            deptNameError.classList.add('hidden');
+            deptNameError.textContent = '';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Saving...';
+
+            fetch('/departments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    department_name: document.getElementById('department-name').value
+                }),
+            })
+            .then(res => res.json().then(data => ({ status: res.status, data })))
+            .then(result => {
+                if (result.status === 200 && result.data.success) {
+                    form.reset();
+                    closeModal();
+                    setTimeout(() => openSuccessModal(
+                        result.data.message,
+                        'The new department has been saved and is now available in the list.'
+                    ), 250);
+                } else if (result.data.errors) {
+                    deptNameError.textContent = result.data.errors.department_name?.[0] ?? 'Validation error.';
+                    deptNameError.classList.remove('hidden');
+                }
+            })
+            .catch(() => {
+                deptNameError.textContent = 'Something went wrong. Please try again.';
+                deptNameError.classList.remove('hidden');
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Save Department';
+            });
+        });
+
+        // ── Edit Department Form Submit ──
+        editForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            const editNameError = document.getElementById('edit-dept-name-error');
+            const submitBtn = document.querySelector('[form="edit-department-form"]');
+            const id = document.getElementById('edit-department-id').value;
+
             if (!id) {
-                console.error('Edit button missing data-id attribute');
+                editNameError.textContent = 'Department ID is missing. Please close and try again.';
+                editNameError.classList.remove('hidden');
                 return;
             }
-            openEditModal(id, name);
-        }
-    });
 
-    // ── Add Department Form Submit ──
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const csrfToken     = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const deptNameError = document.getElementById('dept-name-error');
-        const submitBtn     = document.querySelector('[form="add-department-form"]');
+            editNameError.classList.add('hidden');
+            editNameError.textContent = '';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Saving...';
 
-        deptNameError.classList.add('hidden');
-        deptNameError.textContent = '';
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Saving...';
-
-        fetch('/departments', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken,
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                department_name: document.getElementById('department-name').value
-            }),
-        })
-        .then(res => res.json().then(data => ({ status: res.status, data })))
-        .then(result => {
-            if (result.status === 200 && result.data.success) {
-                form.reset();
-                closeModal();
-                setTimeout(() => openSuccessModal(
-                    result.data.message,
-                    'The new department has been saved and is now available in the list.'
-                ), 250);
-            } else if (result.data.errors) {
-                deptNameError.textContent = result.data.errors.department_name?.[0] ?? 'Validation error.';
-                deptNameError.classList.remove('hidden');
-            }
-        })
-        .catch(() => {
-            deptNameError.textContent = 'Something went wrong. Please try again.';
-            deptNameError.classList.remove('hidden');
-        })
-        .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Save Department';
-        });
-    });
-
-    // ── Edit Department Form Submit ──
-    editForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const csrfToken     = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const editNameError = document.getElementById('edit-dept-name-error');
-        const submitBtn     = document.querySelector('[form="edit-department-form"]');
-        const id            = document.getElementById('edit-department-id').value;
-
-        if (!id) {
-            editNameError.textContent = 'Department ID is missing. Please close and try again.';
-            editNameError.classList.remove('hidden');
-            return;
-        }
-
-        editNameError.classList.add('hidden');
-        editNameError.textContent = '';
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Saving...';
-
-        fetch(`/departments/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken,
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                department_name: document.getElementById('edit-department-name').value
-            }),
-        })
-        .then(res => res.json().then(data => ({ status: res.status, data })))
-        .then(result => {
-            if ((result.status === 200 || result.status === 201) && result.data.success) {
-                editForm.reset();
-                closeEditModal();
-                setTimeout(() => openSuccessModal(
-                    result.data.message || 'Department updated successfully.',
-                    'The department has been updated and changes are now reflected in the list.'
-                ), 250);
-            } else if (result.data.errors) {
-                editNameError.textContent = result.data.errors.department_name?.[0] ?? 'Validation error.';
+            fetch(`/departments/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    department_name: document.getElementById('edit-department-name').value
+                }),
+            })
+            .then(res => res.json().then(data => ({ status: res.status, data })))
+            .then(result => {
+                if ((result.status === 200 || result.status === 201) && result.data.success) {
+                    editForm.reset();
+                    closeEditModal();
+                    setTimeout(() => openSuccessModal(
+                        result.data.message || 'Department updated successfully.',
+                        'The department has been updated and changes are now reflected in the list.'
+                    ), 250);
+                } else if (result.data.errors) {
+                    editNameError.textContent = result.data.errors.department_name?.[0] ?? 'Validation error.';
+                    editNameError.classList.remove('hidden');
+                } else {
+                    editNameError.textContent = result.data.message ?? 'Update failed. Please try again.';
+                    editNameError.classList.remove('hidden');
+                }
+            })
+            .catch(() => {
+                editNameError.textContent = 'Something went wrong. Please try again.';
                 editNameError.classList.remove('hidden');
-            } else {
-                editNameError.textContent = result.data.message ?? 'Update failed. Please try again.';
-                editNameError.classList.remove('hidden');
-            }
-        })
-        .catch(() => {
-            editNameError.textContent = 'Something went wrong. Please try again.';
-            editNameError.classList.remove('hidden');
-        })
-        .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Save Changes';
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Save Changes';
+            });
         });
-    });
-</script>
+    </script>
 </x-app-layout>
