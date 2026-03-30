@@ -16,6 +16,7 @@ body {
     align-items: center;
     padding: 8px 25px;
 }
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -30,11 +31,13 @@ body {
     background: white;
     color: #374151;
 }
+
 .btn-green {
     background: #15803d;
     color: white;
     border: none;
 }
+
 .btn-green:hover { background: #166534; }
 
 /* ── PDS Page ── */
@@ -51,11 +54,13 @@ body {
 .pds-header {
     border-bottom: 1px solid #000;
 }
+
 .pds-header-top {
     display: flex;
     align-items: center;
     padding: 6px 4px 4px;
 }
+
 .pds-header-left {
     font-size: 7pt;
     line-height: 1.4;
@@ -68,6 +73,7 @@ body {
     font-size: 11pt;
     font-weight: bold;
 }
+
 .pds-header-left .revised {
     font-family: 'Calibri', 'Trebuchet MS', sans-serif;
     font-size: 9pt;
@@ -79,6 +85,7 @@ body {
     font-style: italic;
     font-size: 9pt;
 }
+
 .pds-header-center {
     flex: 1;
     text-align: center;
@@ -194,15 +201,18 @@ body {
     display: flex;
     border-top: 1px solid #000;
 }
+
 .sig-cell {
     flex: 1;
     padding: 4px 6px;
     font-size: 6pt;
     font-style: italic;
 }
+
 .sig-cell + .sig-cell {
     border-left: 1px solid #000;
 }
+
 .sig-line {
     border-bottom: 1px solid #000;
     min-height: 18px;
