@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('employees.edit.step.post', ['id' => $employee->id, 'step' => 7]) }}">
+<form method="POST" action="{{ route('employees.edit.step.post', ['id' => $employee->employee_id, 'step' => 7]) }}">
     @csrf
 
     <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
@@ -83,7 +83,7 @@
 
         <!-- Navigation -->
         <div class="flex justify-between mt-8">
-            <a href="{{ route('employees.edit.step', ['id' => $employee->id, 'step' => 6]) }}"
+            <a href="{{ route('employees.edit.step', ['id' => $employee->employee_id, 'step' => 6]) }}"
                 class="px-8 py-2 rounded-full border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50">
                 &lsaquo; Back
             </a>

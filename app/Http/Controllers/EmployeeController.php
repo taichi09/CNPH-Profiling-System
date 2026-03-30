@@ -673,7 +673,7 @@ class EmployeeController extends Controller
                 ->with('success', 'Employee updated successfully!');
         }
 
-        return redirect()->route('employees.edit.step', ['id' => $id, 'step' => $nextStep])
+        return redirect()->route('employees.edit.step', ['id' => $employee->employee_id, 'step' => $nextStep])
             ->with('success', 'Step ' . $step . ' saved successfully!');
     }
 

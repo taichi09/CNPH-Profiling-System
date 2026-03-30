@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('employees.edit.step.post', ['id' => $employee->id, 'step' => 1]) }}">
+<form method="POST" action="{{ route('employees.edit.step.post', ['id' => $employee->employee_id, 'step' => 1]) }}">
     @csrf
 
     <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
