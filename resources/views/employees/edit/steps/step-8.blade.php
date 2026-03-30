@@ -8,7 +8,12 @@
             <p style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #6b7280;">Update other information details.</p>
         </div>
 
-        @php $other = $employee->otherInformations->first(); @endphp
+        @php
+            $other = $employee->otherInformations->first();
+            $skills = array_filter(explode(',', $other->special_skills_and_hobbies ?? '')) ?: [''];
+            $distinctions = array_filter(explode(',', $other->non_academic_distinction ?? '')) ?: [''];
+            $memberships = array_filter(explode(',', $other->membership_in_association ?? '')) ?: [''];
+        @endphp
 
         <!-- Body -->
         <div class="border border-gray-300 text-xs w-full">
@@ -30,12 +35,6 @@
 
             <!-- Input Rows -->
             <div class="flex items-stretch border-b border-gray-300">
-                @php
-                    $skills      = array_filter(explode(',', $other->special_skills_and_hobbies ?? '')) ?: [''];
-                    $distinctions = array_filter(explode(',', $other->non_academic_distinction ?? '')) ?: [''];
-                    $memberships  = array_filter(explode(',', $other->membership_in_association ?? '')) ?: [''];
-                @endphp
-
                 <div id="skills-list" class="flex-1 border-r border-gray-300 flex flex-col">
                     @foreach($skills as $i => $skill)
                     <input type="text" name="skills[{{ $i }}]"
@@ -43,7 +42,6 @@
                         class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-b border-gray-300 text-center">
                     @endforeach
                 </div>
-
                 <div id="distinctions-list" class="flex-1 border-r border-gray-300 flex flex-col">
                     @foreach($distinctions as $i => $distinction)
                     <input type="text" name="distinctions[{{ $i }}]"
@@ -51,7 +49,6 @@
                         class="w-full px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-b border-gray-300 text-center">
                     @endforeach
                 </div>
-
                 <div id="memberships-list" class="flex-1 flex flex-col">
                     @foreach($memberships as $i => $membership)
                     <input type="text" name="memberships[{{ $i }}]"
@@ -87,15 +84,15 @@
                     </span>
                     <input type="text" name="landbank_no"
                         value="{{ old('landbank_no', $other->landbank_no ?? '') }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
-                <div class="flex items-stretch flex-1">
+                <div class="flex items-stretch flex-1 border-r border-gray-300">
                     <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                         DBP No.
                     </span>
                     <input type="text" name="dbp_no"
                         value="{{ old('dbp_no', $other->dbp_no ?? '') }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
             </div>
 
@@ -106,15 +103,15 @@
                     </span>
                     <input type="text" name="sss_id"
                         value="{{ old('sss_id', $other->sss_id ?? '') }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
-                <div class="flex items-stretch flex-1">
+                <div class="flex items-stretch flex-1 border-r border-gray-300">
                     <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                         Department Name
                     </span>
                     <input type="text" name="department_name"
                         value="{{ old('department_name', $other->department_name ?? '') }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
             </div>
 
@@ -123,12 +120,17 @@
                     <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                         Employment Status
                     </span>
+                    @php $empStatus = old('employment_status', $other->employment_status ?? ''); @endphp
                     <select name="employment_status"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm">
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
                         <option value="">-- Select --</option>
-                        @foreach(['Permanent', 'Contract Of Service', 'Regular', 'Casual', 'Contractual', 'Job Order', 'Coterminous', 'Resigned'] as $status)
-                            <option {{ old('employment_status', $other->employment_status ?? '') == $status ? 'selected' : '' }}>{{ $status }}</option>
-                        @endforeach
+                        <option {{ $empStatus == 'Permanent' ? 'selected' : '' }}>Permanent</option>
+                        <option {{ $empStatus == 'Contract Of Service' ? 'selected' : '' }}>Contract of Service</option>
+                        <option {{ $empStatus == 'Regular' ? 'selected' : '' }}>Regular</option>
+                        <option {{ $empStatus == 'Casual' ? 'selected' : '' }}>Casual</option>
+                        <option {{ $empStatus == 'Contractual' ? 'selected' : '' }}>Contractual</option>
+                        <option {{ $empStatus == 'Job Order' ? 'selected' : '' }}>Job Order</option>
+                        <option {{ $empStatus == 'Resigned' ? 'selected' : '' }}>Resigned</option>
                     </select>
                 </div>
             </div>
@@ -148,9 +150,9 @@
     </div>
 
     <script>
-        let skillIndex = {{ count($skills) }};
+        let skillIndex      = {{ count($skills) }};
         let distinctionIndex = {{ count($distinctions) }};
-        let membershipIndex = {{ count($memberships) }};
+        let membershipIndex  = {{ count($memberships) }};
 
         function addSkill() {
             const list = document.getElementById('skills-list');

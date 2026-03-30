@@ -663,20 +663,13 @@ class EmployeeController extends Controller
 
             7 => $this->updateLearningAndDevelopment($request, $employee),
 
-            8 => $employee->otherInformations()->updateOrCreate(
-                    ['employee_id' => $employee->employee_id],
-                    $request->only([
-                        'special_skills_and_hobbies', 'non_academic_distinction',
-                        'membership_in_association', 'landbank_no', 'dbp_no',
-                        'sss_id', 'department_name', 'employment_status',
-                    ])
-                ),
+            8 => $this->updateOtherInformation($request, $employee),
         };
 
         $nextStep = (int) $step + 1;
 
         if ($nextStep > 8) {
-            return redirect()->route('employees.show', $id)
+            return redirect()->route('employees.index')
                 ->with('success', 'Employee updated successfully!');
         }
 
@@ -884,6 +877,29 @@ class EmployeeController extends Controller
                 ]);
             }
         }
+    }
+
+    private function updateOtherInformation(Request $request, PersonalInformation $employee): void
+    {
+        $s8 = $request->all();
+
+        $skills = array_filter($s8['skills'] ?? []);
+        $distinctions = array_filter($s8['distinctions'] ?? []);
+        $memberships = array_filter($s8['memberships'] ?? []);
+
+        $employee->otherInformations()->updateOrCreate(
+            ['employee_id' => $employee->employee_id],
+            [
+                'special_skills_and_hobbies' => implode(',', $skills),
+                'non_academic_distinction' => implode(',', $distinctions),
+                'membership_in_association'  => implode(',', $memberships),
+                'landbank_no' => $s8['landbank_no'] ?? null,
+                'dbp_no' => $s8['dbp_no'] ?? null,
+                'sss_id' => $s8['sss_id'] ?? null,
+                'department_name' => $s8['department_name'] ?? null,
+                'employment_status' => $s8['employment_status'] ?? null,
+            ]
+        );
     }
 
     private function syncHasMany($relation, array $rows, array $fields)
