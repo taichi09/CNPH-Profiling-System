@@ -21,7 +21,7 @@
                 @foreach($steps as $stepNumber => $stepLabel)
                     @php
                         $isCompleted = $currentStep > $stepNumber;
-                        $isActive    = $currentStep === $stepNumber;
+                        $isActive = $currentStep === $stepNumber;
                     @endphp
 
                     <div class="relative flex-1 flex items-center gap-2 px-2 py-3
