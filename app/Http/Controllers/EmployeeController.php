@@ -12,6 +12,7 @@ use App\Models\WorkExperience;
 use App\Models\VoluntaryWork;
 use App\Models\LearningAndDevelopment;
 use App\Models\OtherInformation;
+use App\Models\Department;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -135,12 +136,15 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index');
     }
 
-    public function create($step = 1)
-    {
-        return view('employees.create.index', [
-            'currentStep' => (int)$step
-        ]);
-    }
+   public function create($step = 1)
+{
+    $departments = Department::orderBy('dept_name')->get();
+
+    return view('employees.create.index', [
+        'currentStep' => (int)$step,
+        'departments' => $departments,
+    ]);
+}
 
     public function storeStep(Request $request, $step)
     {
