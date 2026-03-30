@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class FamilyBackground extends Model
 {
-    //
     protected $table = 'family_background';
     protected $primaryKey = 'employee_id';
     public $incrementing = false; 

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class VoluntaryWork extends Model
 {
-    //
     protected $table = 'voluntary_work';
 
     public $incrementing = false;

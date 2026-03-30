@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class CivilServiceEligibility extends Model
 {
-    //
     protected $table = 'civil_service_eligibility';
 
     public $incrementing = false;

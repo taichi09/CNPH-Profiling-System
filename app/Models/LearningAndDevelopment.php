@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class LearningAndDevelopment extends Model
 {
-    //
     protected $table = 'learning_and_development_interventions';
 
     public $incrementing = false;

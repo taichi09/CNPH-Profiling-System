@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class OtherInformation extends Model
 {
-    //
     protected $table = 'other_information';
 
     public $incrementing = false;
