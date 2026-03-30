@@ -44,21 +44,21 @@
                 @endphp
                 @foreach($voluntaries as $i => $vol)
                 <div class="flex items-stretch border-b border-gray-300">
-                    <input type="text" name="voluntary[{{ $i }}][name_and_address_of_organization]"
-                        value="{{ old("voluntary.$i.name_and_address_of_organization", $vol->name_and_address_of_organization ?? '') }}"
+                    <input type="text" name="voluntary[{{ $i }}][organization]"
+                        value="{{ old("voluntary.$i.organization", $vol->name_and_address_of_organization ?? '') }}"
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="voluntary[{{ $i }}][inclusive_date_from]"
-                        value="{{ old("voluntary.$i.inclusive_date_from", $vol->inclusive_date_from ?? '') }}"
+                    <input type="text" name="voluntary[{{ $i }}][from]"
+                        value="{{ old("voluntary.$i.from", $vol->inclusive_date_from ?? '') }}"
                         class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="voluntary[{{ $i }}][inclusive_date_to]"
-                        value="{{ old("voluntary.$i.inclusive_date_to", $vol->inclusive_date_to ?? '') }}"
+                    <input type="text" name="voluntary[{{ $i }}][to]"
+                        value="{{ old("voluntary.$i.to", $vol->inclusive_date_to ?? '') }}"
                         class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                    <input type="text" name="voluntary[{{ $i }}][number_of_hours]"
-                        value="{{ old("voluntary.$i.number_of_hours", $vol->number_of_hours ?? '') }}"
+                    <input type="text" name="voluntary[{{ $i }}][hours]"
+                        value="{{ old("voluntary.$i.hours", $vol->number_of_hours ?? '') }}"
                         class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                    <input type="text" name="voluntary[{{ $i }}][position_nature_of_work]"
-                        value="{{ old("voluntary.$i.position_nature_of_work", $vol->position_nature_of_work ?? '') }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                    <input type="text" name="voluntary[{{ $i }}][position]"
+                        value="{{ old("voluntary.$i.position", $vol->position_nature_of_work ?? '') }}"
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                 </div>
                 @endforeach
             </div>
@@ -90,16 +90,16 @@
             const row = document.createElement('div');
             row.className = 'flex items-stretch border-b border-gray-300';
             row.innerHTML = `
-                <input type="text" name="voluntary[${voluntaryIndex}][name_and_address_of_organization]"
+                <input type="text" name="voluntary[${voluntaryIndex}][organization]"
                     class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="voluntary[${voluntaryIndex}][inclusive_date_from]"
+                <input type="text" name="voluntary[${voluntaryIndex}][from]"
                     class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                <input type="text" name="voluntary[${voluntaryIndex}][inclusive_date_to]"
+                <input type="text" name="voluntary[${voluntaryIndex}][to]"
                     class="shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center" style="width: 4.5rem;">
-                <input type="text" name="voluntary[${voluntaryIndex}][number_of_hours]"
+                <input type="text" name="voluntary[${voluntaryIndex}][hours]"
                     class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                <input type="text" name="voluntary[${voluntaryIndex}][position_nature_of_work]"
-                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm text-center">
+                <input type="text" name="voluntary[${voluntaryIndex}][position]"
+                    class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
             `;
             list.appendChild(row);
             voluntaryIndex++;

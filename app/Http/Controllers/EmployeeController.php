@@ -659,10 +659,7 @@ class EmployeeController extends Controller
 
             5 => $this->updateWorkExperience($request, $employee),
 
-            6 => $this->syncHasMany($employee->voluntaryWorks(), $request->input('voluntary', []), [
-                    'name_and_address_of_organization', 'inclusive_date_from',
-                    'inclusive_date_to', 'number_of_hours', 'position_nature_of_work',
-                ]),
+            6 => $this->updateVoluntaryWork($request, $employee),
 
             7 => $this->syncHasMany($employee->learningAndDevelopments(), $request->input('ld', []), [
                     'title_of_learning_and_development_interventions',
@@ -853,6 +850,23 @@ class EmployeeController extends Controller
                     'salary_grade' => $row['salary_grade'] ?? null,
                     'status_of_appointment' => $row['status'] ?? null,
                     'govt_service' => $row['govt_service'] ?? null,
+                ]);
+            }
+        }
+    }
+
+    private function updateVoluntaryWork(Request $request, PersonalInformation $employee): void
+    {
+        $employee->voluntaryWorks()->delete();
+
+        foreach ($request->input('voluntary', []) as $row) {
+            if (!empty(array_filter($row))) {
+                $employee->voluntaryWorks()->create([
+                    'name_and_address_of_organization' => $row['organization'] ?? null,
+                    'inclusive_date_from' => $row['from'] ?? null,
+                    'inclusive_date_to' => $row['to'] ?? null,
+                    'number_of_hours' => $row['hours'] ?? null,
+                    'position_nature_of_work' => $row['position'] ?? null,
                 ]);
             }
         }
