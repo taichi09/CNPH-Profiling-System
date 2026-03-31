@@ -12,7 +12,11 @@ use App\Models\WorkExperience;
 use App\Models\VoluntaryWork;
 use App\Models\LearningAndDevelopment;
 use App\Models\OtherInformation;
+<<<<<<< HEAD
 use App\Models\PdsBackgroundQuestion;
+=======
+use App\Models\Department;
+>>>>>>> 05ee5ccecae3caf382160fc05a905f0f98db9bcc
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -136,12 +140,15 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index');
     }
 
-    public function create($step = 1)
-    {
-        return view('employees.create.index', [
-            'currentStep' => (int)$step
-        ]);
-    }
+   public function create($step = 1)
+{
+    $departments = Department::orderBy('dept_name')->get();
+
+    return view('employees.create.index', [
+        'currentStep' => (int)$step,
+        'departments' => $departments,
+    ]);
+}
 
     public function storeStep(Request $request, $step)
     {

@@ -120,14 +120,22 @@
                 </div>
 
                 <!-- Department Name -->
-                <div class="flex items-stretch flex-1 border-r border-gray-300">
-                    <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
-                        Department Name
-                    </span>
-                    <input type="text" name="department_name"
-                        value="{{ old('department_name', session('employee_step_8.department_name')) }}"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
-                </div>
+                <!-- Department Name -->
+<div class="flex items-stretch flex-1 border-r border-gray-300">
+    <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+        Department Name
+    </span>
+    @php $selectedDept = old('department_name', session('employee_step_8.department_name')); @endphp
+    <select name="department_name"
+        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+        <option value="">-- Select Department --</option>
+        @foreach($departments as $dept)
+            <option value="{{ $dept->dept_name }}" {{ $selectedDept == $dept->dept_name ? 'selected' : '' }}>
+                {{ $dept->dept_name }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
             </div>
 
