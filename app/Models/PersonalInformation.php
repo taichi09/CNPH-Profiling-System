@@ -52,4 +52,9 @@ class PersonalInformation extends Model
         return $this->hasMany(OtherInformation::class, 'employee_id', 'employee_id');
     }
 
+    public function backgroundQuestions()
+    {
+        return $this->hasOne(PdsBackgroundQuestion::class, 'employee_id', 'employee_id');
+    }
+
 }
