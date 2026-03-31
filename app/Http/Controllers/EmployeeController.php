@@ -12,11 +12,8 @@ use App\Models\WorkExperience;
 use App\Models\VoluntaryWork;
 use App\Models\LearningAndDevelopment;
 use App\Models\OtherInformation;
-<<<<<<< HEAD
 use App\Models\PdsBackgroundQuestion;
-=======
 use App\Models\Department;
->>>>>>> 05ee5ccecae3caf382160fc05a905f0f98db9bcc
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
