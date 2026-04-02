@@ -12,6 +12,7 @@ use App\Models\WorkExperience;
 use App\Models\VoluntaryWork;
 use App\Models\LearningAndDevelopment;
 use App\Models\OtherInformation;
+use App\Models\PdsBackgroundQuestion;
 use App\Models\Department;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -417,10 +418,11 @@ class EmployeeController extends Controller
         $voluntary = VoluntaryWork::where('employee_id', $id)->get();
         $learning = LearningAndDevelopment::where('employee_id', $id)->get();
         $other = OtherInformation::where('employee_id', $id)->first();
+        $backgroundQuestions = PdsBackgroundQuestion::where('employee_id', $id)->first();
 
         return view('employees.show', compact(
             'personal', 'family', 'education', 'eligibility',
-            'work', 'voluntary', 'learning', 'other'
+            'work', 'voluntary', 'learning', 'other', 'backgroundQuestions'
         ));
     }
 
