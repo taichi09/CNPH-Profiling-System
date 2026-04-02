@@ -36,27 +36,12 @@
             <div class="mb-6">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Department <span class="text-red-500">*</span></label>
                 <select name="department" required
-                    class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="" disabled selected>Select department</option>
-                    <optgroup label="Medical">
-                        <option value="Medical - Doctors">Medical - Doctors</option>
-                        <option value="Medical - Nurses">Medical - Nurses</option>
-                        <option value="Medical - Nursing Attendant">Medical - Nursing Attendant</option>
-                        <option value="Medical - Midwives">Medical - Midwives</option>
-                        <option value="Medical - Respiratory Therapist">Medical - Respiratory Therapist</option>
-                    </optgroup>
-                    <optgroup label="Administrative">
-                        <option value="HR">HR</option>
-                        <option value="Finance">Finance</option>
-                        <option value="IT">IT</option>
-                        <option value="Admin">Admin</option>
-                    </optgroup>
-                    <optgroup label="Support">
-                        <option value="Security">Security</option>
-                        <option value="Maintenance">Maintenance</option>
-                        <option value="Housekeeping">Housekeeping</option>
-                    </optgroup>
-                </select>
+    class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <option value="" disabled selected>Select department</option>
+    @foreach($departments as $dept)
+        <option value="{{ $dept->dept_name }}">{{ $dept->dept_name }}</option>
+    @endforeach
+</select>
             </div>
 
             {{-- Actions --}}

@@ -8,6 +8,11 @@
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">Department</th>
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">Job Status</th>
+                @if ($tab === 'resigned')
+    <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">
+        Date Resigned
+    </th>
+@endif
                 <th scope="col" class="px-4 sm:px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
             </tr>
         </thead>
@@ -37,6 +42,13 @@
                         <span class="text-gray-400">—</span>
                     @endif
                 </td>
+                @if ($tab === 'resigned')
+    <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden xl:table-cell">
+        {{ $employee->date_resigned
+            ? \Carbon\Carbon::parse($employee->date_resigned)->format('M d, Y')
+            : '—' }}
+    </td>
+@endif
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm">
                     <div class="flex gap-2">
                         <a href="{{ route('employees.show', $employee->employee_id) }}"

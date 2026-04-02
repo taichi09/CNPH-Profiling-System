@@ -38,7 +38,8 @@ class EmployeeController extends Controller
             ->select(
                 'personal_information.*',
                 'other_information.department_name',
-                'other_information.employment_status'
+                'other_information.employment_status',
+                'other_information.date_resigned'
             );
 
         // Tab: active / resigned
@@ -124,8 +125,9 @@ class EmployeeController extends Controller
 
         $activeCount = OtherInformation::where('employment_status', '!=', 'Resigned')->count();
         $resignedCount = OtherInformation::where('employment_status', 'Resigned')->count();
+        $departments = Department::orderBy('dept_name')->get();
 
-        return view('employees.index', compact('employees', 'tab', 'activeCount', 'resignedCount'));
+        return view('employees.index', compact('employees', 'tab', 'activeCount', 'resignedCount', 'departments'));
     }
 
     public function cancelCreate()
@@ -422,14 +424,17 @@ class EmployeeController extends Controller
         ));
     }
 
-    public function resign($id)
-    {
-        DB::table('other_information')
-            ->where('employee_id', $id)
-            ->update(['employment_status' => 'RESIGNED']);
+  public function resign($id)
+{
+    DB::table('other_information')
+        ->where('employee_id', $id)
+        ->update([
+            'employment_status' => 'Resigned',
+            'date_resigned' => now()->toDateString(), // 👈 add this
+        ]);
 
-        return back()->with('success', 'Employee marked as resigned.');
-    }
+    return back()->with('success', 'Employee marked as resigned.');
+}
 
     public function reinstate(Request $request, $id)
     {

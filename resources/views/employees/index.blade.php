@@ -171,16 +171,8 @@
             return {
                 activeCount: 0,
 
-                departments: [
-                    'Medical - Nurses',
-                    'Medical - Doctors',
-                    'Medical - Midwives',
-                    'Medical - Technicians',
-                    'Administrative',
-                    'Finance',
-                    'HR',
-                    'IT',
-                ],
+                // AFTER
+                departments: @json($departments->pluck('dept_name')),
                 ageGroups:       ['18–25', '26–35', '36–45', '46–55', '56+'],
                 employmentTypes: ['Permanent', 'COS', 'Job Order'],
                 genders:         ['Male', 'Female'],
