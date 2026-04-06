@@ -59,19 +59,106 @@
                 $permAddr = $parseAddress($personal->permanent_address ?? '');
             @endphp
 
-            <div class="action-bar">
-                <a href="{{ route('employees.index') }}" class="btn">&#8592; Back to Employees</a>
-                <button class="btn btn-green" onclick="window.print()">&#128438; Print / Save as PDF</button>
+            <div class="flex items-center justify-between mb-4">
+                <a href="{{ route('employees.index') }}"
+                    class="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-green-700 text-green-700 text-sm font-semibold uppercase tracking-wide hover:bg-green-700 hover:text-white transition-colors duration-200">
+                    &#8592; Back to Employees
+                </a>
+                <button onclick="window.print()"
+                    class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-green-700 text-white text-sm font-semibold uppercase tracking-wide hover:bg-green-800 transition-colors duration-200">
+                    &#128438; Print / Save as PDF
+                </button>
             </div>
 
-            {{-- Page 1: Personal Info + Family Background + Education --}}
-            @include('employees.partials.pds-page1')
+            {{-- Tabs --}}
+            <div class="flex border-b border-gray-200 mb-4">
+                <button onclick="switchTab('page1')"
+                    id="tab-page1"
+                    class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-green-700 text-green-700 focus:outline-none">
+                    Page 1
+                </button>
+                <button onclick="switchTab('page2')"
+                    id="tab-page2"
+                    class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
+                    Page 2
+                </button>
+                <button onclick="switchTab('page3')"
+                    id="tab-page3"
+                    class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
+                    Page 3
+                </button>
+                <button onclick="switchTab('landbank')"
+                    id="tab-landbank"
+                    class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
+                    Landbank
+                </button>
+                <button onclick="switchTab('dbp')"
+                    id="tab-dbp"
+                    class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
+                    DBP No.
+                </button>
+                <button onclick="switchTab('sss')"
+                    id="tab-sss"
+                    class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
+                    SSS ID
+                </button>
+            </div>
 
-            {{-- Page 2: Civil Service Eligibility + Work Experience --}}
-            @include('employees.partials.pds-page2')
+            {{-- Tab Contents --}}
+            <div id="content-page1">
+                @include('employees.partials.pds-page1')
+            </div>
 
-            {{-- Page 3: Voluntary Work + L&D + Other Info --}}
-            @include('employees.partials.pds-page3')
+            <div id="content-page2" style="display:none;">
+                @include('employees.partials.pds-page2')
+            </div>
+
+            <div id="content-page3" style="display:none;">
+                @include('employees.partials.pds-page3')
+            </div>
+
+            <div id="content-landbank" style="display:none;">
+                <div class="max-w-xs mx-auto mt-6 bg-white border border-gray-200 rounded-lg shadow p-4">
+                    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Landbank No.</h2>
+                    <div class="border border-gray-300 rounded px-4 py-3 text-sm font-semibold text-gray-800">
+                        {{ $other->landbank_no ?? 'N/A' }}
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-dbp" style="display:none;">
+                <div class="max-w-xs mx-auto mt-6 bg-white border border-gray-200 rounded-lg shadow p-4">
+                    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">DBP No.</h2>
+                    <div class="border border-gray-300 rounded px-4 py-3 text-sm font-semibold text-gray-800">
+                        {{ $other->dbp_no ?? 'N/A' }}
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-sss" style="display:none;">
+                <div class="max-w-xs mx-auto mt-6 bg-white border border-gray-200 rounded-lg shadow p-4">
+                    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">SSS ID</h2>
+                    <div class="border border-gray-300 rounded px-4 py-3 text-sm font-semibold text-gray-800">
+                        {{ $other->sss_id ?? 'N/A' }}
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                function switchTab(page) {
+                    const pages = ['page1', 'page2', 'page3', 'landbank', 'dbp', 'sss'];
+
+                    pages.forEach(p => {
+                        document.getElementById('content-' + p).style.display = 'none';
+                        document.getElementById('tab-' + p).classList.remove('border-green-700', 'text-green-700');
+                        document.getElementById('tab-' + p).classList.add('border-transparent', 'text-gray-400');
+                    });
+
+                    document.getElementById('content-' + page).style.display = 'block';
+                    document.getElementById('tab-' + page).classList.remove('border-transparent', 'text-gray-400');
+                    document.getElementById('tab-' + page).classList.add('border-green-700', 'text-green-700');
+                }
+            </script>
 
         </div>
     </main>
