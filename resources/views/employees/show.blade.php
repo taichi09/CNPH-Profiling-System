@@ -73,9 +73,6 @@
             {{-- Page 3: Voluntary Work + L&D + Other Info --}}
             @include('employees.partials.pds-page3')
 
-            {{-- Page 4: Declaration + Signature --}}
-            {{-- @include('employees.partials.pds-page4') --}}
-
         </div>
     </main>
 </x-app-layout>
