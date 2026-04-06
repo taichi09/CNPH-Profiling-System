@@ -87,20 +87,10 @@
                     class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
                     Page 3
                 </button>
-                <button onclick="switchTab('landbank')"
-                    id="tab-landbank"
+                <button onclick="switchTab('ids')"
+                    id="tab-ids"
                     class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
-                    Landbank
-                </button>
-                <button onclick="switchTab('dbp')"
-                    id="tab-dbp"
-                    class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
-                    DBP No.
-                </button>
-                <button onclick="switchTab('sss')"
-                    id="tab-sss"
-                    class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
-                    SSS ID
+                    IDs & Bank Info
                 </button>
             </div>
 
@@ -117,36 +107,35 @@
                 @include('employees.partials.pds-page3')
             </div>
 
-            <div id="content-landbank" style="display:none;">
-                <div class="max-w-xs mx-auto mt-6 bg-white border border-gray-200 rounded-lg shadow p-4">
-                    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Landbank No.</h2>
-                    <div class="border border-gray-300 rounded px-4 py-3 text-sm font-semibold text-gray-800">
-                        {{ $other->landbank_no ?? 'N/A' }}
-                    </div>
-                </div>
-            </div>
-
-            <div id="content-dbp" style="display:none;">
-                <div class="max-w-xs mx-auto mt-6 bg-white border border-gray-200 rounded-lg shadow p-4">
-                    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">DBP No.</h2>
-                    <div class="border border-gray-300 rounded px-4 py-3 text-sm font-semibold text-gray-800">
-                        {{ $other->dbp_no ?? 'N/A' }}
-                    </div>
-                </div>
-            </div>
-
-            <div id="content-sss" style="display:none;">
-                <div class="max-w-xs mx-auto mt-6 bg-white border border-gray-200 rounded-lg shadow p-4">
-                    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">SSS ID</h2>
-                    <div class="border border-gray-300 rounded px-4 py-3 text-sm font-semibold text-gray-800">
-                        {{ $other->sss_id ?? 'N/A' }}
+            <div id="content-ids" style="display:none;">
+                <div class="max-w-sm mx-auto mt-6 bg-white border border-gray-200 rounded-lg shadow p-5">
+                    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">IDs & Bank Info</h2>
+                    <div class="flex flex-col gap-3">
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 uppercase mb-1">Landbank No.</p>
+                            <div class="border border-gray-300 rounded px-3 py-2 text-sm font-semibold text-gray-800">
+                                {{ $other->landbank_no ?? 'N/A' }}
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 uppercase mb-1">DBP No.</p>
+                            <div class="border border-gray-300 rounded px-3 py-2 text-sm font-semibold text-gray-800">
+                                {{ $other->dbp_no ?? 'N/A' }}
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 uppercase mb-1">SSS ID</p>
+                            <div class="border border-gray-300 rounded px-3 py-2 text-sm font-semibold text-gray-800">
+                                {{ $other->sss_id ?? 'N/A' }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <script>
                 function switchTab(page) {
-                    const pages = ['page1', 'page2', 'page3', 'landbank', 'dbp', 'sss'];
+                    const pages = ['page1', 'page2', 'page3', 'ids'];
 
                     pages.forEach(p => {
                         document.getElementById('content-' + p).style.display = 'none';
