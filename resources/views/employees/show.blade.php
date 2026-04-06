@@ -108,27 +108,27 @@
             </div>
 
             <div id="content-ids" style="display:none;">
-                <div class="max-w-sm mx-auto mt-6 bg-white border border-gray-200 rounded-lg shadow p-5">
-                    <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">IDs & Bank Info</h2>
-                    <div class="flex flex-col gap-3">
-                        <div>
-                            <p class="text-xs font-semibold text-gray-500 uppercase mb-1">Landbank No.</p>
-                            <div class="border border-gray-300 rounded px-3 py-2 text-sm font-semibold text-gray-800">
-                                {{ $other->landbank_no ?? 'N/A' }}
-                            </div>
+                <div class="mt-6">
+                    <div class="grid grid-cols-3 gap-4">
+
+                        {{-- Landbank --}}
+                        <div class="bg-white border border-gray-200 rounded-lg p-5">
+                            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Landbank No.</p>
+                            <p class="text-sm font-bold text-gray-800">{{ $other->landbank_no ?? 'N/A' }}</p>
                         </div>
-                        <div>
-                            <p class="text-xs font-semibold text-gray-500 uppercase mb-1">DBP No.</p>
-                            <div class="border border-gray-300 rounded px-3 py-2 text-sm font-semibold text-gray-800">
-                                {{ $other->dbp_no ?? 'N/A' }}
-                            </div>
+
+                        {{-- DBP --}}
+                        <div class="bg-white border border-gray-200 rounded-lg p-5">
+                            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">DBP No.</p>
+                            <p class="text-sm font-bold text-gray-800">{{ $other->dbp_no ?? 'N/A' }}</p>
                         </div>
-                        <div>
-                            <p class="text-xs font-semibold text-gray-500 uppercase mb-1">SSS ID</p>
-                            <div class="border border-gray-300 rounded px-3 py-2 text-sm font-semibold text-gray-800">
-                                {{ $other->sss_id ?? 'N/A' }}
-                            </div>
+
+                        {{-- SSS --}}
+                        <div class="bg-white border border-gray-200 rounded-lg p-5">
+                            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">SSS ID</p>
+                            <p class="text-sm font-bold text-gray-800">{{ $other->sss_id ?? 'N/A' }}</p>
                         </div>
+
                     </div>
                 </div>
             </div>
