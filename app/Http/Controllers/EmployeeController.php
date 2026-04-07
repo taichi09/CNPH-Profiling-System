@@ -639,6 +639,7 @@ class EmployeeController extends Controller
 
     public function editStep(Request $request, $id, $step = 1)
     {
+        $departments = Department::orderBy('dept_name')->get();
         $employee = PersonalInformation::with([
             'familyBackground',
             'educations',
@@ -652,6 +653,7 @@ class EmployeeController extends Controller
         return view('employees.edit.index', [
             'employee' => $employee,
             'currentStep' => (int) $step,
+            'departments' => $departments,
         ]);
     }
 
