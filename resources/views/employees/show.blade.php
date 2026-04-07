@@ -87,6 +87,11 @@
                     class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
                     Page 3
                 </button>
+                <button onclick="switchTab('page4')"
+                    id="tab-page4"
+                    class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
+                    Page 4
+                </button>
                 <button onclick="switchTab('ids')"
                     id="tab-ids"
                     class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
@@ -105,6 +110,10 @@
 
             <div id="content-page3" style="display:none;">
                 @include('employees.partials.pds-page3')
+            </div>
+
+            <div id="content-page4" style="display:none;">
+                @include('employees.partials.pds-page4', ['backgroundQuestions' => $backgroundQuestions])
             </div>
 
             <div id="content-ids" style="display:none;">
@@ -135,7 +144,7 @@
 
             <script>
                 function switchTab(page) {
-                    const pages = ['page1', 'page2', 'page3', 'ids'];
+                    const pages = ['page1', 'page2', 'page3', 'page4', 'ids'];
 
                     pages.forEach(p => {
                         document.getElementById('content-' + p).style.display = 'none';
