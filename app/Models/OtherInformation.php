@@ -23,7 +23,9 @@ class OtherInformation extends Model
         'dbp_no',
         'sss_id',
         'department_name',
-        'employment_status'
+        'employment_status',
+        'date_resigned',
+        'photo'
     ];
 
     public function personalInformation()
