@@ -87,15 +87,10 @@
                     class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
                     Page 3
                 </button>
-                <button onclick="switchTab('page4')"
-                    id="tab-page4"
-                    class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
-                    Page 4
-                </button>
                 <button onclick="switchTab('ids')"
                     id="tab-ids"
                     class="px-6 py-2 text-sm font-semibold uppercase tracking-wide border-b-4 border-transparent text-gray-400 hover:text-green-700 focus:outline-none">
-                    IDs & Bank Info
+                    IDs, Bank & Photo
                 </button>
             </div>
 
@@ -112,39 +107,51 @@
                 @include('employees.partials.pds-page3')
             </div>
 
-            <div id="content-page4" style="display:none;">
-                @include('employees.partials.pds-page4', ['backgroundQuestions' => $backgroundQuestions])
-            </div>
-
             <div id="content-ids" style="display:none;">
-                <div class="mt-6">
-                    <div class="grid grid-cols-3 gap-4">
+                <div class="mt-6 flex gap-6 items-stretch">
 
-                        {{-- Landbank --}}
-                        <div class="bg-white border border-gray-200 rounded-lg p-5">
-                            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Landbank No.</p>
-                            <p class="text-sm font-bold text-gray-800">{{ $other->landbank_no ?? 'N/A' }}</p>
+                    {{-- Left: ID Cards --}}
+                    <div class="flex-1">
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+
+                            {{-- Landbank --}}
+                            <div class="bg-white border border-gray-200 rounded-lg p-5">
+                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Landbank No.</p>
+                                <p class="text-sm font-bold text-gray-800">{{ $other->landbank_no ?? 'N/A' }}</p>
+                            </div>
+
+                            {{-- DBP --}}
+                            <div class="bg-white border border-gray-200 rounded-lg p-5">
+                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">DBP No.</p>
+                                <p class="text-sm font-bold text-gray-800">{{ $other->dbp_no ?? 'N/A' }}</p>
+                            </div>
+
+                            {{-- SSS --}}
+                            <div class="bg-white border border-gray-200 rounded-lg p-5">
+                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">SSS ID</p>
+                                <p class="text-sm font-bold text-gray-800">{{ $other->sss_id ?? 'N/A' }}</p>
+                            </div>
+
                         </div>
-
-                        {{-- DBP --}}
-                        <div class="bg-white border border-gray-200 rounded-lg p-5">
-                            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">DBP No.</p>
-                            <p class="text-sm font-bold text-gray-800">{{ $other->dbp_no ?? 'N/A' }}</p>
-                        </div>
-
-                        {{-- SSS --}}
-                        <div class="bg-white border border-gray-200 rounded-lg p-5">
-                            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">SSS ID</p>
-                            <p class="text-sm font-bold text-gray-800">{{ $other->sss_id ?? 'N/A' }}</p>
-                        </div>
-
                     </div>
+
+                    {{-- Right: Passport Photo --}}
+                    <div class="flex flex-col items-center">
+                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Photo</p>
+                        <div style="width:132px; height:170px; border:2px dashed #cbd5e1; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#f8fafc; color:#94a3b8; font-size:7.5pt; text-align:center; padding:8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="width:32px; height:32px; margin-bottom:6px; color:#cbd5e1;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0zM3 20h18" />
+                            </svg>
+                            Passport-sized unfiltered digital picture<br>4.5 cm × 3.5 cm
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
             <script>
                 function switchTab(page) {
-                    const pages = ['page1', 'page2', 'page3', 'page4', 'ids'];
+                    const pages = ['page1', 'page2', 'page3', 'ids'];
 
                     pages.forEach(p => {
                         document.getElementById('content-' + p).style.display = 'none';
