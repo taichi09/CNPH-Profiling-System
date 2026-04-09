@@ -350,7 +350,7 @@
                             </div>
 
                             {{-- Gov ID + Signature row --}}
-                            <table style="width:100%; border-collapse:collapse;">
+                            <table style="width:100%; border-collapse:collapse; margin-top:8px;">
                                 <tr>
                                     {{-- Gov Issued ID --}}
                                     <td style="vertical-align:top; padding:6px; border:1px solid #000; width:35%;">
@@ -397,7 +397,7 @@
                                 Passport-sized unfiltered digital picture taken within the last 6 months<br>4.5 cm. X 3.5 cm
                             </div>
                             <div style="font-family:'Arial Narrow',Arial,sans-serif; font-size:8pt; font-weight:bold; margin-top:6px; margin-bottom:10px; text-transform:none;">PHOTO</div>
-                            <div style="border:1px solid #000; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; text-transform:none; text-align:center; height:170px; width:100%; display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;">
+                            <div style="border:1px solid #000; font-family:'Arial Narrow',Arial,sans-serif; font-size:7.5pt; text-transform:none; text-align:center; height:170px; width:132px; margin:0 auto; display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;">
                                 Right Thumbmark
                             </div>
                         </td>
