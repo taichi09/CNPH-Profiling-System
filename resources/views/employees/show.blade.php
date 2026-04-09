@@ -64,10 +64,10 @@
                     class="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-green-700 text-green-700 text-sm font-semibold uppercase tracking-wide hover:bg-green-700 hover:text-white transition-colors duration-200">
                     &#8592; Back to Employees
                 </a>
-                <button onclick="window.print()"
+                {{-- <button onclick="window.print()"
                     class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-green-700 text-white text-sm font-semibold uppercase tracking-wide hover:bg-green-800 transition-colors duration-200">
                     &#128438; Print / Save as PDF
-                </button>
+                </button> --}}
             </div>
 
             {{-- Tabs --}}
@@ -108,11 +108,21 @@
             </div>
 
             <div id="content-ids" style="display:none;">
-                <div class="mt-6 flex gap-6 items-stretch">
+                <div class="mt-6 flex gap-6 items-start">
 
-                    {{-- Left: ID Cards --}}
+                    {{-- Left: Passport Photo --}}
+                    <div class="flex flex-col items-center">
+                        <div style="width:132px; height:170px; border:2px dashed #cbd5e1; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#f8fafc; color:#94a3b8; font-size:7.5pt; text-align:center; padding:8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="width:32px; height:32px; margin-bottom:6px; color:#cbd5e1;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0zM3 20h18" />
+                            </svg>
+                            Passport-sized unfiltered digital picture taken within the last 6 months<br>4.5 cm × 3.5 cm
+                        </div>
+                    </div>
+
+                    {{-- Right: ID Cards --}}
                     <div class="flex-1">
-                        <div class="grid grid-cols-3 gap-4 mb-4">
+                        <div class="grid grid-cols-3 gap-4 w-full">
 
                             {{-- Landbank --}}
                             <div class="bg-white border border-gray-200 rounded-lg p-5">
@@ -132,17 +142,6 @@
                                 <p class="text-sm font-bold text-gray-800">{{ $other->sss_id ?? 'N/A' }}</p>
                             </div>
 
-                        </div>
-                    </div>
-
-                    {{-- Right: Passport Photo --}}
-                    <div class="flex flex-col items-center">
-                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Photo</p>
-                        <div style="width:132px; height:170px; border:2px dashed #cbd5e1; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#f8fafc; color:#94a3b8; font-size:7.5pt; text-align:center; padding:8px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" style="width:32px; height:32px; margin-bottom:6px; color:#cbd5e1;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0zM3 20h18" />
-                            </svg>
-                            Passport-sized unfiltered digital picture<br>4.5 cm × 3.5 cm
                         </div>
                     </div>
 
