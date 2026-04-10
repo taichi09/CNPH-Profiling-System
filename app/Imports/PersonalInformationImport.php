@@ -45,10 +45,10 @@ class PersonalInformationImport implements ToCollection, WithHeadingRow
 
             if ($exists) {
                 $this->skipIds[] = $excelId;
-                continue; // ← skip, no ID wasted
+                continue; // skip, no ID wasted
             }
 
-            // ← Only fires when row is truly new, ID allocated here only
+            // Only fires when row is truly new, ID allocated here only
             PersonalInformation::create([
                 'employee_id' => $excelId,
                 'surname' => $surname,
