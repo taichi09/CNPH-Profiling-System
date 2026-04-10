@@ -95,7 +95,7 @@ class EmployeeController extends Controller
                 '26–35' => [26, 35],
                 '36–45' => [36, 45],
                 '46–55' => [46, 55],
-                '56+'   => [56, 150],
+                '56+' => [56, 150],
             ];
 
             $query->where(function ($q) use ($groups, $ageMap) {
@@ -139,14 +139,14 @@ class EmployeeController extends Controller
     }
 
    public function create($step = 1)
-{
-    $departments = Department::orderBy('dept_name')->get();
+    {
+        $departments = Department::orderBy('dept_name')->get();
 
-    return view('employees.create.index', [
-        'currentStep' => (int)$step,
-        'departments' => $departments,
-    ]);
-}
+        return view('employees.create.index', [
+            'currentStep' => (int)$step,
+            'departments' => $departments,
+        ]);
+    }
 
     public function storeStep(Request $request, $step)
     {
@@ -431,17 +431,17 @@ class EmployeeController extends Controller
         ));
     }
 
-  public function resign($id)
-{
-    DB::table('other_information')
-        ->where('employee_id', $id)
-        ->update([
-            'employment_status' => 'Resigned',
-            'date_resigned' => now()->toDateString(), // 👈 add this
-        ]);
+    public function resign($id)
+    {
+        DB::table('other_information')
+            ->where('employee_id', $id)
+            ->update([
+                'employment_status' => 'Resigned',
+                'date_resigned' => now()->toDateString(),
+            ]);
 
-    return back()->with('success', 'Employee marked as resigned.');
-}
+        return back()->with('success', 'Employee marked as resigned.');
+    }
 
     public function reinstate(Request $request, $id)
     {
