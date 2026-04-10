@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('employees.create.step.post', 8) }}">
+<form method="POST" action="{{ route('employees.create.step.post', 8) }}" enctype="multipart/form-data">
     @csrf
 
     <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
@@ -163,6 +163,33 @@
             </div>
         </div>
 
+        {{-- Photo Upload Section --}}
+        <div class="border border-gray-300 text-xs w-full mt-5">
+            <div class="flex items-stretch border-b border-gray-300">
+                <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                    Photo
+                </span>
+                <div class="flex-1 px-4 py-4 flex items-center gap-6">
+                    {{-- Preview box --}}
+                    <div id="photo-preview-box" style="width:132px; height:170px; border:2px dashed #cbd5e1; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#f8fafc; color:#94a3b8; font-size:7.5pt; text-align:center; padding:8px; overflow:hidden;">
+                        <svg id="photo-placeholder-icon" xmlns="http://www.w3.org/2000/svg" style="width:32px; height:32px; margin-bottom:6px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0zM3 20h18" />
+                        </svg>
+                        <span id="photo-placeholder-text">Passport-sized unfiltered digital picture<br>4.5 cm × 3.5 cm</span>
+                        <img id="photo-preview-img" src="" alt="Preview" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:6px;">
+                    </div>
+                    {{-- Upload button --}}
+                    <div class="flex flex-col gap-2">
+                        <label for="photo-input" class="cursor-pointer px-4 py-2 rounded-full bg-green-700 text-white text-xs font-semibold uppercase tracking-wide hover:bg-green-800 text-center">
+                            Choose Photo
+                        </label>
+                        <input id="photo-input" type="file" name="photo" accept="image/*" class="hidden" onchange="previewPhoto(this)">
+                        <p class="text-[10px] text-gray-400">JPG, PNG. Max 2MB.<br>4.5 cm × 3.5 cm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             let skillIndex = {{ count(old('skills', session('employee_step_8.skills', ['']))) }};
             let distinctionIndex = {{ count(old('distinctions', session('employee_step_8.distinctions', ['']))) }};
@@ -209,4 +236,22 @@
             </button>
         </div>
     </div>
+
+    <script>
+        function previewPhoto(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('photo-preview-img');
+                    const icon = document.getElementById('photo-placeholder-icon');
+                    const text = document.getElementById('photo-placeholder-text');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                    if (icon) icon.style.display = 'none';
+                    if (text) text.style.display = 'none';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 </form>

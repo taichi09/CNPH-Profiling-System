@@ -112,12 +112,18 @@
 
                     {{-- Left: Passport Photo --}}
                     <div class="flex flex-col items-center">
-                        <div style="width:132px; height:170px; border:2px dashed #cbd5e1; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#f8fafc; color:#94a3b8; font-size:7.5pt; text-align:center; padding:8px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" style="width:32px; height:32px; margin-bottom:6px; color:#cbd5e1;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0zM3 20h18" />
-                            </svg>
-                            Passport-sized unfiltered digital picture taken within the last 6 months<br>4.5 cm × 3.5 cm
-                        </div>
+                        @if($other && $other->photo)
+                            <div style="width:132px; height:170px; border-radius:8px; overflow:hidden; border:1px solid #e5e7eb;">
+                                <img src="{{ Storage::url($other->photo) }}" alt="Employee Photo" style="width:100%; height:100%; object-fit:cover;">
+                            </div>
+                        @else
+                            <div style="width:132px; height:170px; border:2px dashed #cbd5e1; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#f8fafc; color:#94a3b8; font-size:7.5pt; text-align:center; padding:8px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" style="width:32px; height:32px; margin-bottom:6px; color:#cbd5e1;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0zM3 20h18" />
+                                </svg>
+                                Passport-sized unfiltered digital picture taken within the last 6 months<br>4.5 cm × 3.5 cm
+                            </div>
+                        @endif
                     </div>
 
                     {{-- Right: ID Cards --}}

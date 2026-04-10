@@ -12,7 +12,6 @@ use App\Models\WorkExperience;
 use App\Models\VoluntaryWork;
 use App\Models\LearningAndDevelopment;
 use App\Models\OtherInformation;
-use App\Models\PdsBackgroundQuestion;
 use App\Models\Department;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -341,6 +340,12 @@ class EmployeeController extends Controller
                 ]);
             }
 
+            // Handle photo upload for new employee
+            $photoPath = null;
+            if (request()->hasFile('photo')) {
+                $photoPath = request()->file('photo')->store('employee_photos', 'public');
+            }
+
             OtherInformation::create([
                 'employee_id' => $employeeId,
                 'special_skills_and_hobbies' => implode(',', array_filter($s8['skills'] ?? [])) ?: 'N/A',
@@ -351,6 +356,7 @@ class EmployeeController extends Controller
                 'sss_id' => $s8['sss_id'] ?? 'N/A',
                 'department_name' => $s8['department_name'] ?? 'N/A',
                 'employment_status' => $s8['employment_status'] ?? 'N/A',
+                'photo' => $photoPath,
             ]);
         });
 
@@ -418,11 +424,10 @@ class EmployeeController extends Controller
         $voluntary = VoluntaryWork::where('employee_id', $id)->get();
         $learning = LearningAndDevelopment::where('employee_id', $id)->get();
         $other = OtherInformation::where('employee_id', $id)->first();
-        $backgroundQuestions = PdsBackgroundQuestion::where('employee_id', $id)->first();
 
         return view('employees.show', compact(
             'personal', 'family', 'education', 'eligibility',
-            'work', 'voluntary', 'learning', 'other', 'backgroundQuestions'
+            'work', 'voluntary', 'learning', 'other'
         ));
     }
 
@@ -900,6 +905,21 @@ class EmployeeController extends Controller
         $distinctions = array_filter($s8['distinctions'] ?? []);
         $memberships = array_filter($s8['memberships'] ?? []);
 
+        // Handle photo upload
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            // Delete old photo if exists
+            $existing = $employee->otherInformations()->first();
+            if ($existing && $existing->photo) {
+                Storage::disk('public')->delete($existing->photo);
+            }
+            $photoPath = $request->file('photo')->store('employee_photos', 'public');
+        } else {
+            // Keep existing photo if no new one uploaded
+            $existing = $employee->otherInformations()->first();
+            $photoPath = $existing->photo ?? null;
+        }
+
         $employee->otherInformations()->updateOrCreate(
             ['employee_id' => $employee->employee_id],
             [
@@ -911,6 +931,7 @@ class EmployeeController extends Controller
                 'sss_id' => $s8['sss_id'] ?? null,
                 'department_name' => $s8['department_name'] ?? null,
                 'employment_status' => $s8['employment_status'] ?? null,
+                'photo' => $photoPath,
             ]
         );
     }
