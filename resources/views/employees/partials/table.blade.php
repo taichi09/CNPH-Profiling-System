@@ -3,9 +3,10 @@
         <thead class="bg-gray-50">
             <tr>
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No.</th>
+                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Middle Name</th>
-                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
+                
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell w-[200px]">Department</th>
                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">Job Status</th>
                 @if ($tab === 'resigned')
@@ -20,9 +21,10 @@
             @forelse($employees as $index => $employee)
             <tr class="hover:bg-gray-50">
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $employees->firstItem() + $loop->index }}</td>
+                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $employee->surname }}</td>
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $employee->first_name }}</td>
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">{{ $employee->middle_name }}</td>
-                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $employee->surname }}</td>
+                
                 <td class="px-4 sm:px-6 py-4 text-sm text-gray-900 hidden lg:table-cell max-w-[200px]">
                     <span class="block truncate" title="{{ $employee->department_name ?? '—' }}">{{ $employee->department_name ?? '—' }}</span>
                 </td>
