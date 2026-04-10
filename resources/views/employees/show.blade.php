@@ -126,9 +126,11 @@
                         @endif
                     </div>
 
-                    {{-- Right: ID Cards --}}
-                    <div class="flex-1">
-                        <div class="grid grid-cols-3 gap-4 w-full">
+                    {{-- Right: ID Cards + Department + Employment --}}
+                    <div class="flex-1 flex flex-col gap-4">
+
+                        {{-- Top row: Landbank, DBP, SSS --}}
+                        <div class="grid grid-cols-3 gap-4">
 
                             {{-- Landbank --}}
                             <div class="bg-white border border-gray-200 rounded-lg p-5">
@@ -149,6 +151,24 @@
                             </div>
 
                         </div>
+
+                        {{-- Bottom row: Department + Employment Status --}}
+                        <div class="grid grid-cols-2 gap-4">
+
+                            {{-- Department --}}
+                            <div class="bg-white border border-gray-200 rounded-lg p-5">
+                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Department</p>
+                                <p class="text-sm font-bold text-gray-800">{{ $other->department_name ?? 'N/A' }}</p>
+                            </div>
+
+                            {{-- Employment Status --}}
+                            <div class="bg-white border border-gray-200 rounded-lg p-5">
+                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Employment Status</p>
+                                <p class="text-sm font-bold text-gray-800">{{ $other->employment_status ?? 'N/A' }}</p>
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
