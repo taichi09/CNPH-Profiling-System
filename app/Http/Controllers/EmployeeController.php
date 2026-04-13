@@ -24,111 +24,123 @@ use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 class EmployeeController extends Controller
 {
     public function index(Request $request)
-    {
-        $tab = $request->get('tab', 'active');
-        $search = $request->get('search');
+{
+    $tab = $request->get('tab', 'active');
+    $search = $request->get('search');
 
-        // Base query
-        $query = PersonalInformation::leftJoin(
-                'other_information',
-                'personal_information.employee_id',
-                '=',
-                'other_information.employee_id'
-            )
-            ->select(
-                'personal_information.*',
-                'other_information.department_name',
-                'other_information.employment_status',
-                'other_information.date_resigned'
-            );
+    // Base query
+    $query = PersonalInformation::leftJoin(
+            'other_information',
+            'personal_information.employee_id',
+            '=',
+            'other_information.employee_id'
+        )
+        ->select(
+            'personal_information.*',
+            'other_information.department_name',
+            'other_information.employment_status',
+            'other_information.date_resigned'
+        );
 
-        // Tab: active / resigned
-        if ($tab === 'resigned') {
-            $query->where('other_information.employment_status', 'Resigned');
-        } else {
-            $query->where('other_information.employment_status', '!=', 'Resigned');
-        }
-
-        // NAME SEARCH ONLY (Disregard ID)
-        if ($request->filled('search')) {
-            $query->where(function ($q) use ($search) {
-                $q->where('personal_information.surname', 'LIKE', "%{$search}%")
-                ->orWhere('personal_information.first_name', 'LIKE', "%{$search}%")
-                ->orWhere('personal_information.middle_name', 'LIKE', "%{$search}%");
-            });
-        }
-
-        // Filter: Department
-        if ($request->filled('departments')) {
-            $depts = explode(',', $request->get('departments'));
-            $query->whereIn('other_information.department_name', $depts);
-        }
-
-        // Filter: Employment Type
-        if ($request->filled('employment_types')) {
-            $types = explode(',', $request->get('employment_types'));
-            $query->whereIn('other_information.employment_status', $types);
-        }
-
-        // Filter: Gender (sex_at_birth column on personal_information)
-        if ($request->filled('genders')) {
-            $genders = explode(',', $request->get('genders'));
-            $query->whereIn('personal_information.sex_at_birth', $genders);
-        }
-
-        // Filter: Birth Year range
-        if ($request->filled('birth_from')) {
-            $query->whereYear('personal_information.date_of_birth', '>=', (int) $request->get('birth_from'));
-        }
-        if ($request->filled('birth_to')) {
-            $query->whereYear('personal_information.date_of_birth', '<=', (int) $request->get('birth_to'));
-        }
-
-        // Filter: Age Group
-        // Age is derived from date_of_birth at query time using TIMESTAMPDIFF.
-        // Each selected group expands into a BETWEEN clause joined with OR.
-        if ($request->filled('age_groups')) {
-            $groups = explode(',', $request->get('age_groups'));
-
-            $ageMap = [
-                '18–25' => [18, 25],
-                '26–35' => [26, 35],
-                '36–45' => [36, 45],
-                '46–55' => [46, 55],
-                '56+' => [56, 150],
-            ];
-
-            $query->where(function ($q) use ($groups, $ageMap) {
-                foreach ($groups as $group) {
-                    $group = trim($group);
-                    if (isset($ageMap[$group])) {
-                        [$min, $max] = $ageMap[$group];
-                        $q->orWhereBetween(
-                            DB::raw('TIMESTAMPDIFF(YEAR, personal_information.date_of_birth, CURDATE())'),
-                            [$min, $max]
-                        );
-                    }
-                }
-            });
-        }
-
-        // Paginate & preserve query params
-        $employees = $query->orderBy('personal_information.surname', 'asc')
-                    ->paginate(10)
-                    ->withQueryString();
-
-        // SMOOTH SEARCH CHECK
-        // If it's an AJAX request, return ONLY the table partial
-        if ($request->ajax()) {
-            return view('employees.partials.table', compact('employees', 'tab'))->render();
-        }
-
-        $activeCount = OtherInformation::where('employment_status', '!=', 'Resigned')->count();
-        $resignedCount = OtherInformation::where('employment_status', 'Resigned')->count();
-        $departments = Department::orderBy('dept_name')->get();
-
-        return view('employees.index', compact('employees', 'tab', 'activeCount', 'resignedCount', 'departments'));
+    // Tab: active / resigned
+    if ($tab === 'resigned') {
+        $query->where('other_information.employment_status', 'Resigned');
+    } else {
+        $query->where('other_information.employment_status', '!=', 'Resigned');
     }
+
+    // UPDATED SEARCH LOGIC: Names + Learning and Development
+    if ($request->filled('search')) {
+        // 1. Fetch the matched training title as a temporary column "matched_training"
+        // This allows us to show the badge in the table
+        $query->addSelect([
+            'matched_training' => \App\Models\LearningAndDevelopment::select('title_of_learning_and_development_interventions')
+                ->whereColumn('employee_id', 'personal_information.employee_id')
+                ->where('title_of_learning_and_development_interventions', 'LIKE', "%{$search}%")
+                ->limit(1)
+        ]);
+
+        $query->where(function ($q) use ($search) {
+            // Search in Names
+            $q->where('personal_information.surname', 'LIKE', "%{$search}%")
+              ->orWhere('personal_information.first_name', 'LIKE', "%{$search}%")
+              ->orWhere('personal_information.middle_name', 'LIKE', "%{$search}%");
+
+            // 2. Search in Learning and Development table
+            $q->orWhereExists(function ($sub) use ($search) {
+                $sub->select(DB::raw(1))
+                    ->from('learning_and_development_interventions')
+                    ->whereColumn('learning_and_development_interventions.employee_id', 'personal_information.employee_id')
+                    ->where('title_of_learning_and_development_interventions', 'LIKE', "%{$search}%");
+            });
+        });
+    }
+
+    // Filter: Department
+    if ($request->filled('departments')) {
+        $depts = explode(',', $request->get('departments'));
+        $query->whereIn('other_information.department_name', $depts);
+    }
+
+    // Filter: Employment Type
+    if ($request->filled('employment_types')) {
+        $types = explode(',', $request->get('employment_types'));
+        $query->whereIn('other_information.employment_status', $types);
+    }
+
+    // Filter: Gender
+    if ($request->filled('genders')) {
+        $genders = explode(',', $request->get('genders'));
+        $query->whereIn('personal_information.sex_at_birth', $genders);
+    }
+
+    // Filter: Birth Year range
+    if ($request->filled('birth_from')) {
+        $query->whereYear('personal_information.date_of_birth', '>=', (int) $request->get('birth_from'));
+    }
+    if ($request->filled('birth_to')) {
+        $query->whereYear('personal_information.date_of_birth', '<=', (int) $request->get('birth_to'));
+    }
+
+    // Filter: Age Group
+    if ($request->filled('age_groups')) {
+        $groups = explode(',', $request->get('age_groups'));
+        $ageMap = ['18–25' => [18, 25], '26–35' => [26, 35], '36–45' => [36, 45], '46–55' => [46, 55], '56+' => [56, 150]];
+
+        $query->where(function ($q) use ($groups, $ageMap) {
+            foreach ($groups as $group) {
+                $group = trim($group);
+                if (isset($ageMap[$group])) {
+                    [$min, $max] = $ageMap[$group];
+                    $q->orWhereBetween(
+                        DB::raw('TIMESTAMPDIFF(YEAR, personal_information.date_of_birth, CURDATE())'),
+                        [$min, $max]
+                    );
+                }
+            }
+        });
+    }
+
+    // Paginate
+    $employees = $query->orderBy('personal_information.surname', 'asc')
+                ->paginate(10)
+                ->withQueryString();
+
+    // SMOOTH SEARCH CHECK
+    if ($request->ajax()) {
+        // We only return the table rows. We don't need departments here.
+        return view('employees.partials.table', compact('employees', 'tab'))->render();
+    }
+
+    // Non-AJAX variables
+    $activeCount = OtherInformation::where('employment_status', '!=', 'Resigned')->count();
+    $resignedCount = OtherInformation::where('employment_status', 'Resigned')->count();
+    
+    // Ensure Department model is imported or use DB
+    $departments = \App\Models\Department::orderBy('dept_name')->get();
+
+    return view('employees.index', compact('employees', 'tab', 'activeCount', 'resignedCount', 'departments'));
+}
 
     public function cancelCreate()
     {
