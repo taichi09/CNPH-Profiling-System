@@ -180,7 +180,59 @@
 
         </div>
     </div>
+
+
     <!-- End Success Modal -->
+
+
+    <!-- Delete Confirmation Modal -->
+<div id="delete-confirm-modal"
+    style="display:none;position:fixed;inset:0;z-index:10000;"
+    class="flex items-center justify-center"
+    role="dialog" tabindex="-1" aria-modal="true">
+
+    <div class="relative bg-white border border-gray-200 rounded-xl shadow-xl w-full max-w-sm mx-4 transform transition-all duration-300 scale-95 opacity-0" id="delete-modal-box">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200">
+            <h3 class="font-bold text-gray-800 text-lg">Delete Department</h3>
+            <button type="button" id="delete-close-x"
+                class="size-8 inline-flex justify-center items-center rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none"
+                aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6 flex flex-col items-center text-center gap-3">
+            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-red-100">
+                <svg class="w-8 h-8 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                </svg>
+            </div>
+            <p class="text-gray-800 font-semibold text-base">Are you sure?</p>
+            <p class="text-gray-500 text-sm">You are about to delete <span id="delete-dept-name" class="font-semibold text-gray-700"></span>. This action cannot be undone.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="flex justify-center items-center gap-x-2 py-3 px-4 border-t border-gray-200">
+            <button type="button" id="delete-cancel-btn"
+                class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none">
+                Cancel
+            </button>
+            <button type="button" id="delete-confirm-btn"
+                class="py-2 px-6 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-none">
+                Delete
+            </button>
+        </div>
+
+    </div>
+</div>
+<!-- End Delete Confirmation Modal -->
 
     <script src="https://cdn.jsdelivr.net/npm/preline@1.11.0/dist/preline.min.js"></script>
     <script>
@@ -205,6 +257,14 @@
         const editCloseX = document.getElementById('edit-modal-close-x');
         const editCancelBtn = document.getElementById('edit-modal-cancel-btn');
         const editForm = document.getElementById('edit-department-form');
+        const deleteConfirmModal = document.getElementById('delete-confirm-modal');
+const deleteModalBox = document.getElementById('delete-modal-box');
+const deleteCloseX = document.getElementById('delete-close-x');
+const deleteCancelBtn = document.getElementById('delete-cancel-btn');
+const deleteConfirmBtn = document.getElementById('delete-confirm-btn');
+const deleteDeptName = document.getElementById('delete-dept-name');
+
+let pendingDeleteId = null;
 
         // ── Add Modal ──
         function openModal() {
@@ -421,5 +481,67 @@
                 submitBtn.textContent = 'Save Changes';
             });
         });
+function openDeleteModal(id, name) {
+    pendingDeleteId = id;
+    deleteDeptName.textContent = `"${name}"`;
+    deleteConfirmModal.style.display = 'flex';
+    backdrop.style.display = 'block';
+    document.body.classList.add('overflow-hidden');
+    requestAnimationFrame(() => {
+        deleteModalBox.classList.remove('scale-95', 'opacity-0');
+        deleteModalBox.classList.add('scale-100', 'opacity-100');
+    });
+}
+
+function closeDeleteModal() {
+    deleteModalBox.classList.remove('scale-100', 'opacity-100');
+    deleteModalBox.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+        deleteConfirmModal.style.display = 'none';
+        backdrop.style.display = 'none';
+        document.body.classList.remove('overflow-hidden');
+        pendingDeleteId = null;
+    }, 200);
+}
+
+deleteCloseX.addEventListener('click', closeDeleteModal);
+deleteCancelBtn.addEventListener('click', closeDeleteModal);
+
+deleteConfirmBtn.addEventListener('click', function () {
+    if (!pendingDeleteId) return;
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+    deleteConfirmBtn.disabled = true;
+    deleteConfirmBtn.textContent = 'Deleting...';
+
+    fetch(`/departments/${pendingDeleteId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': csrfToken,
+            'Accept': 'application/json',
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            closeDeleteModal();
+            setTimeout(() => openSuccessModal(
+                data.message || 'Department deleted successfully.',
+                'The department has been removed from the list.'
+            ), 250);
+        }
+    })
+    .catch(err => console.error('Delete failed:', err))
+    .finally(() => {
+        deleteConfirmBtn.disabled = false;
+        deleteConfirmBtn.textContent = 'Delete';
+    });
+});
+
+document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.delete-btn');
+    if (!btn) return;
+    openDeleteModal(btn.dataset.id, btn.dataset.name);
+});
     </script>
 </x-app-layout>

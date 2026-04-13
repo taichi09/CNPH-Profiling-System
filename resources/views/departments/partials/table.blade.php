@@ -26,7 +26,11 @@
                                 Edit
                             </button>
                             <!-- Delete Button -->
-                            <button type="button" class="py-1 px-2 sm:px-3 text-xs font-medium rounded bg-red-600 text-white hover:bg-red-700">Delete</button>
+                            <button type="button" class="delete-btn py-1 px-2 sm:px-3 text-xs font-medium rounded bg-red-600 text-white hover:bg-red-700"
+    data-id="{{ $department->dept_id }}"
+    data-name="{{ $department->dept_name }}">
+    Delete
+</button>
                         </div>
                     </td>
                 </tr>

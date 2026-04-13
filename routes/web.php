@@ -56,6 +56,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('employees/{id}/reinstate', [EmployeeController::class, 'reinstate'])->name('employees.reinstate');
     Route::post('/employees/import/preview', [EmployeeController::class, 'importPreview'])
     ->name('employees.import.preview');
+    Route::delete('/departments/{department}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
 
 });
 
