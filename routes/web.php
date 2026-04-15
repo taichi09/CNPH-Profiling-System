@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 // 2. Wrap all protected routes inside the 'auth' middleware group
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', \App\Http\Middleware\PreventBackHistory::class])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
