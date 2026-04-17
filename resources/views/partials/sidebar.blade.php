@@ -56,14 +56,7 @@
         </a>
       </li>
       <!-- Departments -->
-      <li>
-        <a href="{{ route('departments.index') }}"
-          class="flex items-center gap-x-4 py-3 px-6 text-lg font-bold transition-all duration-200
-          {{ request()->routeIs('departments.*') ? 'bg-white text-[#1b5e3a]' : 'text-white hover:bg-white/10' }}">
-          <span class="material-symbols-outlined">groups</span>
-          Departments
-        </a>
-      </li>
+    
     </ul>
   </nav>
   

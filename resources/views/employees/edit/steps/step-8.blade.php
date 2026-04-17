@@ -112,13 +112,33 @@
                     <input type="text" name="department_name"
                         list="dept-list-edit"
                         value="{{ old('department_name', $other->department_name ?? '') }}"
-                        placeholder="Type to search department..."
+                        placeholder="Select or type department..."
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <datalist id="dept-list-edit">
-                        @foreach($departments as $dept)
-                            <option value="{{ $dept->dept_name }}">
-                        @endforeach
-                    </datalist>
+    <option value="MEDICAL - NURSES">
+    <option value="MEDICAL - DOCTORS">
+    <option value="MEDICAL - NURSING ATTENDANT">
+    <option value="MEDICAL - MIDWIVES">
+    <option value="ADMINISTRATIVE">
+    <option value="TECHNICAL">
+    <option value="ANCILLARY">
+    <option value="COH/COC">
+    <option value="HUMAN RESOURCE MANAGEMENT OFFICE">
+    <option value="QUALITY ASSURANCE UNIT">
+    <option value="BUDGET/FINANCE">
+    <option value="CASH OPERATION">
+    <option value="HIMS OPD RECORDS">
+    <option value="OPD RECORDS">
+    <option value="SUPPLY UNIT">
+    <option value="PROCUREMENT">
+    <option value="INTEGRATED HOSPITAL OPERATIONS & MANAGEMENT PROGRAM">
+    <option value="SECURITY">
+    <option value="MAINTENANCE">
+    <option value="TRANSPORTATION">
+    <option value="DISPATCH">
+    <option value="HELP DESK">
+    <option value="RADIOLOGY">
+</datalist>
                 </div>
             </div>
 
