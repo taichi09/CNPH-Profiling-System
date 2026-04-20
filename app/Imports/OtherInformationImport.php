@@ -20,6 +20,7 @@ class OtherInformationImport extends SkippableImport
             'dbp_no' => $row['dbp_no'] ?? null,
             'sss_id' => $row['sss_id'] ?? null,
             'department_name' => $row['department_name'] ?? null,
+            'position' => $row['position'] ?? null,
             'employment_status' => $row['employment_status'] ?? null,
         ]);
     }
