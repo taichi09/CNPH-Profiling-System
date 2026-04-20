@@ -367,6 +367,7 @@ class EmployeeController extends Controller
                 'dbp_no' => $s8['dbp_no'] ?? 'N/A',
                 'sss_id' => $s8['sss_id'] ?? 'N/A',
                 'department_name' => $s8['department_name'] ?? 'N/A',
+                'position' => $s8['position'] ?? 'N/A',
                 'employment_status' => $s8['employment_status'] ?? 'N/A',
                 'photo' => $photoPath,
             ]);
@@ -942,6 +943,7 @@ class EmployeeController extends Controller
                 'dbp_no' => $s8['dbp_no'] ?? null,
                 'sss_id' => $s8['sss_id'] ?? null,
                 'department_name' => $s8['department_name'] ?? null,
+                'position' => $s8['position'] ?? null,
                 'employment_status' => $s8['employment_status'] ?? null,
                 'photo' => $photoPath,
             ]

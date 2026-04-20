@@ -77,6 +77,8 @@
 
         <!-- Second Section -->
         <div class="border border-gray-300 text-xs w-full mt-5">
+
+            {{-- Row 1: Landbank | DBP --}}
             <div class="flex items-stretch border-b border-gray-300">
                 <div class="flex items-stretch flex-1 border-r border-gray-300">
                     <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
@@ -96,6 +98,7 @@
                 </div>
             </div>
 
+            {{-- Row 2: SSS | Department --}}
             <div class="flex items-stretch border-b border-gray-300">
                 <div class="flex items-stretch flex-1 border-r border-gray-300">
                     <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
@@ -115,52 +118,62 @@
                         placeholder="Select or type department..."
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <datalist id="dept-list-edit">
-    <option value="MEDICAL - NURSES">
-    <option value="MEDICAL - DOCTORS">
-    <option value="MEDICAL - NURSING ATTENDANT">
-    <option value="MEDICAL - MIDWIVES">
-    <option value="ADMINISTRATIVE">
-    <option value="TECHNICAL">
-    <option value="ANCILLARY">
-    <option value="COH/COC">
-    <option value="HUMAN RESOURCE MANAGEMENT OFFICE">
-    <option value="QUALITY ASSURANCE UNIT">
-    <option value="BUDGET/FINANCE">
-    <option value="CASH OPERATION">
-    <option value="HIMS OPD RECORDS">
-    <option value="OPD RECORDS">
-    <option value="SUPPLY UNIT">
-    <option value="PROCUREMENT">
-    <option value="INTEGRATED HOSPITAL OPERATIONS & MANAGEMENT PROGRAM">
-    <option value="SECURITY">
-    <option value="MAINTENANCE">
-    <option value="TRANSPORTATION">
-    <option value="DISPATCH">
-    <option value="HELP DESK">
-    <option value="RADIOLOGY">
-</datalist>
+                        <option value="MEDICAL">
+                        <option value="ADMINISTRATIVE">
+                        <option value="TECHNICAL">
+                        <option value="ANCILLARY">
+                        <option value="COH/COC">
+                        <option value="HUMAN RESOURCE MANAGEMENT OFFICE">
+                        <option value="QUALITY ASSURANCE UNIT">
+                        <option value="BUDGET/FINANCE">
+                        <option value="CASH OPERATION">
+                        <option value="HIMS OPD RECORDS">
+                        <option value="OPD RECORDS">
+                        <option value="SUPPLY UNIT">
+                        <option value="PROCUREMENT">
+                        <option value="INTEGRATED HOSPITAL OPERATIONS & MANAGEMENT PROGRAM">
+                        <option value="SECURITY">
+                        <option value="MAINTENANCE">
+                        <option value="TRANSPORTATION">
+                        <option value="DISPATCH">
+                        <option value="HELP DESK">
+                        <option value="RADIOLOGY">
+                    </datalist>
                 </div>
             </div>
 
+            {{-- Row 3: Position | Employment Status --}}
             <div class="flex items-stretch">
+                <div class="flex items-stretch flex-1 border-r border-gray-300">
+                    <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
+                        Position
+                    </span>
+                    <input type="text" name="position"
+                        value="{{ old('position', $other->position ?? '') }}"
+                        placeholder="e.g. Nurses, Doctors..."
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                </div>
                 <div class="flex items-stretch flex-1">
                     <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                         Employment Status
                     </span>
-                    @php $empStatus = old('employment_status', $other->employment_status ?? ''); @endphp
-                    <select name="employment_status"
-                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                        <option value="">-- Select --</option>
-                        <option {{ $empStatus == 'Permanent' ? 'selected' : '' }}>Permanent</option>
-                        <option {{ $empStatus == 'Contract Of Service' ? 'selected' : '' }}>Contract of Service</option>
-                        <option {{ $empStatus == 'Regular' ? 'selected' : '' }}>Regular</option>
-                        <option {{ $empStatus == 'Casual' ? 'selected' : '' }}>Casual</option>
-                        <option {{ $empStatus == 'Contractual' ? 'selected' : '' }}>Contractual</option>
-                        <option {{ $empStatus == 'Job Order' ? 'selected' : '' }}>Job Order</option>
-                        <option {{ $empStatus == 'Resigned' ? 'selected' : '' }}>Resigned</option>
-                    </select>
+                    <input type="text" name="employment_status"
+                        list="emp-status-list-edit"
+                        value="{{ old('employment_status', $other->employment_status ?? '') }}"
+                        placeholder="Select or type status..."
+                        class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
+                    <datalist id="emp-status-list-edit">
+                        <option value="Permanent">
+                        <option value="Contract of Service">
+                        <option value="Regular">
+                        <option value="Casual">
+                        <option value="Contractual">
+                        <option value="Job Order">
+                        <option value="Resigned">
+                    </datalist>
                 </div>
             </div>
+
         </div>
 
         {{-- Photo Upload Section --}}

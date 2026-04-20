@@ -23,6 +23,7 @@ class OtherInformation extends Model
         'dbp_no',
         'sss_id',
         'department_name',
+        'position',
         'employment_status',
         'date_resigned',
         'photo'

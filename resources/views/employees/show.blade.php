@@ -152,13 +152,19 @@
 
                         </div>
 
-                        {{-- Bottom row: Department + Employment Status --}}
-                        <div class="grid grid-cols-2 gap-4">
+                        {{-- Bottom row: Department + Position + Employment Status --}}
+                        <div class="grid grid-cols-3 gap-4">
 
                             {{-- Department --}}
                             <div class="bg-white border border-gray-200 rounded-lg p-5">
                                 <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Department</p>
                                 <p class="text-sm font-bold text-gray-800">{{ $other->department_name ?? 'N/A' }}</p>
+                            </div>
+
+                            {{-- Position --}}
+                            <div class="bg-white border border-gray-200 rounded-lg p-5">
+                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Position</p>
+                                <p class="text-sm font-bold text-gray-800">{{ $other->position ?? 'N/A' }}</p>
                             </div>
 
                             {{-- Employment Status --}}
