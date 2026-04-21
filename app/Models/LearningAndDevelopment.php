@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class LearningAndDevelopment extends Model
 {
-    protected $table = 'learning_and_development_interventions';
-
     public $incrementing = false;
-    protected $keyType = 'string';
-    protected $primaryKey = 'employee_id';
-
     public $timestamps = false;
+
+    protected $table = 'learning_and_development_interventions';    
+    protected $primaryKey = 'employee_id';
+    protected $keyType = 'string';
 
     protected $fillable = [
         'employee_id',

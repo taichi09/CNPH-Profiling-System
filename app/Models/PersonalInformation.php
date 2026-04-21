@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class PersonalInformation extends Model
 {
-    protected $table = 'personal_information';
-
-    protected $primaryKey = 'id';
     public $incrementing = true;
-    protected $keyType = 'int';
+    public $timestamps = true;    
 
-    public $timestamps = true;
+    protected $table = 'personal_information';    
+    protected $primaryKey = 'id';
+    protected $keyType = 'int';
 
     protected $fillable = [
         'employee_id', 'surname', 'first_name', 'middle_name', 'extension', 

@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class VoluntaryWork extends Model
 {
-    protected $table = 'voluntary_work';
-
     public $incrementing = false;
-    protected $keyType = 'string';
-    protected $primaryKey = 'employee_id';
-
     public $timestamps = false;
+
+    protected $table = 'voluntary_work';
+    protected $primaryKey = 'employee_id';
+    protected $keyType = 'string';
 
     protected $fillable = [
         'employee_id',
