@@ -154,10 +154,10 @@
                 get count() {
                     const params = new URLSearchParams(window.location.search);
                     let n = 0;
-                    if (params.get('departments'))     n += params.get('departments').split(',').length;
-                    if (params.get('age_groups'))      n += params.get('age_groups').split(',').length;
-                    if (params.get('employment_types'))n += params.get('employment_types').split(',').length;
-                    if (params.get('genders'))         n += params.get('genders').split(',').length;
+                    if (params.get('departments')) n += params.get('departments').split(',').length;
+                    if (params.get('age_groups')) n += params.get('age_groups').split(',').length;
+                    if (params.get('employment_types')) n += params.get('employment_types').split(',').length;
+                    if (params.get('genders')) n += params.get('genders').split(',').length;
                     if (params.get('birth_from') || params.get('birth_to')) n += 1;
                     return n;
                 }
@@ -166,40 +166,40 @@
 
         function filterPanel() {
             const currentYear = new Date().getFullYear();
-            const startYear   = 1950;
+            const startYear = 1950;
 
             return {
                 activeCount: 0,
 
                 // AFTER
                 departments: [
-                            'MEDICAL - NURSES',
-                            'MEDICAL - DOCTORS',
-                            'MEDICAL - NURSING ATTENDANT',
-                            'MEDICAL - MIDWIVES',
-                            'ADMINISTRATIVE',
-                            'TECHNICAL',
-                            'ANCILLARY',
-                            'COH/COC',
-                            'HUMAN RESOURCE MANAGEMENT OFFICE',
-                            'QUALITY ASSURANCE UNIT',
-                            'BUDGET/FINANCE',
-                            'CASH OPERATION',
-                            'HIMS OPD RECORDS',
-                            'OPD RECORDS',
-                            'SUPPLY UNIT',
-                            'PROCUREMENT',
-                            'INTEGRATED HOSPITAL OPERATIONS & MANAGEMENT PROGRAM',
-                            'SECURITY',
-                            'MAINTENANCE',
-                            'TRANSPORTATION',
-                            'DISPATCH',
-                            'HELP DESK',
-                            'RADIOLOGY',
-                        ],
-                ageGroups:       ['18–25', '26–35', '36–45', '46–55', '56+'],
+                    'MEDICAL - NURSES',
+                    'MEDICAL - DOCTORS',
+                    'MEDICAL - NURSING ATTENDANT',
+                    'MEDICAL - MIDWIVES',
+                    'ADMINISTRATIVE',
+                    'TECHNICAL',
+                    'ANCILLARY',
+                    'COH/COC',
+                    'HUMAN RESOURCE MANAGEMENT OFFICE',
+                    'QUALITY ASSURANCE UNIT',
+                    'BUDGET/FINANCE',
+                    'CASH OPERATION',
+                    'HIMS OPD RECORDS',
+                    'OPD RECORDS',
+                    'SUPPLY UNIT',
+                    'PROCUREMENT',
+                    'INTEGRATED HOSPITAL OPERATIONS & MANAGEMENT PROGRAM',
+                    'SECURITY',
+                    'MAINTENANCE',
+                    'TRANSPORTATION',
+                    'DISPATCH',
+                    'HELP DESK',
+                    'RADIOLOGY',
+                ],
+                ageGroups: ['18–25', '26–35', '36–45', '46–55', '56+'],
                 employmentTypes: ['Permanent', 'COS', 'Job Order'],
-                genders:         ['Male', 'Female'],
+                genders: ['Male', 'Female'],
 
                 get yearRange() {
                     const years = [];
@@ -208,16 +208,16 @@
                 },
 
                 selected: {
-                    dept:   [],
-                    age:    [],
-                    type:   [],
+                    dept: [],
+                    age: [],
+                    type: [],
                     gender: [],
                 },
 
-                birthFrom:        1960,
-                birthTo:          currentYear,
+                birthFrom: 1960,
+                birthTo: currentYear,
                 defaultBirthFrom: 1960,
-                defaultBirthTo:   currentYear,
+                defaultBirthTo: currentYear,
 
                 toggleFilter(group, value) {
                     const idx = this.selected[group].indexOf(value);
@@ -241,17 +241,17 @@
                         this.selected.gender.length;
                     const rangeChanged =
                         (parseInt(this.birthFrom) !== this.defaultBirthFrom ||
-                         parseInt(this.birthTo)   !== this.defaultBirthTo) ? 1 : 0;
+                         parseInt(this.birthTo) !== this.defaultBirthTo) ? 1 : 0;
                     this.activeCount = chipCount + rangeChanged;
                 },
 
                 resetFilters() {
-                    this.selected           = { dept: [], age: [], type: [], gender: [] };
-                    this.birthFrom          = this.defaultBirthFrom;
-                    this.birthTo            = this.defaultBirthTo;
-                    this.activeCount        = 0;
+                    this.selected = { dept: [], age: [], type: [], gender: [] };
+                    this.birthFrom = this.defaultBirthFrom;
+                    this.birthTo = this.defaultBirthTo;
+                    this.activeCount = 0;
                     this.$store.filter.open = false;
-                    window.location.href    = '?tab={{ $tab }}';
+                    window.location.href = '?tab={{ $tab }}';
                 },
 
                 applyFilters() {
@@ -277,7 +277,7 @@
                         params.set('birth_to', this.birthTo);
 
                     this.$store.filter.open = false;
-                    window.location.href    = '?' + params.toString();
+                    window.location.href = '?' + params.toString();
                 },
 
                 init() {
