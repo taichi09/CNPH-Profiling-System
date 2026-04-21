@@ -6,10 +6,11 @@
     </div>
 
     <!-- Investments Card -->
-    <div class="bg-white rounded-lg shadow p-6">
-        <div class="text-sm text-gray-600 mb-2">Departments</div>
-        <div class="text-4xl font-bold text-gray-800">15</div>
-    </div>
+    <!-- Investments Card -->
+<div class="bg-white rounded-lg shadow p-6">
+    <div class="text-sm text-gray-600 mb-2">Casual</div>
+    <div class="text-4xl font-bold text-gray-800">{{ $casualCount }}</div>
+</div>
 
     <!-- Net Hires Card -->
     <div class="bg-white rounded-lg shadow p-6">
