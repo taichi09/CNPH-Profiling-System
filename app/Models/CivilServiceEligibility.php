@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class CivilServiceEligibility extends Model
 {
-    protected $table = 'civil_service_eligibility';
-
     public $incrementing = false;
-    protected $keyType = 'string';
-    protected $primaryKey = 'employee_id';
-
     public $timestamps = false;
+
+    protected $table = 'civil_service_eligibility';
+    protected $primaryKey = 'employee_id';
+    protected $keyType = 'string';
 
     protected $fillable = [
         'employee_id',

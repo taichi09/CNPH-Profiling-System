@@ -7,15 +7,15 @@
             @php
                 $na = fn($v) => (!$v || strtoupper(trim((string)$v)) === 'N/A') ? 'N/A' : $v;
 
-                /* ── Children ── */
+                // Children 
                 $childNames = [];
                 $childDobs = [];
                 if ($family) {
-                    // Get raw values directly from DB attributes, bypassing accessors
+                    // Get raw values directly from DB
                     $rawNames = $family->getAttributes()['name_of_children'] ?? '';
                     $rawDobs = $family->getAttributes()['date_of_birth'] ?? '';
 
-                    // Detect separator — semicolon or comma
+                    // Detect separator
                     $nameSep = str_contains($rawNames, ';') ? ';' : ',';
                     $dobSep = str_contains($rawDobs, ';') ? ';' : ',';
 
@@ -23,27 +23,27 @@
                     $childDobs = array_values(array_filter(array_map('trim', explode($dobSep, $rawDobs))));
                 }
 
-                /* ── Education by level ── */
+                // Education by level
                 $levelOrder = ['Elementary', 'Secondary', 'Vocational/Trade Course', 'College', 'Graduate Studies'];
                 $eduByLevel = [];
                 foreach ($education as $e) {
                     $eduByLevel[$e->level][] = $e;
                 }
 
-                /* ── Other Information ── */
+                // Other Information
                 $skills = $other ? array_values(array_filter(array_map('trim', explode(',', $other->special_skills_and_hobbies ?? '')))) : [];
                 $distinctions = $other ? array_values(array_filter(array_map('trim', explode(',', $other->non_academic_distinction ?? '')))) : [];
                 $memberships = $other ? array_values(array_filter(array_map('trim', explode(',', $other->membership_in_association ?? '')))) : [];
                 $maxOther = max(count($skills), count($distinctions), count($memberships), 7);
 
-                /* ── Citizenship display ── */
+                // Citizenship display
                 $citizenshipRaw = $personal->citizenship ?? 'N/A';
                 $citizenParts = array_map('trim', explode('//', $citizenshipRaw));
                 $citizenship = $citizenParts[0] ?? 'N/A';
                 $citizenType = $citizenParts[1] ?? '';
                 $citizenCountry = $citizenParts[2] ?? '';
 
-                /* ── Address parser ── */
+                // Address parser 
                 $parseAddress = function(string $raw): array {
                     $parts = array_map('trim', explode('//', $raw));
                     return [
@@ -64,10 +64,6 @@
                     class="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-green-700 text-green-700 text-sm font-semibold uppercase tracking-wide hover:bg-green-700 hover:text-white transition-colors duration-200">
                     &#8592; Back to Employees
                 </a>
-                {{-- <button onclick="window.print()"
-                    class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-green-700 text-white text-sm font-semibold uppercase tracking-wide hover:bg-green-800 transition-colors duration-200">
-                    &#128438; Print / Save as PDF
-                </button> --}}
             </div>
 
             {{-- Tabs --}}

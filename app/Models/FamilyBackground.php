@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class FamilyBackground extends Model
 {
-    protected $table = 'family_background';
-    protected $primaryKey = 'employee_id';
-    public $incrementing = false; 
-    protected $keyType = 'string';
+    public $incrementing = false;
     public $timestamps = false;
+
+    protected $table = 'family_background';
+    protected $primaryKey = 'employee_id'; 
+    protected $keyType = 'string';
 
     protected $fillable = [
         'employee_id', 'spouse_surname', 'spouse_first_name', 'spouse_middle_name',

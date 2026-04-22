@@ -11,10 +11,10 @@
 
             <!-- Content Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Chart Card - Increased Height -->
+                <!-- Chart Card -->
                 @include('dashboard.partials.employees-chart')
 
-                <!-- Recently Added Employees Card - Increased Height -->
+                <!-- Recently Added Employees Card -->
                 @include('dashboard.partials.recent-employees')
             </div>
         </div>

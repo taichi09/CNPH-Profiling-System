@@ -6,14 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class WorkExperience extends Model
 {
+    public $incrementing = false;
+    public $timestamps = false;
 
     protected $table = 'work_experience';
-
-    public $incrementing = false;
-    protected $keyType = 'string';
     protected $primaryKey = 'employee_id';
-    
-    public $timestamps = false;
+    protected $keyType = 'string';
 
     protected $fillable = [
         'employee_id',

@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class EducationalBackground extends Model
 {
-    protected $table = 'educational_background';
-
     public $timestamps = false;
+
+    protected $table = 'educational_background';
 
     protected $fillable =   [
         'employee_id',
