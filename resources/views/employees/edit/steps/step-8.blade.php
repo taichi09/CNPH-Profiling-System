@@ -138,6 +138,12 @@
                         <option value="DISPATCH">
                         <option value="HELP DESK">
                         <option value="RADIOLOGY">
+                         <option value="LABORATORY/BLOOD BANK">
+                        <option value="DENTAL CLINIC">
+                        <option value="DIALYSIS CENTER">
+                        <option value="NUTRITION AND DIETETICS">
+                        <option value="HOUSEKEEPING">
+                        
                     </datalist>
                 </div>
             </div>

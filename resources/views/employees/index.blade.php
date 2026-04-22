@@ -196,6 +196,11 @@
                             'DISPATCH',
                             'HELP DESK',
                             'RADIOLOGY',
+                            'LABORATORY/BLOOD BANK',
+                            'DENTAL CLINIC',
+                            'DIALYSIS CENTER',
+                            'NUTRITION AND DIETETICS',
+                            'HOUSEKEEPING'
                         ],
                 ageGroups:       ['18–25', '26–35', '36–45', '46–55', '56+'],
                 employmentTypes: ['Permanent', 'COS', 'Job Order'],
