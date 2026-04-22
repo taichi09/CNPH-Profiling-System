@@ -26,23 +26,48 @@
                     class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="" disabled selected>Select status</option>
                     <option value="Permanent">Permanent</option>
-                    <option value="Regular">Regular</option>
+                    <option value="Regular">Casual</option>
                     <option value="COS">COS (Contract of Service)</option>
                     <option value="Job Order">Job Order</option>
                 </select>
             </div>
 
             {{-- Department --}}
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Department <span class="text-red-500">*</span></label>
-                <select name="department" required
-    class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-    <option value="" disabled selected>Select department</option>
-    @foreach($departments as $dept)
-        <option value="{{ $dept->dept_name }}">{{ $dept->dept_name }}</option>
-    @endforeach
-</select>
-            </div>
+          <div class="mb-6">
+    <label class="block text-sm font-medium text-gray-700 mb-1">Department <span class="text-red-500">*</span></label>
+    <select name="department" required
+        class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="" disabled selected>Select department</option>
+        <option value="MEDICAL - NURSES">MEDICAL - NURSES</option>
+        <option value="MEDICAL - DOCTORS">MEDICAL - DOCTORS</option>
+        <option value="MEDICAL - NURSING ATTENDANT">MEDICAL - NURSING ATTENDANT</option>
+        <option value="MEDICAL - MIDWIVES">MEDICAL - MIDWIVES</option>
+        <option value="ADMINISTRATIVE">ADMINISTRATIVE</option>
+        <option value="TECHNICAL">TECHNICAL</option>
+        <option value="ANCILLARY">ANCILLARY</option>
+        <option value="COH/COC">COH/COC</option>
+        <option value="HUMAN RESOURCE MANAGEMENT OFFICE">HUMAN RESOURCE MANAGEMENT OFFICE</option>
+        <option value="QUALITY ASSURANCE UNIT">QUALITY ASSURANCE UNIT</option>
+        <option value="BUDGET/FINANCE">BUDGET/FINANCE</option>
+        <option value="CASH OPERATION">CASH OPERATION</option>
+        <option value="HIMS OPD RECORDS">HIMS OPD RECORDS</option>
+        <option value="OPD RECORDS">OPD RECORDS</option>
+        <option value="SUPPLY UNIT">SUPPLY UNIT</option>
+        <option value="PROCUREMENT">PROCUREMENT</option>
+        <option value="INTEGRATED HOSPITAL OPERATIONS & MANAGEMENT PROGRAM">INTEGRATED HOSPITAL OPERATIONS &amp; MANAGEMENT PROGRAM</option>
+        <option value="SECURITY">SECURITY</option>
+        <option value="MAINTENANCE">MAINTENANCE</option>
+        <option value="TRANSPORTATION">TRANSPORTATION</option>
+        <option value="DISPATCH">DISPATCH</option>
+        <option value="HELP DESK">HELP DESK</option>
+        <option value="RADIOLOGY">RADIOLOGY</option>
+        <option value="LABORATORY/BLOOD BANK">LABORATORY/BLOOD BANK</option>
+        <option value="DENTAL CLINIC">DENTAL CLINIC</option>
+        <option value="DIALYSIS CENTER">DIALYSIS CENTER</option>
+        <option value="NUTRITION AND DIETETICS">NUTRITION AND DIETETICS</option>
+        <option value="HOUSEKEEPING">HOUSEKEEPING</option>
+    </select>
+</div>
 
             {{-- Actions --}}
             <div class="flex justify-end gap-3">
