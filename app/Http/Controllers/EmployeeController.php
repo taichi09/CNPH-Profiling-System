@@ -444,17 +444,21 @@ class EmployeeController extends Controller
         ));
     }
 
-    public function resign($id)
-    {
-        DB::table('other_information')
-            ->where('employee_id', $id)
-            ->update([
-                'employment_status' => 'Resigned',
-                'date_resigned' => now()->toDateString(),
-            ]);
+   public function resign(Request $request, $id)
+{
+    $request->validate([
+        'date_resigned' => ['required', 'date', 'before_or_equal:today'],
+    ]);
 
-        return back()->with('success', 'Employee marked as resigned.');
-    }
+    DB::table('other_information')
+        ->where('employee_id', $id)
+        ->update([
+            'employment_status' => 'Resigned',
+            'date_resigned'     => $request->date_resigned,
+        ]);
+
+    return back()->with('success', 'Employee marked as resigned.');
+}
 
     public function reinstate(Request $request, $id)
     {
