@@ -23,7 +23,7 @@
                         </span>
                         <input type="text" name="spouse_surname"
                             value="{{ old('spouse_surname', session('employee_step_2.spouse_surname')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Spouse First Name + Extension -->
@@ -33,7 +33,7 @@
                         </span>
                         <input type="text" name="spouse_first_name"
                             value="{{ old('spouse_first_name', session('employee_step_2.spouse_first_name')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                         
                         <!-- Name Extension -->    
                         <span class="w-40 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
@@ -61,7 +61,7 @@
                         </span>
                         <input type="text" name="spouse_middle_name"
                             value="{{ old('spouse_middle_name', session('employee_step_2.spouse_middle_name')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Occupation -->
@@ -71,7 +71,7 @@
                         </span>
                         <input type="text" name="spouse_occupation"
                             value="{{ old('spouse_occupation', session('employee_step_2.spouse_occupation')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Employer/Business Name -->
@@ -81,7 +81,7 @@
                         </span>
                         <input type="text" name="spouse_employer"
                             value="{{ old('spouse_employer', session('employee_step_2.spouse_employer')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Business Address -->
@@ -91,7 +91,7 @@
                         </span>
                         <input type="text" name="spouse_business_address"
                             value="{{ old('spouse_business_address', session('employee_step_2.spouse_business_address')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Telephone No -->
@@ -101,7 +101,7 @@
                         </span>
                         <input type="text" name="spouse_telephone"
                             value="{{ old('spouse_telephone', session('employee_step_2.spouse_telephone')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Father Surname -->
@@ -111,7 +111,7 @@
                         </span>
                         <input type="text" name="father_surname"
                             value="{{ old('father_surname', session('employee_step_2.father_surname')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Father First Name + Extension -->
@@ -121,7 +121,7 @@
                         </span>
                         <input type="text" name="father_first_name"
                             value="{{ old('father_first_name', session('employee_step_2.father_first_name')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm border-r">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm border-r">
                         <span class="w-40 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                             Name Extension <br>(Jr., Sr., II, III)
                         </span>
@@ -147,7 +147,7 @@
                         </span>
                         <input type="text" name="father_middle_name"
                             value="{{ old('father_middle_name', session('employee_step_2.father_middle_name')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Mother Maiden Name label -->
@@ -164,7 +164,7 @@
                         </span>
                         <input type="text" name="mother_surname"
                             value="{{ old('mother_surname', session('employee_step_2.mother_surname')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Mother First Name -->
@@ -174,7 +174,7 @@
                         </span>
                         <input type="text" name="mother_first_name"
                             value="{{ old('mother_first_name', session('employee_step_2.mother_first_name')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Mother Middle Name -->
@@ -184,7 +184,7 @@
                         </span>
                         <input type="text" name="mother_middle_name"
                             value="{{ old('mother_middle_name', session('employee_step_2.mother_middle_name')) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
                 </div>
 
