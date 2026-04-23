@@ -26,8 +26,8 @@
                     class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="" disabled selected>Select status</option>
                     <option value="Permanent">Permanent</option>
-                    <option value="Regular">Casual</option>
-                    <option value="COS">COS (Contract of Service)</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Contract of Service">COS (Contract of Service)</option>
                     <option value="Job Order">Job Order</option>
                 </select>
             </div>
