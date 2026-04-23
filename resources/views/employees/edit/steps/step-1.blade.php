@@ -439,7 +439,7 @@
                         <span class="w-36 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                             21. Email Address
                         </span>
-                        <input type="email" name="email"
+                        <input type="text" name="email"
                             value="{{ old('email', $employee->email_address) }}"
                             class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
