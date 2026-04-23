@@ -18,7 +18,7 @@
                 </span>
                 <input type="text" name="surname"
                     value="{{ old('surname', $employee->surname) }}"
-                    class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
             </div>
 
             <!-- First Name -->
@@ -28,7 +28,7 @@
                 </span>
                 <input type="text" name="first_name"
                     value="{{ old('first_name', $employee->first_name) }}"
-                    class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                 <span class="w-44 shrink-0 px-2 py-2 bg-white text-gray-600 uppercase font-semibold tracking-wide border-r border-gray-300 text-[10px] leading-tight flex items-center">
                     Name Extension <br>(Jr., Sr., II, III)
                 </span>
@@ -54,7 +54,7 @@
                 </span>
                 <input type="text" name="middle_name"
                     value="{{ old('middle_name', $employee->middle_name) }}"
-                    class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                    class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
             </div>
 
             <div class="flex border-b border-gray-300">
@@ -79,7 +79,7 @@
                         </span>
                         <input type="text" name="place_of_birth"
                             value="{{ old('place_of_birth', $employee->place_of_birth) }}"
-                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent uppercase text-sm">
+                            class="flex-1 px-2 py-2 outline-none border-gray-300 focus:bg-gray-50 bg-transparent text-sm">
                     </div>
 
                     <!-- Sex at Birth -->
@@ -130,7 +130,7 @@
                         <p class="text-[10px] text-gray-400 mb-0.5">If holder of dual citizenship, please indicate country:</p>
                         <input type="text" name="citizenship_country"
                             value="{{ old('citizenship_country', $citizenshipCountry) }}"
-                            class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent uppercase text-sm">
+                            class="w-full border-b border-gray-300 focus:border-green-700 outline-none py-1 bg-transparent text-sm">
                     </div>
                 </div>
 
