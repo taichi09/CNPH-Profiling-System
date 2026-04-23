@@ -170,9 +170,8 @@ class EmployeeController extends Controller
                 $data['citizenship_type'] ?? '',
                 $data['citizenship_country'] ?? '',
             ]);
-            $data['citizenship'] = implode('//', $citizenshipParts) ?: 'N/A';
-            unset($data['citizenship_type']);
-            unset($data['citizenship_country']);
+            $data['citizenship_combined'] = implode('//', $citizenshipParts) ?: 'N/A';
+            // Keep the individual fields in session so the blade can repopulate them
 
             if (isset($data['civil_status']) && $data['civil_status'] === 'Others') {
                 if (!empty($data['civil_status_other'])) {
@@ -235,7 +234,7 @@ class EmployeeController extends Controller
                 'philsys_no' => $s1['philsys'] ?? 'N/A',
                 'tin_no' => $s1['tin'] ?? 'N/A',
                 'agency_employee_no' => $s1['agency_employee_no'] ?? 'N/A',
-                'citizenship' => $s1['citizenship'] ?? 'N/A',
+                'citizenship' => $s1['citizenship_combined'] ?? 'N/A',
                 'residential_address' => $buildAddress($s1, 'res'),
                 'residential_zip_code' => $s1['res_zip'] ?? 'N/A',
                 'permanent_address' => $buildAddress($s1, 'perm'),
