@@ -65,14 +65,10 @@
             {{-- ── STEP 2: Preview ── --}}
             <div id="step-preview" class="hidden">
                 {{-- Summary Cards --}}
-                <div class="grid grid-cols-3 gap-3 mb-5">
+                <div class="grid grid-cols-2 gap-3 mb-5">
                     <div class="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
                         <div id="count-new" class="text-2xl font-bold text-green-700">0</div>
                         <div class="text-xs text-green-600 font-medium mt-0.5">New Employees</div>
-                    </div>
-                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-center">
-                        <div id="count-updated" class="text-2xl font-bold text-amber-700">0</div>
-                        <div class="text-xs text-amber-600 font-medium mt-0.5">Will Be Updated</div>
                     </div>
                     <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center">
                         <div id="count-duplicate" class="text-2xl font-bold text-gray-500">0</div>
@@ -199,9 +195,6 @@
     });
 
     function setFile(file) {
-        const allowed = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                         'application/vnd.ms-excel.sheet.macroenabled.12',
-                         'application/vnd.ms-excel'];
         const ext = file.name.split('.').pop().toLowerCase();
         if (!['xlsx','xlsm','xls'].includes(ext)) {
             showError('Only .xlsx, .xlsm, or .xls files are allowed.');
@@ -255,21 +248,18 @@
     // ── Render Preview ─────────────────────────────────────────────
     function renderPreview(data) {
         document.getElementById('count-new').textContent       = data.summary.new_count;
-        document.getElementById('count-updated').textContent   = data.summary.updated_count;
         document.getElementById('count-duplicate').textContent = data.summary.duplicate_count;
 
         const container = document.getElementById('preview-details');
         container.innerHTML = '';
 
         if (data.new.length)       container.appendChild(buildSection('New Employees', data.new, 'green', 'M12 4v16m8-8H4'));
-        if (data.updated.length)   container.appendChild(buildSection('Will Be Updated', data.updated, 'amber', 'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'));
         if (data.duplicate.length) container.appendChild(buildSection('Skipped (Duplicates)', data.duplicate, 'gray', 'M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636'));
     }
 
     function buildSection(title, items, color, iconPath) {
         const colors = {
             green: { bg: 'bg-green-50', border: 'border-green-200', title: 'text-green-700', badge: 'bg-green-100 text-green-700', icon: 'text-green-500', row: 'text-green-800', sub: 'text-green-600' },
-            amber: { bg: 'bg-amber-50', border: 'border-amber-200', title: 'text-amber-700', badge: 'bg-amber-100 text-amber-700', icon: 'text-amber-500', row: 'text-amber-800', sub: 'text-amber-600' },
             gray:  { bg: 'bg-gray-50',  border: 'border-gray-200',  title: 'text-gray-600',  badge: 'bg-gray-100 text-gray-600',   icon: 'text-gray-400', row: 'text-gray-700', sub: 'text-gray-500' },
         };
         const c = colors[color];
@@ -302,7 +292,6 @@
             row.innerHTML = `
                 <p class="text-sm font-medium ${c.row}">${item.name || '—'}</p>
                 ${item.employee_id ? `<p class="text-xs ${c.sub}">${item.employee_id}</p>` : ''}
-                ${item.changes    ? `<p class="text-xs ${c.sub}">${item.changes}</p>`     : ''}
                 ${item.reason     ? `<p class="text-xs ${c.sub}">${item.reason}</p>`      : ''}`;
             body.appendChild(row);
         });
