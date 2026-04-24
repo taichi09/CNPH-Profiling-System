@@ -77,10 +77,14 @@ class EmployeeController extends Controller
     }
 
     // Filter: Department
-    if ($request->filled('departments')) {
-        $depts = explode(',', $request->get('departments'));
-        $query->whereIn('other_information.department_name', $depts);
-    }
+if ($request->filled('departments')) {
+    $depts = explode(',', $request->get('departments'));
+    $query->where(function ($q) use ($depts) {
+        foreach ($depts as $dept) {
+            $q->orWhereRaw('LOWER(other_information.department_name) LIKE ?', [strtolower(trim($dept)) . '%']);
+        }
+    });
+}
 
     // Filter: Employment Type
     if ($request->filled('employment_types')) {
