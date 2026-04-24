@@ -203,7 +203,7 @@
                             'HOUSEKEEPING'
                         ],
                 ageGroups:       ['18–25', '26–35', '36–45', '46–55', '56+'],
-                employmentTypes: ['Permanent', 'COS', 'Job Order', 'Casual'],
+                employmentTypes: ['Permanent', 'Contract of Service', 'Job Order', 'Casual'],
                 genders: ['Male', 'Female'],
 
                 get yearRange() {
