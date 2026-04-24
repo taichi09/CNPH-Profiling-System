@@ -27,7 +27,9 @@
                 $levelOrder = ['Elementary', 'Secondary', 'Vocational/Trade Course', 'College', 'Graduate Studies'];
                 $eduByLevel = [];
                 foreach ($education as $e) {
-                    $eduByLevel[$e->level][] = $e;
+                    $normalized = ucwords(strtolower($e->level));
+                    $matched = collect($levelOrder)->first(fn($l) => strtolower($l) === strtolower($e->level)) ?? $normalized;
+                    $eduByLevel[$matched][] = $e;
                 }
 
                 // Other Information
