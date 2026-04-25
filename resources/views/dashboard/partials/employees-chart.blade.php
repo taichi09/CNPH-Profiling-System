@@ -1,6 +1,5 @@
 <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
     <h2 class="text-lg font-semibold text-gray-800 mb-1">Employees by Department</h2>
-    
 
     <div id="dept-chart-wrap" style="position: relative; width: 100%; height: 380px;">
         <canvas id="departmentChart" role="img" aria-label="Vertical bar chart of employees by department">Employee counts by department.</canvas>
@@ -60,7 +59,7 @@
     ];
 
     const DEFAULT_SHOW = 8;
-    let mainChart  = null;
+    let mainChart = null;
     let modalChart = null;
 
     function shortLabel(label) {
@@ -81,7 +80,7 @@
 
     /* ── Main chart (top 8, vertical, straight short labels) ── */
     function buildMainChart() {
-        const slice  = combined.slice(0, DEFAULT_SHOW);
+        const slice = combined.slice(0, DEFAULT_SHOW);
         const labels = slice.map(d => shortLabel(d.label));
         const counts = slice.map(d => d.count);
         const colors = slice.map((_, i) => PALETTE[i % PALETTE.length]);
