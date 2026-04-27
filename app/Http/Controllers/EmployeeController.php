@@ -356,10 +356,13 @@ if ($request->filled('departments')) {
             }
 
             // Handle photo upload for new employee
-            $photoPath = null;
-            if (request()->hasFile('photo')) {
-                $photoPath = request()->file('photo')->store('employee_photos', 'public');
-            }
+           $photoPath = null;
+if (request()->hasFile('photo')) {
+    $file = request()->file('photo');
+    $filename = time() . '_' . $file->getClientOriginalName();
+    $file->move(public_path('employee_photos'), $filename);
+    $photoPath = 'employee_photos/' . $filename;
+}
 
             OtherInformation::create([
                 'employee_id' => $employeeId,
@@ -928,12 +931,18 @@ if ($request->filled('departments')) {
         // Handle photo upload
         $photoPath = null;
         if ($request->hasFile('photo')) {
-            // Delete old photo if exists
-            $existing = $employee->otherInformations()->first();
-            if ($existing && $existing->photo) {
-                Storage::disk('public')->delete($existing->photo);
-            }
-            $photoPath = $request->file('photo')->store('employee_photos', 'public');
+    // Delete old photo if exists
+    $existing = $employee->otherInformations()->first();
+    if ($existing && $existing->photo) {
+        $oldFullPath = public_path($existing->photo);
+        if (file_exists($oldFullPath)) {
+            unlink($oldFullPath);
+        }
+    }
+    $file = $request->file('photo');
+    $filename = time() . '_' . $file->getClientOriginalName();
+    $file->move(public_path('employee_photos'), $filename);
+    $photoPath = 'employee_photos/' . $filename;
         } else {
             // Keep existing photo if no new one uploaded
             $existing = $employee->otherInformations()->first();

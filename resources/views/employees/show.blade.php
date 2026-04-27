@@ -112,7 +112,7 @@
                     <div class="flex flex-col items-center">
                         @if($other && $other->photo)
                             <div style="width:132px; height:170px; border-radius:8px; overflow:hidden; border:1px solid #e5e7eb;">
-                                <img src="{{ Storage::url($other->photo) }}" alt="Employee Photo" style="width:100%; height:100%; object-fit:cover;">
+                                <img src="{{ asset($other->photo) }}" alt="Employee Photo" style="width:100%; height:100%; object-fit:cover;">
                             </div>
                         @else
                             <div style="width:132px; height:170px; border:2px dashed #cbd5e1; border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#f8fafc; color:#94a3b8; font-size:7.5pt; text-align:center; padding:8px;">
