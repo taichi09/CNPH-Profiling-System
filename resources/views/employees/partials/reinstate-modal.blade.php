@@ -66,7 +66,25 @@
         <option value="DIALYSIS CENTER">DIALYSIS CENTER</option>
         <option value="NUTRITION AND DIETETICS">NUTRITION AND DIETETICS</option>
         <option value="HOUSEKEEPING">HOUSEKEEPING</option>
+        <option value="MALASAKIT/SOCIAL WORKER">MALASAKIT/SOCIAL WORKER</option>
+        <option value="PHILHEALTH (PHILHEALTH 1)">PHILHEALTH (PHILHEALTH 1)</option>
+        <option value="PHILHEALTH (PHILHEALTH 2)">PHILHEALTH (PHILHEALTH 2)</option>
+        <option value="PHILHEALTH (PHILHEALTH 3)">PHILHEALTH (PHILHEALTH 3)</option>
+        <option value="PHILHEALTH (PHILHEALTH 4)">PHILHEALTH (PHILHEALTH 4)</option>
+        <option value="PHILHEALTH (PHILHEALTH E-KONSULTA)">PHILHEALTH (PHILHEALTH E-KONSULTA)</option>
+
+
+
+
     </select>
+</div>
+
+{{-- Position/Designation --}}
+<div class="mb-6">
+    <label class="block text-sm font-medium text-gray-700 mb-1">Position / Designation <span class="text-red-500">*</span></label>
+    <input type="text" name="position" required
+        class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter position or designation" />
 </div>
 
             {{-- Actions --}}
