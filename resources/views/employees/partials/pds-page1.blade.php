@@ -432,7 +432,7 @@
                 <span class="cell-label">23. Name of Children <span style="text-transform:none;">(Write full name and list all)</span></span>
             </td>
             <td colspan="2" style="background:#EAEAEA; border-left:1px solid #000; text-align:center;" class="label-cell">
-                <span class="cell-label">Date of Birth <span style="text-transform:none;">(dd/mm/yyyy)</span></span>
+                <span class="cell-label">Date of Birth {{-- <span style="text-transform:none;">(dd/mm/yyyy)</span> --}}</span>
             </td>
         </tr>
 
