@@ -128,7 +128,7 @@
                 </span>
             @else
                 <button type="button" 
-                    @click="window.location.href='{{ $employees->previousPageUrl() }}&tab={{ request('tab', 'active') }}'"
+                    onclick="window.location.href='{{ $employees->previousPageUrl() }}&tab={{ request('tab', 'active') }}'"
                     class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                     Prev
@@ -163,7 +163,7 @@
             {{-- Next --}}
             @if ($employees->hasMorePages())
                 <button type="button" 
-                    @click="window.location.href='{{ $employees->nextPageUrl() }}&tab={{ request('tab', 'active') }}'"
+                    onclick="window.location.href='{{ $employees->nextPageUrl() }}&tab={{ request('tab', 'active') }}'"
                     class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                     Next
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
