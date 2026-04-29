@@ -9,9 +9,13 @@
         </div>
 
         @php
-            $family     = $employee->familyBackground;
-            $childNames = is_array($family->name_of_children ?? null) ? $family->name_of_children : [];
-            $childDobs  = is_array($family->date_of_birth ?? null)    ? $family->date_of_birth    : [];
+            $family = $employee->familyBackground;
+            $rawNames = (string)($family->getAttributes()['name_of_children'] ?? '');
+            $rawDobs = (string)($family->getAttributes()['date_of_birth'] ?? '');
+            $nameSep = str_contains($rawNames, ';') ? ';' : ',';
+            $dobSep = str_contains($rawDobs, ';') ? ';' : ',';
+            $childNames = array_values(array_filter(array_map('trim', explode($nameSep, $rawNames))));
+            $childDobs = array_values(array_filter(array_map('trim', explode($dobSep, $rawDobs))));
             $childCount = max(count($childNames), 1);
         @endphp
 
@@ -216,8 +220,9 @@
                             <input type="text" name="children[{{ $i }}][name]"
                                 value="{{ old("children.$i.name", $childNames[$i] ?? '') }}"
                                 class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                            <input type="date" name="children[{{ $i }}][dob]"
+                            <input type="text" name="children[{{ $i }}][dob]"
                                 value="{{ old("children.$i.dob", $childDobs[$i] ?? '') }}"
+                                placeholder="dd/mm/yyyy"
                                 class="w-40 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-gray-300">
                         </div>
                         @endfor
@@ -256,7 +261,7 @@
             row.innerHTML = `
                 <input type="text" name="children[${childIndex}][name]"
                     class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300">
-                <input type="date" name="children[${childIndex}][dob]"
+                <input type="text" name="children[${childIndex}][dob]" placeholder="dd/mm/yyyy"
                     class="w-40 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-gray-300">
             `;
             list.appendChild(row);
