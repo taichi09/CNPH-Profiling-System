@@ -128,10 +128,25 @@
                     </label>
                 </li>
             </template>
-            <li x-show="departments.filter(d => d.toLowerCase().includes(search.toLowerCase())).length === 0"
-                class="px-3 py-4 text-xs text-gray-400 text-center">
-                No departments found
-            </li>
+           <li x-show="departments.filter(d => d.toLowerCase().includes(search.toLowerCase())).length === 0"
+    class="px-3 py-3 text-center">
+    <p class="text-xs text-gray-400 mb-2">No department found for "<span x-text="search" class="font-medium text-gray-600"></span>"</p>
+    <button
+        type="button"
+        @click="
+            if (search.trim() && !departments.includes(search.trim().toUpperCase())) {
+                departments.push(search.trim().toUpperCase());
+            }
+            toggleFilter('dept', search.trim().toUpperCase());
+            search = '';
+        "
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-50 border border-green-300 text-green-700 text-xs font-medium hover:bg-green-100 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        Add "<span x-text="search.trim()" class="font-semibold"></span>"
+    </button>
+</li>
         </ul>
 
         {{-- Footer: select all / clear --}}
