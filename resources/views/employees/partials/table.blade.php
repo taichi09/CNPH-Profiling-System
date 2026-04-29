@@ -72,7 +72,7 @@
                 @endif
                 <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-center">
                     <div class="flex justify-center gap-2">
-                        <a href="{{ route('employees.show', $employee->employee_id) }}"
+                        <a href="{{ route('employees.show', $employee->employee_id) }}?back={{ urlencode(request()->fullUrl()) }}"
                             class="py-1 px-2 sm:px-3 text-xs font-medium rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
                             View
                         </a>

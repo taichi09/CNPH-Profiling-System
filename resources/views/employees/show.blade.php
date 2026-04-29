@@ -62,7 +62,7 @@
             @endphp
 
             <div class="flex items-center justify-between mb-4">
-                <a href="{{ route('employees.index') }}"
+                <a href="{{ request('back') ? urldecode(request('back')) : route('employees.index') }}"
                     class="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-green-700 text-green-700 text-sm font-semibold uppercase tracking-wide hover:bg-green-700 hover:text-white transition-colors duration-200">
                     &#8592; Back to Employees
                 </a>
