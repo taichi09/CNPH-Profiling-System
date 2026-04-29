@@ -9,7 +9,14 @@
         </div>
 
         @php
-            $educations = $employee->educations->groupBy(fn($e) => ucwords(strtolower($e->level)));
+            $levelOrder = ['Elementary', 'Secondary', 'Vocational/Trade Course', 'College', 'Graduate Studies'];
+            $eduByLevel = [];
+            foreach ($employee->educations as $e) {
+                $normalized = ucwords(strtolower($e->level));
+                $matched = collect($levelOrder)->first(fn($l) => strtolower($l) === strtolower($e->level)) ?? $normalized;
+                $eduByLevel[$matched][] = $e;
+            }
+            $educations = collect($eduByLevel)->map(fn($rows) => collect($rows));
             $levelMap = [
                 'elem' => 'Elementary',
                 'sec' => 'Secondary',
