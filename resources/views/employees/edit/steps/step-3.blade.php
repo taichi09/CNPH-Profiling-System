@@ -9,7 +9,7 @@
         </div>
 
         @php
-            $educations = $employee->educations->groupBy('level');
+            $educations = $employee->educations->groupBy(fn($e) => ucwords(strtolower($e->level)));
             $levelMap = [
                 'elem' => 'Elementary',
                 'sec' => 'Secondary',

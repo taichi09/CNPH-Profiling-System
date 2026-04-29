@@ -24,8 +24,9 @@
                         $isActive = $currentStep === $stepNumber;
                     @endphp
 
-                    <div class="relative flex-1 flex items-center gap-2 px-2 py-3
-                        {{ $isCompleted ? 'bg-green-700' : ($isActive ? 'bg-white border-t-4 border-t-green-700' : 'bg-white') }}">
+                    <a href="{{ route('employees.edit.step', ['id' => $employee->employee_id, 'step' => $stepNumber]) }}"
+                        class="relative flex-1 flex items-center gap-2 px-2 py-3
+                            {{ $isCompleted ? 'bg-green-700' : ($isActive ? 'bg-white border-t-4 border-t-green-700' : 'bg-white') }}">
 
                         {{-- Circle / Checkmark --}}
                         <div class="shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center font-bold text-xs
@@ -44,7 +45,7 @@
                             {{ $isCompleted ? 'text-white' : ($isActive ? 'text-green-700' : 'text-gray-400') }}">
                             {{ $stepLabel }}
                         </span>
-                    </div>
+                    </a>
                 @endforeach
             </div>
 
