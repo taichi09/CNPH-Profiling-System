@@ -173,10 +173,10 @@
 
                 // AFTER
                 departments: [
-                            'MEDICAL - NURSES',
-                            'MEDICAL - DOCTORS',
-                            'MEDICAL - NURSING ATTENDANT',
-                            'MEDICAL - MIDWIVES',
+                            'MEDICAL',
+                            'NURSES',
+                            'NURSING ATTENDANT',
+                            'MIDWIVES',
                             'ADMINISTRATIVE',
                             'TECHNICAL',
                             'ANCILLARY',

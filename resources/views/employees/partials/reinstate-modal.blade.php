@@ -38,10 +38,10 @@
                 <select name="department" required
                     class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="" disabled selected>Select department</option>
-                    <option value="MEDICAL - NURSES">MEDICAL - NURSES</option>
-                    <option value="MEDICAL - DOCTORS">MEDICAL - DOCTORS</option>
-                    <option value="MEDICAL - NURSING ATTENDANT">MEDICAL - NURSING ATTENDANT</option>
-                    <option value="MEDICAL - MIDWIVES">MEDICAL - MIDWIVES</option>
+                    <option value="MEDICAL">MEDICAL</option>
+                    <option value="NURSES">NURSES</option>
+                    <option value="NURSING ATTENDANT">NURSING ATTENDANT</option>
+                    <option value="MIDWIVES">MIDWIVES</option>
                     <option value="ADMINISTRATIVE">ADMINISTRATIVE</option>
                     <option value="TECHNICAL">TECHNICAL</option>
                     <option value="ANCILLARY">ANCILLARY</option>

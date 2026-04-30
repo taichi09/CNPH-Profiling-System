@@ -131,6 +131,9 @@
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <datalist id="dept-list-create">
                         <option value="MEDICAL">
+                        <option value="NURSES">
+                        <option value="NURSING ATTENDANT">
+                        <option value="MIDWIVES">                
                         <option value="ADMINISTRATIVE">
                         <option value="TECHNICAL">
                         <option value="ANCILLARY">
