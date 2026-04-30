@@ -33,47 +33,24 @@
             </div>
 
             {{-- Department --}}
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Department <span class="text-red-500">*</span></label>
-                <select name="department" required
-                    class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="" disabled selected>Select department</option>
-                    <option value="MEDICAL">MEDICAL</option>
-                    <option value="NURSES">NURSES</option>
-                    <option value="NURSING ATTENDANT">NURSING ATTENDANT</option>
-                    <option value="MIDWIVES">MIDWIVES</option>
-                    <option value="ADMINISTRATIVE">ADMINISTRATIVE</option>
-                    <option value="TECHNICAL">TECHNICAL</option>
-                    <option value="ANCILLARY">ANCILLARY</option>
-                    <option value="COH/COC">COH/COC</option>
-                    <option value="HUMAN RESOURCE MANAGEMENT OFFICE">HUMAN RESOURCE MANAGEMENT OFFICE</option>
-                    <option value="QUALITY ASSURANCE UNIT">QUALITY ASSURANCE UNIT</option>
-                    <option value="BUDGET/FINANCE">BUDGET/FINANCE</option>
-                    <option value="CASH OPERATION">CASH OPERATION</option>
-                    <option value="HIMS OPD RECORDS">HIMS OPD RECORDS</option>
-                    <option value="OPD RECORDS">OPD RECORDS</option>
-                    <option value="SUPPLY UNIT">SUPPLY UNIT</option>
-                    <option value="PROCUREMENT">PROCUREMENT</option>
-                    <option value="INTEGRATED HOSPITAL OPERATIONS & MANAGEMENT PROGRAM">INTEGRATED HOSPITAL OPERATIONS &amp; MANAGEMENT PROGRAM</option>
-                    <option value="SECURITY">SECURITY</option>
-                    <option value="MAINTENANCE">MAINTENANCE</option>
-                    <option value="TRANSPORTATION">TRANSPORTATION</option>
-                    <option value="DISPATCH">DISPATCH</option>
-                    <option value="HELP DESK">HELP DESK</option>
-                    <option value="RADIOLOGY">RADIOLOGY</option>
-                    <option value="LABORATORY/BLOOD BANK">LABORATORY/BLOOD BANK</option>
-                    <option value="DENTAL CLINIC">DENTAL CLINIC</option>
-                    <option value="DIALYSIS CENTER">DIALYSIS CENTER</option>
-                    <option value="NUTRITION AND DIETETICS">NUTRITION AND DIETETICS</option>
-                    <option value="HOUSEKEEPING">HOUSEKEEPING</option>
-                    <option value="MALASAKIT/SOCIAL WORKER">MALASAKIT/SOCIAL WORKER</option>
-                    <option value="PHILHEALTH (PHILHEALTH 1)">PHILHEALTH (PHILHEALTH 1)</option>
-                    <option value="PHILHEALTH (PHILHEALTH 2)">PHILHEALTH (PHILHEALTH 2)</option>
-                    <option value="PHILHEALTH (PHILHEALTH 3)">PHILHEALTH (PHILHEALTH 3)</option>
-                    <option value="PHILHEALTH (PHILHEALTH 4)">PHILHEALTH (PHILHEALTH 4)</option>
-                    <option value="PHILHEALTH (PHILHEALTH E-KONSULTA)">PHILHEALTH (PHILHEALTH E-KONSULTA)</option>
-                </select>
-            </div>
+ {{-- Department --}}
+<div class="mb-6">
+    <label class="block text-sm font-medium text-gray-700 mb-1">Department <span class="text-red-500">*</span></label>
+    <div class="relative">
+        <input
+            type="text"
+            id="departmentInput"
+            name="department"
+            required
+            autocomplete="off"
+            placeholder="Search or type a department…"
+            class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <ul id="departmentDropdown"
+            class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded shadow-lg max-h-52 overflow-y-auto text-sm">
+        </ul>
+    </div>
+</div>
 
             {{-- Position/Designation --}}
             <div class="mb-6">
@@ -97,3 +74,66 @@
         </form>
     </div>
 </div>
+
+<script>
+(function () {
+    const DEPARTMENTS = [
+        'MEDICAL', 'NURSES', 'NURSING ATTENDANT', 'MIDWIVES', 'ADMINISTRATIVE',
+        'TECHNICAL', 'ANCILLARY', 'COH/COC', 'HUMAN RESOURCE MANAGEMENT OFFICE',
+        'QUALITY ASSURANCE UNIT', 'BUDGET/FINANCE', 'CASH OPERATION',
+        'HIMS OPD RECORDS', 'OPD RECORDS', 'SUPPLY UNIT', 'PROCUREMENT',
+        'INTEGRATED HOSPITAL OPERATIONS & MANAGEMENT PROGRAM', 'SECURITY',
+        'MAINTENANCE', 'TRANSPORTATION', 'DISPATCH', 'HELP DESK', 'RADIOLOGY',
+        'LABORATORY/BLOOD BANK', 'DENTAL CLINIC', 'DIALYSIS CENTER',
+        'NUTRITION AND DIETETICS', 'HOUSEKEEPING', 'MALASAKIT/SOCIAL WORKER',
+        'PHILHEALTH (PHILHEALTH 1)', 'PHILHEALTH (PHILHEALTH 2)',
+        'PHILHEALTH (PHILHEALTH 3)', 'PHILHEALTH (PHILHEALTH 4)',
+        'PHILHEALTH (PHILHEALTH E-KONSULTA)'
+    ];
+
+    const input = document.getElementById('departmentInput');
+    const dropdown = document.getElementById('departmentDropdown');
+
+    function renderDropdown(filter) {
+        const q = filter.toLowerCase().trim();
+        const matches = q
+            ? DEPARTMENTS.filter(d => d.toLowerCase().includes(q))
+            : DEPARTMENTS;
+
+        dropdown.innerHTML = '';
+
+        if (matches.length === 0) {
+            const li = document.createElement('li');
+            li.className = 'px-3 py-2 text-gray-400 italic';
+            li.textContent = 'No match — your input will be used as-is';
+            dropdown.appendChild(li);
+        } else {
+            matches.forEach(dept => {
+                const li = document.createElement('li');
+                li.className = 'px-3 py-2 cursor-pointer hover:bg-blue-50 hover:text-blue-700 text-gray-700';
+                li.textContent = dept;
+                li.addEventListener('mousedown', function (e) {
+                    e.preventDefault();
+                    input.value = dept;
+                    closeDropdown();
+                });
+                dropdown.appendChild(li);
+            });
+        }
+
+        dropdown.classList.remove('hidden');
+    }
+
+    function closeDropdown() {
+        dropdown.classList.add('hidden');
+    }
+
+    input.addEventListener('focus', () => renderDropdown(input.value));
+    input.addEventListener('input', () => renderDropdown(input.value));
+    input.addEventListener('blur', closeDropdown);
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeDropdown();
+    });
+})();
+</script>

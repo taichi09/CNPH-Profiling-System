@@ -203,7 +203,7 @@
     function closeModal() {
         document.getElementById('dept-modal').classList.add('hidden');
         document.body.style.overflow = '';
-        document.getElementById('dept-search').value = '';
+        document.getElM,ementById('dept-search').value = '';
         document.querySelectorAll('#dept-list [data-label]').forEach(r => r.style.display = 'flex');
         document.getElementById('dept-no-results').classList.add('hidden');
     }
