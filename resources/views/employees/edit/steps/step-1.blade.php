@@ -104,10 +104,10 @@
                 <div class="w-[50%] shrink-0 px-3 py-2 flex flex-col gap-2">
                     <span class="text-gray-600 uppercase font-semibold tracking-wide">16. Citizenship</span>
                     @php
-                        $citizenshipRaw     = old('citizenship', $employee->citizenship ?? '');
-                        $citizenshipParts   = explode('//', $citizenshipRaw);
-                        $citizenshipVal     = strtoupper(trim($citizenshipParts[0] ?? ''));
-                        $citizenshipType    = strtoupper(trim($citizenshipParts[1] ?? ''));
+                        $citizenshipRaw = old('citizenship', $employee->citizenship ?? '');
+                        $citizenshipParts = explode('//', $citizenshipRaw);
+                        $citizenshipVal = strtoupper(trim($citizenshipParts[0] ?? ''));
+                        $citizenshipType = strtoupper(trim($citizenshipParts[1] ?? ''));
                         $citizenshipCountry = trim($citizenshipParts[2] ?? '');
                     @endphp
                     <div class="flex flex-row gap-1 text-sm text-gray-700">
@@ -466,13 +466,13 @@
         function copyResidentialToPermanent(checkbox) {
             const fields = ['house', 'street', 'subdivision', 'barangay', 'city', 'province', 'zip'];
             fields.forEach(function(field) {
-                const res  = document.querySelector(`input[name="res_${field}"]`);
+                const res = document.querySelector(`input[name="res_${field}"]`);
                 const perm = document.querySelector(`input[name="perm_${field}"]`);
                 if (checkbox.checked) {
-                    perm.value    = res.value;
+                    perm.value = res.value;
                     perm.readOnly = true;
                 } else {
-                    perm.value    = '';
+                    perm.value = '';
                     perm.readOnly = false;
                 }
             });
@@ -481,7 +481,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const fields = ['house', 'street', 'subdivision', 'barangay', 'city', 'province', 'zip'];
             const allMatch = fields.every(function(field) {
-                const res  = document.querySelector(`input[name="res_${field}"]`);
+                const res = document.querySelector(`input[name="res_${field}"]`);
                 const perm = document.querySelector(`input[name="perm_${field}"]`);
                 return res && perm && res.value !== '' && res.value === perm.value;
             });

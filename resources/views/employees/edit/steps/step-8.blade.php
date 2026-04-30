@@ -227,9 +227,9 @@
     </div>
 
     <script>
-        let skillIndex      = {{ count($skills) }};
+        let skillIndex = {{ count($skills) }};
         let distinctionIndex = {{ count($distinctions) }};
-        let membershipIndex  = {{ count($memberships) }};
+        let membershipIndex = {{ count($memberships) }};
 
         function addSkill() {
             const list = document.getElementById('skills-list');
