@@ -58,7 +58,7 @@
         {{-- Date of Birth | Citizenship (rowspan 3) --}}
         <tr>
             <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">3.</span></td>
-            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Date of Birth<br>(dd/mm/yyyy)</span></td>
+            <td style="background:#EAEAEA; border-top:1px solid #000; border-bottom:1px solid #000;" class="label-cell"><span class="cell-label">Date of Birth<br><span class="normal-case font-normal text-[10px]">(dd/mm/yyyy)</span></span></td>
             <td colspan="2" style="text-align:center; vertical-align:middle;">
                 <span class="cell-value">
                     {{ $personal->date_of_birth
