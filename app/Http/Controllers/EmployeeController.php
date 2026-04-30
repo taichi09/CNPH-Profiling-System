@@ -25,7 +25,7 @@ class EmployeeController extends Controller
 {
 public function index(Request $request)
 {
-    $tab    = $request->get('tab', 'active');
+    $tab = $request->get('tab', 'active');
     $search = $request->get('search');
 
     // Build the L&D aggregate subquery conditionally.
@@ -77,8 +77,8 @@ public function index(Request $request)
     // Search: names + Learning and Development title
     if ($search) {
         $query->where(function ($q) use ($search) {
-            $q->where('personal_information.surname',    'LIKE', "%{$search}%")
-              ->orWhere('personal_information.first_name',  'LIKE', "%{$search}%")
+            $q->where('personal_information.surname', 'LIKE', "%{$search}%")
+              ->orWhere('personal_information.first_name', 'LIKE', "%{$search}%")
               ->orWhere('personal_information.middle_name', 'LIKE', "%{$search}%")
               ->orWhereNotNull('ld_agg.matched_training');
         });
@@ -129,7 +129,7 @@ public function index(Request $request)
             '26–35' => [26, 35],
             '36–45' => [36, 45],
             '46–55' => [46, 55],
-            '56+'   => [56, 150],
+            '56+' => [56, 150],
         ];
 
         $query->where(function ($q) use ($groups, $ageMap) {
@@ -157,9 +157,9 @@ public function index(Request $request)
         return view('employees.partials.table', compact('employees', 'tab'))->render();
     }
 
-    $activeCount   = OtherInformation::where('employment_status', '!=', 'Resigned')->count();
+    $activeCount = OtherInformation::where('employment_status', '!=', 'Resigned')->count();
     $resignedCount = OtherInformation::where('employment_status', 'Resigned')->count();
-    $departments   = \App\Models\Department::orderBy('dept_name')->get();
+    $departments = \App\Models\Department::orderBy('dept_name')->get();
 
     return view('employees.index', compact(
         'employees', 'tab', 'activeCount', 'resignedCount', 'departments'
@@ -377,12 +377,12 @@ public function index(Request $request)
 
             // Handle photo upload for new employee
            $photoPath = null;
-if (request()->hasFile('photo')) {
-    $file = request()->file('photo');
-    $filename = time() . '_' . $file->getClientOriginalName();
-    $file->move(public_path('employee_photos'), $filename);
-    $photoPath = 'employee_photos/' . $filename;
-}
+            if (request()->hasFile('photo')) {
+                $file = request()->file('photo');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('employee_photos'), $filename);
+                $photoPath = 'employee_photos/' . $filename;
+            }
 
             OtherInformation::create([
                 'employee_id' => $employeeId,
