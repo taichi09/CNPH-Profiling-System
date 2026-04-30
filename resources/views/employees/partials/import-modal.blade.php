@@ -124,25 +124,25 @@
 <script>
 (function () {
     // ── Elements ──────────────────────────────────────────────────
-    const modal          = document.getElementById('import-modal');
-    const dropZone       = document.getElementById('drop-zone');
-    const fileInput      = document.getElementById('import-file-input');
-    const selectedFile   = document.getElementById('selected-file');
-    const selectedName   = document.getElementById('selected-file-name');
-    const removeFile     = document.getElementById('remove-file');
-    const uploadError    = document.getElementById('upload-error');
-    const stepUpload     = document.getElementById('step-upload');
-    const stepPreview    = document.getElementById('step-preview');
-    const btnPreview     = document.getElementById('btn-preview');
+    const modal = document.getElementById('import-modal');
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('import-file-input');
+    const selectedFile = document.getElementById('selected-file');
+    const selectedName = document.getElementById('selected-file-name');
+    const removeFile = document.getElementById('remove-file');
+    const uploadError = document.getElementById('upload-error');
+    const stepUpload = document.getElementById('step-upload');
+    const stepPreview = document.getElementById('step-preview');
+    const btnPreview = document.getElementById('btn-preview');
     const btnPreviewText = document.getElementById('btn-preview-text');
-    const btnSpinner     = document.getElementById('btn-preview-spinner');
-    const btnBack        = document.getElementById('btn-back');
-    const btnCancel      = document.getElementById('btn-cancel');
-    const confirmForm    = document.getElementById('confirm-import-form');
-    const tempPathInput  = document.getElementById('temp-path-input');
-    const step1Dot       = document.getElementById('step1-dot');
-    const step2Dot       = document.getElementById('step2-dot');
-    const step2Label     = document.getElementById('step2-label');
+    const btnSpinner = document.getElementById('btn-preview-spinner');
+    const btnBack = document.getElementById('btn-back');
+    const btnCancel = document.getElementById('btn-cancel');
+    const confirmForm = document.getElementById('confirm-import-form');
+    const tempPathInput = document.getElementById('temp-path-input');
+    const step1Dot = document.getElementById('step1-dot');
+    const step2Dot = document.getElementById('step2-dot');
+    const step2Label = document.getElementById('step2-label');
 
     // ── Open / Close ──────────────────────────────────────────────
     document.getElementById('import-btn').addEventListener('click', openModal);
@@ -218,7 +218,7 @@
         fd.append('_token', document.querySelector('meta[name="csrf-token"]').content);
 
         try {
-            const res  = await fetch('{{ route("employees.import.preview") }}', { method: 'POST', body: fd });
+            const res = await fetch('{{ route("employees.import.preview") }}', { method: 'POST', body: fd });
             const data = await res.json();
 
             if (!res.ok) throw new Error(data.message || data.errors?.file?.[0] || 'Preview failed.');
@@ -247,13 +247,13 @@
 
     // ── Render Preview ─────────────────────────────────────────────
     function renderPreview(data) {
-        document.getElementById('count-new').textContent       = data.summary.new_count;
+        document.getElementById('count-new').textContent = data.summary.new_count;
         document.getElementById('count-duplicate').textContent = data.summary.duplicate_count;
 
         const container = document.getElementById('preview-details');
         container.innerHTML = '';
 
-        if (data.new.length)       container.appendChild(buildSection('New Employees', data.new, 'green', 'M12 4v16m8-8H4'));
+        if (data.new.length) container.appendChild(buildSection('New Employees', data.new, 'green', 'M12 4v16m8-8H4'));
         if (data.duplicate.length) container.appendChild(buildSection('Skipped (Duplicates)', data.duplicate, 'gray', 'M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636'));
     }
 
@@ -292,7 +292,7 @@
             row.innerHTML = `
                 <p class="text-sm font-medium ${c.row}">${item.name || '—'}</p>
                 ${item.employee_id ? `<p class="text-xs ${c.sub}">${item.employee_id}</p>` : ''}
-                ${item.reason     ? `<p class="text-xs ${c.sub}">${item.reason}</p>`      : ''}`;
+                ${item.reason ? `<p class="text-xs ${c.sub}">${item.reason}</p>` : ''}`;
             body.appendChild(row);
         });
 
