@@ -33,59 +33,55 @@
             </div>
 
             {{-- Department --}}
-          <div class="mb-6">
-    <label class="block text-sm font-medium text-gray-700 mb-1">Department <span class="text-red-500">*</span></label>
-    <select name="department" required
-        class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <option value="" disabled selected>Select department</option>
-        <option value="MEDICAL - NURSES">MEDICAL - NURSES</option>
-        <option value="MEDICAL - DOCTORS">MEDICAL - DOCTORS</option>
-        <option value="MEDICAL - NURSING ATTENDANT">MEDICAL - NURSING ATTENDANT</option>
-        <option value="MEDICAL - MIDWIVES">MEDICAL - MIDWIVES</option>
-        <option value="ADMINISTRATIVE">ADMINISTRATIVE</option>
-        <option value="TECHNICAL">TECHNICAL</option>
-        <option value="ANCILLARY">ANCILLARY</option>
-        <option value="COH/COC">COH/COC</option>
-        <option value="HUMAN RESOURCE MANAGEMENT OFFICE">HUMAN RESOURCE MANAGEMENT OFFICE</option>
-        <option value="QUALITY ASSURANCE UNIT">QUALITY ASSURANCE UNIT</option>
-        <option value="BUDGET/FINANCE">BUDGET/FINANCE</option>
-        <option value="CASH OPERATION">CASH OPERATION</option>
-        <option value="HIMS OPD RECORDS">HIMS OPD RECORDS</option>
-        <option value="OPD RECORDS">OPD RECORDS</option>
-        <option value="SUPPLY UNIT">SUPPLY UNIT</option>
-        <option value="PROCUREMENT">PROCUREMENT</option>
-        <option value="INTEGRATED HOSPITAL OPERATIONS & MANAGEMENT PROGRAM">INTEGRATED HOSPITAL OPERATIONS &amp; MANAGEMENT PROGRAM</option>
-        <option value="SECURITY">SECURITY</option>
-        <option value="MAINTENANCE">MAINTENANCE</option>
-        <option value="TRANSPORTATION">TRANSPORTATION</option>
-        <option value="DISPATCH">DISPATCH</option>
-        <option value="HELP DESK">HELP DESK</option>
-        <option value="RADIOLOGY">RADIOLOGY</option>
-        <option value="LABORATORY/BLOOD BANK">LABORATORY/BLOOD BANK</option>
-        <option value="DENTAL CLINIC">DENTAL CLINIC</option>
-        <option value="DIALYSIS CENTER">DIALYSIS CENTER</option>
-        <option value="NUTRITION AND DIETETICS">NUTRITION AND DIETETICS</option>
-        <option value="HOUSEKEEPING">HOUSEKEEPING</option>
-        <option value="MALASAKIT/SOCIAL WORKER">MALASAKIT/SOCIAL WORKER</option>
-        <option value="PHILHEALTH (PHILHEALTH 1)">PHILHEALTH (PHILHEALTH 1)</option>
-        <option value="PHILHEALTH (PHILHEALTH 2)">PHILHEALTH (PHILHEALTH 2)</option>
-        <option value="PHILHEALTH (PHILHEALTH 3)">PHILHEALTH (PHILHEALTH 3)</option>
-        <option value="PHILHEALTH (PHILHEALTH 4)">PHILHEALTH (PHILHEALTH 4)</option>
-        <option value="PHILHEALTH (PHILHEALTH E-KONSULTA)">PHILHEALTH (PHILHEALTH E-KONSULTA)</option>
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Department <span class="text-red-500">*</span></label>
+                <select name="department" required
+                    class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="" disabled selected>Select department</option>
+                    <option value="MEDICAL - NURSES">MEDICAL - NURSES</option>
+                    <option value="MEDICAL - DOCTORS">MEDICAL - DOCTORS</option>
+                    <option value="MEDICAL - NURSING ATTENDANT">MEDICAL - NURSING ATTENDANT</option>
+                    <option value="MEDICAL - MIDWIVES">MEDICAL - MIDWIVES</option>
+                    <option value="ADMINISTRATIVE">ADMINISTRATIVE</option>
+                    <option value="TECHNICAL">TECHNICAL</option>
+                    <option value="ANCILLARY">ANCILLARY</option>
+                    <option value="COH/COC">COH/COC</option>
+                    <option value="HUMAN RESOURCE MANAGEMENT OFFICE">HUMAN RESOURCE MANAGEMENT OFFICE</option>
+                    <option value="QUALITY ASSURANCE UNIT">QUALITY ASSURANCE UNIT</option>
+                    <option value="BUDGET/FINANCE">BUDGET/FINANCE</option>
+                    <option value="CASH OPERATION">CASH OPERATION</option>
+                    <option value="HIMS OPD RECORDS">HIMS OPD RECORDS</option>
+                    <option value="OPD RECORDS">OPD RECORDS</option>
+                    <option value="SUPPLY UNIT">SUPPLY UNIT</option>
+                    <option value="PROCUREMENT">PROCUREMENT</option>
+                    <option value="INTEGRATED HOSPITAL OPERATIONS & MANAGEMENT PROGRAM">INTEGRATED HOSPITAL OPERATIONS &amp; MANAGEMENT PROGRAM</option>
+                    <option value="SECURITY">SECURITY</option>
+                    <option value="MAINTENANCE">MAINTENANCE</option>
+                    <option value="TRANSPORTATION">TRANSPORTATION</option>
+                    <option value="DISPATCH">DISPATCH</option>
+                    <option value="HELP DESK">HELP DESK</option>
+                    <option value="RADIOLOGY">RADIOLOGY</option>
+                    <option value="LABORATORY/BLOOD BANK">LABORATORY/BLOOD BANK</option>
+                    <option value="DENTAL CLINIC">DENTAL CLINIC</option>
+                    <option value="DIALYSIS CENTER">DIALYSIS CENTER</option>
+                    <option value="NUTRITION AND DIETETICS">NUTRITION AND DIETETICS</option>
+                    <option value="HOUSEKEEPING">HOUSEKEEPING</option>
+                    <option value="MALASAKIT/SOCIAL WORKER">MALASAKIT/SOCIAL WORKER</option>
+                    <option value="PHILHEALTH (PHILHEALTH 1)">PHILHEALTH (PHILHEALTH 1)</option>
+                    <option value="PHILHEALTH (PHILHEALTH 2)">PHILHEALTH (PHILHEALTH 2)</option>
+                    <option value="PHILHEALTH (PHILHEALTH 3)">PHILHEALTH (PHILHEALTH 3)</option>
+                    <option value="PHILHEALTH (PHILHEALTH 4)">PHILHEALTH (PHILHEALTH 4)</option>
+                    <option value="PHILHEALTH (PHILHEALTH E-KONSULTA)">PHILHEALTH (PHILHEALTH E-KONSULTA)</option>
+                </select>
+            </div>
 
-
-
-
-    </select>
-</div>
-
-{{-- Position/Designation --}}
-<div class="mb-6">
-    <label class="block text-sm font-medium text-gray-700 mb-1">Position / Designation <span class="text-red-500">*</span></label>
-    <input type="text" name="position" required
-        class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="Enter position or designation" />
-</div>
+            {{-- Position/Designation --}}
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Position / Designation <span class="text-red-500">*</span></label>
+                <input type="text" name="position" required
+                    class="w-full text-sm border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter position or designation" />
+            </div>
 
             {{-- Actions --}}
             <div class="flex justify-end gap-3">
