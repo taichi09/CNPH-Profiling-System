@@ -27,7 +27,7 @@
                     <option value="" disabled selected>Select status</option>
                     <option value="Permanent">Permanent</option>
                     <option value="Casual">Casual</option>
-                    <option value="Contract of Service">COS (Contract of Service)</option>
+                    <option value="COS">COS (Contract of Service)</option>
                     <option value="Job Order">Job Order</option>
                 </select>
             </div>

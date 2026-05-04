@@ -173,7 +173,7 @@
                         class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
                     <datalist id="emp-status-list-edit">
                         <option value="Permanent">
-                        <option value="Contract of Service">
+                        <option value="COS">
                         <option value="Regular">
                         <option value="Casual">
                         <option value="Contractual">
