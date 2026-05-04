@@ -2,6 +2,29 @@
     @csrf
 
     <div class="max-w-7xl mx-auto bg-white rounded-lg shadow p-8">
+
+        @if($errors->any())
+            <div id="error-toast"
+                class="fixed bottom-6 right-6 z-50 flex items-start gap-3 bg-red-600 text-white text-sm font-medium px-5 py-3 rounded-lg shadow-lg transition-opacity duration-500 max-w-sm">
+                <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <ul class="list-none">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            <script>
+                setTimeout(function () {
+                    const toast = document.getElementById('error-toast');
+                    if (toast) {
+                        toast.style.opacity = '0';
+                        setTimeout(() => toast.remove(), 500);
+                    }
+                }, 4000);
+            </script>
+        @endif
         <!-- Header -->
         <div class="mb-6 border-b pb-4">
             <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: #14532d; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">Personal Information</h2>

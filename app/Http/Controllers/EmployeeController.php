@@ -189,6 +189,18 @@ public function index(Request $request)
         $data = $request->except('_token');
 
         if ((int)$step === 1) {
+            $request->validate([
+                'surname' => 'required|string',
+                'first_name' => 'required|string',
+                'middle_name' => 'required|string',
+            ], [
+                'surname.required' => 'Surname is required.',
+                'first_name.required' => 'First name is required.',
+                'middle_name.required' => 'Middle name is required.',
+            ]);
+        }
+
+        if ((int)$step === 1) {
             $citizenshipParts = array_filter([
                 $data['citizenship'] ?? '',
                 $data['citizenship_type'] ?? '',
