@@ -499,23 +499,23 @@ public function index(Request $request)
     }
 
    public function reinstate(Request $request, $id)
-{
-    $request->validate([
-        'employment_status' => 'required|string',
-        'department' => 'required|string',
-        'position' => 'required|string',
-    ]);
-
-    DB::table('other_information')
-        ->where('employee_id', $id)
-        ->update([
-            'employment_status' => $request->employment_status,
-            'department_name' => $request->department,
-            'position' => $request->position,
+    {   
+        $request->validate([
+            'employment_status' => 'required|string',
+            'department' => 'required|string',
+            'position' => 'required|string',
         ]);
 
-    return back()->with('success', 'Employee has been reinstated successfully.');
-}
+        DB::table('other_information')
+            ->where('employee_id', $id)
+            ->update([
+                'employment_status' => $request->employment_status,
+                'department_name' => $request->department,
+                'position' => $request->position,
+            ]);
+
+        return back()->with('success', 'Employee has been reinstated successfully.');
+    }       
 
     public function importPreview(Request $request)
     {
@@ -965,18 +965,18 @@ public function index(Request $request)
         // Handle photo upload
         $photoPath = null;
         if ($request->hasFile('photo')) {
-    // Delete old photo if exists
-    $existing = $employee->otherInformations()->first();
-    if ($existing && $existing->photo) {
-        $oldFullPath = public_path($existing->photo);
-        if (file_exists($oldFullPath)) {
-            unlink($oldFullPath);
+        // Delete old photo if exists
+        $existing = $employee->otherInformations()->first();
+        if ($existing && $existing->photo) {
+            $oldFullPath = public_path($existing->photo);
+            if (file_exists($oldFullPath)) {
+                unlink($oldFullPath);
+            }
         }
-    }
-    $file = $request->file('photo');
-    $filename = time() . '_' . $file->getClientOriginalName();
-    $file->move(public_path('employee_photos'), $filename);
-    $photoPath = 'employee_photos/' . $filename;
+        $file = $request->file('photo');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('employee_photos'), $filename);
+        $photoPath = 'employee_photos/' . $filename;
         } else {
             // Keep existing photo if no new one uploaded
             $existing = $employee->otherInformations()->first();
