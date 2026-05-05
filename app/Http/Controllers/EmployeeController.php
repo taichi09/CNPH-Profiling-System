@@ -626,7 +626,7 @@ public function index(Request $request)
         ]);
     }
 
-    private function parseDatePreview($value): ?string
+    private function parseDatePreview(mixed $value): ?string
     {
         if (empty($value)) return null;
 
@@ -640,9 +640,7 @@ public function index(Request $request)
 
         if (preg_match('/^(\d{2})\/(\d{2})\/(\d{4})$/', $value, $m)) {
             try {
-                return ((int) $m[1] > 12)
-                    ? Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d')
-                    : Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
+                return Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
             } catch (\Exception $e) {
                 return null;
             }
