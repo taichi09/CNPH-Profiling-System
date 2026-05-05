@@ -21,6 +21,8 @@ class DashboardController extends Controller
         $permanentCount = \App\Models\OtherInformation::where('employment_status', 'Permanent')->count();
         $JobOrderCount = \App\Models\OtherInformation::where('employment_status', 'Job Order')->count();
         $casualCount = \App\Models\OtherInformation::where('employment_status', 'Casual')->count();
+        $COSCount = \App\Models\OtherInformation::where('employment_status', 'COS')->count();
+
         // Group employees by department from other_information
         $departmentData = \App\Models\OtherInformation::selectRaw('department_name, COUNT(*) as count')
             ->whereNotNull('department_name')
@@ -33,7 +35,7 @@ class DashboardController extends Controller
 
         return view('dashboard.index', compact(
             'recentEmployees', 'employeeCount', 'permanentCount', 'JobOrderCount',
-            'departmentLabels', 'departmentCounts', 'casualCount'
+            'departmentLabels', 'departmentCounts', 'casualCount', 'COSCount'
         ));
     }
 }
