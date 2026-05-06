@@ -131,7 +131,7 @@
                 <input type="text" name="work[${workIndex}][govt_service]"
                     class="w-16 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
             `;
-            list.appendChild(row);
+            list.prepend(row);
             workIndex++;
         }
     </script>

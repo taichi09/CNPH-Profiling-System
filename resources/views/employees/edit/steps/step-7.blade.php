@@ -114,7 +114,7 @@
                 <input type="text" name="ld[${ldIndex}][conducted_by]"
                     class="flex-1 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
             `;
-            list.appendChild(row);
+            list.prepend(row);
             ldIndex++;
         }
     </script>

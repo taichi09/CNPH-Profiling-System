@@ -112,7 +112,7 @@
                 <input type="text" name="eligibility[${eligibilityIndex}][license_valid]"
                     class="w-24 shrink-0 px-2 py-2 outline-none focus:bg-gray-50 bg-transparent text-sm border-r border-gray-300 text-center">
             `;
-            list.appendChild(row);
+            list.prepend(row);
             eligibilityIndex++;
         }
     </script>
