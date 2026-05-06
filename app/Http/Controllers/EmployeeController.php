@@ -159,10 +159,9 @@ public function index(Request $request)
 
     $activeCount = OtherInformation::where('employment_status', '!=', 'Resigned')->count();
     $resignedCount = OtherInformation::where('employment_status', 'Resigned')->count();
-    $departments = \App\Models\Department::orderBy('dept_name')->get();
 
     return view('employees.index', compact(
-        'employees', 'tab', 'activeCount', 'resignedCount', 'departments'
+        'employees', 'tab', 'activeCount', 'resignedCount'
     ));
 }
 
@@ -176,11 +175,8 @@ public function index(Request $request)
 
     public function create($step = 1)
     {
-        $departments = Department::orderBy('dept_name')->get();
-
         return view('employees.create.index', [
-            'currentStep' => (int)$step,
-            'departments' => $departments,
+            'currentStep' => (int)$step
         ]);
     }
 
@@ -699,7 +695,6 @@ public function index(Request $request)
 
     public function editStep(Request $request, $id, $step = 1)
     {
-        $departments = Department::orderBy('dept_name')->get();
         $employee = PersonalInformation::with([
             'familyBackground',
             'educations',
@@ -712,8 +707,7 @@ public function index(Request $request)
 
         return view('employees.edit.index', [
             'employee' => $employee,
-            'currentStep' => (int) $step,
-            'departments' => $departments,
+            'currentStep' => (int) $step
         ]);
     }
 
