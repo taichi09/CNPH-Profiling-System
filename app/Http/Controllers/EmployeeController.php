@@ -12,7 +12,6 @@ use App\Models\WorkExperience;
 use App\Models\VoluntaryWork;
 use App\Models\LearningAndDevelopment;
 use App\Models\OtherInformation;
-use App\Models\Department;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
