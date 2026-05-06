@@ -64,7 +64,9 @@
   <div class="p-6">
     <form method="POST" action="{{ route('logout') }}">
         @csrf
-        <button type="submit" class="w-full bg-white text-[#1b5e3a] font-bold py-3 px-4 rounded-sm flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors uppercase tracking-widest text-sm">
+        <button type="submit"
+            onclick="this.disabled=true; this.form.submit();"
+            class="w-full bg-white text-[#1b5e3a] font-bold py-3 px-4 rounded-sm flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors uppercase tracking-widest text-sm">
           <span class="material-symbols-outlined">logout</span>
           Log Out
         </button>
